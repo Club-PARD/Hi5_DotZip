@@ -1,38 +1,22 @@
 import styled from "styled-components";
-import { useMediaQuery } from 'react-responsive'
-import AboutFirst from "../components/Web/Web-AboutPage/Web-AboutFirst";
-import AboutFirst_Mob from "../components/Mobile/Mobile-AboutPage/Mobile-AboutFirst";
+import AboutFirst from "../components/Web/AboutPage/AboutFirst";
 import NavBar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 
 
-function AboutPage() {
-    const isDesktopOrMobile = useMediaQuery({ query: '(max-width:768px)' }); // 758px 이하일 때는 모바일 뷰로 바뀐다.
-
-    const AboutPageComponent = styled.div`
+function AboutPage() {    const AboutPageComponent = styled.div`
     `;
 
 
-const AboutPageComponent_Mob = styled.div`
-width: 100%;
-`;
-
     return (
         <AboutPageComponent>
-            {isDesktopOrMobile !== true ?
-                <div>
-                    <NavBar/>
-                    <AboutFirst />
-                    <Footer/>
-                </div>
-                :
-                <AboutPageComponent_Mob>
-                    <NavBar/>
-                    <AboutFirst_Mob/>
-                    <Footer/>
-                </AboutPageComponent_Mob>
-            }
+          
+            <div>
+                <NavBar/>
+                <AboutFirst />
+                <Footer/>
+            </div>
         </AboutPageComponent>
     );
 }
