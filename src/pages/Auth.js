@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import KakaoLogin from "react-kakao-login";
 import { dbService } from "../fbase.js";
 import { addDoc, collection, onSnapshot } from "firebase/firestore";
+import { Navigate } from "react-router-dom";
 
 const Auth = () => {
-  const [isLoggedOut, setIsLoggedOut] = useState(false); //logout
   const [accessToken, setAccessToken] = useState("");
   const [kakaoId, setKakaoId] = useState([]);
 
@@ -17,10 +17,7 @@ const Auth = () => {
     initializeKakao();
   }, []); //카카오 초기화
 
-  const handleSuccess = async(response) => {
-    console.log("로그인 성공", response);
-    console.log("사용자 이메일:",response.response.access_token);
-    setAccessToken(response.response.access_token); 
+  useEffect(() => {
     const unsubscribe = onSnapshot(collection(dbService, "kakaoId"), (snapshot) => {
       const kakaoArr = snapshot.docs.map((doc) => ({
         id: doc.userId,
@@ -28,26 +25,32 @@ const Auth = () => {
       }));
       setKakaoId(kakaoArr);
     });
+
+    return () => unsubscribe();
+  }, []);
+
+  const handleSuccess = async (response) => {
+    console.log("로그인 성공", response);
+    console.log("사용자 이메일:", response.response.access_token);
+    setAccessToken(response.response.access_token);
+
     const hasMatchingId = (responseId, userIds) => {
       return userIds.some((userId) => responseId === userId);
     };
-  
+
     const addKakaoId = kakaoId.map((item) => item.userId);
     const hasMatchingIdResult = hasMatchingId(response.profile.id, addKakaoId);
     console.log("hasMatchingIdResult:", hasMatchingIdResult);
-    if(!hasMatchingIdResult){
+    if (!hasMatchingIdResult) {
       try {
         await addDoc(collection(dbService, "kakaoId"), {
-            userId: response.profile.id,
-            nickName : response.profile.properties.nickname,
+          userId: response.profile.id,
+          nickName: response.profile.properties.nickname,
         });
-    } catch (error) {
+      } catch (error) {
         console.error("Error adding document: ", error);
+      }
     }
-  }
-
-    return () => unsubscribe();
-
   };
 
   const handleFailure = (error) => {
@@ -57,42 +60,32 @@ const Auth = () => {
   const handleLogout = () => {
     if (window.Kakao.Auth.getAccessToken()) {
       window.Kakao.Auth.logout(() => {
-        setIsLoggedOut(true);
         setAccessToken("");
         console.log("로그아웃");
       });
     }
   };
-
+//hashMatching 이 false이면 처음들어간 것이라 그때 로그인 환영합니다 페이지 생성
+//true면 한번들어온 것이라 그때 생성
   return (
     <div>
-      {isLoggedOut ? (
+      {accessToken ? (
         <div>
-          <div>로그아웃되었습니다.</div>
-          <button onClick={() => setIsLoggedOut(false)}>로그인</button>
+          {accessToken && <Navigate to="/home" replace={true} />}
         </div>
       ) : (
-        <div>
-          {accessToken ? (
+        <KakaoLogin
+          token="7eee69554b01a9bd34081035d074123e"
+          onSuccess={handleSuccess}
+          onFail={handleFailure}
+          onLogout={handleLogout}
+          render={({ onClick }) => (
             <div>
-              <div>Access Token: {accessToken}</div>
+              <div onClick={onClick}>카카오로 로그인하기</div>
               <button onClick={handleLogout}>로그아웃</button>
             </div>
-          ) : (
-            <KakaoLogin
-              token="5c373a790edcc8d304e01372fe507b43"
-              onSuccess={handleSuccess}
-              onFail={handleFailure}
-              onLogout={handleLogout}
-              render={({ onClick }) => (
-                <div>
-                  <div onClick={onClick}>카카오로 로그인하기</div>
-                  <button onClick={handleLogout}>로그아웃</button>
-                </div>
-              )}
-            />
           )}
-        </div>
+        />
       )}
     </div>
   );
