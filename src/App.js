@@ -4,7 +4,8 @@ import Home from './pages/Home';
 import Inquiry from './pages/Inquiry';
 import About from './pages/About';
 import PickAnswerPage from './components/Web/VotePage/PickAnswerPage';
-import VoteTitlePage from './components/Web/VotePage/VoteTitlePage';
+import CreateVotePage from './components/Web/VotePage/CreateVotePage';
+import CompleteVotePage from './components/Web/VotePage/CompleteVotePage';
 import Survey from './pages/Survey';
 
 function App() {
@@ -16,7 +17,8 @@ function App() {
     <Route path='/Inquiry' element={<Inquiry/>}/>
     <Route path='About' element={<About/>}/>
     <Route path='/PickAnswer' element={<PickAnswerPage/>}/>
-    <Route path='/VoteTitle' element={<VoteTitlePage/>}/>
+    <Route path='/CreateVote' element={<CreateVotePage/>}/>
+    <Route path='/CompleteVote' element={<CompleteVotePage/>}/>
     <Route path='Survey' element={<Survey/>}/>
 
   </Routes>
