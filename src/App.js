@@ -5,6 +5,7 @@ import Inquiry from './pages/Inquiry';
 import About from './pages/About';
 import PickAnswerPage from './components/Web/VotePage/PickAnswerPage';
 import VoteTitlePage from './components/Web/VotePage/VoteTitlePage';
+import Survey from './pages/Survey';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
     <Route path='About' element={<About/>}/>
     <Route path='/PickAnswer' element={<PickAnswerPage/>}/>
     <Route path='/VoteTitle' element={<VoteTitlePage/>}/>
+    <Route path='Survey' element={<Survey/>}/>
 
   </Routes>
 
