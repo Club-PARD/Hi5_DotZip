@@ -4,8 +4,8 @@ import Home from './pages/Home';
 import Inquiry from './pages/Inquiry';
 import About from './pages/About';
 import PickAnswerPage from './components/Web/VotePage/PickAnswerPage';
-import CreateVotePage from './components/Web/VotePage/CreateVotePage';
-import CompleteVotePage from './components/Web/VotePage/CompleteVotePage';
+import EditVotePage from './components/Web/VotePage/EditVotePage';
+import MyProfilePage from './components/Web/ProfilePage/MyProfilePage';
 import Survey from './pages/Survey';
 import Answer from './pages/Answer';
 
@@ -18,8 +18,8 @@ function App() {
     <Route path='/Inquiry' element={<Inquiry/>}/>
     <Route path='About' element={<About/>}/>
     <Route path='/PickAnswer' element={<PickAnswerPage/>}/>
-    <Route path='/CreateVote' element={<CreateVotePage/>}/>
-    <Route path='/CompleteVote' element={<CompleteVotePage/>}/>
+    <Route path='/EditVotePage' element={<EditVotePage/>}/>
+    <Route path='/MyProfile' element={<MyProfilePage/>}/>
     <Route path='Survey' element={<Survey/>}/>
     <Route path='/Answer' element={<Answer/>}/>
 

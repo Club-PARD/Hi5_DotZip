@@ -1,93 +1,203 @@
 import styled from "styled-components";
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { collection, query, onSnapshot } from 'firebase/firestore';
 import { dbService } from '../../../fbase';
+import Modal from 'react-modal';
+import CopyToClipboard from 'react-copy-to-clipboard';
+import { useNavigate } from 'react-router-dom';
+
 
 
 const Div = styled.div`
 
 `;
+//제목
+const Title = styled.div`
+    width: 400px;
+    height: 100px;
+    padding: 5px;
+    background: pink;
+`;
+//투표 박스
 const VoteBox = styled.button`
     width: 400px;
     height: 200px;
     margin: 5px;
     border: 1px solid black;
-    background: ${props => (props.selected ? 'pink' : 'skyblue')};
-    color: ${props => (props.selected ? '#000000' : '#ffffff')};
+    background: skyblue;
+    color: #ffffff;
 `;
-const NextButton = styled.button`
+//버튼들
+const LinkButton = styled.button`
     width: 200px;
     height: 100px;
     padding: 5px;
     background: red;
 `;
+const LinkMessage = styled.div`
+    width: 200px;
+    background: white;
+    padding: 10px;
+    border: 1px solid black;
+`;
+const EndButton = styled.button`
+    width: 200px;
+    height: 100px;
+    padding: 5px;
+    background: red;
+`;
+const EditButton = styled.button`
+    width: 200px;
+    height: 100px;
+    padding: 5px;
+    background: red;
+`;
+//모달 안에 내용들
+const modalStyles = {
+    content: {
+      width: '400px',
+      height: '600px',
+      margin: 'auto',
+      border: '1px solid #ccc',
+      borderRadius: '4px',
+      padding: '20px',
+      backgroundColor: '#fff',
+    },
+};
+const ReasonBox = styled.div`
+    width: 200px;
+    height: 100px;
+    background: yellow;
+`;
+const ModalCheck = styled.button`
+    width: 100px;
+    height: 50px;
+    padding: 5px;
+    background: white;
+    color: black;
+`;
+
 
 function PickAnswerPage() {
-    const [zips1, setZips1] = useState([]);
-    useEffect(()=>{
+    var kakaoId; //앞에서 넘겨받기
+    var questionId; //앞에서 넘겨받기
+
+    //답변 불러오기
+    const [answerzips, setAnswerZip] = useState([]);
+    useEffect(() => {
         const fetchData = async () => {
-        //데이터베이스에서 뭔가를 하게 되면 알 수 있도록 listener
-        const q = query(
-            collection(dbService, "zip_1"),
-        );
-        const unsubscribe = onSnapshot(q, (snapshot)=>{ 
-            const zipArr = snapshot.docs.map((doc)=>({ //Snapshot실시간으로 확인 (데이터베이스에 무슨 일이 있을 때 알림 받기)
-                id: doc.id,
-                ...doc.data(),
+          const q = query(collection(dbService, "zip"));
+          const unsubscribe = onSnapshot(q, (snapshot) => {
+            const zipArr = snapshot.docs.map((doc) => ({
+              id: doc.id,
+              ...doc.data(),
             }));
-            setZips1(zipArr); //새로운 snapshot을 받을 때 배열을 만들고 state에 배열 집어넣기
-        });
-        return () => {
-            unsubscribe(); // 컴포넌트가 unmount되었을 때 listener를 정리합니다.
+            setAnswerZip(zipArr);
+          });
+          return () => {
+            unsubscribe();
           };
-        }
+        };
+      
         fetchData();
-    },[]);
-    const [selectedVoteBoxes, setSelectedVoteBoxes] = useState([]);
+    }, []);
+    //이유불러오기
+    const [reasonzips, setReasonZip] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+          const q = query(collection(dbService, "reason_zip"));
+          const unsubscribe = onSnapshot(q, (snapshot) => {
+            const reasonArr = snapshot.docs.map((doc) => ({
+              id: doc.id,
+              ...doc.data(),
+            }));
+            setReasonZip(reasonArr);
+          });
+          return () => {
+            unsubscribe();
+          };
+        };
+      
+        fetchData();
+    }, []);
 
+    //modal창띄우고 내리는 함수 관련
+    const [keyword, setKeyword] = useState("");
+    const [reasonIndex, setReasonIndex] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const handleVoteBoxClick = (index, answer) => {
+        setReasonIndex(index);
+        setKeyword(answer);
+        setIsModalOpen(true);
+    };
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
+
+    //링크 복사하기
+    const voteLink = window.location.href;
+    const [showMessage, setShowMessage] = useState(false);
+    const handleCopyLink = () => {
+        setShowMessage(true);
+        setTimeout(() => {
+            setShowMessage(false);
+        }, 1000);
+    };
+
+    //투표수정하기
     const navigate = useNavigate();
-
-    const HandleButtonClick = (id) => {
-        setZips1((prevZip1) =>
-        prevZip1.map((zip) => {
-            if (zip.id === id) {
-                return {
-                ...zip,
-                selected: !zip.selected,
-                };
-            } else {
-                return zip;
-            }
-            })
-        );
+    const handleEditVote = () => {
+        navigate('/EditVotePage');
+    };
+  
+    //투표종료하기
+    const handleEndVote = () => {
+      navigate('/MyProfile');
     };
 
-    const handleNextButtonClick = () => {
-        const selectedBoxes = zips1.filter((p) => p.selected);
-        setSelectedVoteBoxes(selectedBoxes);
-
-        // 선택된 VoteBox의 개수를 확인하여 4개에서 6개 사이인 경우에만 다음 페이지로 이동합니다.
-        if (selectedBoxes.length >= 4 && selectedBoxes.length <= 6) {
-            navigate('/CompleteVote', { state: { selectedVoteBoxes: selectedBoxes } });
-        }
-    };
-
-    const selectedCount = zips1.filter((p) => p.selected).length;
-    const isNextButtonDisabled = selectedCount < 4 || selectedCount > 6;
 
     return (
         <Div>
-            <h1>가장 마음에 드는 답변을 골라보세요!</h1> 
-            <h3>최소 4~6개까지 가능해요^^</h3>
-            {zips1.map(zip1 => (
-            <VoteBox key={zip1.id} selected={zip1.selected} onClick={() => HandleButtonClick(zip1.id)} disabled={!zip1.selected && selectedCount >= 6}>
-                <text selected={zip1.selected}>{zip1.answer}</text>
-            </VoteBox>
+        <h1>진행중인 .ZiP</h1> 
+        <h3>사람들이 남겨둔 키워드와 이유를 확인해보세요!</h3>
+        <Title>질문 타이틀 뜨기</Title>
+            {answerzips.map((answerzip) => (
+                <div key={answerzip.id}>
+                    {answerzip.answer.map((answerItem, index) => {
+                    const voteCount = answerzip.totalVote[index];
+                    const totalVoteSum = answerzip.totalVote.reduce((sum, vote) => sum + vote, 0);
+                    const percentage = (voteCount / totalVoteSum) * 100;
+
+                    return (
+                        <VoteBox key={`${answerzip.id}-${index}`} onClick={() => handleVoteBoxClick(index, answerItem)}>
+                        <div>
+                            <span>{answerItem} {percentage.toFixed(1)}%</span>
+                        </div>
+                        </VoteBox>
+                    );
+                    })}
+                </div>
             ))}
-            <NextButton onClick={handleNextButtonClick} disabled={isNextButtonDisabled}>다골랐어요</NextButton>
+        <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal} style={modalStyles}>
+            <h1>{keyword}을 선택한 사람들의 이유</h1>
+            {reasonzips.map((reasonzip, index) => (
+                reasonzip.answerArr === reasonIndex && (
+                <ReasonBox key={index}>
+                    <h3>{reasonzip.reason}</h3>
+                    <h6>작성자 nickname: {reasonzip.nickname}</h6>
+                </ReasonBox>
+                )
+            ))}
+            <ModalCheck isOpen={isModalOpen} onClick={handleCloseModal}>확인</ModalCheck>
+        </Modal>
+            <EditButton onClick={handleEditVote}>투표 수정하기</EditButton>
+            <EndButton onClick={handleEndVote}>투표 종료하기</EndButton>
+            <CopyToClipboard text={voteLink}>
+                <LinkButton onClick={handleCopyLink}>링크 복사하기</LinkButton>
+            </CopyToClipboard>
+            {showMessage && <LinkMessage>링크가 복사되었습니다</LinkMessage>}
         </Div>
     );
 };
-
+//questionID가 같으면 이유는 answerArr비교해서 해당 모듈 창 띄우기 + 해당 사람의 별명
 export default PickAnswerPage;
