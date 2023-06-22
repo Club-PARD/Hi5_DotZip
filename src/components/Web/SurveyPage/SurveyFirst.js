@@ -31,7 +31,7 @@ const Button = styled.button`
   margin: 8px;
   border: 1px solid #ABABAB;
   border-radius: 10px;
-  background: #353535;
+  background: ${({ active }) => (active ? '#D9D9D9' : '#353535')};
 `;
 
 const HeaderDiv = styled.header`
@@ -147,9 +147,9 @@ function CreateFirst() {
         }
       }
     };
-  
-    const handleButtonSelect = () => {
-      setButtonSelected(true);
+    const [selectedButton, setSelectedButton] = useState(null);
+    const handleButtonSelect = (button) => {
+      setSelectedButton(button);
     };
   
     return (
@@ -161,12 +161,32 @@ function CreateFirst() {
           </Header2>
           <Button1 onClick={handleButtonClick}>+ 내가 직접 질문 만들기</Button1>
           <ButtonRow>
-            <Button onClick={handleButtonSelect}>버튼1</Button>
-            <Button onClick={handleButtonSelect}>버튼2</Button>
+          <Button
+          onClick={() => handleButtonSelect('버튼1')}
+          active={selectedButton === '버튼1'}
+        >
+          버튼1
+        </Button>
+        <Button
+          onClick={() => handleButtonSelect('버튼2')}
+          active={selectedButton === '버튼2'}
+        >
+          버튼2
+        </Button>
           </ButtonRow>
           <ButtonRow>
-            <Button onClick={handleButtonSelect}>버튼3</Button>
-            <Button onClick={handleButtonSelect}>버튼4</Button>
+          <Button
+          onClick={() => handleButtonSelect('버튼3')}
+          active={selectedButton === '버튼3'}
+        >
+          버튼3
+        </Button>
+        <Button
+          onClick={() => handleButtonSelect('버튼4')}
+          active={selectedButton === '버튼4'}
+        >
+          버튼4
+        </Button>
           </ButtonRow>
           <Button2 disabled={!buttonSelected} onClick={() => navigate('/SurveySecond')}>
             다음
