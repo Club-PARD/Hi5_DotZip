@@ -7,6 +7,7 @@ import PickAnswerPage from './components/Web/VotePage/PickAnswerPage';
 import CreateVotePage from './components/Web/VotePage/CreateVotePage';
 import CompleteVotePage from './components/Web/VotePage/CompleteVotePage';
 import Survey from './pages/Survey';
+import Answer from './pages/Answer';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
     <Route path='/CreateVote' element={<CreateVotePage/>}/>
     <Route path='/CompleteVote' element={<CompleteVotePage/>}/>
     <Route path='Survey' element={<Survey/>}/>
+    <Route path='/Answer' element={<Answer/>}/>
 
   </Routes>
 
