@@ -115,42 +115,48 @@ const Div = styled.div`
 
 function CreateFirst() {
     const navigate = useNavigate();
-    const [currentUser, setCurrentUser] = useState(null); // State to track the current user
-    const [buttonSelected, setButtonSelected] = useState(false); // State to track if any button is selected
+    const [currentUser, setCurrentUser] = useState(null);
+    const [buttonSelected, setButtonSelected] = useState(false);
   
-    useEffect(() => {
-      // Listen for changes in the user authentication state
-      const unsubscribe = authService.onAuthStateChanged((user) => {
-        if (user) {
-          setCurrentUser(user);
-        } else {
-          setCurrentUser(null);
-        }
-      });
-  
-      return () => {
-        unsubscribe();
-      };
-    }, []);
-  
-    const handleButtonClick = async () => {
-      if (currentUser) {
-        const userId = currentUser.uid;
-  
-        const q = query(collection(dbService, 'kakaoId'), where('userId', '==', userId));
-        const snapshot = await getDocs(q);
-  
-        if (snapshot.empty) {
-          navigate('/'); // userId가 존재하지 않을 경우 로그인 페이지로 이동
-        } else {
-          // userId가 존재할 경우 여기에서 다른 작업을 수행합니다.
-        }
+    
+  useEffect(() => {
+    const unsubscribe = authService.onAuthStateChanged((user) => {
+      if (user) {
+        setCurrentUser(user);
+      } else {
+        setCurrentUser(null);
       }
+    });
+
+    return () => {
+      unsubscribe();
     };
-    const [selectedButton, setSelectedButton] = useState(null);
-    const handleButtonSelect = (button) => {
-      setSelectedButton(button);
-    };
+  }, []);
+
+  const handleButtonClick = async () => {
+    if (currentUser) {
+      const userId = currentUser.uid;
+
+      const q = query(collection(dbService, 'kakaoId'), where('userId', '==', userId));
+      const snapshot = await getDocs(q);
+
+      if (snapshot.empty) {
+        navigate('/');
+      } else {
+        // userId exists, perform other tasks here
+      }
+    } else {
+      navigate('/SurveyCreate');
+    }
+  };
+
+  const [selectedButton, setSelectedButton] = useState(null);
+
+  const handleButtonSelect = (button) => {
+    setSelectedButton(button);
+    setButtonSelected(true); // Update buttonSelected state when a button is selected
+  };
+  
   
     return (
       <Div>
@@ -162,13 +168,19 @@ function CreateFirst() {
           <Button1 onClick={handleButtonClick}>+ 내가 직접 질문 만들기</Button1>
           <ButtonRow>
           <Button
-          onClick={() => handleButtonSelect('버튼1')}
+          onClick ={() => {
+            handleButtonClick();
+            handleButtonSelect('버튼1');
+          }}
           active={selectedButton === '버튼1'}
         >
           버튼1
         </Button>
         <Button
-          onClick={() => handleButtonSelect('버튼2')}
+          onClick ={() => {
+            handleButtonClick();
+            handleButtonSelect('버튼2');
+          }}
           active={selectedButton === '버튼2'}
         >
           버튼2
@@ -176,13 +188,19 @@ function CreateFirst() {
           </ButtonRow>
           <ButtonRow>
           <Button
-          onClick={() => handleButtonSelect('버튼3')}
+          onClick ={() => {
+            handleButtonClick();
+            handleButtonSelect('버튼3');
+          }}
           active={selectedButton === '버튼3'}
         >
           버튼3
         </Button>
         <Button
-          onClick={() => handleButtonSelect('버튼4')}
+          onClick ={() => {
+            handleButtonClick();
+            handleButtonSelect('버튼4');
+          }}
           active={selectedButton === '버튼4'}
         >
           버튼4

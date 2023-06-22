@@ -11,13 +11,17 @@ const HomeFirst = () => {
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
-    navigate('../../../../Survey'); // Replace with the actual path you want to navigate to
+    navigate('../../../../SurveyFirst'); // Replace with the actual path you want to navigate to
+  };
+  const handleButton1Click = () => {
+    navigate('../../../../SurveyCreate'); // Replace with the actual path you want to navigate to
   };
 
   return (
     <>
       <Div>홈 첫번째 페이지</Div>
       <button onClick={handleButtonClick}>Survey</button>
+      <button onClick={handleButton1Click}>SurveyCreate</button>
     </>
   );
 };

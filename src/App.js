@@ -6,8 +6,11 @@ import About from './pages/About';
 import PickAnswerPage from './components/Web/VotePage/PickAnswerPage';
 import EditVotePage from './components/Web/VotePage/EditVotePage';
 import MyProfilePage from './components/Web/ProfilePage/MyProfilePage';
-import Survey from './pages/Survey';
+import SurveyFirst from './components/Web/SurveyPage/SurveyFirst';
+import SurveySecond from './components/Web/SurveyPage/SurveySecond';
+import SurveyCreate from './components/Web/SurveyPage/SurveyCreate';
 import Answer from './pages/Answer';
+import SurveyShare from './components/Web/SurveyPage/SurveyShare';
 
 function App() {
   return (
@@ -20,7 +23,10 @@ function App() {
     <Route path='/PickAnswer' element={<PickAnswerPage/>}/>
     <Route path='/EditVotePage' element={<EditVotePage/>}/>
     <Route path='/MyProfile' element={<MyProfilePage/>}/>
-    <Route path='Survey' element={<Survey/>}/>
+    <Route path='/SurveyFirst' element={<SurveyFirst/>}/>
+    <Route path='/SurveySecond' element={<SurveySecond/>}/>
+    <Route path='/SurveyCreate' element={<SurveyCreate/>}/>
+    <Route path='/SurveyShare' element={<SurveyShare/>}/>
     <Route path='/Answer' element={<Answer/>}/>
 
   </Routes>
@@ -31,3 +37,4 @@ function App() {
 }
 
 export default App;
+
