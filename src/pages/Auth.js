@@ -31,7 +31,6 @@ const Auth = () => {
 
   const handleSuccess = async (response) => {
     console.log("로그인 성공", response);
-    console.log("사용자 이메일:", response.response.access_token);
     setAccessToken(response.response.access_token);
 
     const hasMatchingId = (responseId, userIds) => {
