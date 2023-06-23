@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import KakaoShareButton from '../ProfilePage/ShareKakao';
 
 
 const Div = styled.div`
@@ -46,7 +47,8 @@ function MyProfilePage() {
     const navigate = useNavigate();
     const handleBackHome = () => {
         navigate('/Home');
-      };
+    };
+
     return(
         <Div>
             <h1>'로그인한 사람 이름' 님의 .ZiP</h1>
@@ -54,7 +56,7 @@ function MyProfilePage() {
             <VoteKewordBox>1위</VoteKewordBox>
             <VoteKewordBox>2위</VoteKewordBox>
             <VoteKewordBox>3위</VoteKewordBox>
-            <ShareButton>나의 .ZiP 공유하기</ShareButton>
+            <KakaoShareButton/> 
             <SaveButton>이미지 저장하기</SaveButton>
             <CreateZipButton>다른 .ZiP 만들기</CreateZipButton>
             <BackHomeButton onClick={handleBackHome}>홈으로 돌아가기</BackHomeButton>
