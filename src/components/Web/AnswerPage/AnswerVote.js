@@ -1,70 +1,75 @@
 import styled from 'styled-components';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { dbService } from "../../../fbase.js";
 import { collection, onSnapshot, updateDoc, doc } from "firebase/firestore";
+import { KakaoIdContext } from '../../../KakaoIdContext.js';
+
+const Div = styled.div`
+margin-top: 70px;
+`;
 
 const AnswerVote = () => {
-  const [answerDataList, setAnswerDataList] = useState([]);
+  // const [answerDataList, setAnswerDataList] = useState([]);
+  const [kakaoContext] = useContext(KakaoIdContext);
+  console.log("userId : " ,kakaoContext);
 
-  const Div = styled.div`
-    margin-top: 70px;
-  `;
 
-  useEffect(() => {
-    const fetchData = () => {
-      const unsubscribe = onSnapshot(collection(dbService, 'zip'), (querySnapshot) => {
-        const newDataList = [];
+  // useEffect(() => {
+  //   const fetchData = () => {
 
-        querySnapshot.forEach((doc) => {
-          const data = doc.data();
-          const answerData = data.questionId;
-          const optionsData = data.answer.map((option, optionIndex) => {
-            return {
-              number: optionIndex + 1,
-              value: option
-            };
-          });
-          const totalVote = data.totalVote.map((vote, voteIndex) => {
-            return {
-              number: voteIndex + 1,
-              value: vote
-            };
-          });
-          if (0 === answerData) {
-            newDataList.push({
-              totalVote: totalVote,
-              answer: answerData,
-              options: optionsData
-            });
-          }
-        });
+  //     const unsubscribe = onSnapshot(collection(dbService, 'kakaoId', kakaoContext), (querySnapshot) => {
+  //       const newDataList = [];
 
-        setAnswerDataList(newDataList);
-      });
+  //       querySnapshot.forEach((doc) => {
+  //         const data = doc.data();
+  //         const answerData = data.questionId;
+  //         const optionsData = data.answer.map((option, optionIndex) => {
+  //           return {
+  //             number: optionIndex + 1,
+  //             value: option
+  //           };
+  //         });
+  //         const totalVote = data.totalVote.map((vote, voteIndex) => {
+  //           return {
+  //             number: voteIndex + 1,
+  //             value: vote
+  //           };
+  //         });
+  //         if (0 === answerData) {
+  //           newDataList.push({
+  //             totalVote: totalVote,
+  //             answer: answerData,
+  //             options: optionsData
+  //           });
+  //         }
+  //       });
 
-      return () => {
-        unsubscribe();
-      };
-    };
+  //       setAnswerDataList(newDataList);
+  //     });
 
-    fetchData();
-  }, []);
+  //     return () => {
+  //       unsubscribe();
+  //     };
+  //   };
 
-  const handleVote = async (index) => {
-    console.log(index);
-    try {
-      const docRef = doc(dbService, 'zip', 'UlVihiettYAZbYXnNHxG');
-      await updateDoc(docRef, { totalVote: answerDataList.totalVote[index] + 1});
-    } catch (error) {
-      console.error("Error voting:", error);
-    }
-  };
+  //   fetchData();
+  // }, []);
+
+  // const handleVote = async (index) => {
+  //   console.log(index);
+  //   try {
+  //     const docRef = doc(dbService, 'zip', '');
+  //     await updateDoc(docRef, { totalVote: answerDataList.totalVote[index] + 1});
+  //   } catch (error) {
+  //     console.error("Error voting:", error);
+  //   }
+  // };
 
 
 
   return (
     <Div>
-      {answerDataList.map((data) => (
+      {/* {answerDataList.map((data) => (
         <div key={data.answer}>
           <p>Answer: {data.answer}</p>
           <p>
@@ -76,7 +81,7 @@ const AnswerVote = () => {
             ))}
           </p>
         </div>
-      ))}
+      ))} */}
     </Div>
   );
 };

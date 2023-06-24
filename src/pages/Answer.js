@@ -3,12 +3,12 @@ import AnswerVote from "../components/Web/AnswerPage/AnswerVote";
 import AddAnswer from "../components/Web/AnswerPage/AddAnswer"
 import NavBar from "../components/Navbar";
 import Footer from "../components/Footer";
+const AnswerPageComponent = styled.div`
+`;
 
 
 
 function AnswerPage() {    
-    const AnswerPageComponent = styled.div`
-    `;
 
 
     return (

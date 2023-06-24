@@ -69,12 +69,10 @@ const Survey = styled.div`
 const HomePageFirst = () => {
   const navigate = useNavigate();
   const [kakaoContext] = useContext(KakaoIdContext);
-  console.log(kakaoContext);
+  console.log("userId : ", kakaoContext);//userId
 
 useEffect(() => {
   const unsubscribe = onSnapshot(collection(dbService, 'kakaoId'), (snapshot) => {
-    const userIds = snapshot.docs.map((doc) => doc.data().userId);
-    const firstUserId = userIds[0];
     // 원하는 로직을 추가하세요.
   });
 
@@ -93,6 +91,9 @@ useEffect(() => {
   const handleButton1Click = () => {
     navigate('../../../../SurveyCreate'); // Replace with the actual path you want to navigate to
   };
+  const handleButton2Click = () => {
+    navigate('../../../../Answer'); // Replace with the actual path you want to navigate to
+  };
 
   return (
     <Div>
@@ -103,6 +104,7 @@ useEffect(() => {
         </Header2>
         <button onClick={handleButtonClick}>나의 .Zip</button>
         <button onClick={handleButton1Click}>새로운 .Zip 만들기</button>
+        <button onClick={handleButton2Click}>answer가기</button>
         <Header3>진행중인 .Zip</Header3>
       </Survey>
     </Div>
