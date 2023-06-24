@@ -5,6 +5,7 @@ import { collection, query, where, getDocs } from 'firebase/firestore';
 import { authService, dbService } from '../../../fbase';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
+import {onSnapshot } from 'firebase/firestore';
 
 
 const Survey = styled.div`
@@ -121,47 +122,30 @@ function CreateFirst() {
   const [selectedButton, setSelectedButton] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = authService.onAuthStateChanged(async (user) => {
-      if (user) {
-        setCurrentUser(user);
-        const userId = user.uid;
-        console.log('userId:', userId); // 확인용 콘솔 출력
-
-        const q = query(collection(dbService, 'kakaoId'), where('userId', '==', userId));
-        const snapshot = await getDocs(q);
-
-        if (snapshot.empty) {
-          console.log('User ID does not exist in "kakaoId" collection:', userId);
-        } else {
-          console.log('User ID exists in "kakaoId" collection:', userId);
-          // Perform other tasks here
-        }
-      } else {
-        setCurrentUser(null);
-        console.log('User not logged in');
-      }
+    const unsubscribe = onSnapshot(collection(dbService, 'kakaoId'), (snapshot) => {
+      const userIds = snapshot.docs.map((doc) => doc.data().userId);
+      const firstUserId = userIds[0];
+      console.log("현재 사용자의 userId:", firstUserId);
+      // 원하는 로직을 추가하세요.
     });
-
+  
     return () => {
-      unsubscribe();
+      unsubscribe(); // 컴포넌트가 언마운트될 때 데이터 변경 구독을 해제합니다.
     };
   }, []);
 
  
   const handleButtonClick = async () => {
     if (currentUser) {
-      // User is logged in
       const userId = currentUser.uid;
-      console.log('userId:', userId);
-  
+      console.log('userId:', currentUser); // 확인용 콘솔 출력
+
       const q = query(collection(dbService, 'kakaoId'), where('userId', '==', userId));
       const snapshot = await getDocs(q);
-  
-      console.log('userId:', userId);
-  
+
       if (snapshot.empty) {
         // User ID does not exist in "kakaoId" collection
-      navigate('/'); // Redirect to the "/" page
+        navigate('/'); // Redirect to the "/" page
       } else {
         // User ID exists, perform other tasks here
       }
