@@ -110,45 +110,45 @@ const Div = styled.div`
 `;
 
 function SurveyCreate() {
-  const navigate = useNavigate();
-  const [currentUser, setCurrentUser] = useState(null);
-  const [question, setQuestion] = useState('');
-  const [comment, setComment] = useState('');
-
-  useEffect(() => {
-    const unsubscribe = authService.onAuthStateChanged((user) => {
-      if (user) {
-        setCurrentUser(user);
-      } else {
-        setCurrentUser(null);
-      }
-    });
-
-    return () => unsubscribe();
-  }, []);
-
-  const handleSubmit = async () => {
-    if (currentUser && currentUser.uid) {
-      const questionId = uuidv4();
-      console.log('질문 데이터:', { questionId, question, comment });
-      try {
-        await addDoc(collection(dbService, 'question'), {
-          userId: currentUser.uid,
-          questionId,
-          question,
-          comment
-        });
+    const navigate = useNavigate();
+    const [currentUser, setCurrentUser] = useState(null);
+    const [question, setQuestion] = useState('');
+    const [comment, setComment] = useState('');
   
-        console.log('저장됨');
-        setQuestion('');
-        setComment('');
-        navigate('/SurveyShare');
-      } catch (error) {
-        console.error('Error adding document:', error);
-      }
-    }
-  };
+    useEffect(() => {
+      const unsubscribe = authService.onAuthStateChanged((user) => {
+        if (user) {
+          setCurrentUser(user);
+        } else {
+          setCurrentUser(null);
+        }
+      });
   
+      return () => unsubscribe();
+    }, []);
+  
+    const handleSubmit = async () => {
+      if (currentUser && currentUser.uid) {
+        const questionId = uuidv4();
+        console.log('질문 데이터:', { questionId, question, comment });
+        try {
+          await addDoc(collection(dbService, 'question'), {
+            kakaoId: currentUser.uid,
+            questionId,
+            question,
+            comment
+          });
+    
+          console.log('저장됨');
+          setQuestion('');
+          setComment('');
+          navigate('/SurveyShare');
+        } catch (error) {
+          console.error('Error adding document:', error);
+        }
+      }
+    };
+    
 
   return (
     <Div>

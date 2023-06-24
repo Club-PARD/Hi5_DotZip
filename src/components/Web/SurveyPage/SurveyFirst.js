@@ -103,6 +103,7 @@ const Button2 = styled.button`
   line-height: 20px;
   text-align: center;
   color: #ABABAB;
+  
 `;
 
 const Div = styled.div`
@@ -114,17 +115,30 @@ const Div = styled.div`
 `;
 
 function CreateFirst() {
-    const navigate = useNavigate();
-    const [currentUser, setCurrentUser] = useState(null);
-    const [buttonSelected, setButtonSelected] = useState(false);
-  
-    
+  const navigate = useNavigate();
+  const [currentUser, setCurrentUser] = useState(null);
+  const [buttonSelected, setButtonSelected] = useState(false);
+  const [selectedButton, setSelectedButton] = useState(null);
+
   useEffect(() => {
-    const unsubscribe = authService.onAuthStateChanged((user) => {
+    const unsubscribe = authService.onAuthStateChanged(async (user) => {
       if (user) {
         setCurrentUser(user);
+        const userId = user.uid;
+        console.log('userId:', userId); // 확인용 콘솔 출력
+
+        const q = query(collection(dbService, 'kakaoId'), where('userId', '==', userId));
+        const snapshot = await getDocs(q);
+
+        if (snapshot.empty) {
+          console.log('User ID does not exist in "kakaoId" collection:', userId);
+        } else {
+          console.log('User ID exists in "kakaoId" collection:', userId);
+          // Perform other tasks here
+        }
       } else {
         setCurrentUser(null);
+        console.log('User not logged in');
       }
     });
 
@@ -133,9 +147,36 @@ function CreateFirst() {
     };
   }, []);
 
+ 
   const handleButtonClick = async () => {
     if (currentUser) {
+      // User is logged in
       const userId = currentUser.uid;
+      console.log('userId:', userId);
+  
+      const q = query(collection(dbService, 'kakaoId'), where('userId', '==', userId));
+      const snapshot = await getDocs(q);
+  
+      console.log('userId:', userId);
+  
+      if (snapshot.empty) {
+        // User ID does not exist in "kakaoId" collection
+      navigate('/'); // Redirect to the "/" page
+      } else {
+        // User ID exists, perform other tasks here
+      }
+    } else {
+      // User is not logged in
+      navigate('/SurveyCreate');
+    }
+  };
+  
+  
+
+  const handleButton1Click = async () => {
+    if (currentUser) {
+      const userId = currentUser.uid;
+      console.log('userId:', currentUser); // 확인용 콘솔 출력
 
       const q = query(collection(dbService, 'kakaoId'), where('userId', '==', userId));
       const snapshot = await getDocs(q);
@@ -145,17 +186,14 @@ function CreateFirst() {
       } else {
         // userId exists, perform other tasks here
       }
-    } else {
-      navigate('/SurveyCreate');
     }
   };
 
-  const [selectedButton, setSelectedButton] = useState(null);
-
   const handleButtonSelect = (button) => {
     setSelectedButton(button);
-    setButtonSelected(true); // Update buttonSelected state when a button is selected
+    setButtonSelected(true);
   };
+
   
   
     return (
@@ -169,7 +207,7 @@ function CreateFirst() {
           <ButtonRow>
           <Button
           onClick ={() => {
-            handleButtonClick();
+            handleButton1Click();
             handleButtonSelect('버튼1');
           }}
           active={selectedButton === '버튼1'}
@@ -178,7 +216,7 @@ function CreateFirst() {
         </Button>
         <Button
           onClick ={() => {
-            handleButtonClick();
+            handleButton1Click();
             handleButtonSelect('버튼2');
           }}
           active={selectedButton === '버튼2'}
@@ -189,7 +227,7 @@ function CreateFirst() {
           <ButtonRow>
           <Button
           onClick ={() => {
-            handleButtonClick();
+            handleButton1Click();
             handleButtonSelect('버튼3');
           }}
           active={selectedButton === '버튼3'}
@@ -198,7 +236,7 @@ function CreateFirst() {
         </Button>
         <Button
           onClick ={() => {
-            handleButtonClick();
+            handleButton1Click();
             handleButtonSelect('버튼4');
           }}
           active={selectedButton === '버튼4'}
