@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { dbService } from '../../../fbase';
 import { collection, onSnapshot } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
 import styled from 'styled-components';
+import { KakaoIdContext} from '../../../KakaoIdContext';
 
-const authService = getAuth();
 
 const Div = styled.div`
   margin-top: 70px;
@@ -69,16 +68,13 @@ const Survey = styled.div`
 
 const HomePageFirst = () => {
   const navigate = useNavigate();
-  const [currentUser, setCurrentUser] = useState(null);
-  const [userId, setUserId] = useState(null);
-
-// ...
+  const [kakaoContext, setKakaoContext] = useContext(KakaoIdContext);
+  console.log(kakaoContext);
 
 useEffect(() => {
   const unsubscribe = onSnapshot(collection(dbService, 'kakaoId'), (snapshot) => {
     const userIds = snapshot.docs.map((doc) => doc.data().userId);
     const firstUserId = userIds[0];
-    console.log("현재 사용자의 userId:", firstUserId);
     // 원하는 로직을 추가하세요.
   });
 
