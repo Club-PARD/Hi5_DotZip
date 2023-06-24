@@ -82,10 +82,10 @@ function EditVotePage() {
         <Div>
             <h1>나의 .ZiP 만들기</h1>
             <h3>궁금한 질문을 담은 링크를 공유해보세요.</h3>
-            <h4>'userid받아서 이름' 님의 .ZiP</h4>
+            <h4>'userid받아서 이름' 님의 .ZiP</h4> {/* 유저 닉네임 받아서 넣을 부분 */}
             <Emoticon>이모지 구현 칸</Emoticon>
-            <Title>questionId받아서 질문 타이틀 뜨기</Title>
-            <Coment>questionId받아서 기본 코멘트 뜨도록 구현</Coment>
+            <Title>questionId받아서 질문 타이틀 뜨기</Title>  {/* questionId받아서 질문 타이틀 */}
+            <Coment>questionId받아서 기본 코멘트 뜨도록 구현</Coment> {/* questionId받아서 기본 코멘트 */}
             {answerzips.map((answerzip) => (
                 <div key={answerzip.id}>
                     {answerzip.answer.map((answerItem) => (

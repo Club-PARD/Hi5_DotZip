@@ -52,6 +52,7 @@ function MyProfilePage() {
     return(
         <Div>
             <h1>'로그인한 사람 이름' 님의 .ZiP</h1>
+            {/* 사용자 id받아와서 넣어 줄 부분 */}
             <h2>나의 ZiP 랭킹</h2>
             <VoteKewordBox>1위</VoteKewordBox>
             <VoteKewordBox>2위</VoteKewordBox>

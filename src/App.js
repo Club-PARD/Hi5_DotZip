@@ -11,6 +11,7 @@ import SurveySecond from './components/Web/SurveyPage/SurveySecond';
 import SurveyCreate from './components/Web/SurveyPage/SurveyCreate';
 import Answer from './pages/Answer';
 import SurveyShare from './components/Web/SurveyPage/SurveyShare';
+import Preferences from './components/Web/PreferencesPage/PreferencesPage';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
     <Route path='/SurveyCreate' element={<SurveyCreate/>}/>
     <Route path='/SurveyShare' element={<SurveyShare/>}/>
     <Route path='/Answer' element={<Answer/>}/>
+    <Route path='/Preferences' element={<Preferences/>}/>
 
   </Routes>
 
