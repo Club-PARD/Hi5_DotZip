@@ -68,7 +68,7 @@ const Survey = styled.div`
 
 const HomePageFirst = () => {
   const navigate = useNavigate();
-  const [kakaoContext, setKakaoContext] = useContext(KakaoIdContext);
+  const [kakaoContext] = useContext(KakaoIdContext);
   console.log(kakaoContext);
 
 useEffect(() => {

@@ -9,7 +9,7 @@ const Auth = () => {
   const [accessToken, setAccessToken] = useState("");
   const [kakaoId, setKakaoId] = useState([]);
   const [kakaoContext, setkakaoContext] = useContext(KakaoIdContext);
-
+ 
   useEffect(() => {
     const initializeKakao = () => {
       if (!window.Kakao.isInitialized()) {
@@ -34,7 +34,6 @@ const Auth = () => {
     console.log("로그인 성공", response);
     setAccessToken(response.response.access_token);
     setkakaoContext(response.profile.id);
-    console.log(kakaoContext);
 
     const hasMatchingId = (responseId, userIds) => {
       return userIds.some((userId) => responseId === userId);
