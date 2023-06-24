@@ -25,10 +25,10 @@ const HeaderP = styled.p`
   color: #818181;
 `;
 const Header3 = styled.p`
-width: 110px
-height: 24px
-top: 270px
-left: 27px
+width: 110px;
+height: 24px;
+top: 270px;
+left: 27px;
 font-family: Pretendard;
 font-size: 20px;
 font-weight: 700;
