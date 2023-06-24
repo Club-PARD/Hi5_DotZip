@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import KakaoLogin from "react-kakao-login";
 import { dbService } from "../fbase.js";
-import { addDoc, collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, setDoc, doc } from "firebase/firestore";
 import { Navigate } from "react-router-dom";
+import { KakaoIdContext } from "../KakaoIdContext.js";
 
 const Auth = () => {
   const [accessToken, setAccessToken] = useState("");
   const [kakaoId, setKakaoId] = useState([]);
+  const [kakaoContext, setkakaoContext] = useContext(KakaoIdContext);
 
   useEffect(() => {
     const initializeKakao = () => {
@@ -25,30 +27,33 @@ const Auth = () => {
       }));
       setKakaoId(kakaoArr);
     });
-
     return () => unsubscribe();
-  }, []);
+  }, []); //kakao id가 있는지 없는지 확인
 
   const handleSuccess = async (response) => {
     console.log("로그인 성공", response);
     setAccessToken(response.response.access_token);
+    setkakaoContext(response.profile.id);
+    console.log(kakaoContext);
 
     const hasMatchingId = (responseId, userIds) => {
       return userIds.some((userId) => responseId === userId);
     };
 
+    const collectionName = "kakaoId";
+    const documentId = response.profile.id;
+    const data = {
+      userId: response.profile.id,
+      userName: response.profile.properties.nickname,
+    };
+
     const addKakaoId = kakaoId.map((item) => item.userId);
     const hasMatchingIdResult = hasMatchingId(response.profile.id, addKakaoId);
     console.log("hasMatchingIdResult:", hasMatchingIdResult);
+    const docRef = doc(dbService, collectionName, String(documentId));
     if (!hasMatchingIdResult) {
-      try {
-        await addDoc(collection(dbService, "kakaoId"), {
-          userId: response.profile.id,
-          nickName: response.profile.properties.nickname,
-        });
-      } catch (error) {
-        console.error("Error adding document: ", error);
-      }
+      await setDoc(docRef, data);
+
     }
   };
 
@@ -64,8 +69,7 @@ const Auth = () => {
       });
     }
   };
-//hashMatching 이 false이면 처음들어간 것이라 그때 로그인 환영합니다 페이지 생성
-//true면 한번들어온 것이라 그때 생성
+
   return (
     <div>
       {accessToken ? (
