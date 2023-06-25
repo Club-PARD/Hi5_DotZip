@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { authService, dbService } from '../../../fbase';
-import { query, collection, addDoc, where, getDocs } from 'firebase/firestore';
+import { collection, addDoc } from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
+import { KakaoIdContext } from '../../../KakaoIdContext';
 
 const Survey = styled.div`
   display: flex;
@@ -111,41 +112,34 @@ const Div = styled.div`
 
 function SurveyCreate() {
     const navigate = useNavigate();
+    const [kakaoContext] = useContext(KakaoIdContext);
+    console.log("zip userId : ", kakaoContext);//userId
     const [currentUser, setCurrentUser] = useState(null);
     const [question, setQuestion] = useState('');
     const [comment, setComment] = useState('');
   
-    useEffect(() => {
-      const unsubscribe = authService.onAuthStateChanged((user) => {
-        if (user) {
-          setCurrentUser(user);
-        } else {
-          setCurrentUser(null);
-        }
-      });
-  
-      return () => unsubscribe();
-    }, []);
   
     const handleSubmit = async () => {
-      if (currentUser && currentUser.uid) {
-        const questionId = uuidv4();
-        console.log('질문 데이터:', { questionId, question, comment });
-        try {
-          await addDoc(collection(dbService, 'question'), {
-            kakaoId: currentUser.uid,
-            questionId,
-            question,
-            comment
-          });
-    
-          console.log('저장됨');
-          setQuestion('');
-          setComment('');
-          navigate('/SurveyShare');
-        } catch (error) {
-          console.error('Error adding document:', error);
+      try {
+        if (!kakaoContext) {
+          throw new Error('User not logged in');
         }
+    
+        // const questionId = uuidv4();
+    
+        // Firestore에 데이터 저장
+        await addDoc(collection(dbService, 'kakaoId', kakaoContext, 'zip'), {
+          // questionId,
+          question,
+          comment,
+        });
+    
+        console.log('Data saved successfully');
+        setQuestion('');
+        setComment('');
+        navigate('/SurveyShare');
+      } catch (error) {
+        console.error('Error adding document:', error);
       }
     };
     

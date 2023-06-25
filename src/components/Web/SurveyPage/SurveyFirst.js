@@ -1,11 +1,13 @@
 import styled from "styled-components";
-import React, { useState, useEffect } from 'react';
+import React, { useContext,useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { authService, dbService } from '../../../fbase';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import {onSnapshot } from 'firebase/firestore';
+import { KakaoIdContext} from '../../../KakaoIdContext';
+
 
 
 const Survey = styled.div`
@@ -117,61 +119,34 @@ const Div = styled.div`
 
 function CreateFirst() {
   const navigate = useNavigate();
+  const [kakaoContext] = useContext(KakaoIdContext);
+  console.log("zip userId : ", kakaoContext);//userId
   const [currentUser, setCurrentUser] = useState(null);
   const [buttonSelected, setButtonSelected] = useState(false);
   const [selectedButton, setSelectedButton] = useState(null);
 
-  useEffect(() => {
-    const unsubscribe = onSnapshot(collection(dbService, 'kakaoId'), (snapshot) => {
-      const userIds = snapshot.docs.map((doc) => doc.data().userId);
-      const firstUserId = userIds[0];
-      console.log("현재 사용자의 userId:", firstUserId);
-      // 원하는 로직을 추가하세요.
-    });
-  
-    return () => {
-      unsubscribe(); // 컴포넌트가 언마운트될 때 데이터 변경 구독을 해제합니다.
-    };
-  }, []);
 
- 
-  const handleButtonClick = async () => {
-    if (currentUser) {
-      const userId = currentUser.uid;
-      console.log('userId:', currentUser); // 확인용 콘솔 출력
-
-      const q = query(collection(dbService, 'kakaoId'), where('userId', '==', userId));
-      const snapshot = await getDocs(q);
-
-      if (snapshot.empty) {
-        // User ID does not exist in "kakaoId" collection
-        navigate('/'); // Redirect to the "/" page
-      } else {
-        // User ID exists, perform other tasks here
-      }
+  const handleButtonClick = () => {
+    if (kakaoContext) {
+      // User is logged in
+      // ... perform necessary tasks
+      navigate('/SurveyCreate');
     } else {
       // User is not logged in
-      navigate('/SurveyCreate');
+      navigate('/'); // Navigate to the desired URL
     }
   };
-  
-  
 
-  const handleButton1Click = async () => {
-    if (currentUser) {
-      const userId = currentUser.uid;
-      console.log('userId:', currentUser); // 확인용 콘솔 출력
-
-      const q = query(collection(dbService, 'kakaoId'), where('userId', '==', userId));
-      const snapshot = await getDocs(q);
-
-      if (snapshot.empty) {
-        navigate('/');
-      } else {
-        // userId exists, perform other tasks here
-      }
+  const handleButton1Click = () => {
+    if (kakaoContext) {
+      // User is logged in
+      // ... perform necessary tasks
+    } else {
+      // User is not logged in
+      navigate('/'); // Navigate to the desired URL
     }
   };
+
 
   const handleButtonSelect = (button) => {
     setSelectedButton(button);
