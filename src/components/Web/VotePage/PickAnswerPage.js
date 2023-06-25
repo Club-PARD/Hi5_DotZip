@@ -208,12 +208,12 @@ const fetchReasons = (useridzips, targetQid, answerID) => {
   
     getDocs(reasonZipCollection)
       .then((reasonZipSnapshot) => {
-        console.log("확인용 : ", reasonZipSnapshot);
+        console.log(reasonZipSnapshot);
         const reasonZipArr = reasonZipSnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
-        console.log(reasonZipArr);
+        console.log("확인용 : ",reasonZipArr);
         setReasonZip(reasonZipArr);
       })
       .catch((error) => {
