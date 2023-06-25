@@ -1,16 +1,23 @@
 import React, { useState } from 'react';
 import { dbService } from "../../../fbase.js";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc,updateDoc } from "firebase/firestore";
 
 const AddAnswer = () => {
   const [answer, setAnswer] = useState("");
-
+  const road =collection(dbService, "kakaoId", "2861055889", "zip", "Dz8akNMoanATfITviinB", "zip_answer");
+  const data = {
+    answer: answer,
+    totalVote: 0,
+  }
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      await addDoc(collection(dbService, "zip", "UlVihiettYAZbYXnNHxG"), 
-      answer[3]);
-      console.log("Document written successfully");
+      const newDocRef = await addDoc(road, 
+      data);
+      
+      await updateDoc(newDocRef, {
+        docID : newDocRef.id,
+      });
     } catch (error) {
       console.error("Error adding document: ", error);
     }
