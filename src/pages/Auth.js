@@ -33,7 +33,7 @@ const Auth = () => {
   const handleSuccess = async (response) => {
     console.log("로그인 성공", response);
     setAccessToken(response.response.access_token);
-    setkakaoContext(response.profile.id);
+    setkakaoContext(response.profile.id.toString());
 
     const hasMatchingId = (responseId, userIds) => {
       return userIds.some((userId) => responseId === userId);
