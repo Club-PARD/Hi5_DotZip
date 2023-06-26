@@ -5,7 +5,7 @@ import { dbService } from '../../../fbase';
 import Modal from 'react-modal';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { useNavigate } from 'react-router-dom';
-import { KakaoIdContext} from '../../../KakaoIdContext';
+import { UserNameContext } from '../../../UserNameContext';
 
 const Div = styled.div`
 
@@ -77,7 +77,6 @@ const ModalCheck = styled.button`
 `;
 
 function PickAnswerPage() {
-    const [nameContext] = useContext(KakaoIdContext); //check
     // 답변 불러오기
     const [questionzip, setQuestionZip] = useState();
     const [targetQid, setTargetQidZip] = useState();
@@ -85,6 +84,8 @@ function PickAnswerPage() {
     const [answerzips, setAnswerZip] = useState([]);
     const [reasonzips, setReasonZip] = useState([]);
     const QuestionId = '6LOxO0d0kqHvGEY2Sfbc'; //questionid 받아오기
+    const [userContext] = useContext(UserNameContext);
+    // console.log("username: ", userContext);
 
     useEffect(() => {
         fetchDataQuestion();
@@ -187,7 +188,7 @@ function PickAnswerPage() {
 
     return (
         <Div>
-        <h1>{nameContext}.ZiP</h1> 
+        <h1>{userContext}.ZiP</h1> 
         <h3>사람들이 남겨둔 키워드와 이유를 확인해보세요!</h3>
         <Title>{questionzip}</Title>
         <h3>{commentzip}</h3>
