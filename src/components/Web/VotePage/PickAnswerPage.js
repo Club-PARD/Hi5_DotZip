@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React, { useState, useEffect } from 'react';
-import { collection, query, getDocs, collectionGroup, where, onSnapshot } from "firebase/firestore";
+import { collection, query, getDocs, onSnapshot } from "firebase/firestore";
 import { dbService } from '../../../fbase';
 import Modal from 'react-modal';
 import CopyToClipboard from 'react-copy-to-clipboard';
@@ -85,7 +85,7 @@ function PickAnswerPage() {
     const [answerzips, setAnswerZip] = useState([]);
     const [reasonzips, setReasonZip] = useState([]);
     const TargetUserId = 2861906505; // userid 받아오기
-    const QuestionId = 'iIOd2xPHp5yMQwOvoSTw'; //questionid 받아오기
+    const QuestionId = '9q3B1MVPokmOv92z54Q7'; //questionid 받아오기
 
     useEffect(() => {
         fetchDataKaKao();
@@ -129,7 +129,7 @@ function PickAnswerPage() {
 
     
     const fetchDataAnswer = async (targetUser, targetQ) => {
-        const answerZipCollection = collection(dbService,"kakaoId", targetUser.id,"zip", targetQ.id,"zip_answers");
+        const answerZipCollection = collection(dbService,"kakaoId", targetUser.id,"zip", targetQ.id,"zip_answer");
         getDocs(answerZipCollection)
         .then((answerZipSnapshot) => {
             const answerZipArr = answerZipSnapshot.docs.map((doc) => ({
@@ -151,10 +151,11 @@ function PickAnswerPage() {
         console.log(useridzips.toString());
         console.log(targetQid.toString());
         console.log(answerID.toString());
-        const reasonZipCollection = collection(dbService, "kakaoId", useridzips.toString(), "zip", targetQid.toString(),"zip_answers", answerID.toString(),"zip_reason");
+        const reasonZipCollection = collection(dbService, "kakaoId", useridzips.toString(), "zip", targetQid.toString(),"zip_answer", answerID.toString(),"zip_reason");
         const unsubscribe = onSnapshot(reasonZipCollection, (querySnapshot) => {
             const data = querySnapshot.docs.map((doc) => doc.data().reason);
             const name = querySnapshot.docs.map((doc) => doc.data().nickname);
+            console.log(data);
             const combinedData = data.map((reason, index) => ({
                 reason,
                 nickname: name[index],
