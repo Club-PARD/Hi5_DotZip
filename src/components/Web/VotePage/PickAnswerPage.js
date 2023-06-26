@@ -1,68 +1,10 @@
-// useEffect(() => {
-//     fetchDataKaKao(); // fetchDataKaKao 함수 호출
-//     //모든 kakaoId정보 가져오기
-//         const fetchData = async () => {
-//             //모든 kakao사용자 불러오기
-//             const kakaoId = query(collection(dbService, "kakaoId"));
-//             const unsubscribe = onSnapshot(kakaoId, (snapshot) => {
-//             const idArr = snapshot.docs.map((doc) => ({
-//               id: doc.id,
-//               ...doc.data(),
-//             }));
-//             //일치하는 사용자 찾기
-//             const targetUser = idArr.find(user => user.userId === TargetUserId);
-//             setUserIdZip(targetUser.userId);
-//             setUserNameZip(targetUser.userName);
-//             //일치하는 사용자의 zip(질문컬렉션)으로 이동하기
-//             if (targetUser) {
-//                 const zipCollection = collection(dbService, "kakaoId", targetUser.id, "zip");
-//                 getDocs(zipCollection)
-//                   .then((zipSnapshot) => {
-//                     const zipArr = zipSnapshot.docs.map((doc) => ({
-//                       id: doc.id,
-//                       ...doc.data(),
-//                     }));
-//                     //console.log(zipArr);
-//                     //일치하는 질문 찾기
-//                     const targetQ = zipArr.find(user => user.id === QuestionId);
-//                     setQuestionZip(targetQ.question);
-//                     setCommentZip(targetQ.comment);
-//                     //console.log(targetQ);
-//                     //일치하는 질문의 zip_answers(답변 컬렉션)으로 이동하기
-//                     if(targetQ) {
-//                         const answerZipCollection = collection(dbService, "kakaoId", targetUser.id, "zip", targetQ.id,"zip_answers");
-//                         getDocs(answerZipCollection)
-//                         .then((answerZipSnapshot) => {
-//                             const answerZipArr = answerZipSnapshot.docs.map((doc) => ({
-//                               id: doc.id,
-//                               ...doc.data(),
-//                         }));
-//                         //console.log(answerZipArr);
-//                         setAnswerZip(answerZipArr);
-//                         // 이유 불러오기
-//                         if (answerZipArr.length > 0) {
-//                             fetchReasons(targetUser, targetQ); // fetchReasons 함수 호출
-//                         }
-//                         });
-//                     } //if(targetQ)
-//                   });
-//             };
-//             return () => {
-//                 unsubscribe();
-//             };
-//         })}
-//     fetchData();
-// }, []);
-
 import styled from "styled-components";
 import React, { useState, useEffect } from 'react';
-import { collection, query, getDocs, collectionGroup, where, onSnapshot } from "firebase/firestore";
+import { collection, query, getDocs, onSnapshot } from "firebase/firestore";
 import { dbService } from '../../../fbase';
 import Modal from 'react-modal';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { useNavigate } from 'react-router-dom';
-
-
 
 const Div = styled.div`
 
@@ -133,93 +75,100 @@ const ModalCheck = styled.button`
     color: black;
 `;
 
-
 function PickAnswerPage() {
-// 답변 불러오기
-const [useridzips, setUserIdZip] = useState();
-const [usernamezips, setUserNameZip] = useState();
-const [questionzip, setQuestionZip] = useState();
-const [targetQid, setTargetQidZip] = useState();
-const [commentzip, setCommentZip] = useState();
-const [answerzips, setAnswerZip] = useState([]);
-const [reasonzips, setReasonZip] = useState([]);
-const TargetUserId = 2861906505; // userid 받아오기
-const QuestionId = 'iIOd2xPHp5yMQwOvoSTw'; //questionid 받아오기
+    // 답변 불러오기
+    const [useridzips, setUserIdZip] = useState();
+    const [usernamezips, setUserNameZip] = useState();
+    const [questionzip, setQuestionZip] = useState();
+    const [targetQid, setTargetQidZip] = useState();
+    const [commentzip, setCommentZip] = useState();
+    const [answerzips, setAnswerZip] = useState([]);
+    const [reasonzips, setReasonZip] = useState([]);
+    const TargetUserId = 2861906505; // userid 받아오기
+    const QuestionId = '9q3B1MVPokmOv92z54Q7'; //questionid 받아오기
 
-useEffect(() => {
-    fetchDataKaKao();
-});
-
-const fetchDataKaKao = async () => {
-    const kakaoId = query(collection(dbService, "kakaoId"));
-    const unsubscribe = onSnapshot(kakaoId, (snapshot) => {
-      const idArr = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      const targetUser = idArr.find((user) => user.userId === TargetUserId);
-      setUserIdZip(targetUser.userId);
-      setUserNameZip(targetUser.userName);
-      fetchDataQuestion(targetUser); // fetchDataQ 함수 호출
+    useEffect(() => {
+        fetchDataKaKao();
     });
-    return () => {
-      unsubscribe();
-    };
-  };
 
-const fetchDataQuestion = async (targetUser) => {
-    const zipCollection = collection(dbService, "kakaoId", targetUser.id, "zip");
-    getDocs(zipCollection)
-      .then((zipSnapshot) => {
-        const zipArr = zipSnapshot.docs.map((doc) => ({
+    const fetchDataKaKao = async () => {
+        const kakaoId = query(collection(dbService, "kakaoId"));
+        const unsubscribe = onSnapshot(kakaoId, (snapshot) => {
+        const idArr = snapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
-    }));
-    const targetQ = zipArr.find((user) => user.id === QuestionId);
-    setTargetQidZip(targetQ.id);
-    setQuestionZip(targetQ.question);
-    setCommentZip(targetQ.comment);
-    fetchDataAnswer(targetUser, targetQ); // fetchDataAnswer 함수 호출
-    });
-};
-
-  
-const fetchDataAnswer = async (targetUser, targetQ) => {
-    const answerZipCollection = collection(dbService,"kakaoId", targetUser.id,"zip", targetQ.id,"zip_answers");
-    getDocs(answerZipCollection)
-    .then((answerZipSnapshot) => {
-        const answerZipArr = answerZipSnapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-    }));
-    setAnswerZip(answerZipArr);
-    });
-};
-  
-
-const fetchReasons = (useridzips, targetQid, answerID) => {
-    if (!useridzips || !targetQid || !answerID) {
-      return;
-    }
-    console.log(useridzips.toString());
-    console.log(targetQid.toString());
-    console.log(answerID.toString());
-    const reasonZipCollection = collection(dbService, "kakaoId", useridzips.toString(), "zip", targetQid.toString(),"zip_answers", answerID.toString(),"zip_reason");
-  
-    getDocs(reasonZipCollection)
-      .then((reasonZipSnapshot) => {
-        console.log(reasonZipSnapshot);
-        const reasonZipArr = reasonZipSnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
         }));
-        console.log("확인용 : ",reasonZipArr);
-        setReasonZip(reasonZipArr);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-};
+        const targetUser = idArr.find((user) => user.userId === TargetUserId);
+        setUserIdZip(targetUser.userId);
+        setUserNameZip(targetUser.userName);
+        fetchDataQuestion(targetUser); // fetchDataQ 함수 호출
+        });
+        return () => {
+            unsubscribe();
+        };
+    };
+
+    const fetchDataQuestion = async (targetUser) => {
+        const zipCollection = collection(dbService, "kakaoId", targetUser.id, "zip");
+        getDocs(zipCollection)
+        .then((zipSnapshot) => {
+            const zipArr = zipSnapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+        }));
+        const targetQ = zipArr.find((user) => user.id === QuestionId);
+        setTargetQidZip(targetQ.id);
+        setQuestionZip(targetQ.question);
+        setCommentZip(targetQ.comment);
+        fetchDataAnswer(targetUser, targetQ); // fetchDataAnswer 함수 호출
+        });
+        return () => {
+            zipCollection(); // 감시 중지
+        };
+    };
+
+    
+    const fetchDataAnswer = async (targetUser, targetQ) => {
+        const answerZipCollection = collection(dbService,"kakaoId", targetUser.id,"zip", targetQ.id,"zip_answer");
+        getDocs(answerZipCollection)
+        .then((answerZipSnapshot) => {
+            const answerZipArr = answerZipSnapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+        }));
+        setAnswerZip(answerZipArr);
+        });
+        return () => {
+            answerZipCollection(); // 감시 중지
+        };
+    };
+    
+
+    const fetchReasons = (useridzips, targetQid, answerID) => {
+        if (!useridzips || !targetQid || !answerID) {
+        return;
+        }
+        console.log(useridzips.toString());
+        console.log(targetQid.toString());
+        console.log(answerID.toString());
+        const reasonZipCollection = collection(dbService, "kakaoId", useridzips.toString(), "zip", targetQid.toString(),"zip_answer", answerID.toString(),"zip_reason");
+        const unsubscribe = onSnapshot(reasonZipCollection, (querySnapshot) => {
+            const data = querySnapshot.docs.map((doc) => doc.data().reason);
+            const name = querySnapshot.docs.map((doc) => doc.data().nickname);
+            console.log(data);
+            const combinedData = data.map((reason, index) => ({
+                reason,
+                nickname: name[index],
+            }));
+            setReasonZip(combinedData);
+            // console.log("KakaoId documents:", data);
+            // console.log("Vote:", voteData);
+        });
+        return () => {
+            unsubscribe(); // 감시 중지
+        };
+
+    };
 
     //modal창띄우고 내리는 함수 관련
     const [keyword, setKeyword] = useState("");
@@ -248,10 +197,10 @@ const fetchReasons = (useridzips, targetQid, answerID) => {
     const handleEditVote = () => {
         navigate('/EditVotePage');
     };
-  
+
     //투표종료하기
     const handleEndVote = () => {
-      navigate('/MyProfile');
+    navigate('/MyProfile');
     };
     const totalVotes = answerzips.reduce((sum, answerzip) => sum + answerzip.totalVote, 0);
 
@@ -275,10 +224,10 @@ const fetchReasons = (useridzips, targetQid, answerID) => {
         ))}
         <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal} style={modalStyles}>
             <h1>{keyword}을 선택한 사람들의 이유</h1>
-            {reasonzips.map((reasonzip) => (
-                <ReasonBox key={reasonzip.id}>
-                    <h3>{reasonzip.reason}</h3>
-                    <h6>작성자 nickname: {reasonzip.nickname}</h6>
+            {reasonzips.map(({ reason, nickname }) => (
+                <ReasonBox key={reason}>
+                    <h3>{reason}</h3>
+                    <h6>작성자 nickname: {nickname}</h6>
                 </ReasonBox>
             ))}
             <ModalCheck isOpen={isModalOpen} onClick={handleCloseModal}>확인</ModalCheck>
