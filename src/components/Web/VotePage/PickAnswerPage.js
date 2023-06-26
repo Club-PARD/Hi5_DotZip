@@ -1,10 +1,11 @@
 import styled from "styled-components";
-import React, { useState, useEffect } from 'react';
-import { collection, query, getDocs, onSnapshot } from "firebase/firestore";
+import React, { useState, useEffect, useContext } from 'react';
+import { collection, getDocs } from "firebase/firestore";
 import { dbService } from '../../../fbase';
 import Modal from 'react-modal';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { useNavigate } from 'react-router-dom';
+import { KakaoIdContext} from '../../../KakaoIdContext';
 
 const Div = styled.div`
 
@@ -76,107 +77,86 @@ const ModalCheck = styled.button`
 `;
 
 function PickAnswerPage() {
+    const [nameContext] = useContext(KakaoIdContext); //check
     // 답변 불러오기
-    const [useridzips, setUserIdZip] = useState();
-    const [usernamezips, setUserNameZip] = useState();
     const [questionzip, setQuestionZip] = useState();
     const [targetQid, setTargetQidZip] = useState();
     const [commentzip, setCommentZip] = useState();
     const [answerzips, setAnswerZip] = useState([]);
     const [reasonzips, setReasonZip] = useState([]);
-    const TargetUserId = 2861906505; // userid 받아오기
-    const QuestionId = '9q3B1MVPokmOv92z54Q7'; //questionid 받아오기
+    const QuestionId = '6LOxO0d0kqHvGEY2Sfbc'; //questionid 받아오기
 
     useEffect(() => {
-        fetchDataKaKao();
+        fetchDataQuestion();
     });
 
-    const fetchDataKaKao = async () => {
-        const kakaoId = query(collection(dbService, "kakaoId"));
-        const unsubscribe = onSnapshot(kakaoId, (snapshot) => {
-        const idArr = snapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-        }));
-        const targetUser = idArr.find((user) => user.userId === TargetUserId);
-        setUserIdZip(targetUser.userId);
-        setUserNameZip(targetUser.userName);
-        fetchDataQuestion(targetUser); // fetchDataQ 함수 호출
-        });
-        return () => {
-            unsubscribe();
-        };
-    };
-
-    const fetchDataQuestion = async (targetUser) => {
-        const zipCollection = collection(dbService, "kakaoId", targetUser.id, "zip");
+    const fetchDataQuestion = async () => {
+        const zipCollection = collection(dbService, "zip_Question");
         getDocs(zipCollection)
         .then((zipSnapshot) => {
-            const zipArr = zipSnapshot.docs.map((doc) => ({
+            const QuestionzipArr = zipSnapshot.docs.map((doc) => ({
                 id: doc.id,
                 ...doc.data(),
         }));
-        const targetQ = zipArr.find((user) => user.id === QuestionId);
+        const targetQ = QuestionzipArr.find((user) => user.id === QuestionId);
         setTargetQidZip(targetQ.id);
-        setQuestionZip(targetQ.question);
-        setCommentZip(targetQ.comment);
-        fetchDataAnswer(targetUser, targetQ); // fetchDataAnswer 함수 호출
+        setQuestionZip(targetQ.question); //질문 questionzip에 저장
+        setCommentZip(targetQ.comment); //comment commentzip에 저장
         });
+        fetchDataAnswer();
         return () => {
             zipCollection(); // 감시 중지
         };
     };
 
-    
-    const fetchDataAnswer = async (targetUser, targetQ) => {
-        const answerZipCollection = collection(dbService,"kakaoId", targetUser.id,"zip", targetQ.id,"zip_answer");
+    const fetchDataAnswer = async () => {
+        const answerZipCollection = collection(dbService, "zip_Answer");
         getDocs(answerZipCollection)
         .then((answerZipSnapshot) => {
             const answerZipArr = answerZipSnapshot.docs.map((doc) => ({
                 id: doc.id,
                 ...doc.data(),
         }));
-        setAnswerZip(answerZipArr);
+        const targetAnswers = answerZipArr.filter(
+            (answer) => answer.questionId === targetQid
+          );
+          setAnswerZip(targetAnswers);
         });
         return () => {
-            answerZipCollection(); // 감시 중지
+          answerZipCollection(); // 감시 중지
         };
     };
     
 
-    const fetchReasons = (useridzips, targetQid, answerID) => {
-        if (!useridzips || !targetQid || !answerID) {
-        return;
+    const fetchReasons = (answerID) => {
+        if (!answerID) {
+            return;
         }
-        console.log(useridzips.toString());
-        console.log(targetQid.toString());
-        console.log(answerID.toString());
-        const reasonZipCollection = collection(dbService, "kakaoId", useridzips.toString(), "zip", targetQid.toString(),"zip_answer", answerID.toString(),"zip_reason");
-        const unsubscribe = onSnapshot(reasonZipCollection, (querySnapshot) => {
-            const data = querySnapshot.docs.map((doc) => doc.data().reason);
-            const name = querySnapshot.docs.map((doc) => doc.data().nickname);
-            console.log(data);
-            const combinedData = data.map((reason, index) => ({
-                reason,
-                nickname: name[index],
-            }));
-            setReasonZip(combinedData);
-            // console.log("KakaoId documents:", data);
-            // console.log("Vote:", voteData);
+        const reasonZipCollection = collection(dbService, "zip_Reason");
+        getDocs(reasonZipCollection)
+        .then((reasonZipSnapshot) => {
+            const reasonZipArr = reasonZipSnapshot.docs.map((doc) => ({
+                ...doc.data(),
+        }));
+        const targetReason = reasonZipArr.filter(
+            (reason) => reason.answerId === answerID
+          );
+          setReasonZip(targetReason);
         });
         return () => {
-            unsubscribe(); // 감시 중지
+            reasonZipCollection();
         };
 
     };
 
     //modal창띄우고 내리는 함수 관련
+    Modal.setAppElement('#root'); // 예시로 root 요소를 App 요소로 설정
     const [keyword, setKeyword] = useState("");
     const [isModalOpen, setIsModalOpen] = useState(false);
     const handleVoteBoxClick = (answer, answerID) => {
         setKeyword(answer);
         setIsModalOpen(true);
-        fetchReasons(useridzips, targetQid, answerID); //zip_reason컬렉션에서 해당 정보와 일치하는 이유 불러오기
+        fetchReasons(answerID); //zip_reason컬렉션에서 해당 정보와 일치하는 이유 불러오기
     };
     const handleCloseModal = () => {
         setIsModalOpen(false);
@@ -207,7 +187,7 @@ function PickAnswerPage() {
 
     return (
         <Div>
-        <h1>{usernamezips}.ZiP</h1> 
+        <h1>{nameContext}.ZiP</h1> 
         <h3>사람들이 남겨둔 키워드와 이유를 확인해보세요!</h3>
         <Title>{questionzip}</Title>
         <h3>{commentzip}</h3>
