@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { authService, dbService } from '../../../fbase';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, setDoc, doc } from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import { KakaoIdContext } from '../../../KakaoIdContext';
@@ -110,7 +110,6 @@ const Div = styled.div`
   align-items: center;
 `;
 
-
 function SurveyCreate() {
     const navigate = useNavigate();
     const [kakaoContext] = useContext(KakaoIdContext);
@@ -129,7 +128,7 @@ function SurveyCreate() {
         const questionId = uuidv4();
     
         // Firestore에 데이터 저장
-        await addDoc(collection(dbService, 'zip_Question'), {
+        await setDoc(doc(dbService, 'zip_Question', questionId), {
           kakaoContext,
           questionId,
           question,
@@ -137,13 +136,14 @@ function SurveyCreate() {
         });
     
         console.log('Data saved successfully');
-        setQuestion('');
-        setComment('');
-        navigate(`/SurveyShare/${questionId}`);
-      } catch (error) {
-        console.error('Error adding document:', error);
-      }
-    };
+      setQuestion('');
+      setComment('');
+      navigate(`/AnswerVote/${questionId}`);
+    } catch (error) {
+      console.error('Error adding document:', error);
+    }
+  };
+    
 
   return (
     <Div>
