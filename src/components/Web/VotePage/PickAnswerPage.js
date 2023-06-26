@@ -181,7 +181,7 @@ function PickAnswerPage() {
 
     //투표종료하기
     const handleEndVote = () => {
-    navigate('/MyProfile');
+        navigate('/MyProfile');
     };
     const totalVotes = answerzips.reduce((sum, answerzip) => sum + answerzip.totalVote, 0);
 
