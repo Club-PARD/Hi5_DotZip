@@ -94,6 +94,9 @@ useEffect(() => {
   const handleButton2Click = () => {
     navigate(`/Answer/${kakaoContext}`); // Replace with the actual path you want to navigate to
   };
+  const handleButtonPickAnswer = () => {
+    navigate('/PickAnswer'); // Replace with the actual path you want to navigate to
+  };
 
   return (
     <Div>
@@ -105,6 +108,7 @@ useEffect(() => {
         <button onClick={handleButtonClick}>나의 .Zip</button>
         <button onClick={handleButton1Click}>새로운 .Zip 만들기</button>
         <button onClick={handleButton2Click}>answer가기</button>
+        <button onClick={handleButtonPickAnswer}>pickanswer가기</button>
         <Header3>진행중인 .Zip</Header3>
       </Survey>
     </Div>
