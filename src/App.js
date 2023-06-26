@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useContext } from 'react';
 import Auth from './pages/Auth';
 import Home from './pages/Home';
 import Inquiry from './pages/Inquiry';
@@ -12,8 +13,10 @@ import SurveyCreate from './components/Web/SurveyPage/SurveyCreate';
 import Answer from './pages/Answer';
 import SurveyShare from './components/Web/SurveyPage/SurveyShare';
 import Preferences from './components/Web/PreferencesPage/PreferencesPage';
+import { KakaoIdContext } from "./KakaoIdContext.js";
 
 function App() {
+  const [kakaoContext] = useContext(KakaoIdContext);
   return (
 <Router>
   <Routes>
@@ -29,6 +32,7 @@ function App() {
     <Route path='/SurveyCreate' element={<SurveyCreate/>}/>
     <Route path='/SurveyShare' element={<SurveyShare/>}/>
     <Route path='/Answer' element={<Answer/>}/>
+    <Route path='/Answer/:id' element={<Answer/>}/>
     <Route path='/Preferences' element={<Preferences/>}/>
 
   </Routes>

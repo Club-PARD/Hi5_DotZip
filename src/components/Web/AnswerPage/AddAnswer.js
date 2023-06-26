@@ -4,13 +4,16 @@ import { collection, addDoc,updateDoc } from "firebase/firestore";
 
 const AddAnswer = () => {
   const [answer, setAnswer] = useState("");
-  const road =collection(dbService, "kakaoId", "2861055889", "zip", "Dz8akNMoanATfITviinB", "zip_answer");
+  const kakaoId = "2861055889";
+  const questionId = "Dz8akNMoanATfITviinB";
+  const road =collection(dbService, "zip_Answer", "zip",  "zip_answer");//다시 고치기
   const data = {
     answer: answer,
     totalVote: 0,
   }
   const onSubmit = async (e) => {
     e.preventDefault();
+    if(answer!==""){
     try {
       const newDocRef = await addDoc(road, 
       data);
@@ -22,6 +25,7 @@ const AddAnswer = () => {
       console.error("Error adding document: ", error);
     }
     setAnswer("");
+  }
   };
 
   const onChange = (e) => {

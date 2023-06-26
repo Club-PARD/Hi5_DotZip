@@ -92,7 +92,7 @@ useEffect(() => {
     navigate('../../../../SurveyCreate'); // Replace with the actual path you want to navigate to
   };
   const handleButton2Click = () => {
-    navigate('../../../../Answer'); // Replace with the actual path you want to navigate to
+    navigate(`/Answer/${kakaoContext}`); // Replace with the actual path you want to navigate to
   };
 
   return (
