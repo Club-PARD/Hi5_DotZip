@@ -28,7 +28,11 @@ const AddAnswer = () => {
         reason : reason,
         answerId : newDocRef.id,
         nickname : nickname,
-      } );
+      } 
+      );
+      setAnswer("");
+      setReason("");
+      setNickName("");
     } catch (error) {
       console.error("Error adding document: ", error);
     }

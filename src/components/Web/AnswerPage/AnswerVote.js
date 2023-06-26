@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext,  } from 'react';
 import { dbService } from "../../../fbase.js";
 import { collection, onSnapshot, updateDoc, doc } from "firebase/firestore";
 import { KakaoIdContext } from '../../../KakaoIdContext.js';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Div = styled.div`
   margin-top: 70px;
@@ -13,6 +13,7 @@ const AnswerVote = () => {
   const [documents, setDocuments] = useState([]);
   const road = collection(dbService, "zip_Answer");
   const {QID}= useParams;//QuestionID
+  const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = onSnapshot(road, (querySnapshot) => {
@@ -47,6 +48,7 @@ const AnswerVote = () => {
           doc.ID === ID ? { ...doc, voteData: (totalVote || 0) + 1 } : doc
         )
       );
+      navigate('/AnswerEnd');
     } catch (error) {
       console.error("Error updating document:", error);
     }

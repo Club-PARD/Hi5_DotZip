@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import KakaoShareButton from '../ProfilePage/ShareKakao';
-
+import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
+import { dbService } from "../../../fbase.js";
 
 const Div = styled.div`
 
@@ -41,13 +42,42 @@ const BackHomeButton = styled.button`
     padding: 5px;
     background: red;
 `;
-
-function MyProfilePage() {
-    //홈으로 돌아가기
+//-------------------------------------------------------------------------
+const MyProfilePage = () => {
+    // 홈으로 돌아가기
     const navigate = useNavigate();
     const handleBackHome = () => {
-        navigate('/Home');
+      navigate('/Home');
     };
+    // const road = collection(dbService, 'zip_Answer');
+  
+    // useEffect(() => {
+    //   const fetchDocuments = async () => {
+    //     const q = query(road, orderBy('totalVote', 'desc'), limit(3));
+    //     try {
+    //       const querySnapshot = await getDocs(q);
+    //       const topThreeDocuments = [];
+  
+    //       querySnapshot.forEach((doc) => {
+    //         const data = doc.data();
+    //         const document = {
+    //           answer: data.answer,
+    //           voteData: data.totalVote,
+    //           ID: data.answerId,
+    //         };
+    //         topThreeDocuments.push(document);
+    //       });
+  
+    //       console.log(topThreeDocuments);
+    //       // 여기서 상태(state)로 할당하거나 렌더링할 수 있습니다.
+    //     } catch (error) {
+    //       console.error('Error getting documents:', error);
+    //     }
+    //   };
+  
+    //   fetchDocuments();
+    // }, []);
+  
 
     return(
         <Div>

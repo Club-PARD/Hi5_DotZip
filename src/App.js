@@ -11,6 +11,7 @@ import SurveyFirst from './components/Web/SurveyPage/SurveyFirst';
 import SurveySecond from './components/Web/SurveyPage/SurveySecond';
 import SurveyCreate from './components/Web/SurveyPage/SurveyCreate';
 import Answer from './pages/Answer';
+import AnswerEnd from './components/Web/AnswerPage/AnswerEnd';
 import SurveyShare from './components/Web/SurveyPage/SurveyShare';
 import Preferences from './components/Web/PreferencesPage/PreferencesPage';
 import { KakaoIdContext } from "./KakaoIdContext.js";
@@ -33,6 +34,7 @@ function App() {
     <Route path='/SurveyShare' element={<SurveyShare/>}/>
     <Route path='/Answer' element={<Answer/>}/>
     <Route path='/Answer/:id' element={<Answer/>}/>
+    <Route path='/AnswerEnd' element={<AnswerEnd/>}/>
     <Route path='/Preferences' element={<Preferences/>}/>
 
   </Routes>
