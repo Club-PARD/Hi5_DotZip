@@ -4,6 +4,7 @@ import { dbService } from '../../../fbase';
 import { collection, onSnapshot } from 'firebase/firestore';
 import styled from 'styled-components';
 import { KakaoIdContext} from '../../../KakaoIdContext';
+import { UserNameContext } from '../../../UserNameContext';
 
 
 const Div = styled.div`
@@ -70,6 +71,8 @@ const HomePageFirst = () => {
   const navigate = useNavigate();
   const [kakaoContext] = useContext(KakaoIdContext);
   console.log("userId : ", kakaoContext);//userId
+  const [userContext] = useContext(UserNameContext);
+  console.log("username: ", userContext);
 
 useEffect(() => {
   const unsubscribe = onSnapshot(collection(dbService, 'kakaoId'), (snapshot) => {
@@ -102,7 +105,7 @@ useEffect(() => {
     <Div>
       <Survey>
         <Header2>
-          <HeaderDiv>안녕하세요, OO님</HeaderDiv>
+          <HeaderDiv>안녕하세요, {userContext}님</HeaderDiv>
           <HeaderP>궁금한 질문을 담은 링크를 공유해보세요.</HeaderP>
         </Header2>
         <button onClick={handleButtonClick}>나의 .Zip</button>
