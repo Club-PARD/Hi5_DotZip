@@ -110,6 +110,7 @@ const Div = styled.div`
   align-items: center;
 `;
 
+
 function SurveyCreate() {
     const navigate = useNavigate();
     const [kakaoContext] = useContext(KakaoIdContext);
@@ -125,11 +126,12 @@ function SurveyCreate() {
           throw new Error('User not logged in');
         }
     
-        // const questionId = uuidv4();
+        const questionId = uuidv4();
     
         // Firestore에 데이터 저장
-        await addDoc(collection(dbService, 'kakaoId', kakaoContext, 'zip'), {
-          // questionId,
+        await addDoc(collection(dbService, 'zip_Question'), {
+          kakaoContext,
+          questionId,
           question,
           comment,
         });
@@ -137,12 +139,11 @@ function SurveyCreate() {
         console.log('Data saved successfully');
         setQuestion('');
         setComment('');
-        navigate('/SurveyShare');
+        navigate(`/SurveyShare/${questionId}`);
       } catch (error) {
         console.error('Error adding document:', error);
       }
     };
-    
 
   return (
     <Div>

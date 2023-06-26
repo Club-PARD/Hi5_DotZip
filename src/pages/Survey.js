@@ -14,6 +14,7 @@ function SurveyPage() {    const SurveyPageComponent = styled.div`
             <div>
                 <NavBar />
                 <SurveyFirst />
+                <Footer/>
             </div>
         </SurveyPageComponent>
     );
