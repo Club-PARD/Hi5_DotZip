@@ -1,15 +1,16 @@
-import React, { useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { dbService } from '../../../fbase';
-import { collection, onSnapshot } from 'firebase/firestore';
+import { collection, doc, onSnapshot } from 'firebase/firestore';
 import styled from 'styled-components';
-import { KakaoIdContext} from '../../../KakaoIdContext';
+import { KakaoIdContext } from '../../../KakaoIdContext';
 import { UserNameContext } from '../../../UserNameContext';
-import { useLocation } from 'react-router-dom';
+
 
 const Div = styled.div`
   margin-top: 70px;
   height: 1000px;
+  
 `;
 
 const HeaderP = styled.p`
@@ -84,29 +85,40 @@ const Button2 = styled.button`
   color: #ABABAB;
   
 `;
+const P = styled.p`
+
+background: #EEFF01;
+
+  
+`;
 
 
 const SurveyShare = () => {
-
+    const { questionId } = useParams();
     const navigate = useNavigate();
     const [kakaoContext] = useContext(KakaoIdContext);
-    console.log("userId : ", kakaoContext);//userId
     const [userContext] = useContext(UserNameContext);
-    console.log("username: ", userContext);
     const location = useLocation();
-const queryParams = new URLSearchParams(location.search);
-const question = queryParams.get('question');
-const comment = queryParams.get('comment');
-
-useEffect(() => {
-  const unsubscribe = onSnapshot(collection(dbService, 'kakaoId'), (snapshot) => {
-    // 원하는 로직을 추가하세요.
-  });
-
-  return () => {
-    unsubscribe(); // 컴포넌트가 언마운트될 때 데이터 변경 구독을 해제합니다.
-  };
-}, []);
+    const queryParams = new URLSearchParams(location.search);
+    const [question, setQuestion] = useState('');
+    const [comment, setComment] = useState('');
+  
+    useEffect(() => {
+      const unsubscribe = onSnapshot(doc(dbService, 'zip_Question', questionId), (snapshot) => {
+        if (snapshot.exists()) {
+          const data = snapshot.data();
+          setQuestion(data.question);
+          setComment(data.comment);
+        } else {
+          // Handle case when document does not exist
+        }
+      });
+  
+      return () => {
+        unsubscribe();
+      };
+    }, [questionId]);
+  
 
 
     return (
@@ -117,11 +129,11 @@ useEffect(() => {
               <HeaderP>링크를 공유하고 투표를 받아보세요!</HeaderP>
             </Header2>
             <div>
-            <p>Question: {question}</p>
-            <p>Comment: {comment}</p>
+            <P>Question: {question}</P>
+            <P>Comment: {comment}</P>
              </div>
             <button >링크 공유하고 답변 받기 </button>
-            <Button2 onClick={() => navigate('/HomePageFirst')}>
+            <Button2 onClick={() => navigate('/home')}>
             다음
           </Button2>
           <h2>투표하기</h2> <p>키워드 후보는 1인 1개만 추가할 수 있어요.</p>

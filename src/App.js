@@ -31,7 +31,7 @@ function App() {
     <Route path='/SurveyFirst' element={<SurveyFirst/>}/>
     <Route path='/SurveySecond' element={<SurveySecond/>}/>
     <Route path='/SurveyCreate' element={<SurveyCreate/>}/>
-    <Route path='/SurveyShare' element={<SurveyShare/>}/>
+    <Route path='/SurveyShare/:questionId' element={<SurveyShare/>}/>
     <Route path='/Answer' element={<Answer/>}/>
     <Route path='/Answer/:id' element={<Answer/>}/>
     <Route path='/AnswerEnd' element={<AnswerEnd/>}/>
