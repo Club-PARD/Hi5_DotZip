@@ -5,6 +5,7 @@ import { collection, addDoc, setDoc, doc } from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import { KakaoIdContext } from '../../../KakaoIdContext';
+import { UserNameContext } from '../../../UserNameContext';
 
 const Survey = styled.div`
   display: flex;
@@ -110,6 +111,8 @@ const Div = styled.div`
   align-items: center;
 `;
 
+
+
 function SurveyCreate() {
     const navigate = useNavigate();
     const [kakaoContext] = useContext(KakaoIdContext);
@@ -117,6 +120,8 @@ function SurveyCreate() {
     const [currentUser, setCurrentUser] = useState(null);
     const [question, setQuestion] = useState('');
     const [comment, setComment] = useState('');
+    const [userContext] = useContext(UserNameContext);
+    console.log("username: ", userContext);
   
   
     const handleSubmit = async () => {
@@ -138,7 +143,8 @@ function SurveyCreate() {
         console.log('Data saved successfully');
       setQuestion('');
       setComment('');
-      navigate(`/AnswerVote/${questionId}`);
+      navigate(`/SurveyShare/${questionId}`);
+      //navigate(`/SurveyShare/${questionId}?question=${question}&comment=${comment}`);
     } catch (error) {
       console.error('Error adding document:', error);
     }
@@ -151,7 +157,7 @@ function SurveyCreate() {
         <Header2>
           <HeaderDiv>새로운 .ZiP 만들기</HeaderDiv>
           <HeaderP>궁금한 질문을 담은 링크를 공유해보세요.</HeaderP>
-          <HeaderName>ㅇㅇ님의 .ZiP</HeaderName>
+          <HeaderName>{userContext}님의 .ZiP</HeaderName>
         </Header2>
         <Button>이모지선택</Button>
         <InputQues

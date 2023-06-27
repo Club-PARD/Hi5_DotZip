@@ -117,7 +117,7 @@ const Div = styled.div`
   height: 100%;
 `;
 
-function CreateFirst() {
+function SurveyFirst() {
   const navigate = useNavigate();
   const [kakaoContext] = useContext(KakaoIdContext);
   console.log("zip userId : ", kakaoContext);//userId
@@ -169,17 +169,17 @@ function CreateFirst() {
             handleButton1Click();
             handleButtonSelect('버튼1');
           }}
-          active={selectedButton === '버튼1'}
+          active={selectedButton === '버튼1' ? 'true' : 'false'} // 수정된 부분
         >
           버튼1
         </Button>
         <Button
-          onClick ={() => {
-            handleButton1Click();
-            handleButtonSelect('버튼2');
+          onClick={() => {
+          handleButton1Click();
+          handleButtonSelect('버튼2');
           }}
-          active={selectedButton === '버튼2'}
-        >
+          active={selectedButton === '버튼2' ? 'true' : 'false'} // 수정된 부분
+          >
           버튼2
         </Button>
           </ButtonRow>
@@ -189,7 +189,7 @@ function CreateFirst() {
             handleButton1Click();
             handleButtonSelect('버튼3');
           }}
-          active={selectedButton === '버튼3'}
+          active={selectedButton === '버튼3' ? 'true' : 'false'} // 수정된 부분
         >
           버튼3
         </Button>
@@ -198,7 +198,7 @@ function CreateFirst() {
             handleButton1Click();
             handleButtonSelect('버튼4');
           }}
-          active={selectedButton === '버튼4'}
+          active={selectedButton === '버튼4' ? 'true' : 'false'} // 수정된 부분
         >
           버튼4
         </Button>
@@ -211,5 +211,5 @@ function CreateFirst() {
     );
   }
   
-  export default CreateFirst;
+  export default SurveyFirst;
   
