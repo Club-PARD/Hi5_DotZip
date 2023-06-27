@@ -3,12 +3,13 @@ import KakaoLogin from "react-kakao-login";
 import { dbService } from "../fbase.js";
 import { collection, onSnapshot, setDoc, doc } from "firebase/firestore";
 import { Navigate } from "react-router-dom";
+import { KakaoIdContext } from "../KakaoIdContext.js";
 import { UserNameContext } from "../UserNameContext";
 
 const Auth = () => {
   const [accessToken, setAccessToken] = useState("");
   const [kakaoId, setKakaoId] = useState([]);
-
+  const [kakaoContext, setkakaoContext] = useContext(KakaoIdContext);
   const [userContext, setuserContext] = useContext(UserNameContext);
  
   useEffect(() => {
@@ -33,6 +34,8 @@ const Auth = () => {
 
   const handleSuccess = async (response) => {
     console.log("로그인 성공", response);
+    setAccessToken(response.response.access_token);
+    setkakaoContext(response.profile.id.toString());
     localStorage.setItem("kakaoId",response.profile.id);
     setuserContext(response.profile.properties.nickname.toString());
     const hasMatchingId = (responseId, userIds) => {
