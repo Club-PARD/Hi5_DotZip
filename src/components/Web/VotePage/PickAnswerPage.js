@@ -226,7 +226,7 @@ function PickAnswerPage() {
                     <h6>작성자 nickname: {nickname}</h6>
                 </ReasonBox>
             ))}
-            <ModalCheck isOpen={isModalOpen} onClick={handleCloseModal}>확인</ModalCheck>
+            <ModalCheck isopen="false" onClick={handleCloseModal}>확인</ModalCheck>
         </Modal>
             {voteEnd ?  null : (<BackHomeButton onClick={handleBackHome}>홈으로 돌아가기</BackHomeButton>)}
             {voteEnd ? (<EditButton onClick={handleEditVote}>투표 수정하기</EditButton>) : null}
