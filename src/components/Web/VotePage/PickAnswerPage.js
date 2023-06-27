@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React, { useState, useEffect, useContext } from 'react';
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, updateDoc, doc } from "firebase/firestore";
 import { dbService } from '../../../fbase';
 import Modal from 'react-modal';
 // import CopyToClipboard from 'react-copy-to-clipboard'; //링크복사
@@ -70,44 +70,46 @@ const ReasonBox = styled.div`
 `;
 const ModalCheck = styled.button`
     width: 100px;
-    height: 50px;
+    height: 50px;d
     padding: 5px;
     background: white;
     color: black;
+`;
+const BackHomeButton = styled.button`
+    width: 200px;
+    height: 100px;
+    padding: 5px;
+    background: red;
 `;
 
 function PickAnswerPage() {
     // 답변 불러오기
     const [questionzip, setQuestionZip] = useState();
-    const [targetQid, setTargetQidZip] = useState();
     const [commentzip, setCommentZip] = useState();
     const [answerzips, setAnswerZip] = useState([]);
     const [reasonzips, setReasonZip] = useState([]);
-    const QuestionId = '7193c996-38e7-4058-acd5-592b73e5c1b0'; //questionid 받아오기
+    const QuestionId = '024d3b76-d706-483a-8af0-de369fd993cf'; //questionid 받아오기
     const [userContext] = useContext(UserNameContext);
+    const [voteEnd, setVoteEnd] = useState(true);
     // console.log("username: ", userContext);
 
     useEffect(() => {
         fetchDataQuestion();
-    });
+        fetchDataAnswer();
+    }, []);
 
     const fetchDataQuestion = async () => {
         const zipCollection = collection(dbService, "zip_Question");
-        getDocs(zipCollection)
-        .then((zipSnapshot) => {
-            const QuestionzipArr = zipSnapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
+        const zipQSnapshot = await getDocs(zipCollection);
+        const QuestionzipArr = zipQSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
         }));
         const targetQ = QuestionzipArr.find((user) => user.id === QuestionId);
-        setTargetQidZip(targetQ.id);
-        setQuestionZip(targetQ.question); //질문 questionzip에 저장
-        setCommentZip(targetQ.comment); //comment commentzip에 저장
-        });
-        fetchDataAnswer();
-        return () => {
-            zipCollection(); // 감시 중지
-        };
+        console.log(targetQ);
+        setQuestionZip(targetQ.question);
+        setCommentZip(targetQ.comment);
+        setVoteEnd(targetQ.voteEnd); // 투표 종료 여부 판단
     };
 
     const fetchDataAnswer = async () => {
@@ -118,11 +120,11 @@ function PickAnswerPage() {
                 id: doc.id,
                 ...doc.data(),
         }));
-        const targetAnswers = answerZipArr.filter(
-            (answer) => answer.questionId === targetQid
-          );
+        const targetAnswers = answerZipArr.filter((answer) => answer.questionId === QuestionId);
           setAnswerZip(targetAnswers);
+          console.log(targetAnswers);
         });
+        
         return () => {
           answerZipCollection(); // 감시 중지
         };
@@ -130,9 +132,7 @@ function PickAnswerPage() {
     
 
     const fetchReasons = (answerID) => {
-        if (!answerID) {
-            return;
-        }
+        if (!answerID) {return;}
         const reasonZipCollection = collection(dbService, "zip_Reason");
         getDocs(reasonZipCollection)
         .then((reasonZipSnapshot) => {
@@ -143,11 +143,11 @@ function PickAnswerPage() {
             (reason) => reason.answerId === answerID
           );
           setReasonZip(targetReason);
+          console.log(targetReason);
         });
         return () => {
             reasonZipCollection();
         };
-
     };
 
     //modal창띄우고 내리는 함수 관련
@@ -162,6 +162,7 @@ function PickAnswerPage() {
     const handleCloseModal = () => {
         setIsModalOpen(false);
     };
+    
 
     //링크 복사하기
     // const voteLink = window.location.href;
@@ -181,7 +182,21 @@ function PickAnswerPage() {
 
     //투표종료하기
     const handleEndVote = () => {
-        navigate('/MyProfile');
+        const docRef = doc(dbService, "zip_Question", QuestionId);
+        updateDoc(docRef, { voteEnd: false })
+        .then(() => {
+        // Update the local state after successful update in Firebase
+        setVoteEnd(false);
+            navigate('/MyProfile');
+        })
+        .catch((error) => {
+        // Handle the error
+        console.error("Error updating voteEnd field:", error);
+        });
+    };
+    //홈으로 돌아가기
+    const handleBackHome = () => {
+        navigate('/Home');
     };
     const totalVotes = answerzips.reduce((sum, answerzip) => sum + answerzip.totalVote, 0);
 
@@ -213,8 +228,9 @@ function PickAnswerPage() {
             ))}
             <ModalCheck isOpen={isModalOpen} onClick={handleCloseModal}>확인</ModalCheck>
         </Modal>
-            <EditButton onClick={handleEditVote}>투표 수정하기</EditButton>
-            <EndButton onClick={handleEndVote}>투표 종료하기</EndButton>
+            {voteEnd ?  null : (<BackHomeButton onClick={handleBackHome}>홈으로 돌아가기</BackHomeButton>)}
+            {voteEnd ? (<EditButton onClick={handleEditVote}>투표 수정하기</EditButton>) : null}
+            {voteEnd ? (<EndButton onClick={handleEndVote}>투표 종료하기</EndButton>) : null}
             {/* <CopyToClipboard text={voteLink}> //링크복사
                 <LinkButton onClick={handleCopyLink}>링크 복사하기</LinkButton>
             </CopyToClipboard>
