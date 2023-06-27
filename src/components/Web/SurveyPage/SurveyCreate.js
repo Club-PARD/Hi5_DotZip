@@ -118,12 +118,16 @@ function SurveyCreate() {
     // const [kakaoContext] = useContext(KakaoIdContext);
     // console.log("zip userId : ", kakaoContext);//userId
     const kakaoId = localStorage.getItem("kakaoId");
-    console.log(localStorage.getItem("kakaoId"));
+    //console.log(localStorage.getItem("kakaoId"));
     const [currentUser, setCurrentUser] = useState(null);
     const [question, setQuestion] = useState('');
     const [comment, setComment] = useState('');
     const [userContext] = useContext(UserNameContext);
     //console.log("username: ", userContext);
+
+    useEffect(() => {
+      console.log(kakaoId); // Print kakaoId value only once
+    }, []);
 
   
     const handleSubmit = async () => {
@@ -172,7 +176,6 @@ function SurveyCreate() {
           onChange={(e) => setComment(e.target.value)}
           placeholder="질문 코멘트 입력(선택사항)"
         />
-        <InputVote>+투표 항목 추가하기</InputVote>
         <Submit onClick={handleSubmit}>질문 저장하기</Submit>
       </Survey>
     </Div>
