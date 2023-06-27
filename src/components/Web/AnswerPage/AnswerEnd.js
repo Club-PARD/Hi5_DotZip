@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React, { useState, useEffect} from 'react';
 import { dbService } from "../../../fbase.js";
-import { collection, onSnapshot  } from "firebase/firestore";W
+import { collection, onSnapshot  } from "firebase/firestore";
 // import { KakaoIdContext } from '../../../KakaoIdContext.js';
 // import { useParams } from 'react-router-dom';
 
