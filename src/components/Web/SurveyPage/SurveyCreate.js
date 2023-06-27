@@ -1,7 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { authService, dbService } from '../../../fbase';
-import { collection, addDoc, setDoc, doc } from 'firebase/firestore';
+import { collection, addDoc, setDoc, doc} from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import { KakaoIdContext } from '../../../KakaoIdContext';
@@ -115,18 +115,20 @@ const Div = styled.div`
 
 function SurveyCreate() {
     const navigate = useNavigate();
-    const [kakaoContext] = useContext(KakaoIdContext);
-    console.log("zip userId : ", kakaoContext);//userId
+    // const [kakaoContext] = useContext(KakaoIdContext);
+    // console.log("zip userId : ", kakaoContext);//userId
+    const kakaoId = localStorage.getItem("kakaoId");
+    console.log(localStorage.getItem("kakaoId"));
     const [currentUser, setCurrentUser] = useState(null);
     const [question, setQuestion] = useState('');
     const [comment, setComment] = useState('');
     const [userContext] = useContext(UserNameContext);
-    console.log("username: ", userContext);
-  
+    //console.log("username: ", userContext);
+
   
     const handleSubmit = async () => {
       try {
-        if (!kakaoContext) {
+        if (!kakaoId) {
           throw new Error('User not logged in');
         }
     
@@ -134,7 +136,7 @@ function SurveyCreate() {
     
         // Firestore에 데이터 저장
         await setDoc(doc(dbService, 'zip_Question', questionId), {
-          kakaoContext,
+          kakaoId,
           questionId,
           question,
           comment,
