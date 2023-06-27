@@ -24,7 +24,7 @@ const HeaderP = styled.p`
 `;
 
 const HeaderDiv = styled.header`
-  width: 120px;
+
   height: 19px;
   font-family: 'Pretendard';
   font-style: normal;
@@ -69,8 +69,9 @@ const Survey = styled.div`
 
 const HomePageFirst = () => {
   const navigate = useNavigate();
-  const [kakaoContext] = useContext(KakaoIdContext);
-  console.log("userId : ", kakaoContext);//userId
+  // const [kakaoContext] = useContext(KakaoIdContext);
+  // console.log("userId : ", kakaoContext);//userId
+  const kakaoId = localStorage.getItem("kakaoId");
   const [userContext] = useContext(UserNameContext);
   console.log("username: ", userContext);
   console.log(localStorage.getItem("kakaoId"));
@@ -96,7 +97,7 @@ useEffect(() => {
     navigate('../../../../SurveyCreate'); // Replace with the actual path you want to navigate to
   };
   const handleButton2Click = () => {
-    navigate(`/Answer/${kakaoContext}`); // Replace with the actual path you want to navigate to
+    navigate(`/Answer/${kakaoId}`); // Replace with the actual path you want to navigate to
   };
   const handleButtonPickAnswer = () => {
     navigate('/PickAnswer'); // Replace with the actual path you want to navigate to
@@ -106,8 +107,9 @@ useEffect(() => {
     <Div>
       <Survey>
         <Header2>
-          <HeaderDiv>안녕하세요, {userContext}님</HeaderDiv>
+        <HeaderDiv>.zip에서 나의 새로운 모습을 찾아가보세요!</HeaderDiv>
           <HeaderP>궁금한 질문을 담은 링크를 공유해보세요.</HeaderP>
+
         </Header2>
         <button onClick={handleButtonClick}>나의 .Zip</button>
         <button onClick={handleButton1Click}>새로운 .Zip 만들기</button>

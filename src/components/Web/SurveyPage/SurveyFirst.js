@@ -119,15 +119,17 @@ const Div = styled.div`
 
 function SurveyFirst() {
   const navigate = useNavigate();
-  const [kakaoContext] = useContext(KakaoIdContext);
-  console.log("zip userId : ", kakaoContext);//userId
+  // const [kakaoContext] = useContext(KakaoIdContext);
+  // console.log("zip userId : ", kakaoContext);//userId
   const [currentUser, setCurrentUser] = useState(null);
   const [buttonSelected, setButtonSelected] = useState(false);
   const [selectedButton, setSelectedButton] = useState(null);
+  const kakaoId = localStorage.getItem("kakaoId");
+  console.log(localStorage.getItem("kakaoId"));
 
 
   const handleButtonClick = () => {
-    if (kakaoContext) {
+    if (kakaoId) {
       // User is logged in
       // ... perform necessary tasks
       navigate('/SurveyCreate');
@@ -138,7 +140,7 @@ function SurveyFirst() {
   };
 
   const handleButton1Click = () => {
-    if (kakaoContext) {
+    if (kakaoId) {
       // User is logged in
       // ... perform necessary tasks
     } else {

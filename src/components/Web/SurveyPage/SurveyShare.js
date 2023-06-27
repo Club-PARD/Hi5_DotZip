@@ -134,7 +134,7 @@ const SurveyShare = () => {
              </div>
             <button >링크 공유하고 답변 받기 </button>
             <Button2 onClick={() => navigate('/home')}>
-            다음
+            홈으로 돌아가기
           </Button2>
           <h2>투표하기</h2> <p>키워드 후보는 1인 1개만 추가할 수 있어요.</p>
           <button >+키워드 후보 추가하기 </button>
