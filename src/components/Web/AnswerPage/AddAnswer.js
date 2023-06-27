@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { dbService } from "../../../fbase.js";
 import { collection, addDoc,updateDoc } from "firebase/firestore";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const AddAnswer = () => {
   const [answer, setAnswer] = useState("");
@@ -9,9 +9,10 @@ const AddAnswer = () => {
   const [nickname, setNickName] = useState("");
   const {id} = useParams(); //이변수
   const road =collection(dbService, "zip_Answer");//다시 고치기
+  const navigate = useNavigate();
   const data = {
     answer: answer,
-    totalVote: 0,
+    totalVote: 1,
     questionId :"",//params로 받은 변수 넣기
   }
   const onSubmit = async (e) => {
@@ -33,6 +34,7 @@ const AddAnswer = () => {
       setAnswer("");
       setReason("");
       setNickName("");
+      navigate('/AnswerEnd');
     } catch (error) {
       console.error("Error adding document: ", error);
     }
