@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { dbService } from "../../../fbase.js";
 import { collection, getDocs, updateDoc, doc } from "firebase/firestore";
-import { KakaoIdContext } from '../../../KakaoIdContext.js';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const Div = styled.div`
