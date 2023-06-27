@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { collection, getDocs } from "firebase/firestore";
 import { dbService } from '../../../fbase';
 import Modal from 'react-modal';
-import CopyToClipboard from 'react-copy-to-clipboard';
+// import CopyToClipboard from 'react-copy-to-clipboard'; //링크복사
 import { useNavigate } from 'react-router-dom';
 import { UserNameContext } from '../../../UserNameContext';
 
@@ -27,18 +27,18 @@ const VoteBox = styled.button`
     color: #ffffff;
 `;
 //버튼들
-const LinkButton = styled.button`
-    width: 200px;
-    height: 100px;
-    padding: 5px;
-    background: red;
-`;
-const LinkMessage = styled.div`
-    width: 200px;
-    background: white;
-    padding: 10px;
-    border: 1px solid black;
-`;
+// const LinkButton = styled.button` //링크복사
+//     width: 200px;
+//     height: 100px;
+//     padding: 5px;
+//     background: red;
+// `;
+// const LinkMessage = styled.div` //링크복사
+//     width: 200px;
+//     background: white;
+//     padding: 10px;
+//     border: 1px solid black;
+// `;
 const EndButton = styled.button`
     width: 200px;
     height: 100px;
@@ -215,7 +215,7 @@ function PickAnswerPage() {
         </Modal>
             <EditButton onClick={handleEditVote}>투표 수정하기</EditButton>
             <EndButton onClick={handleEndVote}>투표 종료하기</EndButton>
-            {/* <CopyToClipboard text={voteLink}>
+            {/* <CopyToClipboard text={voteLink}> //링크복사
                 <LinkButton onClick={handleCopyLink}>링크 복사하기</LinkButton>
             </CopyToClipboard>
             {showMessage && <LinkMessage>링크가 복사되었습니다</LinkMessage>} */}
