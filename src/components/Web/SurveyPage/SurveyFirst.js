@@ -154,6 +154,31 @@ function SurveyFirst() {
     setSelectedButton(button);
     setButtonSelected(true);
   };
+  const handleSubmit = async () => {
+    try {
+      if (!kakaoId) {
+        throw new Error('User not logged in');
+      }
+  
+      const questionId = uuidv4();
+  
+      // Firestore에 데이터 저장
+      // await setDoc(doc(dbService, 'zip_Question', questionId), {
+      //   kakaoId,
+      //   questionId,
+      //   question,
+      //   comment,
+      // });
+  
+      console.log('Data saved successfully');
+    setQuestion('');
+    setComment('');
+    navigate(`/SurveyShare/${questionId}`);
+
+  } catch (error) {
+    console.error('Error adding document:', error);
+  }
+};
 
   
   
@@ -172,6 +197,8 @@ function SurveyFirst() {
             handleButtonSelect('버튼1');
           }}
           active={selectedButton === '버튼1' ? 'true' : 'false'} // 수정된 부분
+          // question = {나를 보면 어떤 단어가 떠올라?}
+          // comment = {자세히 적어줘}
         >
           버튼1
         </Button>
