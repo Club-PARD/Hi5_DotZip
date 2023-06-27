@@ -56,7 +56,7 @@ const ReturnVote = styled.button`
 
 function EditVotePage() {
     const [userContext] = useContext(UserNameContext);
-    const QuestionId = '6LOxO0d0kqHvGEY2Sfbc'; //questionid 받아오기
+    const QuestionId = '7193c996-38e7-4058-acd5-592b73e5c1b0'; //questionid 받아오기
     const [questionzip, setQuestionZip] = useState();
     const [targetQid, setTargetQidZip] = useState();
     const [commentzip, setCommentZip] = useState();

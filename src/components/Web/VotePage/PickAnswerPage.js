@@ -83,7 +83,7 @@ function PickAnswerPage() {
     const [commentzip, setCommentZip] = useState();
     const [answerzips, setAnswerZip] = useState([]);
     const [reasonzips, setReasonZip] = useState([]);
-    const QuestionId = '6LOxO0d0kqHvGEY2Sfbc'; //questionid 받아오기
+    const QuestionId = '7193c996-38e7-4058-acd5-592b73e5c1b0'; //questionid 받아오기
     const [userContext] = useContext(UserNameContext);
     // console.log("username: ", userContext);
 
@@ -164,14 +164,14 @@ function PickAnswerPage() {
     };
 
     //링크 복사하기
-    const voteLink = window.location.href;
-    const [showMessage, setShowMessage] = useState(false);
-    const handleCopyLink = () => {
-        setShowMessage(true);
-        setTimeout(() => {
-            setShowMessage(false);
-        }, 1000);
-    };
+    // const voteLink = window.location.href;
+    // const [showMessage, setShowMessage] = useState(false);
+    // const handleCopyLink = () => {
+    //     setShowMessage(true);
+    //     setTimeout(() => {
+    //         setShowMessage(false);
+    //     }, 1000);
+    // };
 
     //투표수정하기
     const navigate = useNavigate();
@@ -215,10 +215,10 @@ function PickAnswerPage() {
         </Modal>
             <EditButton onClick={handleEditVote}>투표 수정하기</EditButton>
             <EndButton onClick={handleEndVote}>투표 종료하기</EndButton>
-            <CopyToClipboard text={voteLink}>
+            {/* <CopyToClipboard text={voteLink}>
                 <LinkButton onClick={handleCopyLink}>링크 복사하기</LinkButton>
             </CopyToClipboard>
-            {showMessage && <LinkMessage>링크가 복사되었습니다</LinkMessage>}
+            {showMessage && <LinkMessage>링크가 복사되었습니다</LinkMessage>} */}
         </Div>
     );
 };
