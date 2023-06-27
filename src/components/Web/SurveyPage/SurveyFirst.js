@@ -154,31 +154,31 @@ function SurveyFirst() {
     setSelectedButton(button);
     setButtonSelected(true);
   };
-  const handleSubmit = async () => {
-    try {
-      if (!kakaoId) {
-        throw new Error('User not logged in');
-      }
+//   const handleSubmit = async () => {
+//     try {
+//       if (!kakaoId) {
+//         throw new Error('User not logged in');
+//       }
   
-      const questionId = uuidv4();
+//       const questionId = uuidv4();
   
-      // Firestore에 데이터 저장
-      // await setDoc(doc(dbService, 'zip_Question', questionId), {
-      //   kakaoId,
-      //   questionId,
-      //   question,
-      //   comment,
-      // });
+//       // Firestore에 데이터 저장
+//       // await setDoc(doc(dbService, 'zip_Question', questionId), {
+//       //   kakaoId,
+//       //   questionId,
+//       //   question,
+//       //   comment,
+//       // });
   
-      console.log('Data saved successfully');
-    setQuestion('');
-    setComment('');
-    navigate(`/SurveyShare/${questionId}`);
+//       console.log('Data saved successfully');
+//     setQuestion('');
+//     setComment('');
+//     navigate(`/SurveyShare/${questionId}`);
 
-  } catch (error) {
-    console.error('Error adding document:', error);
-  }
-};
+//   } catch (error) {
+//     console.error('Error adding document:', error);
+//   }
+// };
 
   
   
