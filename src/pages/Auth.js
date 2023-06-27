@@ -38,7 +38,6 @@ const Auth = () => {
     setkakaoContext(response.profile.id.toString());
     localStorage.setItem("kakaoId",response.profile.id);
     setuserContext(response.profile.properties.nickname.toString());
-
     const hasMatchingId = (responseId, userIds) => {
       return userIds.some((userId) => responseId === userId);
     };

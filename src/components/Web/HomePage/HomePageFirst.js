@@ -73,6 +73,7 @@ const HomePageFirst = () => {
   console.log("userId : ", kakaoContext);//userId
   const [userContext] = useContext(UserNameContext);
   console.log("username: ", userContext);
+  console.log(localStorage.getItem("kakaoId"));
 
 useEffect(() => {
   const unsubscribe = onSnapshot(collection(dbService, 'kakaoId'), (snapshot) => {
