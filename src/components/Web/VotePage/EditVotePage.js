@@ -102,8 +102,8 @@ function EditVotePage() {
     };
 
     const navigate = useNavigate();
-    const handlePickVote = () => {
-        navigate('/PickAnswer/');
+    const handlePickVote = (questionId) => {
+        navigate(`/PickAnswer/${questionId}`);
     };
     return(
         <Div>
@@ -125,7 +125,7 @@ function EditVotePage() {
             </div>
         ))}
             <AddWord>항목 추가하기</AddWord> {/* 현승오빠가 구현해놓은 부분으로 => 항목 추가하는 부분 */}
-            <ReturnVote onClick={handlePickVote}>투표 등록하기</ReturnVote>
+            <ReturnVote onClick={() => handlePickVote(questionId)}>투표 등록하기</ReturnVote>
         </Div>
     );
 };

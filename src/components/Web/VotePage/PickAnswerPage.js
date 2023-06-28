@@ -229,7 +229,7 @@ function PickAnswerPage() {
             <ModalCheck isopen="false" onClick={handleCloseModal}>확인</ModalCheck>
         </Modal>
             {voteEnd ?  null : (<BackHomeButton onClick={handleBackHome}>홈으로 돌아가기</BackHomeButton>)}
-            {voteEnd ? (<EditButton onClick={handleEditVote(questionId)}>투표 수정하기</EditButton>) : null}
+            {voteEnd ? (<EditButton onClick={() => handleEditVote(questionId)}>투표 수정하기</EditButton>) : null}
             {voteEnd ? (<EndButton onClick={handleEndVote}>투표 종료하기</EndButton>) : null}
             {/* <CopyToClipboard text={voteLink}> //링크복사
                 <LinkButton onClick={handleCopyLink}>링크 복사하기</LinkButton>
