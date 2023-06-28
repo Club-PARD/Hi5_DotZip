@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import React, { useContext, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { collection, addDoc, doc, setDoc } from 'firebase/firestore';
-import { authService, dbService } from '../../../fbase';
+import { doc, setDoc } from 'firebase/firestore';
+import { dbService } from '../../../fbase';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import { onSnapshot } from 'firebase/firestore';
@@ -132,6 +132,13 @@ function SurveyFirst() {
     }
   };
 
+
+  useEffect(() => {
+    if (selectedButton) {
+      handleButton1Click();
+    }
+  }, [selectedButton]);
+
   const handleButton1Click = async () => {
     try {
       if (!kakaoId) {
@@ -140,6 +147,8 @@ function SurveyFirst() {
 
       let question = '';
       let comment = '';
+      console.log('Selected Button:', selectedButton);
+
 
       if (selectedButton === '버튼1') {
         question = '나의 컬러 나의 이미지와 가장 잘 어울리는 색이 어떤 색인지 알려주세요!';
@@ -166,7 +175,7 @@ function SurveyFirst() {
       });
       
       console.log('Question:', question);
-    console.log('Comment:', comment);
+      console.log('Comment:', comment);
 
 
       setSelectedButton(null);
@@ -183,6 +192,7 @@ function SurveyFirst() {
     setSelectedButton(button);
     setButtonSelected(true);
   };
+  
 
   return (
     <Div>
@@ -194,39 +204,27 @@ function SurveyFirst() {
         <Button1 onClick={handleButtonClick}>+ 내가 직접 질문 만들기</Button1>
         <ButtonRow>
           <Button
-            onClick={() => {
-              handleButtonSelect('버튼1');
-              handleButton1Click();
-            }}
+            onClick={() => handleButtonSelect('버튼1')}
             active={selectedButton === '버튼1'}
           >
             나의 컬러 <br /> 나의 이미지와 가장 잘 어울리는 색은?
           </Button>
           <Button
-            onClick={() => {
-              handleButtonSelect('버튼2');
-              handleButton1Click();
-            }}
+            onClick={() => handleButtonSelect('버튼2')}
             active={selectedButton === '버튼2'}
           >
             패션브랜드 <br /> 나의 이미지와 어울리는 패션 브랜드는?
           </Button>
         </ButtonRow>
         <ButtonRow>
-          <Button
-            onClick={() => {
-              handleButtonSelect('버튼3');
-              handleButton1Click();
-            }}
+        <Button
+            onClick={() => handleButtonSelect('버튼3')}
             active={selectedButton === '버튼3'}
           >
             꽃말<br /> 내가 꽃이라면 그 꽃과 꽃말은?
           </Button>
           <Button
-            onClick={() => {
-              handleButtonSelect('버튼4');
-              handleButton1Click();
-            }}
+            onClick={() => handleButtonSelect('버튼4')}
             active={selectedButton === '버튼4'}
           >
             책 이름 <br /> 나를 책으로 만든다면, 그 책의 이름은?
