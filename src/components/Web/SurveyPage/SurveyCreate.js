@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { authService, dbService } from '../../../fbase';
-import { collection, addDoc, setDoc, doc} from 'firebase/firestore';
+import { dbService } from '../../../fbase';
+import { collection, addDoc, setDoc, doc, serverTimestamp} from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import { KakaoIdContext } from '../../../KakaoIdContext';
@@ -138,6 +138,8 @@ function SurveyCreate() {
         }
     
         const questionId = uuidv4();
+        const timestamp = serverTimestamp(); // Firebase 서버 시간으로 생성
+
     
         // Firestore에 데이터 저장
         await setDoc(doc(dbService, 'zip_Question', questionId), {
@@ -146,6 +148,7 @@ function SurveyCreate() {
           question,
           comment,
           voteEnd,
+          timestamp,
         });
     
         console.log('Data saved successfully');
