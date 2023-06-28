@@ -2,7 +2,7 @@ import styled from "styled-components";
 import React, { useState, useEffect, useContext } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { dbService } from '../../../fbase';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { UserNameContext } from '../../../UserNameContext';
 
 const Div = styled.div`
@@ -56,7 +56,7 @@ const ReturnVote = styled.button`
 
 function EditVotePage() {
     const [userContext] = useContext(UserNameContext);
-    const QuestionId = '024d3b76-d706-483a-8af0-de369fd993cf'; //questionid 받아오기
+    const {questionId} = useParams(); //questionid 받아오기
     const [questionzip, setQuestionZip] = useState();
     const [targetQid, setTargetQidZip] = useState();
     const [commentzip, setCommentZip] = useState();
@@ -73,7 +73,7 @@ function EditVotePage() {
                 id: doc.id,
                 ...doc.data(),
         }));
-        const targetQ = QuestionzipArr.find((user) => user.id === QuestionId);
+        const targetQ = QuestionzipArr.find((user) => user.id === questionId);
         setTargetQidZip(targetQ.id);
         setQuestionZip(targetQ.question); //질문 questionzip에 저장
         setCommentZip(targetQ.comment); //comment commentzip에 저장

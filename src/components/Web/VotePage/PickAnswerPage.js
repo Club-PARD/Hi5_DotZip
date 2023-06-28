@@ -176,8 +176,8 @@ function PickAnswerPage() {
 
     //투표수정하기
     const navigate = useNavigate();
-    const handleEditVote = () => {
-        navigate('/EditVotePage');
+    const handleEditVote = (questionId) => {
+        navigate('/EditVotePage/${questionId}');
     };
 
     //투표종료하기

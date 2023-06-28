@@ -26,7 +26,7 @@ function App() {
     <Route path='/Inquiry' element={<Inquiry/>}/>
     <Route path='About' element={<About/>}/>
     <Route path='/PickAnswer/:questionId' element={<PickAnswerPage/>}/>
-    <Route path='/EditVotePage' element={<EditVotePage/>}/>
+    <Route path='/EditVotePage/:questionId' element={<EditVotePage/>}/>
     <Route path='/MyProfile' element={<MyProfilePage/>}/>
     <Route path='/SurveyFirst' element={<SurveyFirst/>}/>
     <Route path='/SurveySecond' element={<SurveySecond/>}/>
