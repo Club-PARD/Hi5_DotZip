@@ -3,7 +3,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import KakaoShareButton from '../ProfilePage/ShareKakao';
 import ImageSaveButton from '../ProfilePage/SaveImage';
-import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
+import { collection, query, orderBy, limit, getDocs, updateDoc , doc} from "firebase/firestore";
 import { dbService } from "../../../fbase.js";
 import { UserNameContext } from '../../../UserNameContext';
 
@@ -41,7 +41,34 @@ const BackHomeButton = styled.button`
 `;
 //-------------------------------------------------------------------------
 const MyProfilePage = () => {
-    const [userContext] = useContext(UserNameContext);
+    const userId = localStorage.getItem("kakaoId");
+    const [userNickname, setUserName] = useState(localStorage.getItem("userName"));
+    useEffect(() => {
+      localStorage.setItem('userName', userNickname);
+      updateFirestoreUserName(userNickname);
+      console.log(localStorage.getItem("userName"));
+    }, [userNickname]);
+    
+    const updateFirestoreUserName = async (newUserName) => {
+      try {
+        const docRef = doc(dbService, 'kakaoId', userId);
+        await updateDoc(docRef, {
+          userName: newUserName
+        });
+        console.log('Firestore userName updated:', newUserName);
+      } catch (error) {
+        console.error('Error updating Firestore userName:', error);
+      }
+    };
+
+  const handleButtonClick = () => {
+    const newUserName = prompt('Enter your new name:');
+    if (newUserName) {
+      setUserName(newUserName);
+    }
+  };
+
+
     // 홈으로 돌아가기
     const navigate = useNavigate();
     const handleBackHome = () => {
@@ -80,7 +107,7 @@ const MyProfilePage = () => {
 
     return(
         <Div>
-            <h1>{userContext}님의 .ZiP</h1>
+            <h1><button onClick={handleButtonClick}>{userNickname}</button>님의 .ZiP</h1>
             {/* 사용자 id받아와서 넣어 줄 부분 */}
             <h2>나의 ZiP 랭킹</h2>
             {top3Answer.map(({ answer, voteData, ID }, index) => (

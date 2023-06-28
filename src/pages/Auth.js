@@ -37,7 +37,9 @@ const Auth = () => {
     setAccessToken(response.response.access_token);
     setkakaoContext(response.profile.id.toString());
     localStorage.setItem("kakaoId",response.profile.id);
-    setuserContext(response.profile.properties.nickname.toString());
+    localStorage.setItem("userName",response.profile.properties.nickname);
+    console.log(response.profile.properties.nickname);
+    // setuserContext(response.profile.properties.nickname.toString());
     const hasMatchingId = (responseId, userIds) => {
       return userIds.some((userId) => responseId === userId);
     };

@@ -77,8 +77,9 @@ const HomePageFirst = () => {
   // const [kakaoContext] = useContext(KakaoIdContext);
   // console.log("userId : ", kakaoContext);//userId
   const kakaoId = localStorage.getItem("kakaoId");
-  const [userContext] = useContext(UserNameContext);
-  console.log("username: ", userContext);
+  const userName = localStorage.getItem("userName");
+  // const [userContext] = useContext(UserNameContext);
+  console.log(localStorage.getItem("userName"));
   console.log(localStorage.getItem("kakaoId"));
   const [questions, setQuestions] = useState([]);
 
