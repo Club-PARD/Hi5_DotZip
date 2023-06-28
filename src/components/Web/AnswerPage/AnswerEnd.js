@@ -17,6 +17,7 @@ const AnswerEnd = () => {
 
   useEffect(() => {
     const unsubscribe = onSnapshot(road, (querySnapshot) => {
+      console.log("durleh answp djqtrpTwl?");
       const updatedDocuments = [];
       querySnapshot.docs.forEach((doc) => {
         if (doc.data().questionId === questionId) {

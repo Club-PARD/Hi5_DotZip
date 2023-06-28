@@ -18,11 +18,12 @@ import { KakaoIdContext } from "./KakaoIdContext.js";
 
 function App() {
   const [kakaoContext] = useContext(KakaoIdContext);
+  const kakaoId =  localStorage.getItem("kakaoId")
   return (
 <Router>
   <Routes>
     <Route path= '/' element={<Auth/>}/>
-    <Route path= '/Home' element={<Home/>}/>
+    <Route path="/Home" element={kakaoId ? <Home /> : <Auth />} />
     <Route path='/Inquiry' element={<Inquiry/>}/>
     <Route path='About' element={<About/>}/>
     <Route path='/PickAnswer/:questionId' element={<PickAnswerPage/>}/>
