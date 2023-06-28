@@ -5,6 +5,7 @@ import { collection, doc, onSnapshot } from 'firebase/firestore';
 import styled from 'styled-components';
 import { KakaoIdContext } from '../../../KakaoIdContext';
 import { UserNameContext } from '../../../UserNameContext';
+import AddAnswer from '../AnswerPage/AddAnswer';
 
 
 const Div = styled.div`
@@ -102,6 +103,7 @@ const SurveyShare = () => {
     const queryParams = new URLSearchParams(location.search);
     const [question, setQuestion] = useState('');
     const [comment, setComment] = useState('');
+    const [modalOpen, setModalOpen] = useState(false);
   
     useEffect(() => {
       const unsubscribe = onSnapshot(doc(dbService, 'zip_Question', questionId), (snapshot) => {
@@ -119,7 +121,9 @@ const SurveyShare = () => {
       };
     }, [questionId]);
   
-
+    const showModal = ()=>{
+      setModalOpen(!modalOpen);
+    };
 
     return (
         <Div>
@@ -133,11 +137,13 @@ const SurveyShare = () => {
             <P>Comment: {comment}</P>
              </div>
             <button >링크 공유하고 답변 받기 </button>
+
             <Button2 onClick={() => navigate('/home')}>
             홈으로 돌아가기
           </Button2>
           <h2>투표하기</h2> <p>키워드 후보는 1인 1개만 추가할 수 있어요.</p>
-          <button >+키워드 후보 추가하기 </button>
+          <button onClick={showModal}>키워드 후보 추가하기</button>
+            {modalOpen && <AddAnswer setModalOpen={setModalOpen} />}
           </Survey>
         </Div>
       );
