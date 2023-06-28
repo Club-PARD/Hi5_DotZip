@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { KakaoIdContext } from '../../../KakaoIdContext';
 import { UserNameContext } from '../../../UserNameContext';
 import AddAnswer from '../AnswerPage/AddAnswer';
+import CopyToClipboard from 'react-copy-to-clipboard'; //링크복사
 
 
 const Div = styled.div`
@@ -91,7 +92,20 @@ const P = styled.p`
 background: #EEFF01;
 
   
+`;//버튼들
+const LinkButton = styled.button` //링크복사
+    width: 200px;
+    height: 100px;
+    padding: 5px;
+    background: red;
 `;
+const LinkMessage = styled.div` //링크복사
+    width: 200px;
+    background: white;
+    padding: 10px;
+    border: 1px solid black;
+`;
+
 
 
 const SurveyShare = () => {
@@ -125,6 +139,16 @@ const SurveyShare = () => {
       setModalOpen(!modalOpen);
     };
 
+     //링크 복사하기
+    const voteLink = window.location.href;
+    const [showMessage, setShowMessage] = useState(false);
+    const handleCopyLink = () => {
+        setShowMessage(true);
+        setTimeout(() => {
+            setShowMessage(false);
+        }, 1000);
+    };
+
     return (
         <Div>
           <Survey>
@@ -136,7 +160,12 @@ const SurveyShare = () => {
             <P>Question: {question}</P>
             <P>Comment: {comment}</P>
              </div>
-            <button >링크 공유하고 답변 받기 </button>
+             <CopyToClipboard text={voteLink}>
+  <div>
+    <LinkButton onClick={handleCopyLink}>링크 복사하기</LinkButton>
+    {showMessage && <LinkMessage>링크가 복사되었습니다</LinkMessage>}
+  </div>
+</CopyToClipboard>
 
             <Button2 onClick={() => navigate('/home')}>
             홈으로 돌아가기
