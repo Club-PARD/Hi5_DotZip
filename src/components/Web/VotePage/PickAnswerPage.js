@@ -88,8 +88,7 @@ function PickAnswerPage() {
     const [commentzip, setCommentZip] = useState();
     const [answerzips, setAnswerZip] = useState([]);
     const [reasonzips, setReasonZip] = useState([]);
-    const {QuestionId} = useParams(); //questionid 받아오기
-    console.log(QuestionId);
+    const {questionId} = useParams(); //questionid 받아오기
     const [userContext] = useContext(UserNameContext);
     const [voteEnd, setVoteEnd] = useState(true);
     // console.log("username: ", userContext);
@@ -106,7 +105,7 @@ function PickAnswerPage() {
           id: doc.id,
           ...doc.data(),
         }));
-        const targetQ = QuestionzipArr.find((user) => user.id === QuestionId);
+        const targetQ = QuestionzipArr.find((user) => user.id === questionId);
         console.log(targetQ);
         setQuestionZip(targetQ.question);
         setCommentZip(targetQ.comment);
@@ -121,7 +120,7 @@ function PickAnswerPage() {
                 id: doc.id,
                 ...doc.data(),
         }));
-        const targetAnswers = answerZipArr.filter((answer) => answer.questionId === QuestionId);
+        const targetAnswers = answerZipArr.filter((answer) => answer.questionId === questionId);
           setAnswerZip(targetAnswers);
           console.log(targetAnswers);
         });
@@ -183,7 +182,7 @@ function PickAnswerPage() {
 
     //투표종료하기
     const handleEndVote = () => {
-        const docRef = doc(dbService, "zip_Question", QuestionId);
+        const docRef = doc(dbService, "zip_Question", questionId);
         updateDoc(docRef, { voteEnd: false })
         .then(() => {
         // Update the local state after successful update in Firebase
