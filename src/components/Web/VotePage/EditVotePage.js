@@ -4,6 +4,7 @@ import { collection, getDocs } from 'firebase/firestore';
 import { dbService } from '../../../fbase';
 import { useNavigate, useParams } from 'react-router-dom';
 import { UserNameContext } from '../../../UserNameContext';
+import AddAnswer from "../AnswerPage/AddAnswer";
 
 const Div = styled.div`
 
@@ -60,6 +61,7 @@ function EditVotePage() {
     const [questionzip, setQuestionZip] = useState();
     const [targetQid, setTargetQidZip] = useState();
     const [commentzip, setCommentZip] = useState();
+    const [modalOpen, setModalOpen] = useState(false);
     //답변 불러오기
     const [answerzips, setAnswerZip] = useState([]);
     useEffect(() => {
@@ -100,7 +102,9 @@ function EditVotePage() {
           answerZipCollection(); // 감시 중지
         };
     };
-
+    const showModal = ()=>{
+        setModalOpen(!modalOpen);
+      };
     const navigate = useNavigate();
     const handlePickVote = (questionId) => {
         navigate(`/PickAnswer/${questionId}`);
@@ -124,7 +128,8 @@ function EditVotePage() {
                 </VoteBox>
             </div>
         ))}
-            <AddWord>항목 추가하기</AddWord> {/* 현승오빠가 구현해놓은 부분으로 => 항목 추가하는 부분 */}
+            <AddWord onClick={showModal}>항목 추가하기</AddWord> {/* 현승오빠가 구현해놓은 부분으로 => 항목 추가하는 부분 */}
+            {modalOpen && <AddAnswer setModalOpen={setModalOpen} />}
             <ReturnVote onClick={() => handlePickVote(questionId)}>투표 등록하기</ReturnVote>
         </Div>
     );
