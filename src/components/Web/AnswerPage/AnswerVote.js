@@ -11,7 +11,7 @@ const Div = styled.div`
 const AnswerVote = () => {
   const [documents, setDocuments] = useState([]);
   const road = collection(dbService, "zip_Answer");
-  const { QID } = useParams(); //QuestionID
+  const { questionId } = useParams(); //QuestionID
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const AnswerVote = () => {
       try {
         const querySnapshot = await getDocs(road);
         const updatedDocuments = querySnapshot.docs
-          .filter((doc) => doc.data().questionId === "")
+          .filter((doc) => doc.data().questionId === questionId)
           .map((doc) => ({
             answer: doc.data().answer,
             voteData: doc.data().totalVote,
@@ -45,7 +45,7 @@ const AnswerVote = () => {
           doc.ID === ID ? { ...doc, voteData: (totalVote || 0) + 1 } : doc
         )
       );
-      navigate('/AnswerEnd');
+      navigate(`/AnswerEnd/${questionId}`);
     } catch (error) {
       console.error("Error updating document:", error);
     }

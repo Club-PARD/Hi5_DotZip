@@ -7,17 +7,17 @@ const AddAnswer = () => {
   const [answer, setAnswer] = useState("");
   const [reason, setReason] = useState("");
   const [nickname, setNickName] = useState("");
-  const {id} = useParams(); //이변수
+  const {questionId} = useParams(); //이변수
   const road =collection(dbService, "zip_Answer");//다시 고치기
   const navigate = useNavigate();
   const data = {
     answer: answer,
     totalVote: 1,
-    questionId :"",//params로 받은 변수 넣기
+    questionId :questionId,//params로 받은 변수 넣기
   }
   const onSubmit = async (e) => {
     e.preventDefault();
-    if(answer!==""){//id
+    if(answer!==""){//안썻을경우
     try {
       const newDocRef = await addDoc(road, 
       data);
@@ -34,7 +34,7 @@ const AddAnswer = () => {
       setAnswer("");
       setReason("");
       setNickName("");
-      navigate('/AnswerEnd');
+      navigate(`/AnswerEnd/${questionId}`);
     } catch (error) {
       console.error("Error adding document: ", error);
     }

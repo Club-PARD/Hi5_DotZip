@@ -140,7 +140,7 @@ const SurveyShare = () => {
     };
 
      //링크 복사하기
-    const voteLink = window.location.href;
+     const voteLink = `${window.location.origin}/answer/${questionId}`;
     const [showMessage, setShowMessage] = useState(false);
     const handleCopyLink = () => {
         setShowMessage(true);
