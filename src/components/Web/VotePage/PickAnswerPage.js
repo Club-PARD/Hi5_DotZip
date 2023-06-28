@@ -4,7 +4,7 @@ import { collection, getDocs, updateDoc, doc } from "firebase/firestore";
 import { dbService } from '../../../fbase';
 import Modal from 'react-modal';
 // import CopyToClipboard from 'react-copy-to-clipboard'; //링크복사
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { UserNameContext } from '../../../UserNameContext';
 
 const Div = styled.div`
@@ -70,7 +70,7 @@ const ReasonBox = styled.div`
 `;
 const ModalCheck = styled.button`
     width: 100px;
-    height: 50px;d
+    height: 50px;
     padding: 5px;
     background: white;
     color: black;
@@ -88,7 +88,8 @@ function PickAnswerPage() {
     const [commentzip, setCommentZip] = useState();
     const [answerzips, setAnswerZip] = useState([]);
     const [reasonzips, setReasonZip] = useState([]);
-    const QuestionId = '494bf53a-be66-4181-a713-9fa2db5d81b2'; //questionid 받아오기
+    const {QuestionId} = useParams(); //questionid 받아오기
+    console.log(QuestionId);
     const [userContext] = useContext(UserNameContext);
     const [voteEnd, setVoteEnd] = useState(true);
     // console.log("username: ", userContext);
