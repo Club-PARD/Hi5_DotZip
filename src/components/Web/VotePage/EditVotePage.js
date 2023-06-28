@@ -92,7 +92,7 @@ function EditVotePage() {
                 ...doc.data(),
         }));
         const targetAnswers = answerZipArr.filter(
-            (answer) => answer.questionId === targetQid
+            (answer) => answer.questionId === questionId
           );
           setAnswerZip(targetAnswers);
         });
@@ -103,8 +103,8 @@ function EditVotePage() {
 
     const navigate = useNavigate();
     const handlePickVote = () => {
-        navigate('/PickAnswer');
-      };
+        navigate('/PickAnswer/');
+    };
     return(
         <Div>
             <h1>나의 .ZiP 만들기</h1>
