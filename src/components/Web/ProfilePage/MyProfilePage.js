@@ -2,6 +2,7 @@ import styled from "styled-components";
 import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import KakaoShareButton from '../ProfilePage/ShareKakao';
+import ImageSaveButton from '../ProfilePage/SaveImage';
 import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
 import { dbService } from "../../../fbase.js";
 import { UserNameContext } from '../../../UserNameContext';
@@ -86,7 +87,7 @@ const MyProfilePage = () => {
   <VoteKewordBox key={ID}>{`${index + 1}위 ${answer}\n 투표수 : ${voteData}`}</VoteKewordBox>
 ))}
             <KakaoShareButton/>
-            <SaveButton>이미지 저장하기</SaveButton> 
+            <ImageSaveButton/>
             <CreateZipButton>다른 .ZiP 만들기</CreateZipButton>
             <BackHomeButton onClick={handleBackHome}>홈으로 돌아가기</BackHomeButton>
         </Div>
