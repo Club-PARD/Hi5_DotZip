@@ -85,9 +85,15 @@ const HomePageFirst = () => {
   useEffect(() => {
     const q = query(collection(dbService, 'zip_Question'), where('kakaoId', '==', kakaoId));
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const questionList = snapshot.docs.map((doc) => doc.data());
+      const questionList = [];
+      snapshot.forEach((doc) => {
+        if (doc.data().kakaoId === kakaoId) {
+          questionList.push(doc.data());
+        }
+      });
       setQuestions(questionList);
     });
+    
 
     return () => {
       unsubscribe();
