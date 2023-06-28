@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { dbService } from '../../../fbase';
-import { collection, onSnapshot } from 'firebase/firestore';
+import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import styled from 'styled-components';
 import { KakaoIdContext} from '../../../KakaoIdContext';
 import { UserNameContext } from '../../../UserNameContext';
+
 
 
 const Div = styled.div`
@@ -82,7 +83,8 @@ const HomePageFirst = () => {
   const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(dbService, 'zip_Question'), (snapshot) => {
+    const q = query(collection(dbService, 'zip_Question'), where('kakaoId', '==', kakaoId));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
       const questionList = snapshot.docs.map((doc) => doc.data());
       setQuestions(questionList);
     });
@@ -90,8 +92,7 @@ const HomePageFirst = () => {
     return () => {
       unsubscribe();
     };
-  }, []);
-
+  }, [kakaoId]);
   const handleQuestionClick = (questionId) => {
     navigate(`/PickAnswer/${questionId}`);
   };
