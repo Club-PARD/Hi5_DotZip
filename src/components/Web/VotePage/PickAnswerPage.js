@@ -88,7 +88,7 @@ function PickAnswerPage() {
     const [commentzip, setCommentZip] = useState();
     const [answerzips, setAnswerZip] = useState([]);
     const [reasonzips, setReasonZip] = useState([]);
-    const QuestionId = '024d3b76-d706-483a-8af0-de369fd993cf'; //questionid 받아오기
+    const QuestionId = '494bf53a-be66-4181-a713-9fa2db5d81b2'; //questionid 받아오기
     const [userContext] = useContext(UserNameContext);
     const [voteEnd, setVoteEnd] = useState(true);
     // console.log("username: ", userContext);

@@ -1,14 +1,13 @@
 import styled from "styled-components";
-import React, { useContext,useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { collection, query, where, getDocs } from 'firebase/firestore';
+import { collection, addDoc, doc, setDoc } from 'firebase/firestore';
 import { authService, dbService } from '../../../fbase';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-import {onSnapshot } from 'firebase/firestore';
-import { KakaoIdContext} from '../../../KakaoIdContext';
-
-
+import { onSnapshot } from 'firebase/firestore';
+import { KakaoIdContext } from '../../../KakaoIdContext';
+import { v4 as uuidv4 } from 'uuid';
 
 const Survey = styled.div`
   display: flex;
@@ -54,7 +53,7 @@ const Header2 = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  margin-top: 20px; /* Adjust this value to move it higher */
+  margin-top: 20px;
 `;
 
 const HeaderP = styled.p`
@@ -106,7 +105,6 @@ const Button2 = styled.button`
   line-height: 20px;
   text-align: center;
   color: #ABABAB;
-  
 `;
 
 const Div = styled.div`
@@ -119,126 +117,127 @@ const Div = styled.div`
 
 function SurveyFirst() {
   const navigate = useNavigate();
-  // const [kakaoContext] = useContext(KakaoIdContext);
-  // console.log("zip userId : ", kakaoContext);//userId
   const [currentUser, setCurrentUser] = useState(null);
   const [buttonSelected, setButtonSelected] = useState(false);
   const [selectedButton, setSelectedButton] = useState(null);
+  const [questionId, setQuestionId] = useState(null);
+  const [voteEnd, setIsBooleanValue] = useState(true);
   const kakaoId = localStorage.getItem("kakaoId");
-  console.log(localStorage.getItem("kakaoId"));
-
 
   const handleButtonClick = () => {
     if (kakaoId) {
-      // User is logged in
-      // ... perform necessary tasks
       navigate('/SurveyCreate');
     } else {
-      // User is not logged in
-      navigate('/'); // Navigate to the desired URL
+      navigate('/');
     }
   };
 
-  const handleButton1Click = () => {
-    if (kakaoId) {
-      // User is logged in
-      // ... perform necessary tasks
-    } else {
-      // User is not logged in
-      navigate('/'); // Navigate to the desired URL
+  const handleButton1Click = async () => {
+    try {
+      if (!kakaoId) {
+        throw new Error('User not logged in');
+      }
+
+      let question = '';
+      let comment = '';
+
+      if (selectedButton === '버튼1') {
+        question = '나의 컬러 나의 이미지와 가장 잘 어울리는 색이 어떤 색인지 알려주세요!';
+        comment = '성격과 컬러의 이미지를 연관지어보세요!';
+      } else if (selectedButton === '버튼2') {
+        question = '패션브랜드 나의 이미지와 가장 잘 어울리는 패션 브랜드가 어디인지 알려주세요!';
+        comment = '성격과 브랜드 이미지를 연관지어보세요!';
+      } else if (selectedButton === '버튼3') {
+        question = '꽃말 내가 꽃이면 나의 이미지와 가장 잘 어울리는 꽃과 꽃말은 뭔지 알려주세요!';
+        comment = '성격과 꽃말을 연관지어보세요!';
+      } else if (selectedButton === '버튼4') {
+        question = '책 이름 나의 이미지와 가장 잘 어울리는 책 이름이 뭔지 알려주세요!';
+        comment = '성격과 책 이름을 연관지어보세요!';
+      }
+
+      const questionId = uuidv4();
+
+      await setDoc(doc(dbService, 'zip_Question', questionId), {
+        kakaoId,
+        questionId,
+        question,
+        comment,
+        voteEnd,
+      });
+      
+      console.log('Question:', question);
+    console.log('Comment:', comment);
+
+
+      setSelectedButton(null);
+      setButtonSelected(false);
+      setQuestionId(questionId); // Set the questionId value
+
+      navigate(`/SurveyShare/${questionId}`);
+    } catch (error) {
+      console.error('Firestore에 데이터를 저장하는 도중 오류가 발생했습니다.', error);
     }
   };
-
 
   const handleButtonSelect = (button) => {
     setSelectedButton(button);
     setButtonSelected(true);
   };
-//   const handleSubmit = async () => {
-//     try {
-//       if (!kakaoId) {
-//         throw new Error('User not logged in');
-//       }
-  
-//       const questionId = uuidv4();
-  
-//       // Firestore에 데이터 저장
-//       // await setDoc(doc(dbService, 'zip_Question', questionId), {
-//       //   kakaoId,
-//       //   questionId,
-//       //   question,
-//       //   comment,
-//       // });
-  
-//       console.log('Data saved successfully');
-//     setQuestion('');
-//     setComment('');
-//     navigate(`/SurveyShare/${questionId}`);
 
-//   } catch (error) {
-//     console.error('Error adding document:', error);
-//   }
-// };
-
-  
-  
-    return (
-      <Div>
-        <Survey>
-          <Header2>
-            <HeaderDiv>새로운 .ZiP 만들기</HeaderDiv>
-            <HeaderP>궁금한 질문을 담은 링크를 공유해보세요.</HeaderP>
-          </Header2>
-          <Button1 onClick={handleButtonClick}>+ 내가 직접 질문 만들기</Button1>
-          <ButtonRow>
+  return (
+    <Div>
+      <Survey>
+        <Header2>
+          <HeaderDiv>새로운 .ZiP 만들기</HeaderDiv>
+          <HeaderP>궁금한 질문을 담은 링크를 공유해보세요.</HeaderP>
+        </Header2>
+        <Button1 onClick={handleButtonClick}>+ 내가 직접 질문 만들기</Button1>
+        <ButtonRow>
           <Button
-          onClick ={() => {
-            handleButton1Click();
-            handleButtonSelect('버튼1');
-          }}
-          active={selectedButton === '버튼1' ? 'true' : 'false'} // 수정된 부분
-          // question = {나를 보면 어떤 단어가 떠올라?}
-          // comment = {자세히 적어줘}
-        >
-          버튼1
-        </Button>
-        <Button
-          onClick={() => {
-          handleButton1Click();
-          handleButtonSelect('버튼2');
-          }}
-          active={selectedButton === '버튼2' ? 'true' : 'false'} // 수정된 부분
+            onClick={() => {
+              handleButtonSelect('버튼1');
+              handleButton1Click();
+            }}
+            active={selectedButton === '버튼1'}
           >
-          버튼2
-        </Button>
-          </ButtonRow>
-          <ButtonRow>
+            나의 컬러 <br /> 나의 이미지와 가장 잘 어울리는 색은?
+          </Button>
           <Button
-          onClick ={() => {
-            handleButton1Click();
-            handleButtonSelect('버튼3');
-          }}
-          active={selectedButton === '버튼3' ? 'true' : 'false'} // 수정된 부분
-        >
-          버튼3
-        </Button>
-        <Button
-          onClick ={() => {
-            handleButton1Click();
-            handleButtonSelect('버튼4');
-          }}
-          active={selectedButton === '버튼4' ? 'true' : 'false'} // 수정된 부분
-        >
-          버튼4
-        </Button>
-          </ButtonRow>
-          <Button2 disabled={!buttonSelected} onClick={() => navigate('/SurveySecond')}>
-            다음
-          </Button2>
-        </Survey>
-      </Div>
-    );
-  }
-  
-  export default SurveyFirst;
-  
+            onClick={() => {
+              handleButtonSelect('버튼2');
+              handleButton1Click();
+            }}
+            active={selectedButton === '버튼2'}
+          >
+            패션브랜드 <br /> 나의 이미지와 어울리는 패션 브랜드는?
+          </Button>
+        </ButtonRow>
+        <ButtonRow>
+          <Button
+            onClick={() => {
+              handleButtonSelect('버튼3');
+              handleButton1Click();
+            }}
+            active={selectedButton === '버튼3'}
+          >
+            꽃말<br /> 내가 꽃이라면 그 꽃과 꽃말은?
+          </Button>
+          <Button
+            onClick={() => {
+              handleButtonSelect('버튼4');
+              handleButton1Click();
+            }}
+            active={selectedButton === '버튼4'}
+          >
+            책 이름 <br /> 나를 책으로 만든다면, 그 책의 이름은?
+          </Button>
+        </ButtonRow>
+        <Button2 disabled={!buttonSelected} onClick={() => navigate(`/SurveyShare/${questionId}`)}>
+          다음
+        </Button2>
+      </Survey>
+    </Div>
+  );
+}
+
+export default SurveyFirst;

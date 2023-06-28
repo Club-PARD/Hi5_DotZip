@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { dbService } from '../../../fbase';
 import { collection, onSnapshot } from 'firebase/firestore';
@@ -66,6 +66,10 @@ const Survey = styled.div`
   margin: 0 auto;
   overflow-x: hidden;
 `;
+const P = styled.button`
+background: #EEFF01;
+ 
+`;
 
 const HomePageFirst = () => {
   const navigate = useNavigate();
@@ -75,18 +79,22 @@ const HomePageFirst = () => {
   const [userContext] = useContext(UserNameContext);
   console.log("username: ", userContext);
   console.log(localStorage.getItem("kakaoId"));
+  const [questions, setQuestions] = useState([]);
 
-useEffect(() => {
-  const unsubscribe = onSnapshot(collection(dbService, 'kakaoId'), (snapshot) => {
-    // 원하는 로직을 추가하세요.
-  });
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(dbService, 'zip_Question'), (snapshot) => {
+      const questionList = snapshot.docs.map((doc) => doc.data());
+      setQuestions(questionList);
+    });
 
-  return () => {
-    unsubscribe(); // 컴포넌트가 언마운트될 때 데이터 변경 구독을 해제합니다.
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  const handleQuestionClick = (questionId) => {
+    navigate(`/PickAnswer/${questionId}`);
   };
-}, []);
-
-// ...
 
 
   const handleButtonClick = () => {
@@ -94,7 +102,7 @@ useEffect(() => {
   };
 
   const handleButton1Click = () => {
-    navigate('../../../../SurveyCreate'); // Replace with the actual path you want to navigate to
+    navigate('../../../../MyProfile'); // Replace with the actual path you want to navigate to
   };
   const handleButton2Click = () => {
     navigate(`/Answer/${kakaoId}`); // Replace with the actual path you want to navigate to
@@ -111,11 +119,21 @@ useEffect(() => {
           <HeaderP>궁금한 질문을 담은 링크를 공유해보세요.</HeaderP>
 
         </Header2>
-        <button onClick={handleButtonClick}>나의 .Zip</button>
-        <button onClick={handleButton1Click}>새로운 .Zip 만들기</button>
+        <button onClick={handleButton1Click}>My Profile .Zip</button> 
+        <button onClick={handleButtonClick}>새로운 .Zip 만들기</button>
         <button onClick={handleButton2Click}>answer가기</button>
         <button onClick={handleButtonPickAnswer}>pickanswer가기</button>
         <Header3>진행중인 .Zip</Header3>
+        {questions.map((question) => (
+        <div key={question.questionId}>
+          {question && question.question && (
+          <P onClick={() => handleQuestionClick(question.questionId)}>
+            Question: {question.question} <br />
+            Comment: {question.comment}
+          </P>
+          )}
+        </div>
+        ))}
       </Survey>
     </Div>
   );

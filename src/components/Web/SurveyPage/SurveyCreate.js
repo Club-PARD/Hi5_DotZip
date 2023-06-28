@@ -122,6 +122,7 @@ function SurveyCreate() {
     const [currentUser, setCurrentUser] = useState(null);
     const [question, setQuestion] = useState('');
     const [comment, setComment] = useState('');
+    const [voteEnd, setIsBooleanValue] = useState(true); 
     const [userContext] = useContext(UserNameContext);
     //console.log("username: ", userContext);
 
@@ -144,6 +145,7 @@ function SurveyCreate() {
           questionId,
           question,
           comment,
+          voteEnd,
         });
     
         console.log('Data saved successfully');
