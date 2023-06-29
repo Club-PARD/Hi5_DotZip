@@ -59,7 +59,7 @@ const Survey = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 375px;
-  height: 812px;
+  height: 1000px;
   background: black;
   margin: 0 auto;
   overflow-x: hidden;
@@ -126,6 +126,14 @@ const ButtonsContainer = styled.div`
   gap: 10px;
   margin-bottom: 10px;
 `;
+const Questionp = styled.button`
+color: black;
+width: 319px;
+height: 259px;
+background: #D9D9D9;
+font-family: Pretendard;
+
+`;
 
 
 const HomePageFirst = () => {
@@ -178,7 +186,7 @@ const HomePageFirst = () => {
     <Div>
       <Survey>
         <Header2>
-          <HeaderDiv>안녕하세요, 00님</HeaderDiv>
+          <HeaderDiv>안녕하세요, {userContext}님</HeaderDiv>
           <HeaderP>폴더를 만들어 새로운 조이님의 모습을 발견해보세요.</HeaderP>
         </Header2>
         <ButtonContainer>
@@ -195,9 +203,29 @@ const HomePageFirst = () => {
         </ButtonsContainer>
 
         <button onClick={handleButtonClick}> + 내가 직접 질문 만들기</button>
-        <button onClick={handleButton2Click}>answer가기</button>
-        <button onClick={handleButtonPickAnswer}>pickanswer가기</button>
-        <Header3>진행중인 .Zip</Header3>
+        {/* <button onClick={handleButton2Click}>answer가기</button>
+        <button onClick={handleButtonPickAnswer}>pickanswer가기</button> */}
+        <Header3>진행중인 폴더</Header3>
+        {questions.length > 0 ? (
+  questions.map((question) => (
+    <div key={question.questionId}>
+      {question && question.question && (
+        <P onClick={() => handleQuestionClick(question.questionId)}>
+          Question: {question.question} <br />
+          Comment: {question.comment}
+        </P>
+      )}
+    </div>
+  ))
+) : (
+  <Questionp>
+    진행중인 폴더가 없어요! <br /> +NEW 폴더 만들기
+  </Questionp>
+)} 
+
+{/* 
+      </Survey>
+      {/* <Header3>진행중인 .Zip</Header3>
         {questions.map((question) => (
           <div key={question.questionId}>
             {question && question.question && (
@@ -207,7 +235,7 @@ const HomePageFirst = () => {
               </P>
             )}
           </div>
-        ))}
+        ))} */}
       </Survey>
     </Div>
   );
