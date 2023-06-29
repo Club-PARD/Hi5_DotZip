@@ -184,7 +184,7 @@ function SurveyFirst() {
       setButtonSelected(false);
       setQuestionId(questionId); // Set the questionId value
 
-      navigate(`/SurveyShare/${questionId}`);
+      navigate(`/MyAnswer/${questionId}`);
     } catch (error) {
       console.error('Firestore에 데이터를 저장하는 도중 오류가 발생했습니다.', error);
     }
