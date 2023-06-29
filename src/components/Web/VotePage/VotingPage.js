@@ -5,7 +5,7 @@ import { collection, onSnapshot, query, where , orderBy} from 'firebase/firestor
 import styled from 'styled-components';
 
 const Div = styled.div`
-
+color:black;
 `;
 const P = styled.button`
 background: #EEFF01;
@@ -41,6 +41,7 @@ const VotingPage = () => {
       };
     return(
         <Div>
+          <p>votingpage</p>
         <h3>진행중인 .Zip</h3>
         {questions.map((question) => (
         <div key={question.questionId}>
