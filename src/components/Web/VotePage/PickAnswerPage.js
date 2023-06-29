@@ -1,11 +1,10 @@
 import styled from "styled-components";
-import React, { useState, useEffect, useContext } from 'react';
-import { collection, getDocs, updateDoc, doc } from "firebase/firestore";
+import React, { useState, useEffect } from 'react';
+import { collection, getDocs, updateDoc, doc , where, orderBy, query} from "firebase/firestore";
 import { dbService } from '../../../fbase';
 import Modal from 'react-modal';
 import CopyToClipboard from 'react-copy-to-clipboard'; //링크복사
 import { useNavigate, useParams } from 'react-router-dom';
-import { UserNameContext } from '../../../UserNameContext';
 import KakaoShareButton from '../ProfilePage/ShareKakao';
 
 const Div = styled.div`
@@ -109,21 +108,22 @@ function PickAnswerPage() {
 
     const fetchDataAnswer = async () => {
         const answerZipCollection = collection(dbService, "zip_Answer");
-        getDocs(answerZipCollection)
-        .then((answerZipSnapshot) => {
-            const answerZipArr = answerZipSnapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-        }));
-        const targetAnswers = answerZipArr.filter((answer) => answer.questionId === questionId);
-          setAnswerZip(targetAnswers);
-          console.log(targetAnswers);
-        });
+        const q = query(answerZipCollection, where("questionId", "==", questionId), orderBy("timestamp", "desc"));
+        const answerZipSnapshot = await getDocs(q);
         
+        const targetAnswers = answerZipSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+      
+        setAnswerZip(targetAnswers);
+        console.log(targetAnswers);
+      
         return () => {
-          answerZipCollection(); // 감시 중지
+          answerZipCollection(); // Stop listening
         };
-    };
+      };
+      
     
 
     const fetchReasons = (answerID) => {

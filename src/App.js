@@ -12,7 +12,7 @@ import SurveyCreate from './components/Web/SurveyPage/SurveyCreate';
 import Answer from './pages/Answer';
 import AnswerEnd from './components/Web/AnswerPage/AnswerEnd';
 import SurveyShare from './components/Web/SurveyPage/SurveyShare';
-import Preferences from './components/Web/PreferencesPage/PreferencesPage';
+import Setting from './components/Web/SettingPage/Setting';
 import VotingPage from './components/Web/VotePage/VotingPage';
 import { KakaoIdContext } from "./KakaoIdContext.js";
 
@@ -38,7 +38,7 @@ function App() {
     <Route path='/Answer/:questionId' element={<Answer/>}/>
     <Route path='/AnswerEnd' element={<AnswerEnd/>}/>
     <Route path='/AnswerEnd/:questionId' element={<AnswerEnd/>}/>
-    <Route path='/Preferences' element={<Preferences/>}/>
+    <Route path='/Setting' element={<Setting/>}/>
 
   </Routes>
 
