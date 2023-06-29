@@ -186,7 +186,7 @@ const HomePageFirst = () => {
     <Div>
       <Survey>
         <Header2>
-          <HeaderDiv>안녕하세요, {userContext}님</HeaderDiv>
+          <HeaderDiv>안녕하세요, 00님</HeaderDiv>
           <HeaderP>폴더를 만들어 새로운 조이님의 모습을 발견해보세요.</HeaderP>
         </Header2>
         <ButtonContainer>
@@ -207,7 +207,7 @@ const HomePageFirst = () => {
         <button onClick={handleButtonPickAnswer}>pickanswer가기</button> */}
         <Header3>진행중인 폴더</Header3>
         {questions.length > 0 ? (
-  questions.map((question) => (
+  questions.slice(0, 3).map((question) => (
     <div key={question.questionId}>
       {question && question.question && (
         <P onClick={() => handleQuestionClick(question.questionId)}>
@@ -221,7 +221,8 @@ const HomePageFirst = () => {
   <Questionp>
     진행중인 폴더가 없어요! <br /> +NEW 폴더 만들기
   </Questionp>
-)} 
+)}
+
 
 {/* 
       </Survey>

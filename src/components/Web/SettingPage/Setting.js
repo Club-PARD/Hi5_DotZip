@@ -34,17 +34,25 @@ const IntroduceButton = styled.button`
     padding: 5px;
     background: red;
 `;
+const OutButton = styled.button`
+    width: 200px;
+    height: 100px;
+    padding: 5px;
+    background: red;
+`;
 
-function PreferencesPage() {
+function Setting() {
 
     return(
         <Div>
             <h1>환경설정</h1>
-            <LogOutButton>로그아웃</LogOutButton> {/*현승오빠가 만들어둔 부분 가져오기 */}
+            <h3>더 나은 서비스를 위해 계속 발전시켜 갈게요!</h3>
             <InquiryButton>문의하기</InquiryButton>
             <IntroduceButton>팀소개</IntroduceButton>
+            <LogOutButton>로그아웃</LogOutButton> {/*현승오빠가 만들어둔 부분 가져오기 */}
+            <OutButton>탈퇴</OutButton>
         </Div>
     );
 };
 
-export default PreferencesPage;
+export default Setting;
