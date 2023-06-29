@@ -14,7 +14,6 @@ const AddAnswerVote = ({ totalVote,answerId }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("gkdl",answerId);
       try {
         if (cachedData) {
           // 캐시된 데이터가 이미 존재하는 경우, 로컬 상태에서 가져옴
@@ -56,7 +55,7 @@ const AddAnswerVote = ({ totalVote,answerId }) => {
       setReason("");
       setNickName("");
       setCachedData(null); // 데이터 캐시 초기화
-      navigate(`/AnswerEnd/${questionId}`);
+      navigate(`/AnswerLoading/${questionId}`);
     } catch (error) {
       console.error("Error adding document: ", error);
     }

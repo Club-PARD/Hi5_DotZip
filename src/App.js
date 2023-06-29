@@ -15,6 +15,7 @@ import SurveyShare from './components/Web/SurveyPage/SurveyShare';
 import Setting from './components/Web/SettingPage/Setting';
 import VotingPage from './components/Web/VotePage/VotingPage';
 import { KakaoIdContext } from "./KakaoIdContext.js";
+import AnswerLoading from './components/Web/AnswerPage/AnswerLoading';
 
 function App() {
   const [kakaoContext] = useContext(KakaoIdContext);
@@ -38,6 +39,8 @@ function App() {
     <Route path='/Answer/:questionId' element={<Answer/>}/>
     <Route path='/AnswerEnd' element={<AnswerEnd/>}/>
     <Route path='/AnswerEnd/:questionId' element={<AnswerEnd/>}/>
+    <Route path='/AnswerLoading' element={<AnswerLoading/>}/>
+    <Route path='/AnswerLoading/:questionId' element={<AnswerLoading/>}/>
     <Route path='/Setting' element={<Setting/>}/>
 
   </Routes>

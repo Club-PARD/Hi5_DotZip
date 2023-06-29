@@ -9,10 +9,20 @@ import { useNavigate, useParams } from 'react-router-dom';
 const Div = styled.div`
   margin-top: 70px;
 `;
+const VoteBox = styled.div`
+    width: 500px;
+    height: 60px;
+    margin: 5px;
+    border: 1px solid black;
+    background: linear-gradient(to right, pink ${props => props.percentage}%, yellow ${props => props.percentage}%);
+    color: #000000;
+`;
 
 const AnswerEnd = () => {
+
+
   const [documents, setDocuments] = useState([]);
-  const road = collection(dbService, "zip_Answer");
+  const totalVotes = documents.reduce((sum, documents) => sum + documents.totalVote, 0);
   const {questionId} = useParams();
   const navigate= useNavigate();
   const userName = localStorage.getItem("userName")
@@ -47,13 +57,11 @@ const AnswerEnd = () => {
       <div>{userName}님을 매우 잘 아시는군요?</div>
       <div>답변 결과</div>
       <div>추천 문구!</div>
-      {documents.map(({ answer, totalVote, ID }) => (
-        <div key={ID} >
-          Answer: {answer}, {totalVote}
-        </div> 
+      {documents.map(({ answer, totalVote, answerId }) => (
+  <VoteBox key={answerId} percentage={(totalVote / totalVotes) * 100}>{answer} : {totalVote}</VoteBox>
       ))}
 
-    <button onClick={onSubmit}>헬로</button>
+    <button onClick={onSubmit}>내 ZIP도 만들어보시는거 어떤가요?</button>
 
     </Div>
 
