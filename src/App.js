@@ -9,7 +9,7 @@ import MyProfilePage from './components/Web/ProfilePage/MyProfilePage';
 import SurveyFirst from './components/Web/SurveyPage/SurveyFirst';
 import SurveySecond from './components/Web/SurveyPage/SurveySecond';
 import SurveyCreate from './components/Web/SurveyPage/SurveyCreate';
-import MyAnswer from './components/Web/SurveyPage/MyAnsewer'
+import MyAnswer from './components/Web/SurveyPage/MyAnswer';
 import Answer from './pages/Answer';
 import AnswerEnd from './components/Web/AnswerPage/AnswerEnd';
 import SurveyShare from './components/Web/SurveyPage/SurveyShare';
