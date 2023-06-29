@@ -7,6 +7,7 @@ import { KakaoIdContext } from '../../../KakaoIdContext';
 import { UserNameContext } from '../../../UserNameContext';
 import AddAnswer from '../AnswerPage/AddAnswer';
 import CopyToClipboard from 'react-copy-to-clipboard'; //링크복사
+import KakaoShareButton from '../ProfilePage/ShareKakao';
 
 
 const Div = styled.div`
@@ -163,6 +164,7 @@ const SurveyShare = () => {
              </div>
              <CopyToClipboard text={voteLink}>
   <div>
+  <KakaoShareButton/>
     <LinkButton onClick={handleCopyLink}>링크 복사하기</LinkButton>
     {showMessage && <LinkMessage>링크가 복사되었습니다</LinkMessage>}
   </div>
