@@ -1,6 +1,16 @@
 //카카오톡으로 공유하는 기능 구현
 import React, { useEffect } from 'react';
+import styled from "styled-components";
 const { Kakao } = window;
+
+
+const ShareButton = styled.button` //링크복사
+    width: 200px;
+    height: 100px;
+    padding: 5px;
+    background: red;
+    display: inline-block;
+`;
 
 const KakaoShareButton = () => {
   useEffect(() => {
@@ -46,9 +56,9 @@ const KakaoShareButton = () => {
 
   return (
     <div>
-      <button id="kakaotalk-sharing-btn" onClick={createKakaoButton}>
+      <ShareButton id="kakaotalk-sharing-btn" onClick={createKakaoButton}>
         카카오톡 공유하기
-      </button>
+      </ShareButton>
     </div>
   );
 };
