@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { dbService } from '../../../fbase';
-import { collection, onSnapshot, query, where } from 'firebase/firestore';
+import { collection, onSnapshot, query, where , orderBy} from 'firebase/firestore';
 import styled from 'styled-components';
 import { KakaoIdContext} from '../../../KakaoIdContext';
 import { UserNameContext } from '../../../UserNameContext';
@@ -77,13 +77,17 @@ const HomePageFirst = () => {
   // const [kakaoContext] = useContext(KakaoIdContext);
   // console.log("userId : ", kakaoContext);//userId
   const kakaoId = localStorage.getItem("kakaoId");
-  const [userContext] = useContext(UserNameContext);
-  console.log("username: ", userContext);
+  // const [userContext] = useContext(UserNameContext);
+  console.log(localStorage.getItem("userName"));
   console.log(localStorage.getItem("kakaoId"));
   const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
-    const q = query(collection(dbService, 'zip_Question'), where('kakaoId', '==', kakaoId));
+    const q = query(
+      collection(dbService, 'zip_Question'),
+      where('kakaoId', '==', kakaoId),
+      orderBy('timestamp', 'desc')
+    );
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const questionList = [];
       snapshot.forEach((doc) => {
@@ -93,12 +97,12 @@ const HomePageFirst = () => {
       });
       setQuestions(questionList);
     });
-    
-
+  
     return () => {
       unsubscribe();
     };
   }, [kakaoId]);
+  
   const handleQuestionClick = (questionId) => {
     navigate(`/PickAnswer/${questionId}`);
   };
