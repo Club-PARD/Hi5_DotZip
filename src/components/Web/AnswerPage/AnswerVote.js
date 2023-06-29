@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { dbService } from "../../../fbase.js";
 import { collection, onSnapshot, query, where , orderBy } from "firebase/firestore";
 import {useParams } from 'react-router-dom';
-import AddAnswerVote from './AddAnswer_Vote.js';
+import AddAnswerVote from './AddAnswerVote.js';
 import AddAnswer from './AddAnswer.js';
 
 const Div = styled.div`
@@ -49,27 +49,29 @@ const AnswerVote = () => {
 };
 
 
-return (
-  <Div>
-    {documents.map(({ answer, voteData, ID }) => (
-      <div key={ID}>
-        <button onClick={() => handleButtonClick(ID)}>
-          Answer: {answer}, {voteData}
-        </button>
-        {modalOpen && selectedAnswerId === ID && (
-          <AddAnswerVote
-            setModalOpen={setModalOpen}
-            voteData={voteData}
-            answerId={ID}
-          />
-        )}
-      </div>
-    ))}
-    {documents.length < 10 && (
-      <button onClick={showModal_new}>키워드 후보 추가하기</button>
-    )}
-    {modalOpen_new && <AddAnswer />}
-  </Div>
-);
-    };
+  return (
+    <Div>
+      {documents.map(({ answer, totalVote, ID }) => (
+        <div >
+          <button onClick={() => handleButtonClick(ID)}>
+            A nswer: {answer}, {totalVote}
+          </button>
+          {modalOpen && selectedAnswerId === ID && (
+            <AddAnswerVote
+              key={ID} // 고유한 key prop 추가
+              setModalOpen={setModalOpen}
+              totalVote={totalVote}
+              answerId={ID}
+            />
+          )}
+        </div>
+      ))}
+      {documents.length < 10 && (
+        <button onClick={showModal_new} key="add-button">키워드 후보 추가하기</button>
+      )}
+      {modalOpen_new && <AddAnswer key="add-answer" />}
+    </Div>
+  );
+};
+
 export default AnswerVote;
