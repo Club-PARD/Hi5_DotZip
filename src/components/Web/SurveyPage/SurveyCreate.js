@@ -111,6 +111,9 @@ const Div = styled.div`
   align-items: center;
 `;
 
+const P = styled.p`
+color : white;
+`;
 
 
 function SurveyCreate() {
@@ -123,7 +126,7 @@ function SurveyCreate() {
     const [question, setQuestion] = useState('');
     const [comment, setComment] = useState('');
     const [voteEnd, setIsBooleanValue] = useState(true); 
-    const [userContext] = useContext(UserNameContext);
+    const [userNickname] = useState(localStorage.getItem("userName"));
     //console.log("username: ", userContext);
 
     useEffect(() => {
@@ -154,7 +157,7 @@ function SurveyCreate() {
         console.log('Data saved successfully');
       setQuestion('');
       setComment('');
-      navigate(`/SurveyShare/${questionId}`);
+      navigate(`/MyAnswer/${questionId}`);
       //navigate(`/SurveyShare/${questionId}?question=${question}&comment=${comment}`);
     } catch (error) {
       console.error('Error adding document:', error);
@@ -168,18 +171,20 @@ function SurveyCreate() {
         <Header2>
           <HeaderDiv>새로운 .ZiP 만들기</HeaderDiv>
           <HeaderP>궁금한 질문을 담은 링크를 공유해보세요.</HeaderP>
-          <HeaderName>{userContext}님의 .ZiP</HeaderName>
+          <HeaderName>{userNickname}님의 .ZiP</HeaderName>
         </Header2>
         <Button>이모지선택</Button>
+        <P>질문</P>
         <InputQues
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
-          placeholder="질문 직접 등록"
+          placeholder="새로운 질문을 적어주세요."
         />
+        <P>답변 TIP</P>
         <InputQues1
           value={comment}
           onChange={(e) => setComment(e.target.value)}
-          placeholder="질문 코멘트 입력(선택사항)"
+          placeholder="답변 적을 때 참고할만한 내용이나 예시를 적어주세요."
         />
         <Submit onClick={handleSubmit}>질문 저장하기</Submit>
       </Survey>

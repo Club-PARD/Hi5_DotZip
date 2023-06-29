@@ -139,7 +139,8 @@ font-family: Pretendard;
 const HomePageFirst = () => {
   const navigate = useNavigate();
   const kakaoId = localStorage.getItem('kakaoId');
-  const [userContext] = useContext(UserNameContext);
+  //const [userContext] = useContext(UserNameContext);
+  const [userNickname] = useState(localStorage.getItem("userName"));
   console.log(localStorage.getItem('userName'));
   console.log(localStorage.getItem('kakaoId'));
   const [questions, setQuestions] = useState([]);
@@ -181,22 +182,26 @@ const HomePageFirst = () => {
   const handleButton3Click = () => {
     navigate(`/VotingPage`); // Replace with the actual path you want to navigate to
   };
+  const handleButton4Click = () => {
+    navigate(`/VotingPage`); // Replace with the actual path you want to navigate to
+  };
 
   return (
     <Div>
       <Survey>
         <Header2>
-          <HeaderDiv>안녕하세요, 00님</HeaderDiv>
+          <HeaderDiv>안녕하세요, {userNickname}님</HeaderDiv>
           <HeaderP>폴더를 만들어 새로운 조이님의 모습을 발견해보세요.</HeaderP>
         </Header2>
         <ButtonContainer>
           <HomeP>Home</HomeP>
+          <button onClick={handleButton3Click}>내 폴더</button>
           <button onClick={handleButton1Click}>My .Zip</button>
         </ButtonContainer>
         <Button>인기 질문 하나 노출</Button>
         <NewQ>NEW 폴더 만들기 </NewQ>
         <Newq>궁금한 질문을 담은 폴더 링크를 공유해보세요. </Newq>
-        <button onClick={handleButton3Click}>전체보기</button>
+        <button onClick={handleButtonClick}>전체보기</button>
         <ButtonsContainer>
           <ButtonQ>나에게 어울리는 컬러는?</ButtonQ>
           <ButtonQ1>나에게 어울리는 동물은?</ButtonQ1>
@@ -206,6 +211,7 @@ const HomePageFirst = () => {
         {/* <button onClick={handleButton2Click}>answer가기</button>
         <button onClick={handleButtonPickAnswer}>pickanswer가기</button> */}
         <Header3>진행중인 폴더</Header3>
+        <button onClick={handleButton3Click}>전체보기</button>
         {questions.length > 0 ? (
   questions.slice(0, 3).map((question) => (
     <div key={question.questionId}>

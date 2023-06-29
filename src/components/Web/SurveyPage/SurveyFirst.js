@@ -24,16 +24,18 @@ const Survey = styled.div`
 const ButtonRow = styled.div`
   display: flex;
   justify-content: center;
+  flex-direction: column; /* Changed from row to column */
 `;
 
 const Button = styled.button`
-  width: 148px;
-  height: 120px;
+  width: 300px;
+  height: 60px;
   background: #D9D9D9;
   margin: 8px;
   border: 1px solid #ABABAB;
   border-radius: 10px;
   background: ${({ active }) => (active ? '#D9D9D9' : '#353535')};
+  color: white;
 `;
 
 const HeaderDiv = styled.header`
@@ -198,8 +200,8 @@ function SurveyFirst() {
     <Div>
       <Survey>
         <Header2>
-          <HeaderDiv>새로운 .ZiP 만들기</HeaderDiv>
-          <HeaderP>궁금한 질문을 담은 링크를 공유해보세요.</HeaderP>
+          <HeaderDiv>New! 폴더 만들기</HeaderDiv>
+          <HeaderP>주변사람들에게 나에 대해 물어보고 투표를 받아보세요!</HeaderP>
         </Header2>
         <Button1 onClick={handleButtonClick}>+ 내가 직접 질문 만들기</Button1>
         <ButtonRow>
@@ -230,7 +232,10 @@ function SurveyFirst() {
             책 이름 <br /> 나를 책으로 만든다면, 그 책의 이름은?
           </Button>
         </ButtonRow>
-        <Button2 disabled={!buttonSelected} onClick={() => navigate(`/SurveyShare/${questionId}`)}>
+        {/* <Button2 disabled={!buttonSelected} onClick={() => navigate(`/SurveyShare/${questionId}`)}>
+          다음
+        </Button2> */}
+        <Button2 disabled={!buttonSelected} onClick={() => navigate(`/MyAnsewer/${questionId}`)}>
           다음
         </Button2>
       </Survey>

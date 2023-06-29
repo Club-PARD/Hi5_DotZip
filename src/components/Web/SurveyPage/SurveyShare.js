@@ -112,12 +112,13 @@ const SurveyShare = () => {
     const { questionId } = useParams();
     const navigate = useNavigate();
     const [kakaoContext] = useContext(KakaoIdContext);
-    const [userContext] = useContext(UserNameContext);
+    // const [userContext] = useContext(UserNameContext);
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const [question, setQuestion] = useState('');
     const [comment, setComment] = useState('');
     const [modalOpen, setModalOpen] = useState(false);
+    const [userNickname] = useState(localStorage.getItem("userName"));
   
     useEffect(() => {
       const unsubscribe = onSnapshot(doc(dbService, 'zip_Question', questionId), (snapshot) => {
@@ -153,8 +154,8 @@ const SurveyShare = () => {
         <Div>
           <Survey>
             <Header2>
-              <HeaderDiv>{userContext}님의 .Zip이 완성되었어요.</HeaderDiv>
-              <HeaderP>링크를 공유하고 투표를 받아보세요!</HeaderP>
+              <HeaderDiv>{userNickname}님의 폴더 생성 완료!</HeaderDiv>
+              <HeaderP>링크를 공유하고 답변을 받아보세요!</HeaderP>
             </Header2>
             <div>
             <P>Question: {question}</P>
@@ -167,12 +168,12 @@ const SurveyShare = () => {
   </div>
 </CopyToClipboard>
 
-            <Button2 onClick={() => navigate('/home')}>
-            홈으로 돌아가기
+            <Button2 onClick={() => navigate(`/PickAnswer/${questionId}`)}>
+           답변보러가기
           </Button2>
-          <h2>투표하기</h2> <p>키워드 후보는 1인 1개만 추가할 수 있어요.</p>
+          {/* <h2>투표하기</h2> <p>키워드 후보는 1인 1개만 추가할 수 있어요.</p>
           <button onClick={showModal}>키워드 후보 추가하기</button>
-            {modalOpen && <AddAnswer setModalOpen={setModalOpen} />}
+            {modalOpen && <AddAnswer setModalOpen={setModalOpen} />} */}
           </Survey>
         </Div>
       );
