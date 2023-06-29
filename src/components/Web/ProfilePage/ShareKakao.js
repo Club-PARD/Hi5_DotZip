@@ -9,7 +9,6 @@ const ShareButton = styled.button` //링크복사
     height: 100px;
     padding: 5px;
     background: red;
-    display: inline-block;
 `;
 
 const KakaoShareButton = () => {

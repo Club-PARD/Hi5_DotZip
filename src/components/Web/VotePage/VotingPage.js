@@ -5,14 +5,17 @@ import { collection, onSnapshot, query, where , orderBy} from 'firebase/firestor
 import styled from 'styled-components';
 
 const Div = styled.div`
-color:black;
+
 `;
-const P = styled.button`
-background: #EEFF01;
- 
+const Question = styled.button`
+    background: #EEFF01;
+    width : 400px;
+    height : 100px;
+    margin : 5px;
 `;
 const VotingPage = () => {
     const kakaoId = localStorage.getItem("kakaoId");
+    const [userNickname] = useState(localStorage.getItem("userName"));
     const [questions, setQuestions] = useState([]);
     useEffect(() => {
         const q = query(
@@ -41,15 +44,16 @@ const VotingPage = () => {
       };
     return(
         <Div>
-          <p>votingpage</p>
-        <h3>진행중인 .Zip</h3>
+        <h1>VOTE ME!</h1>
+        <h2>{userNickname}님의 만든 폴더</h2>
+        <h3>내가 생성한 폴더의 답변을 확인해보세요.</h3>
         {questions.map((question) => (
         <div key={question.questionId}>
           {question && question.question && (
-          <P onClick={() => handleQuestionClick(question.questionId)}>
+          <Question onClick={() => handleQuestionClick(question.questionId)}>
             Question: {question.question} <br />
             Comment: {question.comment}
-          </P>
+          </Question>
           )}
         </div>
         ))}

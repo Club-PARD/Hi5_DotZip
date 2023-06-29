@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import { dbService } from "../../../fbase.js";
-import { collection, query, where, orderBy, onSnapshot} from "firebase/firestore";
+import { collection, onSnapshot, query, where , orderBy } from "firebase/firestore";
 import {useParams } from 'react-router-dom';
 import AddAnswerVote from './AddAnswer_Vote.js';
 import AddAnswer from './AddAnswer.js';
@@ -26,24 +26,20 @@ const AnswerVote = () => {
       where('questionId', '==', questionId),
       orderBy('timestamp', 'desc')
     );
-    const unsubscribe = onSnapshot(q,(snapshot)=>{
+    const unsubscribe = onSnapshot(q, (snapshot) => {
       const answerList = [];
       snapshot.forEach((doc)=>{
-        console.log("hi");
         if(doc.data().questionId===questionId){
           answerList.push(doc.data());
-
         }
       });
       setDocuments(answerList);
-
-    })
-
+    });
 
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [questionId]);
   
 
 

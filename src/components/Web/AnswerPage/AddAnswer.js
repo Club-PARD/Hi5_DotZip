@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { dbService } from "../../../fbase.js";
-import { collection, addDoc,updateDoc } from "firebase/firestore";
+import { collection, addDoc,updateDoc ,serverTimestamp} from "firebase/firestore";
 import { useNavigate, useParams } from 'react-router-dom';
 
 const AddAnswer = () => {
@@ -10,10 +10,12 @@ const AddAnswer = () => {
   const {questionId} = useParams(); //이변수
   const road =collection(dbService, "zip_Answer");//다시 고치기
   const navigate = useNavigate();
+  const timestamp = serverTimestamp();
   const data = {
     answer: answer,
     totalVote: 1,
     questionId :questionId,//params로 받은 변수 넣기
+    timestamp,
   }
   const onSubmit = async (e) => {
     e.preventDefault();
