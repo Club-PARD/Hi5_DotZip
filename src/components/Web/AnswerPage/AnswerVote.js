@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import { dbService } from "../../../fbase.js";
-import { collection, getDocs} from "firebase/firestore";
+import { collection, query, where, orderBy, onSnapshot} from "firebase/firestore";
 import {useParams } from 'react-router-dom';
-import AddAnswer_Vote from './AddAnswer_Vote.js';
+import AddAnswerVote from './AddAnswer_Vote.js';
 import AddAnswer from './AddAnswer.js';
 
 const Div = styled.div`
@@ -12,7 +12,6 @@ const Div = styled.div`
 
 const AnswerVote = () => {
   const [documents, setDocuments] = useState([]);
-  const road = collection(dbService, "zip_Answer");
   const [modalOpen, setModalOpen] = useState(false);
   const { questionId } = useParams(); //QuestionID
   const [selectedAnswerId, setSelectedAnswerId] = useState(null);
@@ -22,25 +21,28 @@ const AnswerVote = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        console.log("얼마나되는지 확인");
-        const querySnapshot = await getDocs(road);
-        const updatedDocuments = querySnapshot.docs
-          .filter((doc) => doc.data().questionId === questionId)
-          .map((doc) => ({
-            answer: doc.data().answer,
-            voteData: doc.data().totalVote,
-            ID: doc.data().answerId
+    const q = query(
+      collection(dbService, 'zip_Answer'),
+      where('questionId', '==', questionId),
+      orderBy('timestamp', 'desc')
+    );
+    const unsubscribe = onSnapshot(q,(snapshot)=>{
+      const answerList = [];
+      snapshot.forEach((doc)=>{
+        console.log("hi");
+        if(doc.data().questionId===questionId){
+          answerList.push(doc.data());
 
-          }));
-        setDocuments(updatedDocuments);
-      } catch (error) {
-        console.error("Error fetching documents:", error);
-      }
+        }
+      });
+      setDocuments(answerList);
+
+    })
+
+
+    return () => {
+      unsubscribe();
     };
-  
-    fetchData();
   }, []);
   
 
@@ -51,27 +53,27 @@ const AnswerVote = () => {
 };
 
 
-  return (
-    <Div>
-      {documents.map(({ answer, voteData, ID }, index) => (
-        <div key={ID}>
-          <button onClick={() => handleButtonClick(ID)}>
-            Answer: {answer}, {voteData}
-          </button>
-          {modalOpen && selectedAnswerId === ID && (
-            <AddAnswer_Vote
-              setModalOpen={setModalOpen}
-              voteData={voteData}
-              answerId={ID}
-            />
-          )}
-        </div>
-      ))}
+return (
+  <Div>
+    {documents.map(({ answer, voteData, ID }) => (
+      <div key={ID}>
+        <button onClick={() => handleButtonClick(ID)}>
+          Answer: {answer}, {voteData}
+        </button>
+        {modalOpen && selectedAnswerId === ID && (
+          <AddAnswerVote
+            setModalOpen={setModalOpen}
+            voteData={voteData}
+            answerId={ID}
+          />
+        )}
+      </div>
+    ))}
     {documents.length < 10 && (
       <button onClick={showModal_new}>키워드 후보 추가하기</button>
     )}
     {modalOpen_new && <AddAnswer />}
-    </Div>
-  );
-};
+  </Div>
+);
+    };
 export default AnswerVote;
