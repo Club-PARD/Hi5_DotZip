@@ -53,7 +53,7 @@ const AnswerVote = () => {
 
   return (
     <Div>
-      {documents.map(({ answer, voteData, ID }) => (
+      {documents.map(({ answer, voteData, ID }, index) => (
         <div key={ID}>
           <button onClick={() => handleButtonClick(ID)}>
             Answer: {answer}, {voteData}
@@ -67,7 +67,9 @@ const AnswerVote = () => {
           )}
         </div>
       ))}
-    <button onClick={showModal_new}>키워드 후보 추가하기</button>
+    {documents.length < 10 && (
+      <button onClick={showModal_new}>키워드 후보 추가하기</button>
+    )}
     {modalOpen_new && <AddAnswer />}
     </Div>
   );
