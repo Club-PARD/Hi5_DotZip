@@ -5,7 +5,6 @@ import Home from './pages/Home';
 import Inquiry from './pages/Inquiry';
 import About from './pages/About';
 import PickAnswerPage from './components/Web/VotePage/PickAnswerPage';
-import EditVotePage from './components/Web/VotePage/EditVotePage';
 import MyProfilePage from './components/Web/ProfilePage/MyProfilePage';
 import SurveyFirst from './components/Web/SurveyPage/SurveyFirst';
 import SurveySecond from './components/Web/SurveyPage/SurveySecond';
@@ -14,6 +13,7 @@ import Answer from './pages/Answer';
 import AnswerEnd from './components/Web/AnswerPage/AnswerEnd';
 import SurveyShare from './components/Web/SurveyPage/SurveyShare';
 import Preferences from './components/Web/PreferencesPage/PreferencesPage';
+import VotingPage from './components/Web/VotePage/VotingPage';
 import { KakaoIdContext } from "./KakaoIdContext.js";
 
 function App() {
@@ -27,8 +27,8 @@ function App() {
     <Route path="/Home" element={kakaoId ? <Home /> : <Auth />} />
     <Route path='/Inquiry' element={<Inquiry/>}/>
     <Route path='About' element={<About/>}/>
+    <Route path='/VotingPage' element={<VotingPage/>}/>
     <Route path='/PickAnswer/:questionId' element={<PickAnswerPage/>}/>
-    <Route path='/EditVotePage/:questionId' element={<EditVotePage/>}/>
     <Route path='/MyProfile' element={<MyProfilePage/>}/>
     <Route path='/SurveyFirst' element={<SurveyFirst/>}/>
     <Route path='/SurveySecond' element={<SurveySecond/>}/>
