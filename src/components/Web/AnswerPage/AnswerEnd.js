@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React, { useState, useEffect} from 'react';
 import { dbService } from "../../../fbase.js";
-import { collection, onSnapshot  } from "firebase/firestore";
+import { collection, onSnapshot, query, where , orderBy } from "firebase/firestore";
 import { useNavigate, useParams } from 'react-router-dom';
 // import { KakaoIdContext } from '../../../KakaoIdContext.js';
 // import { useParams } from 'react-router-dom';
@@ -20,27 +20,26 @@ const AnswerEnd = () => {
     navigate('/');
   }
   useEffect(() => {
-    const unsubscribe = onSnapshot(road, (querySnapshot) => {
-      console.log("durleh answp djqtrpTwl?");
-      const updatedDocuments = [];
-      querySnapshot.docs.forEach((doc) => {
-        if (doc.data().questionId === questionId) {
-          const data = doc.data().answer;
-          const voteData = doc.data().totalVote;
-          const ID = doc.data().answerId;
-          const combinedData = {
-            answer: data,
-            voteData: voteData,
-            ID: ID,
-          };
-          updatedDocuments.push(combinedData);
+    const q = query(
+      collection(dbService, 'zip_Answer'),
+      where('questionId', '==', questionId),
+      orderBy('timestamp', 'desc')
+    );
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const answerList = [];
+      snapshot.forEach((doc)=>{
+        if(doc.data().questionId===questionId){
+          answerList.push(doc.data());
         }
       });
-      setDocuments(updatedDocuments);
+      setDocuments(answerList);
     });
 
-    return () => unsubscribe();
-  }, []);
+    return () => {
+      unsubscribe();
+    };
+  }, [questionId]);
+  
 
   return (
     <Div>
@@ -48,9 +47,9 @@ const AnswerEnd = () => {
       <div>{userName}님을 매우 잘 아시는군요?</div>
       <div>답변 결과</div>
       <div>추천 문구!</div>
-      {documents.map(({ answer, voteData, ID }) => (
+      {documents.map(({ answer, totalVote, ID }) => (
         <div key={ID} >
-          Answer: {answer}, {voteData}
+          Answer: {answer}, {totalVote}
         </div> 
       ))}
 

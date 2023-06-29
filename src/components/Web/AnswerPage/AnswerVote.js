@@ -42,7 +42,6 @@ const AnswerVote = () => {
   }, [questionId]);
   
 
-
   const [modalOpen_new, setModalOpen_new] = useState(false);
   const showModal_new = ()=>{
   setModalOpen_new(!modalOpen_new);
@@ -51,17 +50,17 @@ const AnswerVote = () => {
 
   return (
     <Div>
-      {documents.map(({ answer, totalVote, ID }) => (
+      {documents.map(({ answer, totalVote, answerId }) => (
         <div >
-          <button onClick={() => handleButtonClick(ID)}>
-            A nswer: {answer}, {totalVote}
+          <button onClick={() => handleButtonClick(answerId)}>
+            Answer: {answer}, {totalVote},{answerId}
           </button>
-          {modalOpen && selectedAnswerId === ID && (
+          {modalOpen && selectedAnswerId === answerId && (
             <AddAnswerVote
-              key={ID} // 고유한 key prop 추가
+              key={answerId} // 고유한 key prop 추가
               setModalOpen={setModalOpen}
               totalVote={totalVote}
-              answerId={ID}
+              answerId={answerId}
             />
           )}
         </div>
