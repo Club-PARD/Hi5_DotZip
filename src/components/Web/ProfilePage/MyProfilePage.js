@@ -1,11 +1,10 @@
 import styled from "styled-components";
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import KakaoShareButton from '../ProfilePage/ShareKakao';
 import ImageSaveButton from '../ProfilePage/SaveImage';
 import { collection, query, orderBy, limit, getDocs, updateDoc , doc} from "firebase/firestore";
 import { dbService } from "../../../fbase.js";
-import { UserNameContext } from '../../../UserNameContext';
 
 const Div = styled.div`
 
