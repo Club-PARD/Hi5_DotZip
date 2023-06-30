@@ -12,15 +12,16 @@ const Div = styled.div`
 `;
 const modalStyles = {
   content: {
-    width: '400px',
-    height: '60px',
+    width: '343px',
+    height: '458px',
     margin: 'auto',
     border: '1px solid #ccc',
-    borderRadius: '4px',
+    borderRadius: '10px',
     padding: '20px',
-    backgroundColor: '#fff',
-  },
+    background: 'var(--background-gra, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%))'
+  }
 };
+
 
 const AnswerVote = () => {
   const [documents, setDocuments] = useState([]);

@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import Pretendard from '../asset/font/Pretendard-Medium.otf'
 
 
 // GlobalStyle을 생성합니다.
@@ -7,61 +8,61 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Pretendard';
     font-weight: 300;
     font-style: normal;
-    src: url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-aLt.eot');
-    src: url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-aLt.eot?#iefix') format('embedded-opentype'),
-         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-aLt.woff2') format('woff2'),
-         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-aLt.woff') format('woff'),
-         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-aLt.ttf') format("truetype");
+    src: url('Pretendard');
+    src: url(${Pretendard}) format('embedded-opentype'),
+         url(${Pretendard}) format('woff2'),
+         url(${Pretendard}) format('woff'),
+         url(${Pretendard}) format("truetype");
     font-display: swap;
 } 
 @font-face {
     font-family: 'Pretendard';
     font-weight: 400;
     font-style: normal;
-    src: url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-bRg.eot');
-    src: url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-bRg.eot?#iefix') format('embedded-opentype'),
-         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-bRg.woff2') format('woff2'),
-         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-bRg.woff') format('woff'),
-         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-bRg.ttf') format("truetype");
+    src: url('Pretendard');
+    src: url(${Pretendard}) format('embedded-opentype'),
+         url(${Pretendard}) format('woff2'),
+         url(${Pretendard}) format('woff'),
+         url(${Pretendard}) format("truetype");
     font-display: swap;
 } 
 @font-face {
-    font-family: 'NanumSquare Neo';
+    font-family: 'Pretendard';
     font-weight: 700;
     font-style: normal;
-    src: url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-cBd.eot');
-    src: url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-cBd.eot?#iefix') format('embedded-opentype'),
-         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-cBd.woff2') format('woff2'),
-         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-cBd.woff') format('woff'),
-         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-cBd.ttf') format("truetype");
+    src: url('Pretendard');
+    src: url(${Pretendard}) format('embedded-opentype'),
+         url(${Pretendard}) format('woff2'),
+         url(${Pretendard}) format('woff'),
+         url(${Pretendard}) format("truetype");
     font-display: swap;
 } 
 @font-face {
-    font-family: 'NanumSquare Neo';
+    font-family: 'Pretendard';
     font-weight: 800;
     font-style: normal;
-    src: url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-dEb.eot');
-    src: url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-dEb.eot?#iefix') format('embedded-opentype'),
-         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-dEb.woff2') format('woff2'),
-         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-dEb.woff') format('woff'),
-         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-dEb.ttf') format("truetype");
+    src: url('Pretendard');
+    src: url(${Pretendard}) format('embedded-opentype'),
+         url(${Pretendard}) format('woff2'),
+         url(${Pretendard}) format('woff'),
+         url(${Pretendard}) format("truetype");
     font-display: swap;
 } 
 @font-face {
-    font-family: 'NanumSquare Neo';
+    font-family: 'Pretendard';
     font-weight: 900;
     font-style: normal;
-    src: url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-eHv.eot');
-    src: url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-eHv.eot?#iefix') format('embedded-opentype'),
-         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-eHv.woff2') format('woff2'),
-         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-eHv.woff') format('woff'),
-         url('https://webfontworld.github.io/NanumSquareNeo/NanumSquareNeo-eHv.ttf') format("truetype");
+    src: url('Pretendard');
+    src: url(${Pretendard}) format('embedded-opentype'),
+         url(${Pretendard}) format('woff2'),
+         url(${Pretendard}) format('woff'),
+         url(${Pretendard}) format("truetype");
     font-display: swap;
 } 
 
   body{
-      font-family: "NanumSquare Neo";
-      background-color: #1A1A1A;
+      font-family: "Pretendard";
+      background-color: #fff;
    }
 
 `;
@@ -124,7 +125,5 @@ export const theme = {
     Caption1: '12px',
     Caption: '12px'
   },
-  NavBarColor: {
-    navbarColor: '#1A1A1A', // Navbar의 색상
-  }
+
 };

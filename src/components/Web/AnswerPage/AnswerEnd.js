@@ -9,6 +9,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 const Div = styled.div`
   margin-top: 70px;
 `;
+const Header1 = styled.div`
+  font-family: 'Pretendard', sans-serif;  
+ font-size: 18px;
+
+`;
+
 const VoteBox = styled.div`
     width: 500px;
     height: 60px;
@@ -63,7 +69,7 @@ const AnswerEnd = () => {
 
   return (
     <Div>
-      <div>답변이 잘 전달되었어요</div>
+      <Header1>답변이 잘 전달되었어요</Header1>
       <div>{userName}님을 매우 잘 아시는군요?</div>
       <div>답변 결과</div>
       <div>추천 문구!</div>

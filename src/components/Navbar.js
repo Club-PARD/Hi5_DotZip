@@ -14,11 +14,20 @@ const NavBarWrapper = styled.nav`
   background-color: #1A1A1A;
   color: white;
 `;
+const Setting  = styled.div `
+
+`;
 
 const NavBar = () => {
+  const onClick= {
+
+    
+  };
+
     return(
     <NavBarWrapper>
         <div>Hi^5 화이팅!!</div>
+        <Setting onClick={onClick}>세팅</Setting>
     </NavBarWrapper>
     );
 };

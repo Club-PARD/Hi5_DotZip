@@ -2,8 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { dbService } from "../../../fbase.js";
 import { collection, getDocs, updateDoc, doc, addDoc } from "firebase/firestore";
 import { useNavigate, useParams } from 'react-router-dom';
+import { styled } from 'styled-components';
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+  & > div {
+    text-align: left;
+    margin-bottom: 5px;
+  }
+`;
 
 const AddAnswerVote = ({ totalVote,answerId }) => {
+
 
   const [reason, setReason] = useState("");
   const [nickname, setNickName] = useState("");
@@ -73,7 +85,9 @@ const AddAnswerVote = ({ totalVote,answerId }) => {
 
   return (
     <div>
-      <form onSubmit={onSubmit}>
+      <Form onSubmit={onSubmit}>
+        <div>투표항목 추가하기</div>
+        <div>키워드</div>
         <input
           value={nickname}
           onChange={onChangenickName}
@@ -81,6 +95,7 @@ const AddAnswerVote = ({ totalVote,answerId }) => {
           placeholder="nickName"
           maxLength={10}
         />
+        <div>이유</div>
         <input
           value={reason}
           onChange={onChangeReason}
@@ -89,7 +104,7 @@ const AddAnswerVote = ({ totalVote,answerId }) => {
           maxLength={120}
         />
         <input type="submit" value="Answer" />
-      </form>
+      </Form>
     </div>
   );
 };
