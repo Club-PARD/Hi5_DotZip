@@ -1,16 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import KakaoLogin from "react-kakao-login";
 import { dbService } from "../fbase.js";
 import { collection, onSnapshot, setDoc, doc, getDoc } from "firebase/firestore";
 import { Navigate } from "react-router-dom";
-import { KakaoIdContext } from "../KakaoIdContext.js";
-import { UserNameContext } from "../UserNameContext";
 
 const Auth = () => {
   const [accessToken, setAccessToken] = useState("");
   const [kakaoId, setKakaoId] = useState([]);
-  const [kakaoContext, setkakaoContext] = useContext(KakaoIdContext);
-  const [userContext, setuserContext] = useContext(UserNameContext);
  
   useEffect(() => {
     const initializeKakao = () => {
@@ -35,7 +31,6 @@ const Auth = () => {
   const handleSuccess = async (response) => {
     console.log("로그인 성공", response);
     setAccessToken(response.response.access_token);
-    setkakaoContext(response.profile.id.toString());
     localStorage.setItem("kakaoId", response.profile.id);
   
     // const hasMatchingId = (responseId, userIds) => {
@@ -55,7 +50,6 @@ const Auth = () => {
         const data = docSnap.data();
         console.log("기존 로그인", data.userName);
         localStorage.setItem("userName", data.userName);
-        setuserContext(data.userName);
       } else {
         console.log("처음 로그인 한 사람");
         const data = {
@@ -64,7 +58,6 @@ const Auth = () => {
         };
         await setDoc(docRef, data);
         localStorage.setItem("userName", response.profile.properties.nickname);
-        setuserContext(response.profile.properties.nickname);
       }
   };
   

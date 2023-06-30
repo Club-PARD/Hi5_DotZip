@@ -1,11 +1,17 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { dbService } from '../../../fbase';
 import { collection, addDoc, setDoc, doc, serverTimestamp} from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
-import { KakaoIdContext } from '../../../KakaoIdContext';
-import { UserNameContext } from '../../../UserNameContext';
+import emoji1 from '../../../img/emoji1.png';
+import emoji2 from '../../../img/emoji2.png';
+import emoji3 from '../../../img/emoji3.png';
+import emoji4 from '../../../img/emoji4.png';
+import emoji5 from '../../../img/emoji5.png';
+
+
+
 
 const Survey = styled.div`
   display: flex;
@@ -115,6 +121,23 @@ const P = styled.p`
 color : white;
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 320px;
+  margin-top: 20px;
+`;
+
+const EmojiButton = styled.button`
+  width: 60px;
+  height: 60px;
+  background: ${({ active }) => (active ? '#d9d9d9' : '#353535')};
+`;
+const EmojiImage = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+
 
 function SurveyCreate() {
     const navigate = useNavigate();
@@ -128,6 +151,8 @@ function SurveyCreate() {
     const [voteEnd, setIsBooleanValue] = useState(true); 
     const [userNickname] = useState(localStorage.getItem("userName"));
     //console.log("username: ", userContext);
+    const [selectedEmoji, setSelectedEmoji] = useState(null); // New state for the selected emoji
+
 
     useEffect(() => {
       console.log(kakaoId); // Print kakaoId value only once
@@ -151,12 +176,14 @@ function SurveyCreate() {
           question,
           comment,
           voteEnd,
+          emoji: selectedEmoji, // Include the selected emoji value in the data
           timestamp,
         });
     
         console.log('Data saved successfully');
       setQuestion('');
       setComment('');
+      setSelectedEmoji(null);
       navigate(`/MyAnswer/${questionId}`);
       //navigate(`/SurveyShare/${questionId}?question=${question}&comment=${comment}`);
     } catch (error) {
@@ -173,7 +200,23 @@ function SurveyCreate() {
           <HeaderP>궁금한 질문을 담은 링크를 공유해보세요.</HeaderP>
           <HeaderName>{userNickname}님의 .ZiP</HeaderName>
         </Header2>
-        <Button>이모지선택</Button>
+        <ButtonContainer>
+        <EmojiButton onClick={() => setSelectedEmoji('emoji1')} active={selectedEmoji === 'emoji1'}>
+            <EmojiImage src={emoji1} alt="Emoji" />
+          </EmojiButton>
+          <EmojiButton onClick={() => setSelectedEmoji('emoji2')} active={selectedEmoji === 'emoji2'}>
+            <EmojiImage src={emoji2} alt="Emoji" />
+          </EmojiButton>
+          <EmojiButton onClick={() => setSelectedEmoji('emoji3')} active={selectedEmoji === 'emoji3'}>
+            <EmojiImage src={emoji3} alt="Emoji" />
+          </EmojiButton>
+          <EmojiButton onClick={() => setSelectedEmoji('emoji4')} active={selectedEmoji === 'emoji4'}>
+            <EmojiImage src={emoji4} alt="Emoji" />
+          </EmojiButton>
+          <EmojiButton onClick={() => setSelectedEmoji('emoji5')} active={selectedEmoji === 'emoji5'}>
+            <EmojiImage src={emoji5} alt="Emoji" />
+          </EmojiButton>
+        </ButtonContainer>
         <P>질문</P>
         <InputQues
           value={question}

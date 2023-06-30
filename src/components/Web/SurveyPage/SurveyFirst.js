@@ -6,7 +6,6 @@ import { dbService } from '../../../fbase';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import { onSnapshot } from 'firebase/firestore';
-import { KakaoIdContext } from '../../../KakaoIdContext';
 import { v4 as uuidv4 } from 'uuid';
 
 const Survey = styled.div`
