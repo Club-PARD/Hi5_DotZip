@@ -1,10 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { dbService } from '../../../fbase';
 import { collection, doc, onSnapshot } from 'firebase/firestore';
 import styled from 'styled-components';
-import { KakaoIdContext } from '../../../KakaoIdContext';
-import { UserNameContext } from '../../../UserNameContext';
 import AddAnswer from '../AnswerPage/AddAnswer';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import KakaoShareButton from '../ProfilePage/ShareKakao';
@@ -112,7 +110,6 @@ const LinkMessage = styled.div`
 const SurveyShare = () => {
   const { questionId } = useParams();
   const navigate = useNavigate();
-  const [kakaoContext] = useContext(KakaoIdContext);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const [question, setQuestion] = useState('');

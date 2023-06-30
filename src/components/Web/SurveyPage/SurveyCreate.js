@@ -1,11 +1,9 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { dbService } from '../../../fbase';
 import { collection, addDoc, setDoc, doc, serverTimestamp} from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
-import { KakaoIdContext } from '../../../KakaoIdContext';
-import { UserNameContext } from '../../../UserNameContext';
 import emoji1 from '../../../img/emoji1.png';
 import emoji2 from '../../../img/emoji2.png';
 import emoji3 from '../../../img/emoji3.png';

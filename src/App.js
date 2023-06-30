@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { useContext } from 'react';
 import Auth from './pages/Auth';
 import Home from './pages/Home';
 import Inquiry from './pages/Inquiry';
@@ -15,11 +14,9 @@ import AnswerEnd from './components/Web/AnswerPage/AnswerEnd';
 import SurveyShare from './components/Web/SurveyPage/SurveyShare';
 import Setting from './components/Web/SettingPage/Setting';
 import VotingPage from './components/Web/VotePage/VotingPage';
-import { KakaoIdContext } from "./KakaoIdContext.js";
 import AnswerLoading from './components/Web/AnswerPage/AnswerLoading';
 
 function App() {
-  const [kakaoContext] = useContext(KakaoIdContext);
   const kakaoId =  localStorage.getItem("kakaoId")
   //로컬스토리지로 파람스를 저장하고 파람스와 로컬스토리지가 같을경우 투표한 걸로 챙긴다.
   return (

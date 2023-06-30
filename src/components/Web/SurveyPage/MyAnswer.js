@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { dbService } from '../../../fbase';
 import { collection, addDoc,updateDoc, doc, onSnapshot,serverTimestamp } from 'firebase/firestore';
 import styled from 'styled-components';
-import { KakaoIdContext } from '../../../KakaoIdContext';
 import KakaoShareButton from '../ProfilePage/ShareKakao';
 
 
@@ -98,7 +97,6 @@ background: #EEFF01;
 const MyAnsewer = () => {
     const { questionId } = useParams();
     const navigate = useNavigate();
-    const [kakaoContext] = useContext(KakaoIdContext);
     // const [userContext] = useContext(UserNameContext);
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);

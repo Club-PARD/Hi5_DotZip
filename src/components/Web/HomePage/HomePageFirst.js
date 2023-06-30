@@ -1,10 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { dbService } from '../../../fbase';
 import { collection, onSnapshot, query, where, orderBy } from 'firebase/firestore';
 import styled from 'styled-components';
-import { KakaoIdContext } from '../../../KakaoIdContext';
-import { UserNameContext } from '../../../UserNameContext';
 
 const Div = styled.div`
   margin-top: 70px;
