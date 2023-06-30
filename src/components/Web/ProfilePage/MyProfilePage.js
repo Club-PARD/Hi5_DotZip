@@ -111,8 +111,8 @@ const MyProfilePage = () => {
             {/* 사용자 id받아와서 넣어 줄 부분 */}
             <h2>나의 ZiP 랭킹</h2>
             {top3Answer.map(({ answer, voteData, ID }, index) => (
-  <VoteKewordBox key={ID}>{`${index + 1}위 ${answer}\n 투표수 : ${voteData}`}</VoteKewordBox>
-))}
+            <VoteKewordBox key={ID}>{`${index + 1}위 ${answer}\n 투표수 : ${voteData}`}</VoteKewordBox>
+          ))}
             <KakaoShareButton/>
             <ImageSaveButton/>
             <CreateZipButton>다른 .ZiP 만들기</CreateZipButton>
