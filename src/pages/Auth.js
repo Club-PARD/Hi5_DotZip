@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import KakaoLogin from "react-kakao-login";
 import { dbService } from "../fbase.js";
-import { collection, onSnapshot, setDoc, doc } from "firebase/firestore";
+import { collection, onSnapshot, setDoc, doc, getDoc } from "firebase/firestore";
 import { Navigate } from "react-router-dom";
 import { KakaoIdContext } from "../KakaoIdContext.js";
 import { UserNameContext } from "../UserNameContext";
@@ -36,30 +36,38 @@ const Auth = () => {
     console.log("로그인 성공", response);
     setAccessToken(response.response.access_token);
     setkakaoContext(response.profile.id.toString());
-    localStorage.setItem("kakaoId",response.profile.id);
-    localStorage.setItem("userName",response.profile.properties.nickname);
-    console.log(response.profile.properties.nickname);
-    // setuserContext(response.profile.properties.nickname.toString());
-    const hasMatchingId = (responseId, userIds) => {
-      return userIds.some((userId) => responseId === userId);
-    };
-
+    localStorage.setItem("kakaoId", response.profile.id);
+  
+    // const hasMatchingId = (responseId, userIds) => {
+    //   return userIds.some((userId) => responseId === userId);
+    // };
+  
     const collectionName = "kakaoId";
     const documentId = response.profile.id;
-    const data = {
-      userId: response.profile.id,
-      userName: response.profile.properties.nickname,
-    };
-
-    const addKakaoId = kakaoId.map((item) => item.userId);
-    const hasMatchingIdResult = hasMatchingId(response.profile.id, addKakaoId);
-    console.log("hasMatchingIdResult:", hasMatchingIdResult);
+  
+    // const addKakaoId = kakaoId.map((item) => item.userId);
+    // const hasMatchingIdResult = hasMatchingId(response.profile.id, addKakaoId);
+    // console.log("hasMatchingIdResult:", hasMatchingIdResult);
+  
     const docRef = doc(dbService, collectionName, String(documentId));
-    if (!hasMatchingIdResult) {
-      await setDoc(docRef, data);
-
-    }
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        console.log("기존 로그인", data.userName);
+        localStorage.setItem("userName", data.userName);
+        setuserContext(data.userName);
+      } else {
+        console.log("처음 로그인 한 사람");
+        const data = {
+          userId: response.profile.id,
+          userName: response.profile.properties.nickname,
+        };
+        await setDoc(docRef, data);
+        localStorage.setItem("userName", response.profile.properties.nickname);
+        setuserContext(response.profile.properties.nickname);
+      }
   };
+  
 
   const handleFailure = (error) => {
     console.log("로그인 실패", error);
