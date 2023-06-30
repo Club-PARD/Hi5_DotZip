@@ -79,7 +79,7 @@ const AddAnswerVote = ({ totalVote,answerId }) => {
           onChange={onChangenickName}
           type="text"
           placeholder="nickName"
-          maxLength={120}
+          maxLength={10}
         />
         <input
           value={reason}

@@ -171,9 +171,6 @@ const HomePageFirst = () => {
   const handleButton1Click = () => {
     navigate('../../../../MyProfile'); // Replace with the actual path you want to navigate to
   };
-  const handleButton2Click = () => {
-    navigate(`/Answer/${kakaoId}`); // Replace with the actual path you want to navigate to
-  };
   const handleButtonPickAnswer = () => {
     navigate('/PickAnswer'); // Replace with the actual path you want to navigate to
   };
@@ -211,22 +208,34 @@ const HomePageFirst = () => {
         <Header3>진행중인 폴더</Header3>
         <button onClick={handleButton3Click}>전체보기</button>
         {questions.length > 0 ? (
-  questions.slice(0, 3).map((question) => (
-    <div key={question.questionId}>
-      {question && question.question && (
-        <P onClick={() => handleQuestionClick(question.questionId)}>
-          Question: {question.question} <br />
-          Comment: {question.comment}
-        </P>
-      )}
-    </div>
-  ))
-) : (
-  <Questionp>
-    진행중인 폴더가 없어요! <br /> +NEW 폴더 만들기
-  </Questionp>
-)}
-
+          <>
+            {questions.slice(0, 3).map((question) => (
+              <div key={question.questionId}>
+                {question && question.question && question.voteEnd && (
+                  <P onClick={() => handleQuestionClick(question.questionId)}>
+                    Question: {question.question} <br />
+                    Comment: {question.comment}
+                  </P>
+                )}
+              </div>
+            ))}
+            <Header3>여기서 나뉨 밑은 끝난거 위는 안끝난거</Header3>
+            {questions.slice(0, 3).map((question) => (
+              <div key={question.questionId}>
+                {question && question.question && !question.voteEnd && (
+                  <P onClick={() => handleQuestionClick(question.questionId)}>
+                    Question: {question.question} <br />
+                    Comment: {question.comment}
+                  </P>
+                )}
+              </div>
+            ))}
+          </>
+        ) : (
+          <Questionp>
+            진행중인 폴더가 없어요! <br /> +NEW 폴더 만들기
+          </Questionp>
+        )}
 
 {/* 
       </Survey>
