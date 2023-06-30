@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React, { useState, useEffect} from 'react';
 import { dbService } from "../../../fbase.js";
-import { collection, onSnapshot, query, where , orderBy } from "firebase/firestore";
+import { collection, onSnapshot, query, where , orderBy, doc, updateDoc } from "firebase/firestore";
 import { useNavigate, useParams } from 'react-router-dom';
 // import { KakaoIdContext } from '../../../KakaoIdContext.js';
 // import { useParams } from 'react-router-dom';
@@ -19,6 +19,7 @@ const VoteBox = styled.div`
 `;
 
 const AnswerEnd = () => {
+  
 
 
   const [documents, setDocuments] = useState([]);
@@ -26,6 +27,13 @@ const AnswerEnd = () => {
   const {questionId} = useParams();
   const navigate= useNavigate();
   const userName = localStorage.getItem("userName")
+  const updateVoteNum = async (newVoteNum) => {
+    const questionRef = doc(dbService, 'zip_Question', questionId);
+    await updateDoc(questionRef, {
+      VoteNum: newVoteNum
+    });
+  };
+
   const onSubmit= ()=>{
     navigate('/');
   }
@@ -45,11 +53,13 @@ const AnswerEnd = () => {
       setDocuments(answerList);
     });
 
+
     return () => {
       unsubscribe();
+
     };
   }, [questionId]);
-  
+  updateVoteNum(totalVotes);
 
   return (
     <Div>

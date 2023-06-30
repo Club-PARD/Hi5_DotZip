@@ -18,7 +18,7 @@ const AnswerLoading = () => {
       useEffect(() => {
         const timer = setTimeout(() => {
           navigateToAnswerEnd();
-        }, 60000);
+        }, 2000);
     
         return () => clearTimeout(timer);
       }, []);
