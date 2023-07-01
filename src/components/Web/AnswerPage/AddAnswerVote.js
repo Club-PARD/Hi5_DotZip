@@ -23,6 +23,8 @@ const AddAnswerVote = ({ totalVote,answerId }) => {
   const road = doc(dbService, "zip_Answer", answerId);
   const navigate = useNavigate();
   const [cachedData, setCachedData] = useState(null); // 캐시된 데이터 상태
+  let [inputCountName, setInputCountName] = useState(0);
+  let [inputCountReason, setInputCountReason] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -76,11 +78,13 @@ const AddAnswerVote = ({ totalVote,answerId }) => {
   const onChangeReason = (e) => {
     const { value } = e.target;
     setReason(value);
+    setInputCountReason(e.target.value.length);
   };
 
   const onChangenickName = (e) => {
     const { value } = e.target;
     setNickName(value);
+    setInputCountName(e.target.value.length);
   };
 
   return (
@@ -95,14 +99,16 @@ const AddAnswerVote = ({ totalVote,answerId }) => {
           placeholder="nickName"
           maxLength={10}
         />
+        <span>{inputCountName}/10</span>
         <div>이유</div>
         <input
           value={reason}
           onChange={onChangeReason}
           type="text"
           placeholder="Reason"
-          maxLength={120}
+          maxLength={100}
         />
+                <span>{inputCountReason}/100</span>
         <input type="submit" value="Answer" />
       </Form>
     </div>

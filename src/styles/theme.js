@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import Pretendard from '../asset/font/Pretendard-Medium.otf'
+import PretendardBold from '../asset/font/Pretendard-Bold.otf'
 
 
 // GlobalStyle을 생성합니다.
@@ -57,6 +58,17 @@ export const GlobalStyle = createGlobalStyle`
          url(${Pretendard}) format('woff2'),
          url(${Pretendard}) format('woff'),
          url(${Pretendard}) format("truetype");
+    font-display: swap;
+} 
+@font-face {
+    font-family: 'PretendardBold';
+    font-weight: 900;
+    font-style: normal;
+    src: url('PretendardBold');
+    src: url(${PretendardBold}) format('embedded-opentype'),
+         url(${PretendardBold}) format('woff2'),
+         url(${PretendardBold}) format('woff'),
+         url(${PretendardBold}) format("truetype");
     font-display: swap;
 } 
 
