@@ -5,6 +5,11 @@ import { collection, onSnapshot, query, where , orderBy} from 'firebase/firestor
 import styled from 'styled-components';
 import CreateFolderButton from '../../../img/CreateFolderButton.png';
 import BackNavBar from '../../BackNavbar';
+import emoji1 from '../../../img/emoji1.png';
+import emoji2 from '../../../img/emoji2.png';
+import emoji3 from '../../../img/emoji3.png';
+import emoji4 from '../../../img/emoji4.png';
+import emoji5 from '../../../img/emoji5.png';
 
 const Div = styled.div`
 
@@ -48,6 +53,13 @@ const NoFolder2Text = styled.div`
   weight: 600;
   height: 18px;
 `;
+
+const IMG = styled.img`
+width: 48px;
+height: 48px;
+
+`;
+
 const VotingPage = () => {
     const kakaoId = localStorage.getItem("kakaoId");
     const [questions, setQuestions] = useState([]);
@@ -76,6 +88,24 @@ const VotingPage = () => {
       const handleQuestionClick = (questionId) => {
         navigate(`/PickAnswer/${questionId}`);
       };
+
+      const getEmojiImage = (emoji) => {
+        switch (emoji) {
+          case 'emoji1':
+            return emoji1;
+          case 'emoji2':
+            return emoji2;
+          case 'emoji3':
+            return emoji3;
+          case 'emoji4':
+            return emoji4;
+          case 'emoji5':
+            return emoji5;
+          default:
+            return null;
+        }
+      };
+
     return(
       <Div>
         <BackNavBar/>
@@ -86,6 +116,7 @@ const VotingPage = () => {
             <div key={question.questionId}>
               {question && question.question && (
                 <Question onClick={() => handleQuestionClick(question.questionId)}>
+                  {question.emoji && <IMG src={getEmojiImage(question.emoji)} alt="Emoji" />}
                   Question: {question.question} <br />
                   Comment: {question.comment}
                 </Question>
