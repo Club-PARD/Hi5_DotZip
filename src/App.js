@@ -20,6 +20,7 @@ function App() {
   const kakaoId =  localStorage.getItem("kakaoId")
   //로컬스토리지로 파람스를 저장하고 파람스와 로컬스토리지가 같을경우 투표한 걸로 챙긴다.
   return (
+    
 <Router>
   <Routes>
     <Route path= '/' element={<Auth/>}/>
