@@ -235,7 +235,7 @@ function PickAnswerPage() {
         <h1>VOTE ME!</h1>
         <h1>{userNickname} 님의 진행중인 폴더</h1> 
         <h3>내가 생성한 폴더의 답변과 이유를 확인해보세요!</h3>
-        {emoji && <img src={getEmojiImage(emoji)} alt="Emoji" />}
+        2{emoji && <img src={getEmojiImage(emoji)} alt="Emoji" />}
         <Title>질문 : {questionzip}</Title>
         <h3>comment : {commentzip}</h3>
         <KakaoShareButton/>
