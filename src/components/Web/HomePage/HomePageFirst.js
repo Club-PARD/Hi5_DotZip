@@ -3,6 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { dbService } from '../../../fbase';
 import { collection, onSnapshot, query, where, orderBy } from 'firebase/firestore';
 import styled from 'styled-components';
+import emoji1 from '../../../img/emoji1.png';
+import emoji2 from '../../../img/emoji2.png';
+import emoji3 from '../../../img/emoji3.png';
+import emoji4 from '../../../img/emoji4.png';
+import emoji5 from '../../../img/emoji5.png';
 
 const Div = styled.div`
   margin-top: 70px;
@@ -142,6 +147,7 @@ const HomePageFirst = () => {
   console.log(localStorage.getItem('userName'));
   console.log(localStorage.getItem('kakaoId'));
   const [questions, setQuestions] = useState([]);
+  const [emoji, setEmoji] = useState([]);
 
   useEffect(() => {
     const q = query(collection(dbService, 'zip_Question'), where('kakaoId', '==', kakaoId), orderBy('timestamp', 'desc'));
@@ -181,6 +187,25 @@ const HomePageFirst = () => {
     navigate(`/VotingPage`); // Replace with the actual path you want to navigate to
   };
 
+  const getEmojiImage = (emoji) => {
+    switch (emoji) {
+      case 'emoji1':
+        return emoji1;
+      case 'emoji2':
+        return emoji2;
+      case 'emoji3':
+        return emoji3;
+      case 'emoji4':
+        return emoji4;
+      case 'emoji5':
+        return emoji5;
+      default:
+        return null;
+    }
+  };
+
+  const emojiImage = getEmojiImage(emoji);
+
   return (
     <Div>
       <Survey>
@@ -213,6 +238,7 @@ const HomePageFirst = () => {
               <div key={question.questionId}>
                 {question && question.question && question.voteEnd && (
                   <P onClick={() => handleQuestionClick(question.questionId)}>
+                  emoji: {question.emoji && <img src={getEmojiImage(question.emoji)} alt="Emoji" />}
                     Question: {question.question} <br />
                     Comment: {question.comment}
                   </P>
@@ -224,6 +250,7 @@ const HomePageFirst = () => {
               <div key={question.questionId}>
                 {question && question.question && !question.voteEnd && (
                   <P onClick={() => handleQuestionClick(question.questionId)}>
+                  emoji: {question.emoji && <img src={getEmojiImage(question.emoji)} alt="Emoji" />}
                     Question: {question.question} <br />
                     Comment: {question.comment}
                   </P>
@@ -236,23 +263,11 @@ const HomePageFirst = () => {
             진행중인 폴더가 없어요! <br /> +NEW 폴더 만들기
           </Questionp>
         )}
-
-{/* 
-      </Survey>
-      {/* <Header3>진행중인 .Zip</Header3>
-        {questions.map((question) => (
-          <div key={question.questionId}>
-            {question && question.question && (
-              <P onClick={() => handleQuestionClick(question.questionId)}>
-                Question: {question.question} <br />
-                Comment: {question.comment}
-              </P>
-            )}
-          </div>
-        ))} */}
       </Survey>
     </Div>
   );
 };
 
 export default HomePageFirst;
+
+
