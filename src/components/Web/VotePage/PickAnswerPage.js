@@ -7,6 +7,7 @@ import CopyToClipboard from 'react-copy-to-clipboard'; //링크복사
 import { useNavigate, useParams } from 'react-router-dom';
 import KakaoShareButton from '../ProfilePage/ShareKakao';
 
+
 const Div = styled.div`
 
 `;
@@ -172,6 +173,7 @@ function PickAnswerPage() {
     
     //투표종료하기
     const navigate = useNavigate();
+    const [confirmEndVoteModalOpen, setConfirmEndVoteModalOpen] = useState(false);
     const handleEndVote = () => {
         const docRef = doc(dbService, "zip_Question", questionId);
         updateDoc(docRef, { voteEnd: false })
@@ -185,6 +187,10 @@ function PickAnswerPage() {
         console.error("Error updating voteEnd field:", error);
         });
     };
+    const handleCloseEndModal = () => {
+        setConfirmEndVoteModalOpen(false);
+    };
+    
     //홈으로 돌아가기
     const handleBackHome = () => {
         navigate('/Home');
@@ -228,7 +234,13 @@ function PickAnswerPage() {
             <ModalCheck isopen="false" onClick={handleCloseModal}>확인</ModalCheck>
         </Modal>
             {voteEnd ?  null : (<BackHomeButton onClick={handleBackHome}>홈으로 돌아가기</BackHomeButton>)}
-            {voteEnd ? (<EndButton onClick={handleEndVote}>투표 종료하기</EndButton>) : null}
+            {voteEnd ? (<EndButton onClick={() => setConfirmEndVoteModalOpen(true)}>투표 종료하기</EndButton>) : null}
+            <Modal isOpen={confirmEndVoteModalOpen} onRequestClose={handleCloseEndModal} contentLabel="투표 종료 확인">
+                <h3>투표 종료 확인</h3>
+                <p>진짜로 투표를 종료하시겠습니까?</p>
+                <button onClick={handleEndVote}>진짜 종료하기</button>
+                <button onClick={handleCloseEndModal}>취소</button>
+            </Modal>
         </Div>
     );
 };
