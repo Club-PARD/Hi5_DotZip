@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, setDoc,serverTimestamp } from 'firebase/firestore';
 import { dbService } from '../../../fbase';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
@@ -124,6 +124,7 @@ function SurveyFirst() {
   const [questionId, setQuestionId] = useState(null);
   const [voteEnd, setIsBooleanValue] = useState(true);
   const kakaoId = localStorage.getItem("kakaoId");
+  const timestamp = serverTimestamp();
 
   const handleButtonClick = () => {
     if (kakaoId) {
@@ -173,6 +174,7 @@ function SurveyFirst() {
         question,
         comment,
         voteEnd,
+        timestamp,
       });
       
       console.log('Question:', question);
