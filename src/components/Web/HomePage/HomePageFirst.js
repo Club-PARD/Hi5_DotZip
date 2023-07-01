@@ -75,9 +75,6 @@ const Survey = styled.div`
   align-items: center;
   width: 375px
   height: 1245px
-  top: 272px
-  left: 4802px
-  background: aqua;
   margin: 0 auto;
   overflow-x: hidden;
 

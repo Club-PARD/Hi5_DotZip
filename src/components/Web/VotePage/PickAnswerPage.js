@@ -6,6 +6,11 @@ import Modal from 'react-modal';
 import CopyToClipboard from 'react-copy-to-clipboard'; //링크복사
 import { useNavigate, useParams } from 'react-router-dom';
 import KakaoShareButton from '../ProfilePage/ShareKakao';
+import emoji1 from '../../../img/emoji1.png';
+import emoji2 from '../../../img/emoji2.png';
+import emoji3 from '../../../img/emoji3.png';
+import emoji4 from '../../../img/emoji4.png';
+import emoji5 from '../../../img/emoji5.png';
 
 
 const Div = styled.div`
@@ -78,6 +83,12 @@ const BackHomeButton = styled.button`
     background: red;
 `;
 
+const IMG = styled.img`
+width: 48px;
+height: 48px;
+
+`;
+
 function PickAnswerPage() {
     // 답변 불러오기
     const [questionzip, setQuestionZip] = useState();
@@ -87,6 +98,7 @@ function PickAnswerPage() {
     const {questionId} = useParams(); //questionid 받아오기
     const [voteEnd, setVoteEnd] = useState(true);
     const [userNickname] = useState(localStorage.getItem("userName"));
+    const [emoji, setEmoji] = useState([]);
 
     useEffect(() => {
         fetchDataQuestion();
@@ -104,6 +116,7 @@ function PickAnswerPage() {
         console.log(targetQ);
         setQuestionZip(targetQ.question);
         setCommentZip(targetQ.comment);
+        setEmoji(targetQ.emoji); 
         setVoteEnd(targetQ.voteEnd); // 투표 종료 여부 판단
     };
 
@@ -197,12 +210,32 @@ function PickAnswerPage() {
     };
     const totalVotes = answerzips.reduce((sum, answerzip) => sum + answerzip.totalVote, 0);
 
+    const getEmojiImage = (emoji) => {
+        switch (emoji) {
+          case 'emoji1':
+            return emoji1;
+          case 'emoji2':
+            return emoji2;
+          case 'emoji3':
+            return emoji3;
+          case 'emoji4':
+            return emoji4;
+          case 'emoji5':
+            return emoji5;
+          default:
+            return null;
+        }
+      };
+
+      const emojiImage = getEmojiImage(emoji);
+
 
     return (
         <Div>
         <h1>VOTE ME!</h1>
         <h1>{userNickname} 님의 진행중인 폴더</h1> 
         <h3>내가 생성한 폴더의 답변과 이유를 확인해보세요!</h3>
+        {emoji && <img src={getEmojiImage(emoji)} alt="Emoji" />}
         <Title>질문 : {questionzip}</Title>
         <h3>comment : {commentzip}</h3>
         <KakaoShareButton/>
