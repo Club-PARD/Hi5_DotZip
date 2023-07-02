@@ -13,7 +13,7 @@ const NavBarWrapper = styled.nav`
   left: 50%;
   transform: translateX(-50%);
   width: 375px;
-  z-index: 999;
+  z-index:0;
   background-color: white;
   color: white;
 `;

@@ -6,10 +6,9 @@ const Div = styled.div`
     justify-content: center;
 `;
 const NavbarWrapper = styled.nav`
-  width: 375px;
+  width: 327px;
   display: flex;
   height: 64px;
-  margin-left: 24px;
 `;
 
 const BackButton = styled.button`

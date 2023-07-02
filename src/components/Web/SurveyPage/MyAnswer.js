@@ -3,20 +3,20 @@ import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { dbService } from '../../../fbase';
 import { collection, addDoc,updateDoc, doc, onSnapshot,serverTimestamp } from 'firebase/firestore';
 import styled from 'styled-components';
-import KakaoShareButton from '../ProfilePage/ShareKakao';
-
-
-
+import BackNavBar from '../../BackNavbar'
+import progress from '../../../img/Line2.png'
+import tipimage from '../../../img/Tip.png'
+import addVote from '../../../img/addVote.png'
+import AddAnswerQuest from '../AnswerPage/AddAnswerQuest';
+import Modal from 'react-modal';
+import noAnswer from '../../../img/noAnswer.png'
 
 const Div = styled.div`
-  margin-top: 70px;
-  height: 1000px;
   
 `;
 
 const HeaderP = styled.p`
   width: 260px;
-  height: 19px;
   font-family: 'Pretendard';
   font-style: normal;
   font-weight: 700;
@@ -26,28 +26,15 @@ const HeaderP = styled.p`
 `;
 
 const HeaderDiv = styled.header`
-  
-  height: 19px;
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 19px;
-  color: #efefef;
-  left: calc(50% - 311px/2);
+color: var(--gray-90, #353535);
+/* Head/H3-24-B */
+font-size: 24px;
+font-family: PretendardBold;
+font-style: normal;
+font-weight: 700;
+line-height: 28px;
 `;
 
-const Header3 = styled.p`
-  width: 110px;
-  height: 24px;
-  font-family: Pretendard;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 24px;
-  letter-spacing: 0em;
-  text-align: left;
-  color: #efefef;
-`;
 
 const Header2 = styled.div`
   display: flex;
@@ -63,57 +50,116 @@ const Survey = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 375px;
-  height: 812px;
-  background: black;
   margin: 0 auto;
   overflow-x: hidden;
 `;
-const Button2 = styled.button`
-  box-sizing: border-box;
+const Container = styled.div`
+  position: relative;
+  width: 327px;
+  height: 96px;
+  border: none;
+  border-radius: 10px;
+  background: var(--background-gra, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%));
+  color: var(--black-90, #212121);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-top: 32px;
+`;
+const IMG = styled.img`
   position: absolute;
-  width: 375px;
-  height: 60px;
-  left: calc(50% - 375px/2);
-  top: 648px;
-  background: #212121;
-  border: 1px solid #ABABAB;
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 20px;
-  text-align: center;
-  color: #ABABAB;
-  
+  top: 50%; /* 추가: IMG 요소를 수직 방향으로 중간으로 이동시키기 위해 */
+  transform: translateY(-50%); 
+  width: 48px;
+  height: 48px;
+  margin-left: 16px;
 `;
-const P = styled.p`
-
-background: #EEFF01;
-  
+const Question =styled.div`
+color: var(--black-90, #212121);
+/* Body/B4-14-SB */
+width: 235px;
+font-size: 14px;
+font-family: PretendardBold;
+font-style: normal;
+font-weight: 600;
+line-height: 18px;
+margin-left: 76px;
+margin-top: 27px;
+word-break: keep-all;
 `;
-
+const Comment =styled.div`
+color: var(--gray-60, #808080);
+font-size: 12px;
+font-family: Pretendard;
+font-style: normal;
+font-weight: 500;
+line-height: 16px;
+margin-left: 76px;
+margin-top: 6px;
+`;
+const Progress = styled.img`
+  width: 260px;
+  height: 1.5px;
+  margin-right: 115px;
+`;
+// const TipContaioner=styled.div`
+//   display: flex;
+//   align-items: center;
+//   width: 327px;
+//   height: 40px;
+//   border-radius: 30px;
+//   background: var(--background-orange, #FFF8F3);
+// `;
+// const TipImage=styled.img`
+//   width: 55px;
+//   height: 24px;
+//   margin-right: 8px;
+// `;
+const Hr = styled.hr`
+width: 327px;
+height: 0px;
+color:#ABABAB ;
+margin-top: 32px;
+margin-bottom: 32px;
+`;
+const AddVote = styled.img`
+width: 327px;
+height: 48px;
+margin-top: 8px;
+`;
+const NoAnswer = styled.img`
+width: 327px;
+height: 48px;
+margin-top: 16px;
+`;
+const modalStyles = {
+  content: {
+    width: '343px',
+    height: '280px',
+    margin: 'auto',
+    border: '1px solid #ccc',
+    borderRadius: '10px',
+    padding: '20px',
+    background: 'var(--background-gra, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%))'
+  }
+};
 
 
 const MyAnsewer = () => {
     const { questionId } = useParams();
     const navigate = useNavigate();
-    // const [userContext] = useContext(UserNameContext);
-    const location = useLocation();
-    const queryParams = new URLSearchParams(location.search);
+    const [modalOpen, setModalOpen] = useState(false);
     const [question, setQuestion] = useState('');
     const [comment, setComment] = useState('');
     const [userNickname] = useState(localStorage.getItem("userName"));
-    const [answer, setAnswer] = useState("");
-  const [reason, setReason] = useState("");
-  const [nickname, setNickName] = useState("");
-  const road =collection(dbService, "zip_Answer");//다시 고치기
-  const timestamp = serverTimestamp();
-  const data = {
-    answer: answer,
-    totalVote: 1,
-    questionId :questionId,//params로 받은 변수 넣기
-    timestamp,
-  }
+    const [emoji,setEmoji] = useState('');
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
+  const showModal = ()=>{
+    setModalOpen(!modalOpen);
+  };
 
   
     useEffect(() => {
@@ -122,6 +168,7 @@ const MyAnsewer = () => {
           const data = snapshot.data();
           setQuestion(data.question);
           setComment(data.comment);
+          setEmoji(data.emoji);
         } else {
           // Handle case when document does not exist
         }
@@ -132,42 +179,7 @@ const MyAnsewer = () => {
       };
     }, [questionId]);
 
-    const onSubmit = async (e) => {
-        e.preventDefault();
-        if(answer!==""){//안썻을경우
-        try {
-          const newDocRef = await addDoc(road, 
-          data);
-          
-          await updateDoc(newDocRef, {
-            answerId : newDocRef.id,
-          });
-          await addDoc(collection(dbService, "zip_Reason"),{
-            reason : reason,
-            answerId : newDocRef.id,
-            nickname : nickname,
-          } 
-          );
-          setAnswer("");
-          setReason("");
-          setNickName("");
-          navigate(`/SurveyShare/${questionId}`);
-        } catch (error) {
-          console.error("Error adding document: ", error);
-        }
     
-      }
-      };
-    
-      const onChange = (e) => {
-        const { value } = e.target;
-        setAnswer(value);
-      };
-    
-      const onChangeReason = (e) => {
-        const { value } = e.target;
-        setReason(value);
-      };
       const handleButtonClick = () => {
         navigate(`/SurveyShare/${questionId}`);
       };
@@ -175,38 +187,29 @@ const MyAnsewer = () => {
 
     return (
         <Div>
+          <BackNavBar/>
           <Survey>
+          <Progress src={progress}/>
             <Header2>
-              <HeaderDiv>나에 대해 생각해보세요!</HeaderDiv>
-              <HeaderP>{userNickname}님이 생각하는 질문의 키워드는 무엇인가요?</HeaderP>
-
-              <HeaderDiv>내가 생각하는 내 모습 항목 추가하기</HeaderDiv>
+              <HeaderDiv>내 답변 추가하기</HeaderDiv>
+              <HeaderP>투표 항목에 내가 생각하는 답변을 추가해보세요</HeaderP>
+              <Container>
+                <Question>{question}</Question>
+                <Comment>{comment}</Comment>
+                <IMG src={emoji}></IMG>
+                </Container>
+                <Hr></Hr>
+                {/* <TipContaioner>
+                  <TipImage src={tipimage}/>
               <HeaderP>답변에 내가 생각하는 키워드를 추가할 수 있어요.</HeaderP>
+              </TipContaioner> */}
             </Header2>
             
-
-            <Button2 onClick={() => navigate('/home')}>
-            홈으로 돌아가기
-          </Button2>
-          <button >+ 키워드 후보 추가하기</button>
-          <form onSubmit={onSubmit}>
-          <input
-          value={answer}
-          onChange={onChange}
-          type="text"
-          placeholder="answer"
-          maxLength={120}
-        />
-          <input
-          value={reason}
-          onChange={onChangeReason}
-          type="text"
-          placeholder="Reason"
-          maxLength={120}
-        />
-        <input type="submit" value="등록하기" />
-        </form>   
-        <button onClick={handleButtonClick}>추가 안할래요</button>
+          <AddVote src={addVote} onClick={showModal} ></AddVote>
+          <Modal isOpen={modalOpen} onRequestClose={handleCloseModal} style={modalStyles}>
+          {modalOpen && <AddAnswerQuest key="add-answer"  handleCloseModal={handleCloseModal} />}
+          </Modal>
+        <NoAnswer src={noAnswer} onClick={handleButtonClick}/>
           </Survey>
         </Div>
       );

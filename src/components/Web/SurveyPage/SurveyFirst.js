@@ -3,47 +3,57 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { doc, setDoc,serverTimestamp } from 'firebase/firestore';
 import { dbService } from '../../../fbase';
-import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-import { onSnapshot } from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
 import BackNavBar from "../../BackNavbar"
+import emoji1 from '../../../img/emoji1.png';
+import emoji2 from '../../../img/emoji2.png';
+import emoji3 from '../../../img/emoji3.png';
+import emoji4 from '../../../img/emoji4.png';
+import answer1 from '../../../img/answer1.png';
+import answer2 from '../../../img/answer2.png';
+import answer3 from '../../../img/answer3.png';
+import answer4 from '../../../img/answer4.png';
+import progress from '../../../img/Line1.png'
 const Div = styled.div`
     display: flex;
-    justify-content: center;
     align-items: center;
   flex-direction: column;
-  margin-left: 24px;
 `;
 
 
 const Survey = styled.div`
   width: 375px;
   background: white;
+  display: flex;
   justify-content: center;
 `;
 
 const ButtonRow = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: column; /* Changed from row to column */
+  position: relative;
+  width: 327px;
 `;
 
 const Button = styled.button`
   width: 327px;
   height: 60px;
-  background: #D9D9D9;
-  border: 1px solid #ABABAB;
+  border: none;
   border-radius: 10px;
-  background: ${({ active }) => (active ? '#D9D9D9' : '#353535')};
-  color: white;
+  background: var(--background-gra, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%));
+  color: var(--black-90, #212121);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  z-index: 1;
+  margin-top: 20px;
 `;
 
 const HeaderDiv = styled.header`
-  width: 375px;
+  width : 100%;
   height: 19px;
   font-size: 24px;
-font-family: Pretendard;
+font-family: PretendardBold;
 font-style: normal;
 font-weight: 700;
 text-align: left;
@@ -53,62 +63,72 @@ text-align: left;
 const Header2 = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   margin-top: 20px;
-  width: 375px;
+  width: 327px;
+  justify-content: center;
+  align-items: center;
 `;
 
 const HeaderP = styled.header`
-  width: 375px;
+  width: 100%;
   height: 19px;
   color: var(--gray-60, #808080);
 text-align: left;
-margin-top: 7px;
+margin-top: 13px;
 /* Body/B4-14-SB */
 font-size: 14px;
 font-family: Pretendard;
 font-style: normal;
 font-weight: 600;
 line-height: 18px;
+margin-bottom: 12px;
 `;
 
 
 const Button1 = styled.button`
   width: 327px;
   height: 48px;
-  left: calc(50% - 311px/2);
-  top: 149px;
-  background: #353535;
-  border: 1px solid #EFEFEF;
-  backdrop-filter: blur(2px);
-  border-radius: 8px;
+  border-radius: 10px;
+  border: 1px solid #EC582F;
+  background-color: white;
   font-family: 'Pretendard';
   font-style: normal;
   font-weight: 700;
   font-size: 12px;
   line-height: 14px;
   text-align: center;
-  color: #EFEFEF;
+  color: var(--primary-orange, #EC582F);
   margin-bottom: 10px;
+  margin-top: 32px;
 `;
 
-const Button2 = styled.button`
-  box-sizing: border-box;
-  width: 375px;
-  height: 60px;
-  left: calc(50% - 375px/2);
-  background: #212121;
-  border: 1px solid #ABABAB;
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 20px;
-  text-align: center;
-  color: #ABABAB;
-`;
+// const Button2 = styled.button`
+//   box-sizing: border-box;
+//   width: 375px;
+//   height: 60px;
+//   left: calc(50% - 375px/2);
+//   background: #212121;
+//   border: 1px solid #ABABAB;
+//   font-family: 'Pretendard';
+//   font-style: normal;
+//   font-weight: 700;
+//   font-size: 14px;
+//   line-height: 20px;
+//   text-align: center;
+//   color: #ABABAB;
+// `;
 
+
+const Progress = styled.img`
+  width: 125px;
+  height: 1.5px;
+  margin-right: 235px;
+`;
+const Img = styled.img`
+width: 327px;
+height: 96px;
+margin-top: 20px;
+`;
 
 
 function SurveyFirst() {
@@ -144,21 +164,26 @@ function SurveyFirst() {
 
       let question = '';
       let comment = '';
-      console.log('Selected Button:', selectedButton);
+      let emoji ='';
+
 
 
       if (selectedButton === '버튼1') {
-        question = '나의 컬러 나의 이미지와 가장 잘 어울리는 색이 어떤 색인지 알려주세요!';
-        comment = '성격과 컬러의 이미지를 연관지어보세요!';
+        question = '나에게 어울리는 컬러는?';
+        comment = '나의 성격과 떠오르는 이미지를 연관지어보세요!';
+        emoji = emoji1;
       } else if (selectedButton === '버튼2') {
-        question = '패션브랜드 나의 이미지와 가장 잘 어울리는 패션 브랜드가 어디인지 알려주세요!';
-        comment = '성격과 브랜드 이미지를 연관지어보세요!';
+        question = '나에게 어울리는 직업은?';
+        comment = '나의 성향과 장점을 생각해보세요!';
+        emoji = emoji2;
       } else if (selectedButton === '버튼3') {
-        question = '꽃말 내가 꽃이면 나의 이미지와 가장 잘 어울리는 꽃과 꽃말은 뭔지 알려주세요!';
-        comment = '성격과 꽃말을 연관지어보세요!';
+        question = '나에게 어울리는 형용사는?';
+        comment = '나를 표현하는 단어를 생각해보세요!';
+        emoji = emoji3;
       } else if (selectedButton === '버튼4') {
-        question = '책 이름 나의 이미지와 가장 잘 어울리는 책 이름이 뭔지 알려주세요!';
-        comment = '성격과 책 이름을 연관지어보세요!';
+        question = '나에게 어울리는 브랜드는?';
+        comment = '나를 생각하면 떠오르는 키워드와 연관지어보세요!';
+        emoji = emoji4;
       }
 
       const questionId = uuidv4();
@@ -170,6 +195,7 @@ function SurveyFirst() {
         comment,
         voteEnd,
         timestamp,
+        emoji
       });
       
       console.log('Question:', question);
@@ -194,48 +220,35 @@ function SurveyFirst() {
 
   return (
     <>
-    <BackNavBar/>
     <Div>
+      <Div>
+    <BackNavBar/>
+    <Progress src={progress}/>
         <Header2>
-          <HeaderDiv>New! 폴더 만들기</HeaderDiv>
-        <HeaderP>주변사람들에게 나에 대해 물어보고 투표를 받아보세요!</HeaderP>
+          <HeaderDiv>새로운 질문 만들기</HeaderDiv>
+        <HeaderP>지인들에게 나에 대해 물어보고 투표를 받아보세요!</HeaderP>
         </Header2>
+        <ButtonRow>
+          <Img src={answer1}             
+          onClick={() => handleButtonSelect('버튼1')}
+            active={selectedButton === '버튼1'}/>
+          <Img src={answer2}             
+          onClick={() => handleButtonSelect('버튼2')}
+            active={selectedButton === '버튼2'}/> 
+          <Img src={answer3}             
+          onClick={() => handleButtonSelect('버튼3')}
+            active={selectedButton === '버튼3'}/> 
+          <Img src={answer4}             
+          onClick={() => handleButtonSelect('버튼4')}
+            active={selectedButton === '버튼4'}/> 
+        </ButtonRow>
         <Survey>
         <Button1 onClick={handleButtonClick}>+ 내가 직접 질문 만들기</Button1>
-        
-        <ButtonRow>
-          <Button
-            onClick={() => handleButtonSelect('버튼1')}
-            active={selectedButton === '버튼1'}
-          >
-            나의 컬러 <br /> 나의 이미지와 가장 잘 어울리는 색은?
-          </Button>
-          <Button
-            onClick={() => handleButtonSelect('버튼2')}
-            active={selectedButton === '버튼2'}
-          >
-            패션브랜드 <br /> 나의 이미지와 어울리는 패션 브랜드는?
-          </Button>
-        </ButtonRow>
-    
-        <ButtonRow>
-        <Button
-            onClick={() => handleButtonSelect('버튼3')}
-            active={selectedButton === '버튼3'}
-          >
-            꽃말<br /> 내가 꽃이라면 그 꽃과 꽃말은?
-          </Button>
-          <Button
-            onClick={() => handleButtonSelect('버튼4')}
-            active={selectedButton === '버튼4'}
-          >
-            책 이름 <br /> 나를 책으로 만든다면, 그 책의 이름은?
-          </Button>
-        </ButtonRow>
         </Survey>
         {/* <Button2 disabled={!buttonSelected} onClick={() => navigate(`/SurveyShare/${questionId}`)}>
           다음
         </Button2> */}
+    </Div>
     </Div>
     </>
   );
