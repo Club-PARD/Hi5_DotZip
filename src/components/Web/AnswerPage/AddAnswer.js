@@ -36,7 +36,7 @@ const AddAnswer = () => {
       setAnswer("");
       setReason("");
       setNickName("");
-      navigate(`/AnswerEnd/${questionId}`);
+      navigate(`/AnswerLoading/${questionId}`);
     } catch (error) {
       console.error("Error adding document: ", error);
     }

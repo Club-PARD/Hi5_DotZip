@@ -9,6 +9,9 @@ import emoji2 from '../../../img/emoji2.png';
 import emoji3 from '../../../img/emoji3.png';
 import emoji4 from '../../../img/emoji4.png';
 import emoji5 from '../../../img/emoji5.png';
+import BackNavbar from '../../BackNavbar'
+import progress from '../../../img/Line2.png';
+import check from '../../../img/Group 33956.png';
 
 
 
@@ -16,13 +19,9 @@ import emoji5 from '../../../img/emoji5.png';
 const Survey = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
   width: 375px;
   height: 812px;
-  background: black;
   margin: 0 auto;
-  overflow-x: hidden;
 `;
 
 const HeaderDiv = styled.header`
@@ -70,14 +69,6 @@ const HeaderName = styled.p`
   color: #efefef;
 `;
 
-const Button = styled.button`
-  width: 75px;
-  height: 72px;
-  top: 157px;
-  left: 150px;
-  background: ${({ active }) => (active ? '#d9d9d9' : '#353535')};
-`;
-
 const InputQues = styled.textarea`
   width: 320px;
   height: 68px;
@@ -96,12 +87,6 @@ const InputQues1 = styled.textarea`
   margin: 30px;
 `;
 
-const InputVote = styled.button`
-  width: 320px;
-  height: 68px;
-  top: 423px;
-  left: 28px;
-`;
 
 const Submit = styled.button`
   width: 320px;
@@ -111,7 +96,8 @@ const Submit = styled.button`
 `;
 
 const Div = styled.div`
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   justify-content: center;
   align-items: center;
@@ -128,14 +114,27 @@ const ButtonContainer = styled.div`
   margin-top: 20px;
 `;
 
-const EmojiButton = styled.button`
+const EmojiButton = styled.div`
+position: relative;
   width: 60px;
   height: 60px;
-  background: ${({ active }) => (active ? '#d9d9d9' : '#353535')};
 `;
 const EmojiImage = styled.img`
-  width: 100%;
-  height: 100%;
+position: absolute;
+  width: 60px;
+  height: 60px;
+`;
+const Check = styled.img `
+  position: absolute;
+  width : 60px;
+  height : 60px;
+  opacity : ${({ active }) => (active ? 1 : 0)};
+`
+
+const Progres = styled.img`
+  width: 185px;
+  height: 1.5px;
+  margin-right: 175px;
 `;
 
 
@@ -194,6 +193,8 @@ function SurveyCreate() {
 
   return (
     <Div>
+      <BackNavbar/>
+      <Progres src={progress}/>
       <Survey>
         <Header2>
           <HeaderDiv>새로운 .ZiP 만들기</HeaderDiv>
@@ -201,20 +202,21 @@ function SurveyCreate() {
           <HeaderName>{userNickname}님의 .ZiP</HeaderName>
         </Header2>
         <ButtonContainer>
-        <EmojiButton onClick={() => setSelectedEmoji('emoji1')} active={selectedEmoji === 'emoji1'}>
-            <EmojiImage src={emoji1} alt="Emoji" />
+        <EmojiButton onClick={() => setSelectedEmoji('emoji1')} >
+            <EmojiImage src={emoji1} alt="Emoji" active={selectedEmoji === 'emoji1'} />
+            <Check src={check} active={selectedEmoji === 'emoji1'}  />
           </EmojiButton>
-          <EmojiButton onClick={() => setSelectedEmoji('emoji2')} active={selectedEmoji === 'emoji2'}>
-            <EmojiImage src={emoji2} alt="Emoji" />
+          <EmojiButton onClick={() => setSelectedEmoji('emoji2')} >
+            <EmojiImage src={emoji2} alt="Emoji"active={selectedEmoji === 'emoji2'} />
           </EmojiButton>
-          <EmojiButton onClick={() => setSelectedEmoji('emoji3')} active={selectedEmoji === 'emoji3'}>
-            <EmojiImage src={emoji3} alt="Emoji" />
+          <EmojiButton onClick={() => setSelectedEmoji('emoji3')} >
+            <EmojiImage src={emoji3} alt="Emoji" active={selectedEmoji === 'emoji3'} />
           </EmojiButton>
-          <EmojiButton onClick={() => setSelectedEmoji('emoji4')} active={selectedEmoji === 'emoji4'}>
-            <EmojiImage src={emoji4} alt="Emoji" />
+          <EmojiButton onClick={() => setSelectedEmoji('emoji4')} >
+            <EmojiImage src={emoji4} alt="Emoji" active={selectedEmoji === 'emoji4'} />
           </EmojiButton>
-          <EmojiButton onClick={() => setSelectedEmoji('emoji5')} active={selectedEmoji === 'emoji5'}>
-            <EmojiImage src={emoji5} alt="Emoji" />
+          <EmojiButton onClick={() => setSelectedEmoji('emoji5')}  alt="Emoji" active={selectedEmoji === 'emoji5'}>
+            <EmojiImage src={emoji5}/>
           </EmojiButton>
         </ButtonContainer>
         <P>질문</P>
