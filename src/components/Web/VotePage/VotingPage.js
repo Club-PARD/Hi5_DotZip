@@ -15,10 +15,33 @@ import Folder2 from '../../../img/Folder2.png';
 import Folder3 from '../../../img/Folder3.png';
 import Folder4 from '../../../img/Folder4.png';
 import Tip from '../../../img/Tip.png';
+import LinkImage from '../../../img/Link.png';
+import CopyToClipboard from 'react-copy-to-clipboard'; //링크복사
 
+//기본틀
+const DDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 812px;
+`;
 const Div = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 375px;
+    margin: 0;
+    padding: 0;
 `;
 //새로운 폴더 생성
+const NoDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`;
 const CreateFolderImage = styled.img`
   width: 147px;
   height: 40px;
@@ -26,6 +49,7 @@ const CreateFolderImage = styled.img`
 const NewFolderButton = styled.button`
   border: none;
   background-color: transparent;
+  margin-top: 24px;
 `;
 //폴더
 const FolderImageContainer = styled.div`
@@ -66,6 +90,30 @@ const TipImage = styled.img`
   height: 23px;
   z-index: 1;
 `;
+const AnswerLinkContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+const CopyLinkButton = styled.button`
+  border: none;
+  margin-top: 15px;
+  margin-left: 72px;
+  padding: 0;
+  width: 97px;
+  height: 32px;
+  border-radius: 20px;
+  color: white;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+const Link = styled.img`
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+`;
+
 //폴더 안 텍스트
 const QText = styled.p`
   font-size: 14px;
@@ -73,7 +121,7 @@ const QText = styled.p`
   margin-top: 63px;
   margin-left: 60px;
   margin-bottom: 19px;
-  font-weight: 600;
+  weight: 600;
   width: 235px;
   height: 36px;
   font-family: Pretendard;
@@ -86,7 +134,7 @@ const CText = styled.p`
   font-size: 12px;
   margin: 0;
   margin-left: 60px;
-  font-weight: 600;
+  weight: 600;
   width: 235px;
   height: 14px;
   font-family: Pretendard;
@@ -100,13 +148,12 @@ const AnswerText = styled.p`
   font-size: 12px;
   margin: 0;
   margin-top: 24px;
-  font-weight: 600;
+  weight: 600;
   width: 118px;
   height: 16px;
   font-family: Pretendard;
   color: #808080;
   z-index: 1;
-  word-break: keep-all;
 `;
 const RedText = styled.span`
   color: #EC582F;
@@ -131,6 +178,7 @@ const Folder2Text = styled.div`
 `;
 const NoFolder1Text = styled.div`
   color: #ABABAB;
+  margin-top: 120px;
   font-size: 18px;
   font-weight: 600;
   height: 24px;
@@ -138,9 +186,16 @@ const NoFolder1Text = styled.div`
 `;
 const NoFolder2Text = styled.div`
   color: #ABABAB;
+  margin-top: 4px;
   font-size: 14px;
   font-weight: 600;
   height: 18px;
+`;
+const LinkMessage = styled.div` //링크복사
+  width: 200px;
+  background: white;
+  padding: 10px;
+  border: 1px solid black;
 `;
 
 
@@ -168,11 +223,6 @@ const VotingPage = () => {
         };
       }, [kakaoId]);
 
-      const navigate = useNavigate();
-      const handleQuestionClick = (questionId) => {
-        navigate(`/PickAnswer/${questionId}`);
-      };
-
       const getEmojiImage = (emoji) => {
         switch (emoji) {
           case 'emoji1':
@@ -190,36 +240,70 @@ const VotingPage = () => {
         }
       };
 
+      const navigate = useNavigate();
+      const handleQuestionClick = (questionId, index, event) => {
+        navigate(`/PickAnswer/${questionId}`, { state: { index } });
+      };
+      const handleButtonClick = () => {
+        navigate('../../../../SurveyFirst'); // Replace with the actual path you want to navigate to
+      };
+      //링크 복사하기
+      const [showMessage, setShowMessage] = useState(false);
+      const [copiedLinkId, setCopiedLinkId] = useState('');
+
+      const handleLinkButtonClick = (questionId) => {
+        const link = `${window.location.origin}/answer/${questionId}`;
+        setCopiedLinkId(questionId);
+        setShowMessage(true);
+        setTimeout(() => {
+          setShowMessage(false);
+        }, 1000);
+      };
+      const folderImages = [Folder1, Folder2, Folder3, Folder4];
+
     return(
+      <>
+      <BackNavBar/>
+      <DDiv>
       <Div>
-        <BackNavBar/>
         <Folder1Text>내가 만든 폴더</Folder1Text>
         <Folder2Text>내가 생성한 폴더의 답변을 확인해보세요.</Folder2Text>
         {questions.length > 0 ? (
-          questions.map((question) => (
+          questions.map((question, index) => (
             <div key={question.questionId}>
               {question && question.question && (
-                <FolderImageContainer onClick={() => handleQuestionClick(question.questionId)}>
-                  <FolderImage src={Folder1} />
+                <FolderImageContainer onClick={() => handleQuestionClick(question.questionId, index)}>
+                  <FolderImage src={folderImages[index % folderImages.length]} />
                   <FolderContent>
                     <IMG src={getEmojiImage(question.emoji)} alt="Emoji" />
                     <TipImage src={Tip} />
                     <QText>{question.question}</QText>
                     <CText>{question.comment}</CText>
-                    <AnswerText><RedText>{question.totalVote}</RedText>이 답변을 남겼어요!</AnswerText>
+                    <AnswerLinkContainer>
+                      <AnswerText><RedText>{question.VoteNum}명</RedText>이 답변을 남겼어요!</AnswerText>
+                      <CopyToClipboard text={`${window.location.origin}/answer/${question.questionId}`}>
+                        <CopyLinkButton onClick={(event) => {event.stopPropagation(); handleLinkButtonClick(question.questionId);}} 
+                        disabled={!question.voteEnd} style={{ backgroundColor: question.voteEnd ? '#EC582F' : 'gray' }}>
+                          <Link src={LinkImage} />링크복사
+                        </CopyLinkButton>
+                      </CopyToClipboard>
+                      {showMessage && copiedLinkId === question.questionId && <LinkMessage>링크가 복사되었습니다</LinkMessage>}
+                    </AnswerLinkContainer>
                   </FolderContent>
                 </FolderImageContainer>
               )}
             </div>
           ))
         ) : (
-          <div>
+          <NoDiv>
             <NoFolder1Text>아직 진행중인 폴더가 없어요.</NoFolder1Text>
             <NoFolder2Text>새로운 폴더를 만들고 공유해보세요.</NoFolder2Text>
-            <NewFolderButton><CreateFolderImage src={CreateFolderButton}/></NewFolderButton>
-          </div>
+            <NewFolderButton onClick={handleButtonClick}><CreateFolderImage src={CreateFolderButton}/></NewFolderButton>
+          </NoDiv>
         )}
       </Div>
+      </DDiv>
+      </>
     );
 };
 

@@ -1,14 +1,31 @@
 //카카오톡으로 공유하는 기능 구현
 import React, { useEffect } from 'react';
 import styled from "styled-components";
+import KakaoImoticon from '../../../img/KakaoImoticon.png';
 const { Kakao } = window;
 
 
-const ShareButton = styled.button` //링크복사
-    width: 200px;
-    height: 100px;
-    padding: 5px;
-    background: red;
+
+const ShareButton = styled.button`
+  border: none;
+  margin-top: 13px;
+  margin-left: 51px;
+  margin-right: 32px;
+  padding: 0;
+  width: 97px;
+  height: 32px;
+  border-radius: 20px;
+  color: white;
+  background: #EC582F;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+const KakaoImage = styled.img`
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
 `;
 
 const KakaoShareButton = () => {
@@ -56,7 +73,7 @@ const KakaoShareButton = () => {
   return (
     <div>
       <ShareButton id="kakaotalk-sharing-btn" onClick={createKakaoButton}>
-        카카오톡 공유하기
+        <KakaoImage src={KakaoImoticon} />카톡 공유
       </ShareButton>
     </div>
   );
