@@ -3,20 +3,16 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import BackNavBar from '../../BackNavbar';
 const DDiv = styled.div`
-    display: flex;
-    justify-content: center;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 812px;
+    display: flex; //유연하게 바꾸는 역할
+    justify-content: center; // 중간으로 모으는 역할
+    width: 100%; //100퍼센트의 중간
+    height: 812px; // 임의값
 `;
 
 const Div = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 375px;
-    margin: 0;
-    padding: 0;
+    display: flex; //유연하게
+    flex-direction: column; //세로로 보여주는 역할
+    width: 375px; // 375px 고정값
 `;
 const Header1 = styled.div`
     padding-left: 24px;
