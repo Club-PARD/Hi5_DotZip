@@ -6,8 +6,23 @@ import ImageSaveButton from '../ProfilePage/SaveImage';
 import { collection, query, orderBy, limit, getDocs, updateDoc , doc, where} from "firebase/firestore";
 import { dbService } from "../../../fbase.js";
 
+//기본틀
+const DDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 911px;
+`;
 const Div = styled.div`
-
+    display: flex;
+    flex-direction: column;
+    width: 375px;
+    margin: 0;
+    padding: 0;
+    margin-left: 8px;
+    margin-right: 8px;
 `;
 //랭킹 top3 키워드
 const VoteKewordBox = styled.div`
@@ -118,6 +133,8 @@ const MyProfilePage = () => {
   
 
     return(
+      <>
+      <DDiv>
         <Div>
             <h1><button onClick={handleButtonClick}>{userNickname}</button>님의 .ZiP</h1>
             {/* 사용자 id받아와서 넣어 줄 부분 */}
@@ -130,6 +147,8 @@ const MyProfilePage = () => {
             <CreateZipButton>다른 .ZiP 만들기</CreateZipButton>
             <BackHomeButton onClick={handleBackHome}>홈으로 돌아가기</BackHomeButton>
         </Div>
+      </DDiv>
+      </>
     );
 };
 

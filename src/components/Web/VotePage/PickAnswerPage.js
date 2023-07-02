@@ -21,6 +21,7 @@ import HeartTip from '../../../img/HeartTip.png';
 import LinkImage from '../../../img/Link.png';
 import HomeButtonImage from '../../../img/GoHome.png';
 import ModalImoticon from '../../../img/ModalImoticon.png';
+import X from '../../../img/CancelX.png';
 
 //기본틀
 const DDiv = styled.div`
@@ -29,7 +30,7 @@ const DDiv = styled.div`
     margin: 0;
     padding: 0;
     width: 100%;
-    height: 812px;
+    height: 911px;
 `;
 const Div = styled.div`
     display: flex;
@@ -41,13 +42,6 @@ const Div = styled.div`
     margin-right: 8px;
 `;
 //버튼들
-const LinkButton = styled.button` //링크복사
-    width: 200px;
-    height: 100px;
-    padding: 5px;
-    background: red;
-    display: inline-block;
-`;
 const LinkMessage = styled.div` //링크복사
     width: 200px;
     background: white;
@@ -211,7 +205,7 @@ const TipText = styled.p`
     color: #808080;
 `;
 //답변들 box
-const AnswerBox = styled.div`
+const AnswerBox = styled.button`
     width: 327px;
     height: 64px;
     width: 327px;
@@ -219,6 +213,7 @@ const AnswerBox = styled.div`
     margin-bottom: 16px;
     border-radius: 8px;
     border: 1px solid var(--white-80, #EFEFEF);
+    background: none;
 `;
 const AnswerContainer = styled.div`
   display: flex;
@@ -248,7 +243,7 @@ const PercentageContainer = styled.div`
     display: flex;
     align-items: center;
 `;
-const VoteBox = styled.button`
+const VoteBox = styled.div`
     width: 280px;
     height: 8px;
     margin-left: 12px;
@@ -260,8 +255,7 @@ const VoteBox = styled.button`
 const VoteNumber = styled.p`
     margin: 0;
     margin-top: 4px;
-    margin-right: 12px;
-    margin-left: auto;
+    margin-left: 3px;
     font-size: 12px;
     font-weight: 500;
     height: 16px;
@@ -290,7 +284,7 @@ const EndButton = styled.button`
     width: 327px;
     height: 48px;
 `;
-//모달 안에 내용들
+//종료 모달 안에 내용들
 const modalStyles = {
     content: {
         position: 'absolute',
@@ -298,7 +292,8 @@ const modalStyles = {
         height: '300px',
         borderRadius: '10px',
         background: 'white',
-        margin: '180px',
+        margin: '180px auto',
+        padding: '0',
         top: '0',
         left: '0',
         right: '0',
@@ -313,7 +308,6 @@ const modalStyles = {
 const ModalImg = styled.img`
     width: 48px;
     height: 48px;
-    margin-top: 40px;
     margin-left: 147px;
     margin-bottom: 16px;
 `;
@@ -322,22 +316,102 @@ const ReasonBox = styled.div`
     height: 100px;
     background: yellow;
 `;
-const ModalCheck = styled.button`
-    width: 100px;
-    height: 50px;
-    padding: 5px;
-    background: white;
-    color: black;
-`;
 const ModalText1 = styled.p`
-    margin-left: 7px;
+    text-align: center;
     font-size: 20px;
     font-weight: 700;
     height: 24px;
     font-family: Pretendard;
     color: #353535;
 `;
-
+const ModalText2 = styled.p`
+    margin-bottom: 40px;
+    font-size: 14px;
+    font-weight: 600;
+    height: 18px;
+    font-family: Pretendard;
+    color: #808080;
+    text-align: center;
+`;
+const ModalCancelButton = styled.button`
+    width: 120px;
+    height: 40px;
+    border-radius: 24px;
+    margin-left: 40px;
+    margin-right: 24px;
+    background: var(--gray-10, #F8F8F8);
+    text-align: center;
+    border: 0;
+`;
+const ModalCheckButton = styled.button`
+    width: 120px;
+    height: 40px;
+    background: var(--background-orange, #FFF8F3);
+    border-radius: 24px;
+    text-align: center;
+    border: 0;
+`;
+const CancelButton = styled.button`
+    width: 35px;
+    height: 24px;
+    margin-top: 24px;
+    margin-left: 295px;
+    border: 0;
+    background: none;
+`;
+const CancelX = styled.img`
+    width: 100%;
+    height: 100%;
+`;
+//이유 모달 안에 내용들
+const reasonModalStyles = {
+  content: {
+      position: 'absolute',
+      width: '343px',
+      height: '600px',
+      borderRadius: '10px',
+      background: 'var(--background-gra, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%))',
+      margin: '180px auto',
+      padding: '0',
+      top: '0',
+      left: '0',
+      right: '0',
+      bottom: '0',
+      zIndex: '2',
+    },
+    overlay: {
+      backgroundColor: 'rgba(0, 0, 0, 0.50)',
+      zIndex: '2',
+    },
+};
+const ReasonModalText1 = styled.p`
+  text-align: center;
+  margin-left: 54px;
+  width: 235px;
+  margin-bottom: 16px;
+  font-size: 18px;
+  font-weight: 600;
+  height: 24px;
+  font-family: Pretendard;
+  colot: #353535;
+`;
+const Point = styled.div`
+  width: 74px;
+  height: 36px;
+  margin-left: 136px;
+  border-radius: 22px;
+  border: 2px solid var(--primary-orange, #EC582F);
+`;
+const ReasonModalText2 = styled.p`
+  color: #EC582F;
+  text-align: center;
+  margin-top: 8px;
+  font-size: 16px;
+  font-family: Pretendard;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+`;
 
 
 function PickAnswerPage() {
@@ -453,7 +527,7 @@ function PickAnswerPage() {
         .then(() => {
         // Update the local state after successful update in Firebase
         setVoteEnd(false);
-            navigate('/MyProfile');
+            navigate('/VotingPage');
         })
         .catch((error) => {
         // Handle the error
@@ -535,13 +609,13 @@ function PickAnswerPage() {
                 </TipBox>
                 {answerzips.map((answerzip) => (
                     <div key={answerzip.id}>
-                        <AnswerBox>
+                        <AnswerBox onClick={() => handleVoteBoxClick(answerzip.answer, answerzip.id)}>
                             <AnswerContainer>
                                 <AnswerText>{answerzip.answer}</AnswerText>
                                 <Percentage>{((answerzip.totalVote / totalVotes) * 100).toFixed(0)}%</Percentage>
                             </AnswerContainer>
                             <PercentageContainer>
-                                <VoteBox percentage={(answerzip.totalVote / totalVotes) * 100} onClick={() => handleVoteBoxClick(answerzip.answer, answerzip.id)} />
+                                <VoteBox percentage={(answerzip.totalVote / totalVotes) * 100} />
                                 <VoteNumber>{answerzip.totalVote}명</VoteNumber>
                             </PercentageContainer>
                         </AnswerBox>
@@ -551,21 +625,25 @@ function PickAnswerPage() {
                 <BackHomeButton onClick={handleBackHome}>홈으로 돌아가기</BackHomeButton>
                 {voteEnd ? (<EndButton onClick={() => setConfirmEndVoteModalOpen(true)}>투표 종료하기</EndButton>) : null}
                 <Modal isOpen={confirmEndVoteModalOpen} onRequestClose={handleCloseEndModal} contentLabel="투표 종료 확인" style={modalStyles}>
+                    <CancelButton onClick={handleCloseEndModal}><CancelX src={X}/></CancelButton>
                     <ModalImg src = {ModalImoticon}/>
-                    <ModalText1>진짜로 투표를 종료하시겠습니까?</ModalText1>
-                    <button onClick={handleEndVote}>진짜 종료하기</button>
-                    <button onClick={handleCloseEndModal}>취소</button>
+                    <ModalText1>투표를 종료하시겠어요?</ModalText1>
+                    <ModalText2>투표를 종료하시면<br></br>더 이상 답변을 받을 수 없어요.</ModalText2>
+                    <ModalCancelButton onClick={handleCloseEndModal}>취소</ModalCancelButton>
+                    <ModalCheckButton onClick={handleEndVote}>확인</ModalCheckButton>
                 </Modal>
 
-                <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal} style={modalStyles}>
-                    <h1>{keyword}으로 답변한 <br></br>사람들의 이유</h1>
+                <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal} style={reasonModalStyles}>
+                  <CancelButton onClick={handleCloseModal}><CancelX src={X}/></CancelButton>
+                    <ReasonModalText1>{questionzip}</ReasonModalText1>
+                    <Point><ReasonModalText2>{keyword}</ReasonModalText2></Point>
                     {reasonzips.map(({ reason, nickname }) => (
                         <ReasonBox key={reason}>
                             <h6>작성자 nickname: {nickname}</h6>
                             <h3>{reason}</h3>
                         </ReasonBox>
                     ))}
-                    <ModalCheck isopen="false" onClick={handleCloseModal}>확인</ModalCheck>
+                    <ModalCheckButton isopen="false" onClick={handleCloseModal} style={{ width: '180px', marginLeft: '82px', marginBottom: '24px' }}> <RedText>확인</RedText> </ModalCheckButton>
                 </Modal>
             </Div>
         </DDiv>
