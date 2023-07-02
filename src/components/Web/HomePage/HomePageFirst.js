@@ -15,10 +15,10 @@ const Div = styled.div`
 `;
 
 const HeaderP = styled.p`
-width: 236px
-height: 18px
-top: 184px
-left: 24px
+width: 236px;
+height: 18px;
+top: 184px;
+left: 24px;
 //styleName: Body/B1-14-SB;
 font-family: Pretendard;
 font-size: 14px;
@@ -28,28 +28,30 @@ letter-spacing: 0em;
 text-align: left;
 color: Gray;
 
+
 `;
 
 const HeaderDiv = styled.header`
-width: 170px
-height: 24px
-top: 152px
-left: 24px
-//styleName: Head/H1-20-B;
+width: 170px;
+height: 24px;
+top: 152px;
+left: 24px;
 font-family: Pretendard;
 font-size: 20px;
 font-weight: 700;
 line-height: 24px;
 letter-spacing: 0em;
 text-align: left;
+margin-top: 32px;
+
 
 `;
 
 const Header3 = styled.p`
-width: 113px
-height: 24px
-top: 692px
-left: 24px
+width: 113px;
+height: 24px;
+top: 692px;
+left: 24px;
 //styleName: Head/H1-20-B;
 font-family: Pretendard;
 font-size: 20px;
@@ -66,22 +68,25 @@ const Header2 = styled.div`
   align-items: flex-start;
   justify-content: center;
   margin-top: 20px;
+  margin-left: 5px; /* Remove the margin-left property */
+  padding-left: 0px; /* Add padding-left instead */
 `;
+
+
 
 const Survey = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 375px
-  height: 1245px
-  top: 272px
-  left: 4802px
-  background: aqua;
+  width: 375px;
+  height: 1245px;
   margin: 0 auto;
   overflow-x: hidden;
-
+  // background-color: #00FFFF; /* Set the background color to aqua */
+  background-color:white;
 `;
+
 
 const P = styled.button`
   background: #eeff01;
@@ -93,6 +98,7 @@ const HomeP = styled.header`
   color: white;
   border-bottom: 2px solid black;
   color: black;
+  text-align: center;
 `;
 
 
@@ -102,6 +108,8 @@ const ButtonContainer = styled.div`
   align-items: center;
   gap: 10px;
   margin-bottom: 10px;
+  width: 330px;
+  
 `;
 
 const Button = styled.button`
@@ -129,6 +137,8 @@ font-weight: 700;
 line-height: 24px;
 letter-spacing: 0em;
 text-align: left;
+top: 362px;
+left: 24px;
 
 `;
 
@@ -141,12 +151,20 @@ line-height: 18px;
 letter-spacing: 0em;
 text-align: left;
 color: #808080;
+width: 251px;
+height: 18px;
+top: 394px;
+left: 24px;
+
 
 `;
 const ButtonsContainer = styled.div`
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+gap: 10px;
+margin-bottom: 10px;
+width: 330px;
 `;
 const Questionp = styled.button`
 color: black;
@@ -157,7 +175,7 @@ font-family: Pretendard;
 
 `;
 const Profile = styled.button`
-  width: 165px;
+  width: 180px;
   height: 40px;
   top: 80px;
   left: 186px;
@@ -186,25 +204,62 @@ const ButtonA = styled.button`
 `;
 
 const ButtonNew = styled.button`
-width: 327px
-height: 48px
-top: 580px
-left: 24px
-border-radius: 10px
+width: 327px;
+height: 48px;
+flex-shrink: 0;
+border-radius: 10px;
 border: 1px solid;
 border-image-source: linear-gradient(93.75deg, #EC5730 0%, #FE8100 51.04%, #F8C51F 99.99%);
-background: white;
+font-family: Pretendard;
+font-size: 14px;
+font-weight: 600;
+line-height: 18px;
+letter-spacing: 0em;
+text-align: center;
+color: #EC582F;
 
-//styleName: Body/B1-14-SB;
+
+
+`;
+
+const Img = styled.img`
+display: inline-flex;
+padding: 11px 16px;
+justify-content: center;
+align-items: center;
+gap: 6px;
+top: 876px;
+left: 114px;
+
+`;
+
+const BannerImg = styled.img`
+width: 375px;
+height: 96px;
+flex-shrink: 0;
+top: 234px;
+
+`;
+
+const MadeF = styled.header`
+width: 240px;
+height: 18px;
+top: 724px;
+left: 5px;
 font-family: Pretendard;
 font-size: 14px;
 font-weight: 600;
 line-height: 18px;
 letter-spacing: 0em;
 text-align: left;
-color: #EC582F;
+color: #808080;
 
 
+`;
+
+const Emoji = styled.img`
+width: 48px;
+height: 48px;
 
 `;
 
@@ -280,17 +335,14 @@ const HomePageFirst = () => {
   return (
     <Div>
       <Survey>
-        <Header2>
-        <HeaderDiv>
-            안녕하세요, <span>{userNickname}</span>님
-          </HeaderDiv>
-          <HeaderP>폴더를 만들어 새로운 조이님의 모습을 발견해보세요.</HeaderP>
-        </Header2>
+        <HeaderDiv>안녕하세요, <span>{userNickname}</span>님</HeaderDiv>
+          <HeaderP>나만의 인생 질문을 발견하고 ZiP 해보세요!</HeaderP>
         <ButtonContainer>
           <HomeP>Home</HomeP>
           <Profile onClick={handleButton1Click}>프로필</Profile>
         </ButtonContainer>
-        <Button>인기 질문 하나 노출</Button>
+        {/* <Button>인기 질문 하나 노출</Button> */}
+        <BannerImg src="../../../img/banner.png" alt="banner" />
         <ButtonContainer>
         <NewQ>NEW 폴더 만들기 </NewQ>
         <ButtonA onClick={handleButtonClick}>전체보기 &gt; </ButtonA>
@@ -304,17 +356,18 @@ const HomePageFirst = () => {
         <ButtonNew onClick={handleButtonClick}> + 새로운 질문 만들기</ButtonNew>
         {/* <button onClick={handleButton2Click}>answer가기</button>
         <button onClick={handleButtonPickAnswer}>pickanswer가기</button> */}
-        <ButtonContainer>
+        <ButtonsContainer>
         <Header3>내가 만든 폴더</Header3>
         <ButtonA onClick={handleButton3Click}>전체보기 &gt;</ButtonA>
-        </ButtonContainer>
+        </ButtonsContainer>
+        <MadeF>만든 폴더를 공유하고 답변을 확인해보세요.</MadeF>
         {questions.length > 0 ? (
           <>
             {questions.slice(0, 3).map((question) => (
               <div key={question.questionId}>
                 {question && question.question && question.voteEnd && (
                   <P onClick={() => handleQuestionClick(question.questionId)}>
-                  emoji: {question.emoji && <img src={getEmojiImage(question.emoji)} alt="Emoji" />}
+                  emoji: {question.emoji && <Emoji src={getEmojiImage(question.emoji)} alt="Emoji" />}
                     Question: {question.question} <br />
                     Comment: {question.comment}
                   </P>
@@ -326,7 +379,7 @@ const HomePageFirst = () => {
               <div key={question.questionId}>
                 {question && question.question && !question.voteEnd && (
                   <P onClick={() => handleQuestionClick(question.questionId)}>
-                  emoji: {question.emoji && <img src={getEmojiImage(question.emoji)} alt="Emoji" />}
+                  emoji: {question.emoji && <Emoji src={getEmojiImage(question.emoji)} alt="Emoji" />}
                     Question: {question.question} <br />
                     Comment: {question.comment}
                   </P>
@@ -335,9 +388,10 @@ const HomePageFirst = () => {
             ))}
           </>
         ) : (
-          <Questionp>
-            진행중인 폴더가 없어요! <br /> +NEW 폴더 만들기
-          </Questionp>
+          <><Questionp>
+              진행중인 폴더가 없어요! <br /> 새로운 폴더를 만들고 공유해보세요.
+            </Questionp><Img src="../../../img/CreateFolderButton.png" alt="Button" /></>
+
         )}
       </Survey>
     </Div>
