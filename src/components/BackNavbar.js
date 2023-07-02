@@ -4,14 +4,12 @@ import styled from 'styled-components';
 const Div = styled.div`
     display: flex;
     justify-content: center;
-    margin: 0;
-    padding: 0;
 `;
 const NavbarWrapper = styled.nav`
   width: 375px;
-  padding-left: 36px;
   display: flex;
   height: 64px;
+  margin-left: 24px;
 `;
 
 const BackButton = styled.button`

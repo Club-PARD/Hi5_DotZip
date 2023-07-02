@@ -115,8 +115,10 @@ const Prac = styled.textarea`
 /* 기존 스타일 */
 resize: vertical;
 overflow: hidden;
-width: 5ch;
-
+width: 5ch; 
+border-radius: 24px;
+border: 2px solid var(--primary-orange, #EC582F);
+background-color: transparent;
 `;
 
 const AddAnswerVote = ({ totalVote,answerId,handleCloseModal }) => {

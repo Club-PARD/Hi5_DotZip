@@ -73,7 +73,7 @@ const QText = styled.p`
   margin-top: 63px;
   margin-left: 60px;
   margin-bottom: 19px;
-  weight: 600;
+  font-weight: 600;
   width: 235px;
   height: 36px;
   font-family: Pretendard;
@@ -86,7 +86,7 @@ const CText = styled.p`
   font-size: 12px;
   margin: 0;
   margin-left: 60px;
-  weight: 600;
+  font-weight: 600;
   width: 235px;
   height: 14px;
   font-family: Pretendard;
@@ -100,7 +100,7 @@ const AnswerText = styled.p`
   font-size: 12px;
   margin: 0;
   margin-top: 24px;
-  weight: 600;
+  font-weight: 600;
   width: 118px;
   height: 16px;
   font-family: Pretendard;

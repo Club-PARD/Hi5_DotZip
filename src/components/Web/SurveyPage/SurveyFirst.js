@@ -7,17 +7,20 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import { onSnapshot } from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
+import BackNavBar from "../../BackNavbar"
+const Div = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  flex-direction: column;
+  margin-left: 24px;
+`;
+
 
 const Survey = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
   width: 375px;
-  height: 812px;
-  background: black;
-  margin: 0 auto;
-  overflow-x: hidden;
+  background: white;
+  justify-content: center;
 `;
 
 const ButtonRow = styled.div`
@@ -27,10 +30,9 @@ const ButtonRow = styled.div`
 `;
 
 const Button = styled.button`
-  width: 300px;
+  width: 327px;
   height: 60px;
   background: #D9D9D9;
-  margin: 8px;
   border: 1px solid #ABABAB;
   border-radius: 10px;
   background: ${({ active }) => (active ? '#D9D9D9' : '#353535')};
@@ -38,38 +40,42 @@ const Button = styled.button`
 `;
 
 const HeaderDiv = styled.header`
-  width: 120px;
+  width: 375px;
   height: 19px;
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 19px;
-  color: #EFEFEF;
-  left: calc(50% - 311px/2);
+  font-size: 24px;
+font-family: Pretendard;
+font-style: normal;
+font-weight: 700;
+text-align: left;
+  color: var(--gray-90, #353535);
 `;
 
 const Header2 = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   margin-top: 20px;
+  width: 375px;
 `;
 
-const HeaderP = styled.p`
-  width: 260px;
+const HeaderP = styled.header`
+  width: 375px;
   height: 19px;
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 19px;
-  color: #818181;
+  color: var(--gray-60, #808080);
+text-align: left;
+margin-top: 7px;
+/* Body/B4-14-SB */
+font-size: 14px;
+font-family: Pretendard;
+font-style: normal;
+font-weight: 600;
+line-height: 18px;
 `;
+
 
 const Button1 = styled.button`
-  width: 311px;
+  width: 327px;
   height: 48px;
   left: calc(50% - 311px/2);
   top: 149px;
@@ -77,9 +83,6 @@ const Button1 = styled.button`
   border: 1px solid #EFEFEF;
   backdrop-filter: blur(2px);
   border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-family: 'Pretendard';
   font-style: normal;
   font-weight: 700;
@@ -92,11 +95,9 @@ const Button1 = styled.button`
 
 const Button2 = styled.button`
   box-sizing: border-box;
-  position: absolute;
   width: 375px;
   height: 60px;
   left: calc(50% - 375px/2);
-  top: 648px;
   background: #212121;
   border: 1px solid #ABABAB;
   font-family: 'Pretendard';
@@ -108,13 +109,7 @@ const Button2 = styled.button`
   color: #ABABAB;
 `;
 
-const Div = styled.div`
-  margin: 0 auto;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-`;
+
 
 function SurveyFirst() {
   const navigate = useNavigate();
@@ -198,13 +193,16 @@ function SurveyFirst() {
   
 
   return (
+    <>
+    <BackNavBar/>
     <Div>
-      <Survey>
         <Header2>
           <HeaderDiv>New! 폴더 만들기</HeaderDiv>
-          <HeaderP>주변사람들에게 나에 대해 물어보고 투표를 받아보세요!</HeaderP>
+        <HeaderP>주변사람들에게 나에 대해 물어보고 투표를 받아보세요!</HeaderP>
         </Header2>
+        <Survey>
         <Button1 onClick={handleButtonClick}>+ 내가 직접 질문 만들기</Button1>
+        
         <ButtonRow>
           <Button
             onClick={() => handleButtonSelect('버튼1')}
@@ -219,6 +217,7 @@ function SurveyFirst() {
             패션브랜드 <br /> 나의 이미지와 어울리는 패션 브랜드는?
           </Button>
         </ButtonRow>
+    
         <ButtonRow>
         <Button
             onClick={() => handleButtonSelect('버튼3')}
@@ -233,14 +232,12 @@ function SurveyFirst() {
             책 이름 <br /> 나를 책으로 만든다면, 그 책의 이름은?
           </Button>
         </ButtonRow>
+        </Survey>
         {/* <Button2 disabled={!buttonSelected} onClick={() => navigate(`/SurveyShare/${questionId}`)}>
           다음
         </Button2> */}
-        <Button2 disabled={!buttonSelected} onClick={() => navigate(`/MyAnsewer/${questionId}`)}>
-          다음
-        </Button2>
-      </Survey>
     </Div>
+    </>
   );
 }
 
