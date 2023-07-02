@@ -30,27 +30,27 @@ const NewFolderButton = styled.button`
 `;
 const Folder1Text = styled.div`
   font-size: 24px;
-  weight: 700;
+  font-weight: 700;
   height: 24px;
   font-family: Pretendard;
 `;
 const Folder2Text = styled.div`
   color: #ABABAB;
   font-size: 14px;
-  weight: 600;
+  font-weight: 600;
   height: 18px;
 `;
 const NoFolder1Text = styled.div`
   color: #ABABAB;
   font-size: 18px;
-  weight: 600;
+  font-weight: 600;
   height: 24px;
   font-family: Pretendard;
 `;
 const NoFolder2Text = styled.div`
   color: #ABABAB;
   font-size: 14px;
-  weight: 600;
+  font-weight: 600;
   height: 18px;
 `;
 

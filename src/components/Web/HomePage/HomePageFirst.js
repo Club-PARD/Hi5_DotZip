@@ -32,10 +32,10 @@ color: Gray;
 `;
 
 const HeaderDiv = styled.header`
-width: 170px
-height: 24px
-top: 152px
-left: 24px
+width: 170px;
+height: 24px;
+top: 152px;
+left: 24px;
 font-family: Pretendard;
 font-size: 20px;
 font-weight: 700;
@@ -48,10 +48,10 @@ margin-top: 32px;
 `;
 
 const Header3 = styled.p`
-width: 113px
-height: 24px
-top: 692px
-left: 24px
+width: 113px;
+height: 24px;
+top: 692px;
+left: 24px;
 //styleName: Head/H1-20-B;
 font-family: Pretendard;
 font-size: 20px;
@@ -84,7 +84,7 @@ const Survey = styled.div`
   margin: 0 auto;
   overflow-x: hidden;
   // background-color: #00FFFF; /* Set the background color to aqua */
-  backgroung-color:white;
+  background-color:white;
 `;
 
 

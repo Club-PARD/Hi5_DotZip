@@ -1,5 +1,6 @@
 import React from 'react';
-// import { Link, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 import styled /*{ ThemeProvider } */ from 'styled-components';
 // import { useState, useEffect } from 'react';
 
@@ -9,25 +10,52 @@ const NavBarWrapper = styled.nav`
   justify-content: center;
   position: fixed;
   top: 0;
-  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 375px;
   z-index: 999;
-  background-color: #1A1A1A;
+  background-color: white;
   color: white;
 `;
+
 const Setting  = styled.div `
+  &::after {        
+    content: '세팅'; //이미지
+      color:black;
+        position: absolute;
+        top: 50%;
+        right: 24px;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+
+`;
+const Home  = styled.div `      
+  &::after {        
+    content: 'home'; //이미지
+    color:black;
+        position: absolute;
+        top: 50%;
+        left : 24px;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
 
 `;
 
 const NavBar = () => {
-  const onClick= {
-
-    
+  const navigate = useNavigate();
+  const HomeOnClick = () => {
+    navigate('/home');
   };
-
+  const onClick = () => {
+    navigate('/setting');
+  };
     return(
     <NavBarWrapper>
-        <div>Hi^5 화이팅!!</div>
-        <Setting onClick={onClick}>세팅</Setting>
+
+        <Home onClick={HomeOnClick}></Home>
+        <Setting onClick={onClick}></Setting>
     </NavBarWrapper>
     );
 };

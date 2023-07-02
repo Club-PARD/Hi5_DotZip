@@ -85,6 +85,7 @@ const handleCloseModal = () => {
           setModalOpen={setModalOpen}
           totalVote={totalVote}
           answerId={answerId}
+          handleCloseModal={handleCloseModal}
         />
       )}
     </Modal>
