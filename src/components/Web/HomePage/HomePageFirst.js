@@ -256,9 +256,10 @@ color: #EC582F;
 `;
 
 const DIVB = styled.div`
+top: 660px;
 width: 375px;
 height: 586px;
-backgroundcolor: #F8F8F8;
+background-color: #F8F8F8;
 
 `;
 
