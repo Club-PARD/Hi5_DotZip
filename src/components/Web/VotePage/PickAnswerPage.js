@@ -22,6 +22,7 @@ import LinkImage from '../../../img/Link.png';
 import HomeButtonImage from '../../../img/GoHome.png';
 import ModalImoticon from '../../../img/ModalImoticon.png';
 import X from '../../../img/CancelX.png';
+import ReasonBoxImage from '../../../img/ReasonBox.png';
 
 //기본틀
 const DDiv = styled.div`
@@ -132,7 +133,7 @@ const QText = styled.p`
   margin-top: 63px;
   margin-left: 60px;
   margin-bottom: 19px;
-  weight: 600;
+  font-weight: 600;
   width: 235px;
   height: 36px;
   font-family: Pretendard;
@@ -145,7 +146,7 @@ const CText = styled.p`
   font-size: 12px;
   margin: 0;
   margin-left: 60px;
-  weight: 600;
+  font-weight: 600;
   width: 235px;
   height: 14px;
   font-family: Pretendard;
@@ -167,8 +168,6 @@ const CopyLinkButton = styled.button`
   width: 239px;
   height: 32px;
   border-radius: 20px;
-  color: white;
-  background: #EC582F;
   font-size: 12px;
   display: flex;
   align-items: center;
@@ -289,9 +288,9 @@ const EndButton = styled.button`
     width: 318px;
     height: 47px;
     border-radius: 10px;
-    background: var(--gray-10, #F8F8F8);
-    border: 0;
-    color:  var(--gray-60, #808080);
+    border: 1px solid var(--primary-orange, #EC582F);
+    color: #EC582F;
+    background: white;
 `;
 //종료 모달 안에 내용들
 const modalStyles = {
@@ -300,6 +299,7 @@ const modalStyles = {
         width: '343px',
         height: '300px',
         borderRadius: '10px',
+        borderStyle : 'none',
         background: 'white',
         margin: 'auto',
         padding: '0',
@@ -319,10 +319,12 @@ const ModalImg = styled.img`
     width: 48px;
     height: 48px;
     margin-left: 147px;
-    margin-bottom: 16px;
+    margin-bottom: 0px;
 `;
 const ModalText1 = styled.p`
+    margin-top: 8px;
     text-align: center;
+    margin-bottom: 10px;
     font-size: 20px;
     font-weight: 700;
     height: 24px;
@@ -342,6 +344,7 @@ const ModalCancelButton = styled.button`
     width: 120px;
     height: 40px;
     border-radius: 24px;
+    margin-top: 5px;
     margin-left: 40px;
     margin-right: 24px;
     background: var(--gray-10, #F8F8F8);
@@ -352,6 +355,7 @@ const ModalCheckButton = styled.button`
     width: 120px;
     height: 40px;
     background: var(--background-orange, #FFF8F3);
+    margin-top: 30px;
     border-radius: 24px;
     text-align: center;
     border: 0;
@@ -375,6 +379,7 @@ const reasonModalStyles = {
       width: '343px',
       height: '600px',
       borderRadius: '10px',
+      borderStyle : 'none',
       background: 'var(--background-gra, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%))',
       margin: 'auto',
       padding: '0',
@@ -394,6 +399,11 @@ const reasonModalStyles = {
       zIndex: '2',
     },
 };
+const Box2Image = styled.img`
+  width: 311px;
+  height: 250px;
+  margin-top: 30px;
+`;
 const ReasonBox = styled.div`
   width: 180px;
   height: 240px;
@@ -401,6 +411,7 @@ const ReasonBox = styled.div`
   background: var(--white-100, #FFF);
   box-shadow: 0px 2px 10px 0px #FFE2CE;
   padding-bottom: 12px;
+  margin-top: -280px;
 `;
 const ReasonModalText1 = styled.p`
   text-align: center;
@@ -456,6 +467,8 @@ const ReasonModalText4 = styled.p`
   width: 148px;
   height: 126px;
   margin-left: 16px;
+  word-wrap: break-word;
+  word-break: break-all;
 `;
 
 
@@ -612,7 +625,6 @@ function PickAnswerPage() {
     const [copiedLinkId, setCopiedLinkId] = useState('');
 
     const handleLinkButtonClick = () => {
-    const link = `${window.location.origin}/answer/${questionId}`;
     setCopiedLinkId(questionId);
     setShowMessage(true);
     setTimeout(() => {
@@ -639,8 +651,8 @@ function PickAnswerPage() {
         <BackNavBar/>
         <DDiv>
             <Div>
-                <Text1><RedText>{userNickname}</RedText> 님의 <br></br> 진행중인 폴더</Text1> 
-                <Text2>내가 생성한 폴더의 답변과 이유를 확인해보세요!</Text2>
+                <Text1><RedText>{userNickname}</RedText> 님의 <br></br> 진행중인 질문</Text1> 
+                <Text2>내가 생성한 질문의 답변과 이유를 확인해보세요!</Text2>
                 <FolderImageContainer>
                   <FolderImage src={selectedFolderImage} />
                   <FolderContent>
@@ -649,18 +661,24 @@ function PickAnswerPage() {
                     <QText>{questionzip}</QText>
                     <CText>{commentzip}</CText>
                     <AnswerLinkContainer>
-                    <KakaoShareButton />
+                    {voteEnd && <KakaoShareButton />}
                     <CopyToClipboard text={`${window.location.origin}/answer/${questionId}`}>
-                        <CopyLinkButton onClick={(event) => {event.stopPropagation(); handleLinkButtonClick(questionId);}} 
-                        disabled={!voteEnd} style={{ backgroundColor: voteEnd ? '#EC582F' : 'gray' }}>
-                          <Link src={LinkImage} />링크 복사
-                        </CopyLinkButton>
-                      </CopyToClipboard>
+                      <CopyLinkButton onClick={(event) => {event.stopPropagation(); handleLinkButtonClick(questionId); }} 
+                      disabled={!voteEnd} style={{ backgroundColor: voteEnd ? '#EC582F' : '#F8F8F8' , marginLeft: voteEnd ? '0' : '44px' , color: voteEnd ? 'white' : '#808080' }}>
+                        {voteEnd ? (
+                          <>
+                            <Link src={LinkImage} /> 링크 복사
+                          </>
+                        ) : (
+                          '종료된 투표'
+                        )}
+                      </CopyLinkButton>
+                    </CopyToClipboard>
                       {showMessage && copiedLinkId === questionId && <LinkMessage>링크가 복사되었습니다</LinkMessage>}
                     </AnswerLinkContainer>
                   </FolderContent>
                 </FolderImageContainer>
-                <Text3>투표결과</Text3>
+                <Text3>투표 현황</Text3>
                 <Text4>각 답변을 눌러 이유를 함께 확인해보세요!</Text4>
                 <TipBox>
                     <HeartTipImage src = {HeartTip}></HeartTipImage>
@@ -686,7 +704,7 @@ function PickAnswerPage() {
                 <Modal isOpen={confirmEndVoteModalOpen} onRequestClose={handleCloseEndModal} contentLabel="투표 종료 확인" style={modalStyles}>
                     <CancelButton onClick={handleCloseEndModal}><CancelX src={X}/></CancelButton>
                     <ModalImg src = {ModalImoticon}/>
-                    <ModalText1>투표를 종료하시겠어요?</ModalText1>
+                    <ModalText1>충분히 답변을 받으셨나요?</ModalText1>
                     <ModalText2>투표를 종료하시면<br></br>더 이상 답변을 받을 수 없어요.</ModalText2>
                     <ModalCancelButton onClick={handleCloseEndModal}>취소</ModalCancelButton>
                     <ModalCheckButton onClick={handleEndVote}>확인</ModalCheckButton>
@@ -696,6 +714,7 @@ function PickAnswerPage() {
                   <CancelButton onClick={handleCloseModal}><CancelX src={X}/></CancelButton>
                     <ReasonModalText1>{questionzip}</ReasonModalText1>
                     <Point><ReasonModalText2>{keyword}</ReasonModalText2></Point>
+                      <Box2Image src = {ReasonBoxImage}></Box2Image>
                         <ReasonBox>
                         {reasonzips[currentReasonIndex] && (
                           <>
