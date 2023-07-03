@@ -26,8 +26,6 @@ const VoteBox = styled.div`
 
 const AnswerEnd = () => {
   
-
-
   const [documents, setDocuments] = useState([]);
   const totalVotes = documents.reduce((sum, documents) => sum + documents.totalVote, 0);
   const {questionId} = useParams();
@@ -66,6 +64,8 @@ const AnswerEnd = () => {
     };
   }, [questionId]);
   updateVoteNum(totalVotes);
+  
+  localStorage.setItem("questionId",questionId);
 
   return (
     <Div>
