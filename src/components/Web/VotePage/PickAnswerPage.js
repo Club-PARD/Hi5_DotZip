@@ -278,11 +278,21 @@ const BackHomeButton = styled.button`
     margin-top: 80px;
     margin-left: 16px;
     margin-bottom: 8px;
+    border: none;
+    background: none;
+`;
+const HomeImage = styled.img`
+  width: 100%;
+  height: 100%;
 `;
 const EndButton = styled.button`
-    margin-left: 16px;
-    width: 327px;
-    height: 48px;
+    margin-left: 20px;
+    width: 318px;
+    height: 47px;
+    border-radius: 10px;
+    background: var(--gray-10, #F8F8F8);
+    border: 0;
+    color:  var(--gray-60, #808080);
 `;
 //종료 모달 안에 내용들
 const modalStyles = {
@@ -310,11 +320,6 @@ const ModalImg = styled.img`
     height: 48px;
     margin-left: 147px;
     margin-bottom: 16px;
-`;
-const ReasonBox = styled.div`
-    width: 200px;
-    height: 100px;
-    background: yellow;
 `;
 const ModalText1 = styled.p`
     text-align: center;
@@ -378,27 +383,40 @@ const reasonModalStyles = {
       right: '0',
       bottom: '0',
       zIndex: '2',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     overlay: {
       backgroundColor: 'rgba(0, 0, 0, 0.50)',
       zIndex: '2',
     },
 };
+const ReasonBox = styled.div`
+  width: 180px;
+  height: 240px;
+  border-radius: 10px;
+  background: var(--white-100, #FFF);
+  box-shadow: 0px 2px 10px 0px #FFE2CE;
+  padding-bottom: 12px;
+`;
 const ReasonModalText1 = styled.p`
   text-align: center;
-  margin-left: 54px;
   width: 235px;
-  margin-bottom: 16px;
   font-size: 18px;
   font-weight: 600;
-  height: 24px;
   font-family: Pretendard;
   colot: #353535;
+  padding: 0;
+  margin: 0;
 `;
 const Point = styled.div`
-  width: 74px;
+  display: inline-block;
+  padding: 0 16px;
   height: 36px;
-  margin-left: 136px;
+  margin-top: 16px;
+  margin-bottom: 48px;
   border-radius: 22px;
   border: 2px solid var(--primary-orange, #EC582F);
 `;
@@ -411,6 +429,32 @@ const ReasonModalText2 = styled.p`
   font-style: normal;
   font-weight: 700;
   line-height: 20px;
+`;
+const ReasonModalText3 = styled.p`
+  color: #ABABAB;
+  text-align: center;
+  font-size: 12px;
+  font-family: Pretendard;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 16px;
+  padding-top: 25px;
+`;
+const ReasonModalText3Point = styled.span`
+  color: var(--gray-60, #808080);
+  font-size: 14px;
+`;
+const ReasonModalText4 = styled.p`
+  color: var(--primary-orange, #EC582F);
+  text-align: center;
+  font-size: 14px;
+  font-family: Pretendard;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 18px;
+  width: 148px;
+  height: 126px;
+  margin-left: 16px;
 `;
 
 
@@ -574,6 +618,20 @@ function PickAnswerPage() {
         setShowMessage(false);
     }, 1000);
     };
+    //이유들 넘길때
+    const [currentReasonIndex, setCurrentReasonIndex] = useState(0);
+
+    const handleNextReason = () => {
+      if (currentReasonIndex < reasonzips.length - 1) {
+        setCurrentReasonIndex(currentReasonIndex + 1);
+      }
+    };
+  
+    const handlePreviousReason = () => {
+      if (currentReasonIndex > 0) {
+        setCurrentReasonIndex(currentReasonIndex - 1);
+      }
+    };
 
     return (
         <>
@@ -622,7 +680,7 @@ function PickAnswerPage() {
                     </div>
                 ))}
                 <TotalNumber>총 <RedText>{totalVotes}명</RedText>이 참여했어요.</TotalNumber>
-                <BackHomeButton onClick={handleBackHome}>홈으로 돌아가기</BackHomeButton>
+                <BackHomeButton onClick={handleBackHome}><HomeImage src = {HomeButtonImage} /></BackHomeButton>
                 {voteEnd ? (<EndButton onClick={() => setConfirmEndVoteModalOpen(true)}>투표 종료하기</EndButton>) : null}
                 <Modal isOpen={confirmEndVoteModalOpen} onRequestClose={handleCloseEndModal} contentLabel="투표 종료 확인" style={modalStyles}>
                     <CancelButton onClick={handleCloseEndModal}><CancelX src={X}/></CancelButton>
@@ -637,13 +695,15 @@ function PickAnswerPage() {
                   <CancelButton onClick={handleCloseModal}><CancelX src={X}/></CancelButton>
                     <ReasonModalText1>{questionzip}</ReasonModalText1>
                     <Point><ReasonModalText2>{keyword}</ReasonModalText2></Point>
-                    {reasonzips.map(({ reason, nickname }) => (
-                        <ReasonBox key={reason}>
-                            <h6>작성자 nickname: {nickname}</h6>
-                            <h3>{reason}</h3>
+                    {/* {reasonzips.map(({ reason, nickname }) => ( */}
+                        <ReasonBox>
+                            <ReasonModalText3><ReasonModalText3Point>{reasonzips[currentReasonIndex].nickname}</ReasonModalText3Point> 님의 답변</ReasonModalText3>
+                            <ReasonModalText4>{reasonzips[currentReasonIndex].reason}</ReasonModalText4>
+                            <ModalCancelButton style={{width: '72px', height: '32px', marginLeft:'16px', marginRight:'4px'}} onClick={handlePreviousReason}>이전</ModalCancelButton>
+                            <ModalCheckButton style={{width: '72px', height: '32px'}} onClick={handleNextReason}disabled={currentReasonIndex === reasonzips.length - 1}>다음</ModalCheckButton>
                         </ReasonBox>
-                    ))}
-                    <ModalCheckButton isopen="false" onClick={handleCloseModal} style={{ width: '180px', marginLeft: '82px', marginBottom: '24px' }}> <RedText>확인</RedText> </ModalCheckButton>
+                    {/* ))} */}
+                    <ModalCheckButton isopen="false" onClick={handleCloseModal} style={{ width: '180px', marginBottom: '24px', marginTop: '60px' }}> <RedText>확인</RedText> </ModalCheckButton>
                 </Modal>
             </Div>
         </DDiv>
