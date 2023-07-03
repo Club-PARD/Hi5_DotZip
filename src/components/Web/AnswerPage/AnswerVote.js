@@ -22,6 +22,7 @@ const Div = styled.div`
   align-items: center;
   margin-top: 70px;
 `;
+
 const modalStyles = {
   content: {
     width: '300px',
@@ -97,7 +98,6 @@ const CText = styled.p`
   align-items: center;
 `;
 
-
 const AnswerVote = () => {
   const [documents, setDocuments] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
@@ -120,9 +120,10 @@ const handleCloseModal = () => {
 };
 
   useEffect(() => {
+
     const q = query(
       collection(dbService, 'zip_Answer'),
-      where('questionId', '==', questionId),
+      where('questionId', '==', questionId), 
       orderBy('timestamp', 'desc')
     );
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -181,9 +182,9 @@ const handleCloseModal = () => {
   
 
   const [modalOpen_new, setModalOpen_new] = useState(false);
-  const showModal_new = ()=>{
-  setModalOpen_new(!modalOpen_new);
-};
+  const showModal_new = () => {
+    setModalOpen_new(!modalOpen_new);
+  };
 
 
 

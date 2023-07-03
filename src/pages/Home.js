@@ -18,7 +18,7 @@ function Home() {
                 <div>
                     <NavBar/>
                     <HomeFirst />
-                    <Footer/>
+                    {/* <Footer/> */}
                 </div>
         </HomePageComponent>
     );
