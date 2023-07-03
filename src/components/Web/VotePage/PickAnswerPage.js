@@ -25,28 +25,28 @@ import X from '../../../img/CancelX.png';
 
 //기본틀
 const DDiv = styled.div`
-    display: flex;
-    justify-content: center;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 911px;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 911px;
 `;
 const Div = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 375px;
-    margin: 0;
-    padding: 0;
-    margin-left: 8px;
-    margin-right: 8px;
+  display: flex;
+  flex-direction: column;
+  width: 375px;
+  margin: 0;
+  padding: 0;
+  margin-left: 8px;
+  margin-right: 8px;
 `;
 //버튼들
 const LinkMessage = styled.div` //링크복사
-    width: 200px;
-    background: white;
-    padding: 10px;
-    border: 1px solid black;
+  width: 200px;
+  background: white;
+  padding: 10px;
+  border: 1px solid black;
 `;
 //text
 const Text1 = styled.div`
@@ -276,11 +276,11 @@ const BackHomeButton = styled.button`
     width: 327px;
     height: 48px;
     margin-top: 80px;
-    margin-left: 12px;
+    margin-left: 16px;
     margin-bottom: 8px;
 `;
 const EndButton = styled.button`
-    margin-left: 12px;
+    margin-left: 16px;
     width: 327px;
     height: 48px;
 `;
