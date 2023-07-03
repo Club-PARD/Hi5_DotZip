@@ -20,19 +20,19 @@ import HomeButtonImage from '../../../img/GoHome.png';
 
 //기본틀
 const DDiv = styled.div`
-    display: flex;
-    justify-content: center;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 812px;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 812px;
 `;
 const Div = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 375px;
-    margin: 0;
-    padding: 0;
+  display: flex;
+  flex-direction: column;
+  width: 375px;
+  margin: 0;
+  padding: 0;
 `;
 const FolderImageContainer = styled.div`
   position: relative;
@@ -94,7 +94,7 @@ const CText = styled.p`
   font-size: 12px;
   margin: 0;
   margin-left: 60px;
-  weight: 600;
+  font-weight: 600;
   width: 235px;
   height: 14px;
   font-family: Pretendard;
@@ -151,24 +151,24 @@ const AnswerContainer = styled.div`
   align-items: center;
 `;
 const AnswerBox = styled.button`
-    width: 327px;
-    height: 64px;
-    width: 327px;
-    margin-left: 16px;
-    margin-bottom: 16px;
-    border-radius: 8px;
-    border: 1px solid var(--white-80, #EFEFEF);
-    background: none;
+  width: 327px;
+  height: 64px;
+  width: 327px;
+  margin-left: 16px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  border: 1px solid var(--primary-orange, #EC582F);
+  background: var(--background-orange, #FFF8F3);
 `;
 const AnswerText = styled.p`
-    margin: 0;
-    margin-top: 12px;
-    margin-left: 12px;
-    margin-bottom: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    height: 20px;
-    font-family: Pretendard;
+  margin: 0;
+  margin-top: 12px;
+  margin-left: 12px;
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  height: 20px;
+  font-family: Pretendard;
 `;
 const VoteNumber = styled.p`
   margin: 0;

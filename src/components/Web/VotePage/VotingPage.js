@@ -136,7 +136,7 @@ const CText = styled.p`
   font-size: 12px;
   margin: 0;
   margin-left: 60px;
-  weight: 600;
+  font-weight: 600;
   width: 235px;
   height: 14px;
   font-family: Pretendard;
@@ -150,7 +150,7 @@ const AnswerText = styled.p`
   font-size: 12px;
   margin: 0;
   margin-top: 24px;
-  weight: 600;
+  font-weight: 600;
   width: 118px;
   height: 16px;
   font-family: Pretendard;
@@ -245,6 +245,8 @@ const VotingPage = () => {
         }, 1000);
       };
       const folderImages = [Folder1, Folder2, Folder3, Folder4];
+      const sortedQuestions = questions.slice().sort((a, b) => (a.voteEnd && !b.voteEnd ? -1 : 1));
+
 
     return(
       <>
@@ -253,7 +255,7 @@ const VotingPage = () => {
       <Div>
         <VotePageComponent1 />
         {questions.length > 0 ? (
-          questions.map((question, index) => (
+          sortedQuestions.map((question, index) => (
             <div key={question.questionId}>
               {question && question.question && (
                 <FolderImageContainer onClick={() => handleQuestionClick(question.questionId, index)}>
