@@ -172,12 +172,17 @@ const road = doc(dbService, "zip_Answer", answerId);
 const navigate = useNavigate();
 let [inputCountName, setInputCountName] = useState(0);
 let [inputCountReason, setInputCountReason] = useState(0);
-
+const [isSubmitting, setIsSubmitting] = useState(false);
 
 
 
 const onSubmit = async (e) => {
   e.preventDefault();
+  if (isSubmitting) {
+    return; // 이미 제출 중인 경우 중복 제출 방지
+  }
+
+  setIsSubmitting(true);
 
   try {
     await updateDoc(road, {
@@ -196,6 +201,8 @@ const onSubmit = async (e) => {
     navigate(`/AnswerLoading/${questionId}`);
   } catch (error) {
     console.error("Error adding document: ", error);
+  } finally {
+    setIsSubmitting(false);
   }
 };
 

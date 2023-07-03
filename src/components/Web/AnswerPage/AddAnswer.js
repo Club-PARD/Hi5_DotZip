@@ -136,6 +136,7 @@ margin-top: 30px;
 
 
 const AddAnswer = ({handleCloseModal }) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [answer, setAnswer] = useState("");
   const [reason, setReason] = useState("");
   const [nickname, setNickName] = useState("");
@@ -158,7 +159,11 @@ const AddAnswer = ({handleCloseModal }) => {
   }
   const onSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) {
+      return; // 이미 제출 중인 경우 더 이상의 제출 방지
+    }
     if(answer!=="" && reason!=="" && nickname!==""){//안썻을경우
+      setIsSubmitting(true);
     try {
       const newDocRef = await addDoc(road, 
       data);
@@ -175,9 +180,11 @@ const AddAnswer = ({handleCloseModal }) => {
       setAnswer("");
       setReason("");
       setNickName("");
+      setIsSubmitting(false);
       navigate(`/AnswerLoading/${questionId}`);
     } catch (error) {
       console.error("Error adding document: ", error);
+      setIsSubmitting(false);
     }
 
   }
