@@ -52,6 +52,7 @@ const LinkMessage = styled.div` //링크복사
 const Text1 = styled.div`
   font-size: 24px;
   font-weight: 700;
+  width: 300px;
   height: 28px;
   font-family: Pretendard;
   margin-left: 16px;
@@ -618,20 +619,20 @@ function PickAnswerPage() {
         setShowMessage(false);
     }, 1000);
     };
-    //이유들 넘길때
-    const [currentReasonIndex, setCurrentReasonIndex] = useState(0);
 
-    const handleNextReason = () => {
-      if (currentReasonIndex < reasonzips.length - 1) {
-        setCurrentReasonIndex(currentReasonIndex + 1);
-      }
-    };
-  
-    const handlePreviousReason = () => {
-      if (currentReasonIndex > 0) {
-        setCurrentReasonIndex(currentReasonIndex - 1);
-      }
-    };
+      const [currentReasonIndex, setCurrentReasonIndex] = useState(0);
+
+  const handleNextReason = () => {
+    if (currentReasonIndex < reasonzips.length - 1) {
+      setCurrentReasonIndex(currentReasonIndex + 1);
+    }
+  };
+
+  const handlePreviousReason = () => {
+    if (currentReasonIndex > 0) {
+      setCurrentReasonIndex(currentReasonIndex - 1);
+    }
+  };
 
     return (
         <>
@@ -695,14 +696,16 @@ function PickAnswerPage() {
                   <CancelButton onClick={handleCloseModal}><CancelX src={X}/></CancelButton>
                     <ReasonModalText1>{questionzip}</ReasonModalText1>
                     <Point><ReasonModalText2>{keyword}</ReasonModalText2></Point>
-                    {/* {reasonzips.map(({ reason, nickname }) => ( */}
                         <ReasonBox>
+                        {reasonzips[currentReasonIndex] && (
+                          <>
                             <ReasonModalText3><ReasonModalText3Point>{reasonzips[currentReasonIndex].nickname}</ReasonModalText3Point> 님의 답변</ReasonModalText3>
                             <ReasonModalText4>{reasonzips[currentReasonIndex].reason}</ReasonModalText4>
-                            <ModalCancelButton style={{width: '72px', height: '32px', marginLeft:'16px', marginRight:'4px'}} onClick={handlePreviousReason}>이전</ModalCancelButton>
-                            <ModalCheckButton style={{width: '72px', height: '32px'}} onClick={handleNextReason}disabled={currentReasonIndex === reasonzips.length - 1}>다음</ModalCheckButton>
+                          </>
+                        )}
+                            <ModalCancelButton style={{width: '72px', height: '32px', marginLeft:'16px', marginRight:'4px'}} onClick={handlePreviousReason} disabled={currentReasonIndex === 0}>이전</ModalCancelButton>
+                            <ModalCheckButton style={{width: '72px', height: '32px'}} onClick={handleNextReason} disabled={currentReasonIndex === reasonzips.length - 1}>다음</ModalCheckButton>
                         </ReasonBox>
-                    {/* ))} */}
                     <ModalCheckButton isopen="false" onClick={handleCloseModal} style={{ width: '180px', marginBottom: '24px', marginTop: '60px' }}> <RedText>확인</RedText> </ModalCheckButton>
                 </Modal>
             </Div>
