@@ -15,6 +15,7 @@ import emoji2 from '../../../img/emoji2.png';
 import emoji3 from '../../../img/emoji3.png';
 import emoji4 from '../../../img/emoji4.png';
 import emoji5 from '../../../img/emoji5.png';
+import tip from '../../../img/TipHeart.png'
 
 const Div = styled.div`
   
@@ -108,19 +109,7 @@ const Progress = styled.img`
   height: 1.5px;
   margin-right: 115px;
 `;
-// const TipContaioner=styled.div`
-//   display: flex;
-//   align-items: center;
-//   width: 327px;
-//   height: 40px;
-//   border-radius: 30px;
-//   background: var(--background-orange, #FFF8F3);
-// `;
-// const TipImage=styled.img`
-//   width: 55px;
-//   height: 24px;
-//   margin-right: 8px;
-// `;
+
 const Hr = styled.hr`
 width: 327px;
 height: 0px;
@@ -138,6 +127,45 @@ width: 327px;
 height: 48px;
 margin-top: 16px;
 `;
+
+const Tip = styled.p`
+color: var(--gray-90, #353535);
+/* Body/B1-12-M */
+font-size: 12px;
+font-family: Pretendard;
+font-style: normal;
+font-weight: 500;
+line-height: 16px;
+width: 168px;
+height: 16px;
+top: 385px;
+left: 103px;
+margin-left: 8px;
+
+
+`;
+const TipCon = styled.p`
+display: flex;
+align-items: center;
+`;
+const Submit = styled.p`
+border: white;
+height: 48px;
+left: 24px;
+maring-top: 16px;
+color: #808080;
+font-size: 14px;
+font-family: Pretendard;
+font-style: normal;
+font-weight: 600;
+line-height: 18px;
+
+`;
+const Img = styled.img`
+width: 55px;
+Height: 24px;
+`;
+
 const modalStyles = {
   content: {
       position: 'absolute',
@@ -227,24 +255,25 @@ const MyAnsewer = () => {
           <Survey>
           <Progress src={progress}/>
             <Header2>
-              <HeaderDiv>내 답변 추가하기</HeaderDiv>
-              <HeaderP>투표 항목에 내가 생각하는 답변을 추가해보세요</HeaderP>
+              <HeaderDiv>나에 대해 생각해보세요!</HeaderDiv>
+              <HeaderP>답변 키워드와 이유를 적어 투표 후보에 추가해보세요.</HeaderP>
               <Container>
                 <Question>{question}</Question>
                 <Comment>{comment}</Comment>
                 <IMG src={getEmojiImage(emoji)} alt="Emoji"></IMG>
                 </Container>
                 <Hr></Hr>
-                {/* <TipContaioner>
-                  <TipImage src={tipimage}/>
-              <HeaderP>답변에 내가 생각하는 키워드를 추가할 수 있어요.</HeaderP>
-              </TipContaioner> */}
+                <TipCon>
+                <Img src={tip}/>
+                <Tip>내가 생각하는 답변을 추가해보세요!</Tip>
+                </TipCon>
             </Header2>
             
           <AddVote src={addVote} onClick={showModal} ></AddVote>
           <Modal isOpen={modalOpen} onRequestClose={handleCloseModal} style={modalStyles}>
           {modalOpen && <AddAnswerQuest key="add-answer"  handleCloseModal={handleCloseModal} />}
           </Modal>
+          <Submit onClick={handleButtonClick}>항목 추가 없이 투표 등록하기</Submit>  
           </Survey>
         </Div>
       );

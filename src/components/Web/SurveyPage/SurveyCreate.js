@@ -16,24 +16,29 @@ import check from '../../../img/Group 33956.png';
 
 
 
+
 const Survey = styled.div`
   display: flex;
   flex-direction: column;
   width: 375px;
   height: 812px;
   margin: 0 auto;
+  //background-color:aqua;
 `;
 
 const HeaderDiv = styled.header`
-  width: 120px;
-  height: 19px;
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 19px;
-  color: #efefef;
-  left: calc(50% - 311px / 2);
+width: 246px;
+height: 28px;
+top: 126px;
+margin-left: 24px;
+font-family: Pretendardbold;
+font-size: 24px;
+font-weight: 700;
+line-height: 28px;
+letter-spacing: 0em;
+text-align: left;
+color: #353535;
+
 `;
 
 const Header2 = styled.div`
@@ -41,58 +46,102 @@ const Header2 = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 32px;
 `;
 
 const HeaderP = styled.p`
   width: 260px;
   height: 19px;
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 19px;
+  font-size: 14px;
+font-family: Pretendard;
+font-style: normal;
+font-weight: 600;
+line-height: 18px;
   color: #818181;
+  width: 220px;
+height: 18px;
+top: 162px;
+margin-left: 24px;
+
 `;
 
-const HeaderName = styled.p`
-  width: 115px;
-  height: 24px;
-  top: 121px;
-  left: 30px;
-  font-family: Pretendard;
-  font-size: 20px;
+const ProfileEmoji = styled.p`
+width: 87px;
+height: 20px;
+top: 212px;
+margin-left: 26px;
+  font-family: Pretendardbold;
+  font-size: 16px;
   font-weight: 700;
   line-height: 24px;
   letter-spacing: 0em;
   text-align: left;
-  color: #efefef;
+  color: #353535;
 `;
 
 const InputQues = styled.textarea`
-  width: 320px;
-  height: 68px;
-  top: 240px;
-  left: 28px;
-  background: #d9d9d9;
-  margin: 30px;
+&:focus {
+  border: none;
+  outline: 1px solid var(--primary-orange, #EC582F);
+}
+::placeholder {
+  /* placeholder 스타일 */
+  color:  var(--gray-60, #808080);
+font-family: Pretendard;
+font-size: 14px;
+font-weight: 500;
+line-height: 18px;
+letter-spacing: 0em;
+text-align: left;
+
+}
+width: 327px;
+height: 66px;
+top: 361px;
+margin-left: 24px;
+border-radius: 8px;
+border: 1px solid #808080;
+font-family: Pretendard;
+font-size: 14px;
+font-weight: 500;
+line-height: 18px;
+letter-spacing: 0em;
+text-align: left;
+
 `;
 
 const InputQues1 = styled.textarea`
-  width: 320px;
-  height: 68px;
-  top: 316px;
-  left: 28px;
-  background: #d9d9d9;
-  margin: 30px;
+&:focus {
+  border: none;
+  outline: 1px solid var(--primary-orange, #EC582F);
+}
+::placeholder {
+  /* placeholder 스타일 */
+  color:  var(--gray-60, #808080);
+}
+width: 327px;
+height: 48px;
+top: 505px;
+margin-left: 24px;
+border-radius: 8px;
+border: 1px solid #808080;
+//styleName: Body/B3-14-M;
+font-family: Pretendard;
+font-size: 14px;
+font-weight: 500;
+line-height: 18px;
+letter-spacing: 0em;
+text-align: left;
 `;
 
 
 const Submit = styled.button`
-  width: 320px;
-  height: 68px;
-  top: 530px;
-  left: 28px;
+// width: 327px;
+height: 48px;
+top: 655px;
+left: 24px;
+border: white;
+  color: ${({ isAnswerEmpty }) => (isAnswerEmpty ? 'var(--gray-60, #808080)' : '#EC582F')};
 `;
 
 const Div = styled.div`
@@ -103,21 +152,19 @@ const Div = styled.div`
   align-items: center;
 `;
 
-const P = styled.p`
-color : white;
-`;
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 320px;
   margin-top: 20px;
+  margin-left:24px;
 `;
 
 const EmojiButton = styled.div`
 position: relative;
-  width: 60px;
-  height: 60px;
+  width: 56px;
+  height: 56px;
 `;
 const EmojiImage = styled.img`
 position: absolute;
@@ -126,8 +173,8 @@ position: absolute;
 `;
 const Check = styled.img `
   position: absolute;
-  width : 60px;
-  height : 60px;
+  width : 64px;
+  height : 64px;
   opacity : ${({ active }) => (active ? 1 : 0)};
 `
 
@@ -135,6 +182,44 @@ const Progres = styled.img`
   width: 185px;
   height: 1.5px;
   margin-right: 175px;
+`;
+const QuestionP = styled.p`
+width: 28px;
+height: 20px;
+top: 329px;
+margin-left: 26px;
+font-family: Pretendardbold;
+font-size: 16px;
+font-weight: 700;
+line-height: 20px;
+letter-spacing: 0em;
+text-align: left;
+
+
+`;
+
+const TipP = styled.p`
+width: 56px;
+height: 20px;
+top: 473px;
+margin-left: 26px;
+font-family: Pretendardbold;
+font-size: 16px;
+font-weight: 700;
+line-height: 20px;
+letter-spacing: 0em;
+text-align: left;
+`;
+
+const InputNum = styled.span`
+text-align: right;
+color: var(--gray-60, #808080);
+font-size: 12px;
+font-family: Pretendard;
+font-style: normal;
+font-weight: 500;
+line-height: 16px;
+padding-right:20px;
 `;
 
 
@@ -151,6 +236,9 @@ function SurveyCreate() {
     const [userNickname] = useState(localStorage.getItem("userName"));
     //console.log("username: ", userContext);
     const [selectedEmoji, setSelectedEmoji] = useState(null); // New state for the selected emoji
+
+    let [inputCountReason, setInputCountReason] = useState(0);
+  let [inputCountName, setInputCountName] = useState(0);
 
 
     useEffect(() => {
@@ -189,6 +277,19 @@ function SurveyCreate() {
       console.error('Error adding document:', error);
     }
   };
+  const onChangeComment = (e) => {
+    const { value } = e.target;
+    setComment(value);
+    setInputCountReason(e.target.value.length);
+  };
+  const onChange = (e) => {
+    const { value } = e.target;
+    setQuestion(value);
+    setInputCountName(e.target.value.length);
+  };
+  const isAnswerEmpty = ()=> {
+    return question === "" || comment==="" ||(question === "" && comment === "" );
+  }
     
 
   return (
@@ -197,10 +298,10 @@ function SurveyCreate() {
       <Progres src={progress}/>
       <Survey>
         <Header2>
-          <HeaderDiv>새로운 .ZiP 만들기</HeaderDiv>
-          <HeaderP>궁금한 질문을 담은 링크를 공유해보세요.</HeaderP>
-          <HeaderName>{userNickname}님의 .ZiP</HeaderName>
+          <HeaderDiv>직접 질문을 만들어보세요.</HeaderDiv>
+          <HeaderP>프로필 이모지와 질문,Tip을 적어보세요.</HeaderP>
         </Header2>
+        <ProfileEmoji>프로필이미지</ProfileEmoji>
         <ButtonContainer>
         <EmojiButton onClick={() => setSelectedEmoji('emoji1')} >
             <EmojiImage src={emoji1} alt="Emoji" active={selectedEmoji === 'emoji1'} />
@@ -219,19 +320,24 @@ function SurveyCreate() {
             <EmojiImage src={emoji5}/>
           </EmojiButton>
         </ButtonContainer>
-        <P>질문</P>
+        <QuestionP>질문</QuestionP>
         <InputQues
           value={question}
-          onChange={(e) => setQuestion(e.target.value)}
-          placeholder="새로운 질문을 적어주세요."
+          onChange={onChange}
+          placeholder="40자 이내의 새로운 질문을 적어주세요."
+          maxLength={40}
         />
-        <P>답변 TIP</P>
+        <InputNum>{inputCountName}/40</InputNum>
+        <TipP>답변 TIP</TipP>
         <InputQues1
           value={comment}
-          onChange={(e) => setComment(e.target.value)}
+          onChange={onChangeComment}
           placeholder="답변 적을 때 참고할만한 내용이나 예시를 적어주세요."
+          maxLength={20}
         />
-        <Submit onClick={handleSubmit}>질문 저장하기</Submit>
+        <InputNum>{inputCountReason}/20</InputNum>
+        <Submit onClick={handleSubmit} isAnswerEmpty={isAnswerEmpty()}>다음</Submit>
+  
       </Survey>
     </Div>
   );

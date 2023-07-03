@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 const HomeP = styled.header`
   gap: 10px;
-  width: 120px;
+  width: 130px;
   color: white;
   border-bottom: 2px solid black;
   color: black;
@@ -15,14 +15,14 @@ const HomeP = styled.header`
 `;
 
 
-const ButtonContainer = styled.div`
+const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 10px;
   margin-bottom: 10px;
   width: 330px;
-  margin-left: 10px;
+  margin-left: 24px;
 `;
 
 
@@ -32,7 +32,7 @@ const Profile = styled.button`
   height: 40px;
   top: 80px;
   left: 186px;
-  padding: 10px 61.5px;
+  padding: 8px 61.5px;
   gap: 10px;
   font-family: Pretendard;
   font-size: 16px;
@@ -55,10 +55,10 @@ const HomeNavbar = () => {
       navigate('/MyProfile');
     };
       return(
-        <ButtonContainer>
+        <HeaderContainer>
         <HomeP onClick={HomeOnClick} >Home</HomeP>
         <Profile onClick={onClick}>프로필</Profile>
-      </ButtonContainer>
+      </HeaderContainer>
       );
   };
   

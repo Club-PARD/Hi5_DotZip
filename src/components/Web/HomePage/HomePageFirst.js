@@ -14,6 +14,9 @@ import NewquesButton from '../../../img/NewquesButton.png'
 import Home1 from '../../../img/Home1.png';
 import Home2 from '../../../img/Home2.png';
 import Tip from '../../../img/Tip.png';
+import LinkImage from '../../../img/Link.png';
+import CopyToClipboard from 'react-copy-to-clipboard'; //링크복사
+
 
 const Div = styled.div`
   margin-top: 70px;
@@ -25,28 +28,22 @@ const HeaderP = styled.p`
 color: var(--gray-90, #353535);
 /* Head/H2-20-B */
 font-size: 20px;
-font-family: Pretendard;
+font-family: Pretendardbold;
 font-style: normal;
-font-weight: 700;
 line-height: 24px;
-left: 24px;
-
-
+margin-left: 24px;
 `;
 
 const HeaderDiv = styled.header`
 width: 200px;
 height: 24px;
 top: 152px;
-left: 24px;
-font-family: Pretendard;
+margin-left: 24px;
+font-family: Pretendardbold;
 font-size: 20px;
-font-weight: 700;
 line-height: 24px;
 letter-spacing: 0em;
 margin-top: 32px;
-left: 24px;
-
 `;
 
 const Header3 = styled.p`
@@ -55,52 +52,44 @@ height: 24px;
 top: 692px;
 left: 24px;
 //styleName: Head/H1-20-B;
-font-family: Pretendard;
+font-family: Pretendardbold;
 font-size: 20px;
-font-weight: 700;
 line-height: 24px;
 letter-spacing: 0em;
 text-align: left;
 
 `;
 
-const Header2 = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  margin-top: 20px;
-  margin-left: 5px; /* Remove the margin-left property */
-  padding-left: 0px; /* Add padding-left instead */
-`;
-
-
-
 const Survey = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+  
   width: 375px;
   height: 1245px;
   margin: 0 auto;
   overflow-x: hidden;
-  // background-color: #00FFFF; /* Set the background color to aqua */
-  background-color:white;
-`;
-
-
-const P = styled.button`
-  background: #eeff01;
+  //background-color: #00FFFF; /* Set the background color to aqua */
+  //background-color:white;
 `;
 
 const HomeP = styled.header`
   gap: 10px;
-  width: 120px;
+  width: 130px;
   color: white;
   border-bottom: 2px solid black;
   color: black;
   text-align: center;
+`;
+
+const HeaderContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  width: 330px;
+  margin-left: 24px;
 `;
 
 
@@ -110,19 +99,15 @@ const ButtonContainer = styled.div`
   align-items: center;
   gap: 10px;
   margin-bottom: 10px;
-  width: 330px;
+  width: 350px;
   margin-left: 10px;
 `;
 
-const Button = styled.img`
-  width: 375px;
-  height: 96px;
-  margin-bottom: 10px;
-`;
 const ButtonQ = styled.img`
   width: 156px;
   height: 156px;
   justify-self: flex-start;
+  margin-left: 24px;
 `;
 const ButtonQ1 = styled.img`
   width: 156px;
@@ -132,14 +117,14 @@ const ButtonQ1 = styled.img`
 
 const NewQ = styled.header`
 //styleName: Head/H1-20-B;
-font-family: Pretendard;
+font-family: Pretendardbold;
 font-size: 20px;
 font-weight: 700;
 line-height: 24px;
 letter-spacing: 0em;
 text-align: left;
 top: 362px;
-left: 24px;
+margin-left: 15px;
 
 `;
 
@@ -151,6 +136,7 @@ font-family: Pretendard;
 font-style: normal;
 font-weight: 600;
 line-height: 18px;
+margin-left: 24px;
 `;
 const ButtonsContainer = styled.div`
 display: flex;
@@ -166,17 +152,14 @@ color: black;
 width: 319px;
 height: 259px;
 font-family: Pretendard;
-
-
 `;
 const Profile = styled.button`
   width: 180px;
   height: 40px;
   top: 80px;
   left: 186px;
-  padding: 10px 61.5px;
+  padding: 8px 61.5px;
   gap: 10px;
-  // styleName: Body/B2-16-B;
   font-family: Pretendard;
   font-size: 16px;
   font-weight: 700;
@@ -194,7 +177,7 @@ const ButtonA = styled.button`
   left: 293px;
   background: white;
   border: 1px solid white;
-  margin-left: 20px;
+  left: 24px;
 `;
 const ButtonB = styled.button`
   width: 100px;
@@ -220,6 +203,7 @@ text-align: center;
 color: #EC582F;
 border: 1px solid var(--primary-orange, #EC582F);
 background: none;
+margin-left: 24px;
 
 `;
 
@@ -246,7 +230,7 @@ top: 724px;
 left: 5px;
 font-family: Pretendard;
 font-size: 14px;
-font-weight: 600;
+weight: 600;
 line-height: 18px;
 letter-spacing: 0em;
 text-align: left;
@@ -390,12 +374,38 @@ const AnswerText = styled.p`
 `;
 
 const QuestionContainer = styled.div`
-  display: flex;
+display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 10px;
   margin-bottom: 10px;
   width: 330px;
+`;
+
+const LinkMessage = styled.div` //링크복사
+  width: 200px;
+  background: white;
+  padding: 10px;
+  border: 1px solid black;
+`;
+const CopyLinkButton = styled.button`
+  border: none;
+  margin-top: 15px;
+  margin-left: 72px;
+  padding: 0;
+  width: 97px;
+  height: 32px;
+  border-radius: 20px;
+  color: white;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+const Link = styled.img`
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
 `;
 
 
@@ -413,6 +423,9 @@ const HomePageFirst = () => {
   console.log(localStorage.getItem('kakaoId'));
   const [questions, setQuestions] = useState([]);
   const [emoji, setEmoji] = useState([]);
+
+  const [showMessage, setShowMessage] = useState(false);
+  const [copiedLinkId, setCopiedLinkId] = useState('');
 
   useEffect(() => {
     const q = query(collection(dbService, 'zip_Question'), where('kakaoId', '==', kakaoId), orderBy('timestamp', 'desc'));
@@ -442,14 +455,17 @@ const HomePageFirst = () => {
   const handleButton1Click = () => {
     navigate('../../../../MyProfile'); // Replace with the actual path you want to navigate to
   };
-  const handleButtonPickAnswer = () => {
-    navigate('/PickAnswer'); // Replace with the actual path you want to navigate to
-  };
   const handleButton3Click = () => {
     navigate(`/VotingPage`); // Replace with the actual path you want to navigate to
   };
-  const handleButton4Click = () => {
-    navigate(`/VotingPage`); // Replace with the actual path you want to navigate to
+
+  const handleLinkButtonClick = (questionId) => {
+    const link = `${window.location.origin}/answer/${questionId}`;
+    setCopiedLinkId(questionId);
+    setShowMessage(true);
+    setTimeout(() => {
+      setShowMessage(false);
+    }, 1000);
   };
 
   const getEmojiImage = (emoji) => {
@@ -474,14 +490,12 @@ const HomePageFirst = () => {
   return (
     <Div>
       <Survey>
-        <ButtonContainer>
-          <HomeP>Home</HomeP>
+        <HeaderContainer>
+          <HomeP>홈</HomeP>
           <Profile onClick={handleButton1Click}>프로필</Profile>
-        </ButtonContainer>
+        </HeaderContainer>
         <HeaderDiv>안녕하세요, <RedText>{userNickname}</RedText> 님</HeaderDiv>
         <HeaderP>나의 프로필.ZiP을 만들어보세요!</HeaderP>
-        {/* <Button>인기 질문 하나 노출</Button> */}
-        {/* <Banner /> */}
         <Banner src={banner} onClick={() => navigate(`/SurveyFirst`)}/>
         <ButtonContainer>
         <NewQ>새로운 질문 만들기</NewQ>
@@ -492,7 +506,6 @@ const HomePageFirst = () => {
           <ButtonQ src={Home1}onClick={() => navigate(`/SurveyFirst`)}/>
           <ButtonQ1 src={Home2}onClick={() => navigate(`/SurveyFirst`)}/>
         </QuestionContainer>
-
         <ButtonNew onClick={handleButtonClick}> + 나만의 질문 만들기</ButtonNew>
         <DIVB>
         <ButtonsContainer>
@@ -505,17 +518,25 @@ const HomePageFirst = () => {
         {question && question.question && (
         <FolderImageContainer onClick={() => handleQuestionClick(question.questionId, index)}>
           <FolderImage src={homeFolder} />
-          <FolderContent>
-            <IMG src={getEmojiImage(question.emoji)} alt="Emoji" />
-            <TipImage src={Tip} />
-            <QText>{question.question}</QText>
-            <CText>{question.comment}</CText>
-            <AnswerLinkContainer>
-              <AnswerText><RedText>{question.VoteNum}명</RedText>이 답변을 남겼어요!</AnswerText>
-            </AnswerLinkContainer>
-          </FolderContent>
-        </FolderImageContainer>
-      )}
+                  <FolderContent>
+                    <IMG src={getEmojiImage(question.emoji)} alt="Emoji" />
+                    <TipImage src={Tip} />
+                    <QText>{question.question}</QText>
+                    <CText>{question.comment}</CText>
+                    <AnswerLinkContainer>
+                      <AnswerText><RedText>{question.VoteNum}명</RedText>이 답변을 남겼어요!</AnswerText>
+                      <CopyToClipboard text={`${window.location.origin}/answer/${question.questionId}`}>
+                        <CopyLinkButton onClick={(event) => {event.stopPropagation(); handleLinkButtonClick(question.questionId);}} 
+                        disabled={!question.voteEnd} style={{ backgroundColor: question.voteEnd ? '#EC582F' : 'gray' }}>
+                          <Link src={LinkImage} />링크복사
+                        </CopyLinkButton>
+                      </CopyToClipboard>
+                      {showMessage && copiedLinkId === question.questionId && <LinkMessage>링크가 복사되었습니다</LinkMessage>}
+                    </AnswerLinkContainer>
+                  </FolderContent>
+                </FolderImageContainer>
+              )}
+
     </div>
   ))
 ) : (
