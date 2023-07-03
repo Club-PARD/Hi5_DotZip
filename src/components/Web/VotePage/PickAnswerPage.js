@@ -52,11 +52,9 @@ const LinkMessage = styled.div` //링크복사
 const Text1 = styled.div`
   font-size: 24px;
   font-weight: 700;
-  width: 300px;
-  height: 28px;
+  height: 60px;
   font-family: Pretendard;
   margin-left: 16px;
-  margin-top: 30px;
   margin-bottom: 8px;
 `;
 const RedText = styled.span`
@@ -303,12 +301,13 @@ const modalStyles = {
         height: '300px',
         borderRadius: '10px',
         background: 'white',
-        margin: '180px auto',
+        margin: 'auto',
         padding: '0',
-        top: '0',
-        left: '0',
-        right: '0',
-        bottom: '0',
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        transform: 'translate(-50%, -50%)',
         zIndex: '2',
       },
       overlay: {
@@ -639,7 +638,7 @@ function PickAnswerPage() {
         <BackNavBar/>
         <DDiv>
             <Div>
-                <Text1><RedText>{userNickname}</RedText> 님의 진행중인 폴더</Text1> 
+                <Text1><RedText>{userNickname}</RedText> 님의 <br></br> 진행중인 폴더</Text1> 
                 <Text2>내가 생성한 폴더의 답변과 이유를 확인해보세요!</Text2>
                 <FolderImageContainer>
                   <FolderImage src={selectedFolderImage} />
