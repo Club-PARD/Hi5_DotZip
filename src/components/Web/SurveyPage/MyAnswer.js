@@ -10,6 +10,11 @@ import addVote from '../../../img/addVote.png'
 import AddAnswerQuest from '../AnswerPage/AddAnswerQuest';
 import Modal from 'react-modal';
 import noAnswer from '../../../img/noAnswer.png'
+import emoji1 from '../../../img/emoji1.png';
+import emoji2 from '../../../img/emoji2.png';
+import emoji3 from '../../../img/emoji3.png';
+import emoji4 from '../../../img/emoji4.png';
+import emoji5 from '../../../img/emoji5.png';
 
 const Div = styled.div`
   
@@ -192,6 +197,22 @@ const MyAnsewer = () => {
       };
     }, [questionId]);
 
+    const getEmojiImage = (emoji) => {
+      switch (emoji) {
+        case 'emoji1':
+          return emoji1;
+        case 'emoji2':
+          return emoji2;
+        case 'emoji3':
+          return emoji3;
+        case 'emoji4':
+          return emoji4;
+        case 'emoji5':
+          return emoji5;
+        default:
+          return null;
+      }
+    };
     
       const handleButtonClick = () => {
         navigate(`/SurveyShare/${questionId}`);
@@ -211,7 +232,7 @@ const MyAnsewer = () => {
               <Container>
                 <Question>{question}</Question>
                 <Comment>{comment}</Comment>
-                <IMG src={emoji}></IMG>
+                <IMG src={getEmojiImage(emoji)} alt="Emoji"></IMG>
                 </Container>
                 <Hr></Hr>
                 {/* <TipContaioner>

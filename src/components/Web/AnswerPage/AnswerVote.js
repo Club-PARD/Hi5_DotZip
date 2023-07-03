@@ -13,7 +13,8 @@ import emoji2 from '../../../img/emoji2.png';
 import emoji3 from '../../../img/emoji3.png';
 import emoji4 from '../../../img/emoji4.png';
 import emoji5 from '../../../img/emoji5.png';
-import newAnswer from '../../../img/newAnswer.png'
+import newAnswer from '../../../img/newAnswer.png';
+import check from '../../../img/check.png'
 
 const Div = styled.div`
   display: flex;
@@ -141,10 +142,10 @@ font-weight: 600;
 line-height: 24px;
 margin-top: 16px;
 &::after {
-      content: '✔'; //이미지
+      content: url(${check}); //이미지
       position: absolute;
-      top: 50%;
-      right: 24px;
+      top: 55%;
+      right: 20px;
       transform: translateY(-50%);
       cursor: pointer;
   }

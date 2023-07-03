@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import logo from '../img/Logo.png'
 
 import styled /*{ ThemeProvider } */ from 'styled-components';
 // import { useState, useEffect } from 'react';
@@ -20,7 +21,7 @@ const NavBarWrapper = styled.nav`
 
 const Home  = styled.div `      
   &::after {        
-    content: 'home'; //이미지
+    content: url("${logo}"); //이미지
     color:black;
         position: absolute;
         top: 50%;

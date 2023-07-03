@@ -135,11 +135,12 @@ function SurveyFirst() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState(null);
   const [buttonSelected, setButtonSelected] = useState(false);
-  const [selectedButton, setSelectedButton] = useState(null);
+  // const [selectedButton, setSelectedButton] = useState(null);
   const [questionId, setQuestionId] = useState(null);
   const [voteEnd, setIsBooleanValue] = useState(true);
   const kakaoId = localStorage.getItem("kakaoId");
   const timestamp = serverTimestamp();
+  const [selectedEmoji, setSelectedEmoji] = useState(null);
 
   const handleButtonClick = () => {
     if (kakaoId) {
@@ -151,10 +152,10 @@ function SurveyFirst() {
 
 
   useEffect(() => {
-    if (selectedButton) {
+    if (selectedEmoji) {
       handleButton1Click();
     }
-  }, [selectedButton]);
+  }, [selectedEmoji]);
 
   const handleButton1Click = async () => {
     try {
@@ -168,22 +169,26 @@ function SurveyFirst() {
 
 
 
-      if (selectedButton === '버튼1') {
+      if (selectedEmoji === 'emoji1') {
         question = '나에게 어울리는 컬러는?';
         comment = '나의 성격과 떠오르는 이미지를 연관지어보세요!';
         emoji = emoji1;
-      } else if (selectedButton === '버튼2') {
+
+      } else if (selectedEmoji === 'emoji2') {
         question = '나에게 어울리는 직업은?';
         comment = '나의 성향과 장점을 생각해보세요!';
         emoji = emoji2;
-      } else if (selectedButton === '버튼3') {
+        setSelectedEmoji("emoji2");
+      } else if (selectedEmoji === 'emoji3') {
         question = '나에게 어울리는 형용사는?';
         comment = '나를 표현하는 단어를 생각해보세요!';
         emoji = emoji3;
-      } else if (selectedButton === '버튼4') {
+        setSelectedEmoji("emoji3");
+      } else if (selectedEmoji=== 'emoji4') {
         question = '나에게 어울리는 브랜드는?';
         comment = '나를 생각하면 떠오르는 키워드와 연관지어보세요!';
         emoji = emoji4;
+        setSelectedEmoji("emoji4");
       }
 
       const questionId = uuidv4();
@@ -195,15 +200,16 @@ function SurveyFirst() {
         comment,
         voteEnd,
         timestamp,
-        emoji
+        emoji  : selectedEmoji
       });
+
       
       console.log('Question:', question);
       console.log('Comment:', comment);
+      console.log(selectedEmoji);
 
-
-      setSelectedButton(null);
       setButtonSelected(false);
+      setSelectedEmoji(null);
       setQuestionId(questionId); // Set the questionId value
 
       navigate(`/MyAnswer/${questionId}`);
@@ -213,8 +219,7 @@ function SurveyFirst() {
   };
 
   const handleButtonSelect = (button) => {
-    setSelectedButton(button);
-    setButtonSelected(true);
+    setSelectedEmoji(button);
   };
   
 
@@ -230,17 +235,17 @@ function SurveyFirst() {
         </Header2>
         <ButtonRow>
           <Img src={answer1}             
-          onClick={() => handleButtonSelect('버튼1')}
-            active={selectedButton === '버튼1'}/>
+          onClick={() => handleButtonSelect('emoji1')}
+            active={selectedEmoji === 'emoji1'}/>
           <Img src={answer2}             
-          onClick={() => handleButtonSelect('버튼2')}
-            active={selectedButton === '버튼2'}/> 
+          onClick={() => handleButtonSelect('emoji2')}
+            active={selectedEmoji === 'emoji2'}/> 
           <Img src={answer3}             
-          onClick={() => handleButtonSelect('버튼3')}
-            active={selectedButton === '버튼3'}/> 
+          onClick={() => handleButtonSelect('emoji3')}
+            active={selectedEmoji === 'emoji3'}/> 
           <Img src={answer4}             
-          onClick={() => handleButtonSelect('버튼4')}
-            active={selectedButton === '버튼4'}/> 
+          onClick={() => handleButtonSelect('emoji4')}
+            active={selectedEmoji === 'emoji4'}/> 
         </ButtonRow>
         <Survey>
         <Button1 onClick={handleButtonClick}>+ 내가 직접 질문 만들기</Button1>
