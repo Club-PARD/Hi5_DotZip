@@ -9,23 +9,17 @@ const { Kakao } = window;
 const ShareButton = styled.button`
   border: none;
   margin-top: 13px;
-  margin-left: 51px;
-  margin-right: 32px;
+  margin-left: 6px;
+  margin-right: 12px;
   padding: 0;
-  width: 97px;
+  width: 40px;
   height: 32px;
-  border-radius: 20px;
-  color: white;
-  background: #EC582F;
-  font-size: 12px;
+  background: none;
   display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 const KakaoImage = styled.img`
-  width: 16px;
-  height: 16px;
-  margin-right: 4px;
+  width: 100%;
+  height: 100%;
 `;
 
 const KakaoShareButton = () => {
@@ -73,7 +67,7 @@ const KakaoShareButton = () => {
   return (
     <div>
       <ShareButton id="kakaotalk-sharing-btn" onClick={createKakaoButton}>
-        <KakaoImage src={KakaoImoticon} />카톡 공유
+        <KakaoImage src={KakaoImoticon} />
       </ShareButton>
     </div>
   );

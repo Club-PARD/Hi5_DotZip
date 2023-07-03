@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { dbService } from '../../../fbase';
-import { collection, doc, onSnapshot } from 'firebase/firestore';
+import { doc, onSnapshot } from 'firebase/firestore';
 import styled from 'styled-components';
-import AddAnswer from '../AnswerPage/AddAnswer';
+import BackNavBar from '../../BackNavbar';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import KakaoShareButton from '../ProfilePage/ShareKakao';
 import emoji1 from '../../../img/emoji1.png';
@@ -11,101 +11,214 @@ import emoji2 from '../../../img/emoji2.png';
 import emoji3 from '../../../img/emoji3.png';
 import emoji4 from '../../../img/emoji4.png';
 import emoji5 from '../../../img/emoji5.png';
+import Tip from '../../../img/Tip.png';
+import SurveyShareComponent from './SurveyShareComponent';
+import SurveyShareComponent2 from './SurveyShareComponent2';
+import Folder from '../../../img/Folder3.png';
+import LinkImage from '../../../img/Link.png';
+import HomeButtonImage from '../../../img/GoHome.png';
 
+//기본틀
+const DDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 812px;
+`;
 const Div = styled.div`
-  margin-top: 70px;
-  height: 1000px;
+    display: flex;
+    flex-direction: column;
+    width: 375px;
+    margin: 0;
+    padding: 0;
 `;
-
-const HeaderP = styled.p`
-  width: 260px;
-  height: 19px;
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 19px;
-  color: #818181;
+const FolderImageContainer = styled.div`
+  position: relative;
+  width: 357px;
+  height: 196px;
+  margin-left: 8px;
+  margin-bottom: 24px;
 `;
-
-const HeaderDiv = styled.header`
-  height: 19px;
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 19px;
-  color: #efefef;
-  left: calc(50% - 311px/2);
-`;
-
-const Header3 = styled.p`
-  width: 110px;
-  height: 24px;
-  font-family: Pretendard;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 24px;
-  letter-spacing: 0em;
-  text-align: left;
-  color: #efefef;
-`;
-
-const Header2 = styled.div`
+const FolderContent = styled.div`
+  position: absolute;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
-  margin-top: 20px;
-`;
-
-const Survey = styled.div`
-  display: flex;
-  flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
-  width: 375px;
-  height: 812px;
-  background: black;
-  margin: 0 auto;
-  overflow-x: hidden;
+  margin-left: 32px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
 `;
-
-const Button2 = styled.button`
-  box-sizing: border-box;
+const FolderImage = styled.img`
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+`;
+const TipImage = styled.img`
   position: absolute;
-  width: 375px;
-  height: 60px;
-  left: calc(50% - 375px/2);
-  top: 648px;
-  background: #212121;
-  border: 1px solid #ABABAB;
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 20px;
-  text-align: center;
-  color: #ABABAB;
+  margin-top: 113px;
+  width: 53px;
+  height: 23px;
+  z-index: 1;
 `;
-
-const P = styled.p`
-  background: #EEFF01;
+const IMG = styled.img`
+  position: absolute;
+  padding-top: 57px;
+  width: 48px;
+  height: 48px;
+  z-index: 1;
 `;
-
-const LinkButton = styled.button`
-  width: 200px;
-  height: 100px;
-  padding: 5px;
-  background: red;
+const QText = styled.p`
+  color: #212121;
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+  margin-top: 65px;
+  margin-left: 60px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  width: 235px;
+  height: 36px;
+  font-family: Pretendard;
+  z-index: 1;
+  word-break: keep-all;
+  display: flex;
+  align-items: center;
 `;
-
+const CText = styled.p`
+  font-size: 12px;
+  margin: 0;
+  margin-left: 60px;
+  weight: 600;
+  width: 235px;
+  height: 14px;
+  font-family: Pretendard;
+  color: #808080;
+  z-index: 1;
+  word-break: keep-all;
+  display: flex;
+  align-items: center;
+`;
+//링크복사
+const ButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+const CopyLinkButton = styled.button`
+  border: none;
+  margin-top: 13px;
+  padding: 0;
+  width: 239px;
+  height: 32px;
+  border-radius: 20px;
+  color: white;
+  background: #EC582F;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+const Link = styled.img`
+  width: 16px;
+  height: 16px;
+`;
 const LinkMessage = styled.div`
   width: 200px;
   background: white;
   padding: 10px;
   border: 1px solid black;
 `;
+//투표 Text
+const RedText = styled.span`
+  color: #EC582F;
+`;
+const TotalNumber = styled.p`
+  margin-right: 12px;
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 500;
+  height: 16px;
+  font-family: Pretendard;
+  color: #353535;
+`;
+const AnswerContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+const AnswerBox = styled.button`
+    width: 327px;
+    height: 64px;
+    width: 327px;
+    margin-left: 16px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    border: 1px solid var(--white-80, #EFEFEF);
+    background: none;
+`;
+const AnswerText = styled.p`
+    margin: 0;
+    margin-top: 12px;
+    margin-left: 12px;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    height: 20px;
+    font-family: Pretendard;
+`;
+const VoteNumber = styled.p`
+  margin: 0;
+  margin-left: 3px;
+  font-size: 12px;
+  font-weight: 500;
+  height: 16px;
+  font-family: Pretendard;
+  color: #ABABAB;
+`;
+const PercentageContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+const Percentage = styled.p`
+  margin-top: 14px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  margin-left: auto;
+  font-size: 14px;
+  font-weight: 600;
+  height: 18px;
+  font-family: Pretendard;
+  color: #EC582F;
+`;
+const VoteBox = styled.div`
+  width: 274px;
+  height: 8px;
+  margin-left: 12px;
+  border-radius: 10px;
+  border: 0;
+  background: linear-gradient(to right, #EC582F ${props => props.percentage}%, #FFF8F3 ${props => props.percentage}%);
+  color: #000000;
+`;
+//버튼
+const BackHomeButton = styled.button`
+  width: 327px;
+  height: 48px;
+  margin-top: 80px;
+  margin-left: 16px;
+  margin-bottom: 8px;
+  border: none;
+  background: none;
+`;
+const HomeImage = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+
+
 
 const SurveyShare = () => {
   const { questionId } = useParams();
@@ -114,8 +227,6 @@ const SurveyShare = () => {
   const queryParams = new URLSearchParams(location.search);
   const [question, setQuestion] = useState('');
   const [comment, setComment] = useState('');
-  const [modalOpen, setModalOpen] = useState(false);
-  const [userNickname] = useState(localStorage.getItem("userName"));
   const [emoji, setEmoji] = useState('');
 
   useEffect(() => {
@@ -135,18 +246,17 @@ const SurveyShare = () => {
     };
   }, [questionId]);
 
-  const showModal = () => {
-    setModalOpen(!modalOpen);
-  };
+    //링크 복사하기
+    const [showMessage, setShowMessage] = useState(false);
+    const [copiedLinkId, setCopiedLinkId] = useState('');
 
-  const voteLink = `${window.location.origin}/answer/${questionId}`;
-  const [showMessage, setShowMessage] = useState(false);
-  const handleCopyLink = () => {
+    const handleLinkButtonClick = () => {
+    setCopiedLinkId(questionId);
     setShowMessage(true);
     setTimeout(() => {
-      setShowMessage(false);
+        setShowMessage(false);
     }, 1000);
-  };
+    };
 
   const getEmojiImage = (emoji) => {
     switch (emoji) {
@@ -166,35 +276,53 @@ const SurveyShare = () => {
   };
 
   const emojiImage = getEmojiImage(emoji);
+  //홈으로 돌아가기
+  const handleBackHome = () => {
+      navigate('/Home');
+  };
 
   return (
-    <Div>
-      <Survey>
-        <Header2>
-          <HeaderDiv>{userNickname}님의 폴더 생성 완료!</HeaderDiv>
-          <HeaderP>링크를 공유하고 답변을 받아보세요!</HeaderP>
-        </Header2>
-        <div>
-          <P>Question: {question}</P>
-          <P>Comment: {comment}</P>
-          {emoji && <img src={emojiImage} alt="Emoji" />}
-        </div>
-        <CopyToClipboard text={voteLink}>
-          <div>
-            <KakaoShareButton />
-            <LinkButton onClick={handleCopyLink}>링크 복사하기</LinkButton>
-            {showMessage && <LinkMessage>링크가 복사되었습니다</LinkMessage>}
-          </div>
-        </CopyToClipboard>
-
-        <Button2 onClick={() => navigate(`/PickAnswer/${questionId}`)}>
-          답변보러가기
-        </Button2>
-        {/* <h2>투표하기</h2> <p>키워드 후보는 1인 1개만 추가할 수 있어요.</p>
-          <button onClick={showModal}>키워드 후보 추가하기</button>
-            {modalOpen && <AddAnswer setModalOpen={setModalOpen} />} */}
-      </Survey>
-    </Div>
+    <>
+    <BackNavBar/>
+    <DDiv>
+      <Div>
+        <SurveyShareComponent />
+        <FolderImageContainer>
+          <FolderImage src = {Folder} />
+            <FolderContent>
+              <IMG src={emojiImage}/>
+              <TipImage src={Tip} />
+              <QText>{question}</QText>
+              <CText>{comment}</CText>
+              <CopyToClipboard text={`${window.location.origin}/answer/${questionId}`}>
+                <ButtonContainer>
+                  <KakaoShareButton />
+                  <CopyToClipboard text={`${window.location.origin}/answer/${questionId}`}>
+                    <CopyLinkButton onClick={() => {handleLinkButtonClick(questionId);}} >
+                      <Link src={LinkImage} />링크 복사
+                    </CopyLinkButton>
+                  </CopyToClipboard>
+                  {showMessage && copiedLinkId === questionId && <LinkMessage>링크가 복사되었습니다</LinkMessage>}
+                </ButtonContainer>
+              </CopyToClipboard>
+            </FolderContent>
+          </FolderImageContainer>
+          <SurveyShareComponent2 />
+          <AnswerBox>
+            <AnswerContainer>
+              <AnswerText>답변</AnswerText>
+              <Percentage>{100}%</Percentage>
+            </AnswerContainer>
+            <PercentageContainer>
+              <VoteBox percentage={100} />
+              <VoteNumber>1명</VoteNumber>
+            </PercentageContainer>
+          </AnswerBox>
+          <TotalNumber>총 <RedText>1명</RedText>이 참여했어요.</TotalNumber>
+          <BackHomeButton onClick={handleBackHome}><HomeImage src = {HomeButtonImage} /></BackHomeButton>
+      </Div>
+    </DDiv>
+    </>
   );
 };
 

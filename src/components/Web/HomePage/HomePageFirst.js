@@ -390,7 +390,7 @@ const AnswerText = styled.p`
 `;
 
 const QuestionContainer = styled.div`
-display: flex;
+  display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 10px;

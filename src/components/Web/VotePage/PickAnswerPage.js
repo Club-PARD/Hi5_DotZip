@@ -164,7 +164,7 @@ const CopyLinkButton = styled.button`
   border: none;
   margin-top: 13px;
   padding: 0;
-  width: 97px;
+  width: 239px;
   height: 32px;
   border-radius: 20px;
   color: white;
@@ -219,6 +219,7 @@ const AnswerContainer = styled.div`
   align-items: center;
 `;
 const AnswerText = styled.p`
+    margin: 0;
     margin-top: 12px;
     margin-left: 12px;
     margin-bottom: 8px;
@@ -253,7 +254,6 @@ const VoteBox = styled.div`
 `;
 const VoteNumber = styled.p`
     margin: 0;
-    margin-top: 4px;
     margin-left: 3px;
     font-size: 12px;
     font-weight: 500;
@@ -472,7 +472,7 @@ function PickAnswerPage() {
 
     //폴더 이미지 가져오기
     const location = useLocation();
-    const { index } = location.state;
+    const { index } = location.state || { index: 0 };
     let selectedFolderImage;
     switch ((index) % 4) {
       case 0:
@@ -620,7 +620,7 @@ function PickAnswerPage() {
     }, 1000);
     };
 
-      const [currentReasonIndex, setCurrentReasonIndex] = useState(0);
+  const [currentReasonIndex, setCurrentReasonIndex] = useState(0);
 
   const handleNextReason = () => {
     if (currentReasonIndex < reasonzips.length - 1) {

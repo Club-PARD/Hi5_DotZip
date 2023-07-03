@@ -5,6 +5,7 @@ import { collection, onSnapshot, query, where , orderBy} from 'firebase/firestor
 import styled from 'styled-components';
 import CreateFolderButton from '../../../img/CreateFolderButton.png';
 import BackNavBar from '../../BackNavbar';
+import VotePageComponent1 from './VotePageComponent1';
 import emoji1 from '../../../img/emoji1.png';
 import emoji2 from '../../../img/emoji2.png';
 import emoji3 from '../../../img/emoji3.png';
@@ -78,7 +79,7 @@ const FolderContent = styled.div`
 `;
 const IMG = styled.img`
   position: absolute;
-  padding-top: 58px;
+  padding-top: 57px;
   width: 48px;
   height: 48px;
   z-index: 1;
@@ -96,13 +97,12 @@ const AnswerLinkContainer = styled.div`
 `;
 const CopyLinkButton = styled.button`
   border: none;
-  margin-top: 15px;
-  margin-left: 72px;
+  margin-top: 11px;
+  margin-left: 88px;
   padding: 0;
   width: 97px;
   height: 32px;
   border-radius: 20px;
-  color: white;
   font-size: 12px;
   display: flex;
   align-items: center;
@@ -116,12 +116,14 @@ const Link = styled.img`
 
 //폴더 안 텍스트
 const QText = styled.p`
-  font-size: 14px;
+  color: #212121; 
+  font-size: 16px;
+  padding: 0;
   margin: 0;
-  margin-top: 63px;
+  margin-top: 64px;
   margin-left: 60px;
-  margin-bottom: 19px;
-  weight: 600;
+  margin-bottom: 20px;
+  font-weight: 600;
   width: 235px;
   height: 36px;
   font-family: Pretendard;
@@ -159,23 +161,6 @@ const RedText = styled.span`
   color: #EC582F;
 `;
 //텍스트
-const Folder1Text = styled.div`
-  font-size: 24px;
-  font-weight: 700;
-  height: 24px;
-  font-family: Pretendard;
-  padding-top: 92px;
-  padding-bottom: 8px;
-  padding-left: 14px;
-`;
-const Folder2Text = styled.div`
-  color: #ABABAB;
-  font-size: 14px;
-  font-weight: 600;
-  height: 18px;
-  padding-bottom: 32px;
-  padding-left: 14px;
-`;
 const NoFolder1Text = styled.div`
   color: #ABABAB;
   margin-top: 120px;
@@ -266,8 +251,7 @@ const VotingPage = () => {
       <BackNavBar/>
       <DDiv>
       <Div>
-        <Folder1Text>내가 만든 폴더</Folder1Text>
-        <Folder2Text>내가 생성한 폴더의 답변을 확인해보세요.</Folder2Text>
+        <VotePageComponent1 />
         {questions.length > 0 ? (
           questions.map((question, index) => (
             <div key={question.questionId}>
@@ -283,8 +267,15 @@ const VotingPage = () => {
                       <AnswerText><RedText>{question.VoteNum}명</RedText>이 답변을 남겼어요!</AnswerText>
                       <CopyToClipboard text={`${window.location.origin}/answer/${question.questionId}`}>
                         <CopyLinkButton onClick={(event) => {event.stopPropagation(); handleLinkButtonClick(question.questionId);}} 
-                        disabled={!question.voteEnd} style={{ backgroundColor: question.voteEnd ? '#EC582F' : 'gray' }}>
-                          <Link src={LinkImage} />링크복사
+                        disabled={!question.voteEnd} style={{ backgroundColor: question.voteEnd ? '#EC582F' : '#F8F8F8' , color: question.voteEnd ? 'white' : '#808080' }}>
+                          {question.voteEnd ? (
+                            <>
+                              <Link src={LinkImage} />
+                              링크복사
+                            </>
+                          ) : (
+                            '종료된 투표'
+                          )}
                         </CopyLinkButton>
                       </CopyToClipboard>
                       {showMessage && copiedLinkId === question.questionId && <LinkMessage>링크가 복사되었습니다</LinkMessage>}

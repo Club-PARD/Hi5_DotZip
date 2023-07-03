@@ -190,6 +190,8 @@ const MyAnsewer = () => {
       const handleButtonClick = () => {
         navigate(`/SurveyShare/${questionId}`);
       };
+
+      
     
 
     return (

@@ -131,7 +131,7 @@ const onSubmit = async (e) => {
             answerId : newDocRef.id,
           });
     await addDoc(collection(dbService, "zip_Reason"), {
-      reason: "내가 넣은 투표",
+      reason: "내가 선택한건 이유를 작성하지 않아요. 다른 사람들의 답변을 받고 이유를 확인해보세요!",
       answerId : newDocRef.id,
       nickname: nickname,
     });
