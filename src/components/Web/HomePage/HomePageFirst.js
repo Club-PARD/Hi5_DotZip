@@ -9,10 +9,16 @@ import emoji3 from '../../../img/emoji3.png';
 import emoji4 from '../../../img/emoji4.png';
 import emoji5 from '../../../img/emoji5.png';
 import homeFolder from '../../../img/HomeFolder.png';
+import banner from '../../../img/banner.png'
+import NewquesButton from '../../../img/NewquesButton.png'
+import Home1 from '../../../img/Home1.png';
+import Home2 from '../../../img/Home2.png';
 
 const Div = styled.div`
   margin-top: 70px;
   height: 1000px;
+  display: flex;
+  
 `;
 
 const HeaderP = styled.p`
@@ -23,11 +29,13 @@ font-family: Pretendard;
 font-style: normal;
 font-weight: 700;
 line-height: 24px;
+left: 24px;
+
 
 `;
 
 const HeaderDiv = styled.header`
-width: 170px;
+width: 200px;
 height: 24px;
 top: 152px;
 left: 24px;
@@ -36,9 +44,8 @@ font-size: 20px;
 font-weight: 700;
 line-height: 24px;
 letter-spacing: 0em;
-text-align: left;
 margin-top: 32px;
-
+left: 24px;
 
 `;
 
@@ -107,18 +114,17 @@ const ButtonContainer = styled.div`
   
 `;
 
-const Button = styled.button`
-  background-size: cover;
+const Button = styled.img`
   width: 375px;
   height: 96px;
   margin-bottom: 10px;
 `;
-const ButtonQ = styled.button`
+const ButtonQ = styled.img`
   width: 136px;
   height: 136px;
   justify-self: flex-start;
 `;
-const ButtonQ1 = styled.button`
+const ButtonQ1 = styled.img`
   width: 136px;
   height: 136px;
   justify-self: flex-start;
@@ -148,18 +154,18 @@ line-height: 18px;
 `;
 const ButtonsContainer = styled.div`
 display: flex;
-justify-content: space-between;
-align-items: center;
-gap: 10px;
-margin-bottom: 10px;
-width: 330px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  width: 340px;
 `;
-const Questionp = styled.button`
+const Questionp = styled.div`
 color: black;
 width: 319px;
 height: 259px;
-background: #D9D9D9;
 font-family: Pretendard;
+
 
 `;
 const Profile = styled.button`
@@ -209,20 +215,18 @@ background: none;
 `;
 
 const Img = styled.img`
-display: inline-flex;
-padding: 11px 16px;
-justify-content: center;
-align-items: center;
 gap: 6px;
 top: 876px;
-left: 114px;
+width: 154px;
+height: 40px;
+margin-left: 111.5px;
 
 `;
 
-const Banner = styled.div`
+const Banner = styled.img`
   width: 375px;
   height: 96px;
-  background: var(--background-gra, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%));
+  // background: var(--background-gra, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%));
   margin-bottom: 32px;
 `;
 
@@ -237,7 +241,7 @@ font-weight: 600;
 line-height: 18px;
 letter-spacing: 0em;
 text-align: left;
-color: #808080;
+color: #F8F8F8;
 
 
 `;
@@ -250,6 +254,41 @@ height: 48px;
 const RedText = styled.span`
 color: #EC582F;
 `;
+
+const DIVB = styled.div`
+top: 660px;
+width: 375px;
+height: 586px;
+background-color: #F8F8F8;
+
+`;
+
+const QP = styled.p`
+color: var(--gray-30, #ABABAB);
+
+/* Head/H1-18-SB */
+font-size: 18px;
+font-family: Pretendard;
+font-style: normal;
+font-weight: 600;
+line-height: 24px;
+margin-left: 99px;
+margin-top: 100px;
+
+`;
+const Qp = styled.p`
+color: var(--gray-30, #ABABAB);
+
+/* Body/B4-14-SB */
+font-size: 14px;
+font-family: Pretendard;
+font-style: normal;
+font-weight: 600;
+line-height: 18px;
+margin-left: 90px;
+
+`;
+
 
 
 
@@ -330,27 +369,27 @@ const HomePageFirst = () => {
         <HeaderDiv>안녕하세요, <RedText>{userNickname}</RedText> 님</HeaderDiv>
         <HeaderP>나의 프로필.ZiP을 만들어보세요!</HeaderP>
         {/* <Button>인기 질문 하나 노출</Button> */}
-        <Banner />
+        {/* <Banner /> */}
+        <Banner src={banner} onClick={() => navigate(`/SurveyFirst`)}/>
         <ButtonContainer>
         <NewQ>새로운 질문 만들기</NewQ>
         <ButtonA onClick={handleButtonClick}>전체보기 &gt; </ButtonA>
         </ButtonContainer>
         <Newq>지인들에게 나에 대해 물어보세요!</Newq>
         <ButtonsContainer>
-          <ButtonQ>나에게 어울리는 컬러는?</ButtonQ>
-          <ButtonQ1>나에게 어울리는 동물은?</ButtonQ1>
+          <ButtonQ src={Home1}onClick={() => navigate(`/SurveyFirst`)}/>
+          <ButtonQ1 src={Home2}onClick={() => navigate(`/SurveyFirst`)}/>
         </ButtonsContainer>
 
         <ButtonNew onClick={handleButtonClick}> + 나만의 질문 만들기</ButtonNew>
-        {/* <button onClick={handleButton2Click}>answer가기</button>
-        <button onClick={handleButtonPickAnswer}>pickanswer가기</button> */}
+        <DIVB>
         <ButtonsContainer>
         <Header3>최근에 만든 질문</Header3>
         <ButtonA onClick={handleButton3Click}>전체보기 &gt;</ButtonA>
         </ButtonsContainer>
-        <MadeF>만든 폴더를 공유하고 답변을 확인해보세요.</MadeF>
         {questions.length > 0 ? (
           <>
+           <MadeF>만든 폴더를 공유하고 답변을 확인해보세요.</MadeF>
             {questions.slice(0, 3).map((question, index) => (
               <div key={question.questionId}>
                 {question && question.question && question.voteEnd && (
@@ -362,25 +401,16 @@ const HomePageFirst = () => {
                 )}
               </div>
             ))}
-            <Header3>여기서 나뉨 밑은 끝난거 위는 안끝난거</Header3>
-            {questions.slice(0, 3).map((question) => (
-              <div key={question.questionId}>
-                {question && question.question && !question.voteEnd && (
-                  <P onClick={() => handleQuestionClick(question.questionId)}>
-                  emoji: {question.emoji && <Emoji src={getEmojiImage(question.emoji)} alt="Emoji" />}
-                    Question: {question.question} <br />
-                    Comment: {question.comment}
-                  </P>
-                )}
-              </div>
-            ))}
           </>
         ) : (
           <><Questionp>
-              진행중인 폴더가 없어요! <br /> 새로운 폴더를 만들고 공유해보세요.
-            </Questionp><Img src="../../../img/CreateFolderButton.png" alt="Button" /></>
+              <QP>진행중인 폴더가 없어요! </QP>
+              <Qp>새로운 폴더를 만들고 공유해보세요.</Qp>
+              <Img src={NewquesButton}onClick={() => navigate(`/SurveyFirst`)}/>
+            </Questionp></>
 
         )}
+        </DIVB>
       </Survey>
     </Div>
   );
