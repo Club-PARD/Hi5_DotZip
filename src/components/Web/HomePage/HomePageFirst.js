@@ -13,10 +13,10 @@ import banner from '../../../img/banner.png'
 import NewquesButton from '../../../img/NewquesButton.png'
 import Home1 from '../../../img/Home1.png';
 import Home2 from '../../../img/Home2.png';
+import Tip from '../../../img/Tip.png';
 
 const Div = styled.div`
   margin-top: 70px;
-  height: 1000px;
   display: flex;
   
 `;
@@ -111,7 +111,7 @@ const ButtonContainer = styled.div`
   gap: 10px;
   margin-bottom: 10px;
   width: 330px;
-  
+  margin-left: 10px;
 `;
 
 const Button = styled.img`
@@ -120,13 +120,13 @@ const Button = styled.img`
   margin-bottom: 10px;
 `;
 const ButtonQ = styled.img`
-  width: 136px;
-  height: 136px;
+  width: 156px;
+  height: 156px;
   justify-self: flex-start;
 `;
 const ButtonQ1 = styled.img`
-  width: 136px;
-  height: 136px;
+  width: 156px;
+  height: 156px;
   justify-self: flex-start;
 `;
 
@@ -159,6 +159,7 @@ display: flex;
   gap: 10px;
   margin-bottom: 10px;
   width: 340px;
+  margin-left:24px;
 `;
 const Questionp = styled.div`
 color: black;
@@ -191,10 +192,17 @@ const ButtonA = styled.button`
   height: 20px;
   top: 367px;
   left: 293px;
-  border: 1.5px solid #808080;
-
   background: white;
   border: 1px solid white;
+  margin-left: 20px;
+`;
+const ButtonB = styled.button`
+  width: 100px;
+  height: 20px;
+  top: 367px;
+  left: 293px;
+  background: #F8F8F8;
+  border: 1px solid #F8F8F8;
 `;
 
 const ButtonNew = styled.button`
@@ -212,6 +220,7 @@ text-align: center;
 color: #EC582F;
 border: 1px solid var(--primary-orange, #EC582F);
 background: none;
+
 `;
 
 const Img = styled.img`
@@ -256,11 +265,11 @@ color: #EC582F;
 `;
 
 const DIVB = styled.div`
-top: 660px;
+top: 700px;
 width: 375px;
 height: 586px;
 background-color: #F8F8F8;
-
+margin-top: 32px;
 `;
 
 const QP = styled.p`
@@ -288,6 +297,109 @@ line-height: 18px;
 margin-left: 90px;
 
 `;
+const FolderImage = styled.img`
+  z-index: 0;
+  width: 327px;
+  height: 196px;
+
+`;
+
+const FolderImageContainer = styled.div`
+  position: relative;
+  width: 357px;
+  margin-bottom: 24px;
+  margin-left: 24px;
+
+
+`;
+
+const FolderContent = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-left: 32px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+`;
+const IMG = styled.img`
+  position: absolute;
+  padding-top: 58px;
+  width: 48px;
+  height: 48px;
+  z-index: 1;
+`;
+const TipImage = styled.img`
+  position: absolute;
+  margin-top: 115px;
+  width: 53px;
+  height: 23px;
+  z-index: 1;
+`;
+const AnswerLinkContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+
+
+//폴더 안 텍스트
+const QText = styled.p`
+  font-size: 14px;
+  margin: 0;
+  margin-top: 63px;
+  margin-left: 60px;
+  margin-bottom: 19px;
+  weight: 600;
+  width: 235px;
+  height: 36px;
+  font-family: Pretendard;
+  z-index: 1;
+  word-break: keep-all;
+  display: flex;
+  align-items: center;
+`;
+const CText = styled.p`
+  font-size: 12px;
+  margin: 0;
+  margin-left: 60px;
+  weight: 600;
+  width: 235px;
+  height: 14px;
+  font-family: Pretendard;
+  color: #808080;
+  z-index: 1;
+  word-break: keep-all;
+  display: flex;
+  align-items: center;
+`;
+const AnswerText = styled.p`
+  font-size: 12px;
+  margin: 0;
+  margin-top: 24px;
+  weight: 600;
+  width: 118px;
+  height: 16px;
+  font-family: Pretendard;
+  color: #808080;
+  z-index: 1;
+`;
+
+const QuestionContainer = styled.div`
+display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  width: 330px;
+`;
+
+
+
 
 
 
@@ -376,40 +488,43 @@ const HomePageFirst = () => {
         <ButtonA onClick={handleButtonClick}>전체보기 &gt; </ButtonA>
         </ButtonContainer>
         <Newq>지인들에게 나에 대해 물어보세요!</Newq>
-        <ButtonsContainer>
+        <QuestionContainer>
           <ButtonQ src={Home1}onClick={() => navigate(`/SurveyFirst`)}/>
           <ButtonQ1 src={Home2}onClick={() => navigate(`/SurveyFirst`)}/>
-        </ButtonsContainer>
+        </QuestionContainer>
 
         <ButtonNew onClick={handleButtonClick}> + 나만의 질문 만들기</ButtonNew>
         <DIVB>
         <ButtonsContainer>
         <Header3>최근에 만든 질문</Header3>
-        <ButtonA onClick={handleButton3Click}>전체보기 &gt;</ButtonA>
+        <ButtonB onClick={handleButton3Click}>전체보기 &gt;</ButtonB>
         </ButtonsContainer>
         {questions.length > 0 ? (
-          <>
-           <MadeF>만든 폴더를 공유하고 답변을 확인해보세요.</MadeF>
-            {questions.slice(0, 3).map((question, index) => (
-              <div key={question.questionId}>
-                {question && question.question && question.voteEnd && (
-                  <P onClick={() => handleQuestionClick(question.questionId, index)}>
-                  emoji: {question.emoji && <Emoji src={getEmojiImage(question.emoji)} alt="Emoji" />}
-                    Question: {question.question} <br />
-                    Comment: {question.comment}
-                  </P>
-                )}
-              </div>
-            ))}
-          </>
-        ) : (
-          <><Questionp>
+        questions.slice(0, 2).map((question, index) => (
+        <div key={question.questionId}>
+        {question && question.question && (
+        <FolderImageContainer onClick={() => handleQuestionClick(question.questionId, index)}>
+          <FolderImage src={homeFolder} />
+          <FolderContent>
+            <IMG src={getEmojiImage(question.emoji)} alt="Emoji" />
+            <TipImage src={Tip} />
+            <QText>{question.question}</QText>
+            <CText>{question.comment}</CText>
+            <AnswerLinkContainer>
+              <AnswerText><RedText>{question.VoteNum}명</RedText>이 답변을 남겼어요!</AnswerText>
+            </AnswerLinkContainer>
+          </FolderContent>
+        </FolderImageContainer>
+      )}
+    </div>
+  ))
+) : (
+  <><Questionp>
               <QP>진행중인 폴더가 없어요! </QP>
               <Qp>새로운 폴더를 만들고 공유해보세요.</Qp>
               <Img src={NewquesButton}onClick={() => navigate(`/SurveyFirst`)}/>
             </Questionp></>
-
-        )}
+)}
         </DIVB>
       </Survey>
     </Div>
@@ -417,5 +532,8 @@ const HomePageFirst = () => {
 };
 
 export default HomePageFirst;
+
+
+
 
 
