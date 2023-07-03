@@ -135,19 +135,25 @@ margin-top: 16px;
 `;
 const modalStyles = {
   content: {
-    width: '300px',
-    height: '280px',
-    margin: 'auto',
-    borderRadius: '10px',
-    padding: '20px',
-    background: 'var(--background-gra, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%))',
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    transform: 'translate(-50%, -50%)',
-    borderStyle: 'none',
-  }
+      position: 'absolute',
+      width: '343px',
+      height: '300px',
+      borderRadius: '10px',
+      background: 'var(--background-gra, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%))',
+      margin: 'auto',
+      padding: '0',
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      transform: 'translate(-50%, -50%)',
+      zIndex: '2',
+      borderStyle : 'none',
+    },
+    overlay: {
+      backgroundColor: 'rgba(0, 0, 0, 0.50)',
+      zIndex: '2',
+    },
 };
 
 
@@ -218,7 +224,6 @@ const MyAnsewer = () => {
           <Modal isOpen={modalOpen} onRequestClose={handleCloseModal} style={modalStyles}>
           {modalOpen && <AddAnswerQuest key="add-answer"  handleCloseModal={handleCloseModal} />}
           </Modal>
-        <NoAnswer src={noAnswer} onClick={handleButtonClick}/>
           </Survey>
         </Div>
       );

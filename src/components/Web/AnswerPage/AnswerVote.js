@@ -36,20 +36,27 @@ margin-left:18px;
 
 const modalStyles = {
   content: {
-    width: '300px',
-    height: '550px',
-    margin: 'auto',
-    borderRadius: '10px',
-    padding: '20px',
-    background: 'var(--background-gra, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%))',
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    transform: 'translate(-50%, -50%)',
-    borderStyle: 'none',
-  }
+      position: 'absolute',
+      width: '343px',
+      height: '610px',
+      borderRadius: '10px',
+      background: 'var(--background-gra, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%))',
+      margin: 'auto',
+      padding: '0',
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      transform: 'translate(-50%, -50%)',
+      zIndex: '2',
+      borderStyle : 'none',
+    },
+    overlay: {
+      backgroundColor: 'rgba(0, 0, 0, 0.50)',
+      zIndex: '2',
+    },
 };
+
 const FolderImageContainer = styled.div`
   position: relative;
   width: 357px;
@@ -172,6 +179,7 @@ const NewAnswer = styled.img`
 width: 327px;
 height: 64px;
 margin-top: 16px;
+margin-bottom: 120px;
 `;
 
 const AnswerVote = () => {
@@ -264,6 +272,7 @@ const handleCloseModal = () => {
 
 
 
+
   return (
     <>{isVote() ? <AnswerEnd /> :
     <Div>
@@ -300,6 +309,7 @@ const handleCloseModal = () => {
               setModalOpen={setModalOpen}
               totalVote={totalVote}
               answerId={answerId}
+              answer = {answer}
               handleCloseModal={handleCloseModal}
             />
           )}

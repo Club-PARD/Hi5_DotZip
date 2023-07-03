@@ -67,6 +67,31 @@ padding-left: 16px;
     outline: 1px solid var(--primary-orange, #EC582F);
   }
 `;
+
+const InputReason = styled.textarea`
+ ::placeholder {
+    /* placeholder 스타일 */
+    color:  var(--gray-60, #808080);
+ }
+ color :var(--black-90, #212121);
+font-size: 14px;
+font-family: Pretendard;
+font-style: normal;
+font-weight: 500;
+line-height: 18px;
+border-radius: 8px;
+border: 1px solid var(--gray-60, #808080);
+backdrop-filter: blur(2px);
+width: 295px;
+height: 102px;
+background-color: transparent;
+padding-left: 16px;
+padding-top : 15px;
+&:focus {
+    border: none;
+    outline: 1px solid var(--primary-orange, #EC582F);
+  }
+`;
 const InputNum = styled.span`
 text-align: right;
 color: var(--gray-60, #808080);
@@ -84,11 +109,10 @@ align-items: center; /* 가로 중앙 정렬 */
 const Submit = styled.input`
 border-radius: 24px;
 background: ${({ isAnswerEmpty }) => (isAnswerEmpty ? "var(--white-100, #FFF)" : 'var(--background-orange, #FFF8F3);')};
-width: 180px;
-padding: 11px 80px;
-border-style: none;
-gap: 4px;
 color: ${({ isAnswerEmpty }) => (isAnswerEmpty ? 'var(--gray-60, #808080)' : '#EC582F')};
+width: 180px;
+height: 40px;
+border-style: none;
 
 /* Body/B1-14-SB */
 font-size: 14px;
@@ -97,6 +121,7 @@ font-style: normal;
 font-weight: 600;
 line-height: 18px;
 margin-top: 8px;
+text-align: center;
 `;
 const Warning = styled.div`
   color: var(--primary-orange, #EC582F);
@@ -186,31 +211,31 @@ const AddAnswer = ({handleCloseModal }) => {
           value={nickname}
           onChange={onChangenickName}
           type="text"
-          placeholder="nickName"
-          maxLength={120}
+          placeholder="10자 이내로 원하는 닉네임을 적어주세요."
+          maxLength={10}
         />
       <InputNum>{inputCountName}/10</InputNum>
-        <Header2>키워드</Header2>
+        <Header2>새로운 답변</Header2>
         <Input
           value={answer}
           onChange={onChange}
           type="text"
-          placeholder="answer"
-          maxLength={120}
+          placeholder="10자 이내로 새로운 답변을 적어주세요"
+          maxLength={10}
         />
       <InputNum>{inputCount}/10</InputNum>
         <Header2>이유</Header2>
-          <Input
+          <InputReason
           value={reason}
           onChange={onChangeReason}
           type="text"
-          placeholder="Reason"
+          placeholder="답변을 작성한 이유를 적어보세요"
           maxLength={100}
         />
       <InputNum>{inputCountReason}/100</InputNum>
       <DDiv >
         <Warning>답변은 1인당 1개만 투표할 수 있어요</Warning>
-      <Submit type="submit" value="추가" isAnswerEmpty={isAnswerEmpty()} />
+      <Submit type="submit" value="추가하기" isAnswerEmpty={isAnswerEmpty()} />
       </DDiv>
       </Form>
     </Div>

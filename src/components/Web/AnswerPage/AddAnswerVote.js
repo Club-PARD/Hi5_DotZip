@@ -4,11 +4,32 @@ import { collection, getDocs, updateDoc, doc, addDoc } from "firebase/firestore"
 import { useNavigate, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 
+const Warning = styled.div`
+  color: var(--primary-orange, #EC582F);
+/* Body/B2-12-SB */
+font-size: 12px;
+font-family: Pretendard;
+font-style: normal;
+font-weight: 600;
+line-height: 16px;
+margin-top: 32px;
+`;
 const Div = styled.div`
 display: flex;
 justify-content: center;
 align-items: center;
-
+`;
+const AnswerDiv = styled.div`
+`;
+const Answer = styled.div`
+width: ${props => props.answerLength * 30}px;
+height: 40px;
+border-radius: 24px;
+border: 2px solid var(--primary-orange, #EC582F);
+text-align:center;
+display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 const Form = styled.form`
 display: flex;
@@ -65,6 +86,10 @@ width: 295px;
 height: 48px;
 background-color: transparent; 
 padding-left: 16px;
+&:focus {
+    border: none;
+    outline: 1px solid var(--primary-orange, #EC582F);
+  }
 `;
 const InputReason = styled.textarea`
  ::placeholder {
@@ -85,6 +110,10 @@ height: 102px;
 background-color: transparent;
 padding-left: 16px;
 padding-top : 15px;
+&:focus {
+    border: none;
+    outline: 1px solid var(--primary-orange, #EC582F);
+  }
 `;
 const InputNum = styled.span`
 text-align: right;
@@ -98,12 +127,11 @@ line-height: 16px;
 
 const Submit = styled.input`
 border-radius: 24px;
-background: var(--gray-10, #F8F8F8);
 width: 180px;
-padding: 11px 80px;
+height: 40px;
 border-style: none;
-gap: 4px;
-color: var(--gray-60, #808080);
+background: ${({ isAnswerEmpty }) => (isAnswerEmpty ? "var(--white-100, #FFF)" : 'var(--background-orange, #FFF8F3);')};
+color: ${({ isAnswerEmpty }) => (isAnswerEmpty ? 'var(--gray-60, #808080)' : '#EC582F')};
 
 /* Body/B1-14-SB */
 font-size: 14px;
@@ -111,7 +139,8 @@ font-family: Pretendard;
 font-style: normal;
 font-weight: 600;
 line-height: 18px;
-margin-top: 24px;
+margin-top: 8px;
+margin-bottom: 20px;
 `;
 const DDiv = styled.div`
 display: flex;
@@ -129,7 +158,7 @@ border: 2px solid var(--primary-orange, #EC582F);
 background-color: transparent;
 `;
 
-const AddAnswerVote = ({ totalVote,answerId,handleCloseModal }) => {
+const AddAnswerVote = ({ totalVote,answerId,handleCloseModal, answer }) => {
 
 const closeModal = () => {
   // 모달 닫기 로직 구현
@@ -186,21 +215,19 @@ const onChangenickName = (e) => {
   setNickName(value);
   setInputCountName(e.target.value.length);
 };
+const isAnswerEmpty = ()=> {
+  return reason==="" || nickname === "";
+}
 
-const prac = (e) => {
-  const { value } = e.target;
-  setNickName(value);
-  setInputCountName(e.target.value.length);
-  if (e.target.value.length >= 5) {
-    var length = e.target.value.length + "ch";
-    e.target.style.width = length;
-  }
-}; //나중에 이거 긁어가자
 
 return (
   <Div>
     <Form onSubmit={onSubmit}>
-      <Header1  onClick={closeModal} >투표항목 추가하기</Header1>
+      <Header1  onClick={closeModal} >투표하기</Header1>
+      <Header2>선택한 답변</Header2>
+      <AnswerDiv>
+      <Answer answerLength = {answer.length}>{answer}</Answer>
+      </AnswerDiv>
       <Header2>닉네임</Header2>
       <Input
         value={nickname}
@@ -220,9 +247,9 @@ return (
       />
               <InputNum>{inputCountReason}/100</InputNum>
               <DDiv >
-      <Submit type="submit" value="추가" />
+      <Warning>답변은 1인당 1개만 투표할 수 있어요</Warning>
+      <Submit type="submit" value="투표하기" isAnswerEmpty={isAnswerEmpty()} />
       </DDiv>
-      {/* <Prac onChange={prac}></Prac> */}
     </Form>
   </Div>
 );

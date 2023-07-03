@@ -72,14 +72,12 @@ export const GlobalStyle = createGlobalStyle`
     font-display: swap;
 } 
 
-  body{
-      font-family: "Pretendard";
-      background-color: #fff;
-      margin: 0;
-      padding: 0;
-
-   }
-
+body {
+  font-family: "Pretendard";
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+}
 `;
 
 export const theme = {
