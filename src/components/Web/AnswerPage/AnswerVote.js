@@ -13,6 +13,7 @@ import emoji2 from '../../../img/emoji2.png';
 import emoji3 from '../../../img/emoji3.png';
 import emoji4 from '../../../img/emoji4.png';
 import emoji5 from '../../../img/emoji5.png';
+import newAnswer from '../../../img/newAnswer.png'
 
 const Div = styled.div`
   display: flex;
@@ -22,13 +23,22 @@ const Div = styled.div`
   align-items: center;
   margin-top: 70px;
 `;
+const Head = styled.div`
+  color: var(--gray-90, #353535);
+/* Head/H4-24-32-B */
+font-size: 24px;
+font-family: PretendardBold;
+font-style: normal;
+font-weight: 700;
+line-height: 32px;
+margin-left:18px;
+`;
 
 const modalStyles = {
   content: {
     width: '300px',
     height: '550px',
     margin: 'auto',
-    border: '1px solid #ccc',
     borderRadius: '10px',
     padding: '20px',
     background: 'var(--background-gra, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%))',
@@ -37,17 +47,19 @@ const modalStyles = {
     right: 'auto',
     bottom: 'auto',
     transform: 'translate(-50%, -50%)',
+    borderStyle: 'none',
   }
 };
 const FolderImageContainer = styled.div`
   position: relative;
-  width: 375px;
-  height: 196px;
-  margin-bottom: 24px;
+  width: 357px;
+  margin-top: 32px;
+
 `;
 const FolderImage = styled.img`
-  width: 327px;
-  height: 125px;
+
+  width: 100%;
+  height: 100%;
   z-index: 0;
 `;
 const FolderContent = styled.div`
@@ -64,38 +76,102 @@ const FolderContent = styled.div`
 `;
 const IMG = styled.img`
   position: absolute;
-  padding-top: 58px;
+  padding-top: 60px;
   width: 48px;
   height: 48px;
+  margin-left: 5px;
 `;
 const QText = styled.p`
+  font-family: Pretendard;
   font-size: 14px;
   margin: 0;
-  margin-top: 63px;
-  margin-left: 60px;
-  margin-bottom: 19px;
+  margin-top: 60px;
+  margin-left: 76px;
   font-weight: 600;
   width: 235px;
-  height: 36px;
-  font-family: Pretendard;
-  z-index: 1;
   word-break: keep-all;
   display: flex;
   align-items: center;
 `;
 const CText = styled.p`
   font-size: 12px;
-  margin: 0;
-  margin-left: 60px;
+  margin-top: 8px;
+  margin-left: 76px;
   font-weight: 600;
   width: 235px;
-  height: 14px;
   font-family: Pretendard;
   color: #808080;
-  z-index: 1;
   word-break: keep-all;
   display: flex;
   align-items: center;
+`;
+const Hr = styled.hr`
+  border: 1px dashed #ABABAB; // Specify the border width: ;
+  width: 327px;
+  margin-bottom: 32px;
+  margin-top: 32px;
+`;
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+const Button = styled.button`
+position: relative;
+width: 327px;
+height: 64px;
+border-radius: 8px;
+border: 1px solid var(--gray-30, #ABABAB);
+text-align: left;
+background: transparent;
+color: var(--gray-90, #353535);
+font-size: 18px;
+font-family: Pretendard;
+font-style: normal;
+font-weight: 600;
+line-height: 24px;
+margin-top: 16px;
+&::after {
+      content: '✔'; //이미지
+      position: absolute;
+      top: 50%;
+      right: 24px;
+      transform: translateY(-50%);
+      cursor: pointer;
+  }
+`;
+const Container = styled.div`
+  width: 375px;
+`;
+const Header1 = styled.div`
+  color: var(--black-90, #212121);
+font-size: 20px;
+font-family: Pretendard;
+font-style: normal;
+font-weight: 700;
+line-height: 24px;
+margin-left: 24px;
+`;
+const Header2 = styled.div`
+color: var(--gray-60, #808080);
+
+/* Body/B4-14-SB */
+font-size: 14px;
+font-family: Pretendard;
+font-style: normal;
+font-weight: 600;
+line-height: 18px;
+margin-left: 24px;
+margin-top: 2px;
+margin-bottom: 8px;
+`;
+
+const NewAnswer = styled.img`
+width: 327px;
+height: 64px;
+margin-top: 16px;
 `;
 
 const AnswerVote = () => {
@@ -191,6 +267,10 @@ const handleCloseModal = () => {
   return (
     <>{isVote() ? <AnswerEnd /> :
     <Div>
+      <Container>
+      <Head>질문 폴더를 받으셨네요 🤩️</Head>
+      <Head>답변을 보내보세요!</Head>
+      </Container>
       <FolderImageContainer>
         <FolderImage src={samllFolder1} />
         <FolderContent>
@@ -199,11 +279,16 @@ const handleCloseModal = () => {
           <CText>{commentzip}</CText>
         </FolderContent>
       </FolderImageContainer>
+      <Hr></Hr>
+      <Container>
+      <Header1>투표 참여하기</Header1>
+      <Header2>답변을 투표하거나 새롭게 추가할 수 있어요!</Header2>
+      </Container>
     {documents.map(({ answer, totalVote, answerId }) => (
-      <div key={answerId}>
-        <button onClick={() => handleButtonClick(answerId)}>
-          Answer: {answer}, {totalVote}, {answerId}
-        </button>
+      <ButtonContainer key={answerId}>
+        <Button onClick={() => handleButtonClick(answerId)}>
+          {answer}
+        </Button>
         <Modal
           isOpen={modalOpen && selectedAnswerId === answerId}
           onRequestClose={handleCloseModal}
@@ -219,14 +304,12 @@ const handleCloseModal = () => {
             />
           )}
         </Modal>
-      </div>
+      </ButtonContainer>
     ))}
     
-          {documents.length < 10 && (
-            <button onClick={showModal_new} key="add-button">키워드 후보 추가하기</button>
-          )}
+            <NewAnswer src={newAnswer} onClick={showModal_new} key="add-button"></NewAnswer>
           <Modal isOpen={modalOpen_new} onRequestClose={handleCloseModal_new} style={modalStyles}>
-          {modalOpen_new && <AddAnswer key="add-answer" />}
+          {modalOpen_new && <AddAnswer key="add-answer" handleCloseModal={handleCloseModal_new} />}
           </Modal>
         </Div>
     
