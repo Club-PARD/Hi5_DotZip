@@ -141,7 +141,8 @@ const modalStyles = {
     border: '1px solid #ccc',
     borderRadius: '10px',
     padding: '20px',
-    background: 'var(--background-gra, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%))'
+    background: 'var(--background-gra, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%))',
+    marginRight : '5px'
   }
 };
 

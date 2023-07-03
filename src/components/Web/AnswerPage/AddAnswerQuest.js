@@ -63,6 +63,11 @@ width: 295px;
 height: 48px;
 background-color: transparent; 
 padding-left: 16px;
+
+&:focus {
+    border: none;
+    outline: 1px solid var(--primary-orange, #EC582F);
+  }
 `;
 
 const InputNum = styled.span`
