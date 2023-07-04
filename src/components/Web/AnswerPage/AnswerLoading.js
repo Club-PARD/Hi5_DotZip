@@ -51,8 +51,8 @@ const AnswerLoading = () => {
       }, []);
   return (
     <Div>
-    <Header1>작성해주신 답변이 <br/> {userName}님의 폴더에 전달되고 있어요</Header1>
-    <Header2>{userName}님을 잘 아시는군요?</Header2>
+    <Header1>답변 가고 있는중...</Header1>
+    {/* <Header2></Header2> */}
         <Animation/>
     </Div>
   );
