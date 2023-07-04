@@ -12,7 +12,7 @@ import emoji5 from '../../../img/emoji5.png';
 import BackNavbar from '../../BackNavbar'
 import progress from '../../../img/Line2.png';
 import check from '../../../img/Group 33956.png';
-
+import tip from '../../../img/Tip.png'
 
 
 
@@ -93,7 +93,8 @@ font-weight: 500;
 line-height: 18px;
 letter-spacing: 0em;
 text-align: left;
-
+/* background-color: transparent;  */
+padding-left: 16px;
 }
 width: 327px;
 height: 66px;
@@ -107,7 +108,8 @@ font-weight: 500;
 line-height: 18px;
 letter-spacing: 0em;
 text-align: left;
-
+padding-left: 8px;
+padding-top: 8px;
 `;
 
 const InputQues1 = styled.textarea`
@@ -132,6 +134,8 @@ font-weight: 500;
 line-height: 18px;
 letter-spacing: 0em;
 text-align: left;
+padding-left: 8px;
+padding-top: 8px;
 `;
 
 
@@ -141,6 +145,7 @@ height: 48px;
 top: 655px;
 left: 24px;
 border: white;
+background-color: white;
   color: ${({ isAnswerEmpty }) => (isAnswerEmpty ? 'var(--gray-60, #808080)' : '#EC582F')};
 `;
 
@@ -174,7 +179,7 @@ position: absolute;
 const Check = styled.img `
   position: absolute;
   width : 64px;
-  height : 64px;
+  height : 65px;
   opacity : ${({ active }) => (active ? 1 : 0)};
 `
 
@@ -265,7 +270,6 @@ function SurveyCreate() {
           voteEnd,
           emoji: selectedEmoji, // Include the selected emoji value in the data
           timestamp,
-          voteNum:1
         });
     
         console.log('Data saved successfully');
@@ -273,7 +277,6 @@ function SurveyCreate() {
       setComment('');
       setSelectedEmoji(null);
       navigate(`/MyAnswer/${questionId}`);
-      //navigate(`/SurveyShare/${questionId}?question=${question}&comment=${comment}`);
     } catch (error) {
       console.error('Error adding document:', error);
     }
@@ -310,15 +313,19 @@ function SurveyCreate() {
           </EmojiButton>
           <EmojiButton onClick={() => setSelectedEmoji('emoji2')} >
             <EmojiImage src={emoji2} alt="Emoji"active={selectedEmoji === 'emoji2'} />
+            <Check src={check} active={selectedEmoji === 'emoji2'}  />
           </EmojiButton>
           <EmojiButton onClick={() => setSelectedEmoji('emoji3')} >
             <EmojiImage src={emoji3} alt="Emoji" active={selectedEmoji === 'emoji3'} />
+            <Check src={check} active={selectedEmoji === 'emoji3'}  />
           </EmojiButton>
           <EmojiButton onClick={() => setSelectedEmoji('emoji4')} >
             <EmojiImage src={emoji4} alt="Emoji" active={selectedEmoji === 'emoji4'} />
+            <Check src={check} active={selectedEmoji === 'emoji4'}  />
           </EmojiButton>
           <EmojiButton onClick={() => setSelectedEmoji('emoji5')}  alt="Emoji" active={selectedEmoji === 'emoji5'}>
             <EmojiImage src={emoji5}/>
+            <Check src={check} active={selectedEmoji === 'emoji5'}  />
           </EmojiButton>
         </ButtonContainer>
         <QuestionP>질문</QuestionP>
