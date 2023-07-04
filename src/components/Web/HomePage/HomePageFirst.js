@@ -100,7 +100,7 @@ const HeaderContainer = styled.div`
   margin-bottom: 10px;
   width: 330px;
   margin-left: 24px;
-  margin-top: 70px;
+  margin-top: 80px;
 `;
 
 
