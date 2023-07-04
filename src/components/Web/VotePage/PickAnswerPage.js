@@ -285,6 +285,8 @@ const HomeImage = styled.img`
 `;
 const EndButton = styled.button`
     margin-left: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     width: 318px;
     height: 47px;
     border-radius: 10px;
@@ -718,8 +720,8 @@ function PickAnswerPage() {
                         <ReasonBox>
                         {reasonzips[currentReasonIndex] && (
                           <>
-                            <ReasonModalText3><ReasonModalText3Point>{reasonzips[currentReasonIndex].nickname}</ReasonModalText3Point> 님의 답변</ReasonModalText3>
-                            <ReasonModalText4>{reasonzips[currentReasonIndex].reason}</ReasonModalText4>
+                            <ReasonModalText3><ReasonModalText3Point>{reasonzips[reasonzips.length - 1 - currentReasonIndex].nickname}</ReasonModalText3Point> 님의 답변</ReasonModalText3>
+                            <ReasonModalText4>{reasonzips[reasonzips.length - 1 - currentReasonIndex].reason}</ReasonModalText4>
                           </>
                         )}
                             <ModalCancelButton style={{width: '72px', height: '32px', marginLeft:'16px', marginRight:'4px'}} onClick={handlePreviousReason} disabled={currentReasonIndex === 0}>이전</ModalCancelButton>

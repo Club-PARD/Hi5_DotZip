@@ -1,5 +1,13 @@
 import React from 'react';
 import html2canvas from 'html2canvas';
+import styled from "styled-components";
+import SaveImage from '../../../img/SaveImage.png';
+
+const SaveButton = styled.img`
+    width: 157px;
+    height: 48px;
+    margin-left: 24px;
+`;
 
 const ImageSaveButton = () => {
   const handleSaveImage = () => {
@@ -16,7 +24,7 @@ const ImageSaveButton = () => {
   };
 
   return (
-    <button onClick={handleSaveImage}>이미지 저장하기</button>
+    <SaveButton src = {SaveImage} onClick={handleSaveImage} />
   );
 };
 

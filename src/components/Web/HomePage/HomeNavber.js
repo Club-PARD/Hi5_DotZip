@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { dbService } from '../../../fbase';
-import { collection, onSnapshot, query, where, orderBy } from 'firebase/firestore';
 import styled from 'styled-components';
 
 
 const HomeP = styled.header`
   gap: 10px;
   width: 130px;
-  color: white;
-  border-bottom: 2px solid black;
-  color: black;
+  color: #ABABAB;
   text-align: center;
 `;
 
@@ -20,6 +16,7 @@ const HeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+  margin-top: 10px;
   margin-bottom: 10px;
   width: 330px;
   margin-left: 24px;
@@ -39,8 +36,9 @@ const Profile = styled.button`
   font-weight: 700;
   line-height: 20px;
   letter-spacing: 0em;
-  color: #ababab;
+  color: #353535;
   background-color: white;
+  border: none;
   border-bottom: 2px solid black;
 `;
 
@@ -55,8 +53,8 @@ const HomeNavbar = () => {
       navigate('/MyProfile');
     };
       return(
-        <HeaderContainer>
-        <HomeP onClick={HomeOnClick} >Home</HomeP>
+      <HeaderContainer>
+        <HomeP onClick={HomeOnClick} >홈</HomeP>
         <Profile onClick={onClick}>프로필</Profile>
       </HeaderContainer>
       );
