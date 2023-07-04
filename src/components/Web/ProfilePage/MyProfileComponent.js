@@ -112,7 +112,7 @@ const MyProfileComponent = () => {
     return (
         <>
             <Profile>
-                <Profile1Text><Red>{userNickname}</Red> 님의</Profile1Text>
+                <Profile1Text><Red onClick={showModal}>{userNickname}</Red> 님의</Profile1Text>
                 <Img src = {UserNameImoticon} onClick={showModal} />
                 <Modal isOpen={modalOpen} onRequestClose={handleCloseModal} style={modalStyles}>
                   {modalOpen && <NameModal key="update-name"  handleCloseModal={handleCloseModal} handleNicknameUpdate={handleNicknameUpdate}/>}

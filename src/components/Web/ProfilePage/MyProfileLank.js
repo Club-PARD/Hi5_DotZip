@@ -5,6 +5,8 @@ import { dbService } from "../../../fbase.js";
 import MyProfileNoQ from '../ProfilePage/MyProfileNoQ';
 import ProfileAnimation from './ProfileAnimation';
 import MyProfileFolderImage from '../../../img/MyProfileFolder.png';
+import ImageSaveButton from '../ProfilePage/SaveImage';
+import MyKakaoShareButton from '../ProfilePage/MyKakaoShare';
 
 //랭킹 top3 키워드
 const Wrapper = styled.div`
@@ -69,6 +71,11 @@ const AText = styled.p`
   font-weight: 700;
   line-height: 28px;
   text-align: center;
+`;
+const Container = styled.div`
+    display: flex;
+    flex-direction: row;
+    padding-top: 85px;
 `;
 
 
@@ -141,6 +148,10 @@ const MyProfileLank = () => {
                     ))}
                   </ProfileWrapper>
               </Wrapper>
+              <Container>
+                <MyKakaoShareButton/>
+                <ImageSaveButton/>
+              </Container>
               </>
             ) : (
               <MyProfileNoQ />

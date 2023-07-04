@@ -2,10 +2,9 @@ import styled from "styled-components";
 import React from 'react';
 import Navbar from '../../Navbar';
 import HomeNavbar from '../HomePage/HomeNavber';
-import MyKakaoShareButton from '../ProfilePage/MyKakaoShare';
 import MyProfileComponent from '../ProfilePage/MyProfileComponent';
 import MyProfileLank from '../ProfilePage/MyProfileLank';
-import ImageSaveButton from '../ProfilePage/SaveImage';
+
 
 
 
@@ -27,11 +26,6 @@ const Div = styled.div`
     margin-left: 8px;
     margin-right: 8px;
 `;
-const Container = styled.div`
-    display: flex;
-    flex-direction: row;
-    padding-top: 85px;
-`;
 
 
 const MyProfilePage = () => {
@@ -43,10 +37,6 @@ const MyProfilePage = () => {
           <HomeNavbar />
           <MyProfileComponent />
           <MyProfileLank />
-          <Container>
-            <MyKakaoShareButton/>
-            <ImageSaveButton/>
-          </Container>
         </Div>
       </DDiv>
       </>

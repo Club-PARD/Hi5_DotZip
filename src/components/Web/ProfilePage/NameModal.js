@@ -114,7 +114,9 @@ const NameModal = ({handleCloseModal, handleNicknameUpdate }) => {
   const closeModal = () => {
     // 모달 닫기 로직 구현
     handleCloseModal(); // handleCloseModal 함수 호출
-    handleNicknameUpdate(name); // handleNicknameUpdate 콜백 함수 호출
+    if (name) {
+      handleNicknameUpdate(name); // handleNicknameUpdate 콜백 함수 호출
+    }
   };
 
   const [name, setName] = useState("");
