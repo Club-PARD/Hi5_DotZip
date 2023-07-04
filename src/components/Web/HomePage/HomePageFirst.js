@@ -237,7 +237,8 @@ gap: 6px;
 top: 876px;
 width: 154px;
 height: 40px;
-margin-left: 40px;
+margin-left: 111.5px;
+margin-top: 24px;
 
 `;
 
