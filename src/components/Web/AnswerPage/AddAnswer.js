@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { dbService } from "../../../fbase.js";
-import { collection, addDoc,updateDoc ,serverTimestamp} from "firebase/firestore";
+import { collection, addDoc,updateDoc ,serverTimestamp, getDoc, doc} from "firebase/firestore";
 import { useNavigate, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 import cancleX from "../../../img/CancelX.png"
@@ -141,6 +141,7 @@ const AddAnswer = ({handleCloseModal }) => {
   const [answer, setAnswer] = useState("");
   const [reason, setReason] = useState("");
   const [nickname, setNickName] = useState("");
+  const [kakao , setKakao] = useState("");
   const closeModal = () => {
     // 모달 닫기 로직 구현
     handleCloseModal(); // handleCloseModal 함수 호출
@@ -152,11 +153,25 @@ const AddAnswer = ({handleCloseModal }) => {
   let [inputCount, setInputCount] = useState(0);
   let [inputCountReason, setInputCountReason] = useState(0);
   let [inputCountName, setInputCountName] = useState(0);
+
+  const collectionRef =doc(dbService, "zip_Question",questionId);
+  getDoc(collectionRef).then((docSnapshot) => {
+    if (docSnapshot.exists()) {
+      const data = docSnapshot.data();
+      const kakaoId = data.kakaoId;
+      setKakao(kakaoId);
+    } else {
+      console.log("No matching document found.");
+    }
+  }).catch((error) => {
+    console.log("Error getting document: ", error);
+  });
   const data = {
     answer: answer,
     totalVote: 1,
     questionId :questionId,//params로 받은 변수 넣기
     timestamp,
+    kakaoId:kakao
   }
   const onSubmit = async (e) => {
     e.preventDefault();

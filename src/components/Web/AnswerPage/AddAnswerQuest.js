@@ -120,12 +120,13 @@ const AddAnswerQuest = ({ handleCloseModal }) => {
   const timestamp = serverTimestamp();
   const [inputCountName, setInputCountName] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  const kakaoId = localStorage.getItem("kakaoId");
   const data = {
     answer: answer,
     totalVote: 1,
     questionId: questionId, //params로 받은 변수 넣기
     timestamp,
+    kakaoId: kakaoId
   };
 
   const onSubmit = async (e) => {
