@@ -68,7 +68,6 @@ const FolderImage = styled.img`
 
   width: 100%;
   height: 100%;
-  z-index: 0;
 `;
 const FolderContent = styled.div`
   position: absolute;
@@ -120,6 +119,7 @@ const Hr = styled.hr`
   margin-top: 32px;
 `;
 const ButtonContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -141,14 +141,13 @@ font-style: normal;
 font-weight: 600;
 line-height: 24px;
 margin-top: 16px;
-&::after {
-      content: url(${check}); //이미지
-      position: absolute;
-      top: 55%;
-      right: 20px;
-      transform: translateY(-50%);
-      cursor: pointer;
-  }
+`;
+const Check = styled.img`
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  right: 16px;
 `;
 const Container = styled.div`
   width: 375px;
@@ -300,6 +299,7 @@ const handleCloseModal = () => {
       <ButtonContainer key={answerId}>
         <Button onClick={() => handleButtonClick(answerId)}>
           {answer}
+          <Check src={check} />
         </Button>
         <Modal
           isOpen={modalOpen && selectedAnswerId === answerId}

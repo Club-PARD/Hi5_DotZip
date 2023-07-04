@@ -3,6 +3,7 @@ import { dbService } from "../../../fbase.js";
 import { collection, addDoc,updateDoc ,serverTimestamp} from "firebase/firestore";
 import { useNavigate, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
+import cancleX from "../../../img/CancelX.png"
 const Div = styled.div`
 display: flex;
 justify-content: center;
@@ -15,14 +16,14 @@ font-size: 20px;
 font-weight: 700px;
 line-height: 24px;
 cursor: default;
-&::after {
-      content: 'X'; //이미지
-      position: absolute;
-      top: 50%;
-      right: 24px;
-      transform: translateY(-50%);
-      cursor: pointer;
-  }
+display: flex;
+`;
+const X = styled.img`
+width: 24px;
+height: 24px;
+  position: absolute;
+  right: 1px;
+  cursor: pointer;
 `;
 const Form = styled.form`
 display: flex;
@@ -213,7 +214,7 @@ const AddAnswer = ({handleCloseModal }) => {
   return (
     <Div>
       <Form onSubmit={onSubmit}>
-      <Header1  onClick={closeModal} >새로운 답변 추가하기</Header1>
+      <Header1>새로운 답변 추가하기 <X src={cancleX} onClick={closeModal}/></Header1>
       <Header2>닉네임</Header2>
       <Input
           value={nickname}
@@ -243,7 +244,7 @@ const AddAnswer = ({handleCloseModal }) => {
       <InputNum>{inputCountReason}/100</InputNum>
       <DDiv >
         <Warning>답변은 1인당 1개만 투표할 수 있어요</Warning>
-      <Submit type="submit" value="추가하기" isAnswerEmpty={isAnswerEmpty()} />
+      <Submit type="submit" value="추가하기" isAnswerEmpty={isAnswerEmpty()}  />
       </DDiv>
       </Form>
     </Div>

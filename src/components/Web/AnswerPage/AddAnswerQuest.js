@@ -3,6 +3,7 @@ import { dbService } from "../../../fbase.js";
 import { collection, updateDoc, addDoc, serverTimestamp } from "firebase/firestore";
 import { useNavigate, useParams } from 'react-router-dom';
 import { css, styled } from 'styled-components';
+import cancleX from "../../../img/CancelX.png"
 
 const Div = styled.div`
   display: flex;
@@ -28,14 +29,13 @@ const Header1 = styled.div `
   font-weight: 700;
   line-height: 24px;
   cursor: default;
-  &::after {
-    content: 'X'; //이미지
-    position: absolute;
-    top: 50%;
-    right: 24px;
-    transform: translateY(-50%);
-    cursor: pointer;
-  }
+`;
+const X = styled.img`
+width: 24px;
+height: 24px;
+  position: absolute;
+  right: 1px;
+  cursor: pointer;
 `;
 
 const Header2 = styled.div`
@@ -86,7 +86,7 @@ const Submit = styled.input`
   border-radius: 24px;
   background: ${({ isAnswerEmpty }) => (isAnswerEmpty ? "var(--white-100, #FFF)" : 'var(--background-orange, #FFF8F3);')};
   width: 180px;
-  padding: 11px 80px;
+  height: 48px;
   border-style: none;
   gap: 4px;
   color: ${({ isAnswerEmpty }) => (isAnswerEmpty ? 'var(--gray-60, #808080)' : '#EC582F')};
@@ -119,6 +119,7 @@ const AddAnswerQuest = ({ handleCloseModal }) => {
   const nickname = localStorage.getItem("userName");
   const timestamp = serverTimestamp();
   const [inputCountName, setInputCountName] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const data = {
     answer: answer,
@@ -129,6 +130,10 @@ const AddAnswerQuest = ({ handleCloseModal }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) {
+      return; // 이미 제출 중인 경우 중복 제출 방지
+    }
+    setIsSubmitting(true);
     try {
       const newDocRef = await addDoc(road, data);
       await updateDoc(newDocRef, {
@@ -143,6 +148,8 @@ const AddAnswerQuest = ({ handleCloseModal }) => {
       navigate(`/PickAnswer/${questionId}`);
     } catch (error) {
       console.error("Error adding document: ", error);
+    }finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -159,7 +166,7 @@ const AddAnswerQuest = ({ handleCloseModal }) => {
   return (
     <Div>
       <Form onSubmit={onSubmit}>
-        <Header1 onClick={closeModal}>투표항목 추가하기</Header1>
+        <Header1 >투표항목 추가하기 <X src={cancleX} onClick={closeModal} /></Header1>
         <Header2>키워드</Header2>
         <Input
           value={answer}
@@ -170,7 +177,7 @@ const AddAnswerQuest = ({ handleCloseModal }) => {
         />
         <InputNum>{inputCountName}/10</InputNum>
         <DDiv>
-          <Submit type="submit" value="추가하기" isAnswerEmpty={isAnswerEmpty()} />
+        <Submit type="submit" value="추가하기" isAnswerEmpty={isAnswerEmpty()} disabled={isAnswerEmpty()} />
         </DDiv>
       </Form>
     </Div>
