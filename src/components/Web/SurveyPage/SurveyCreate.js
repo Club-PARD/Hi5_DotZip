@@ -265,6 +265,7 @@ function SurveyCreate() {
           voteEnd,
           emoji: selectedEmoji, // Include the selected emoji value in the data
           timestamp,
+          voteNum:1
         });
     
         console.log('Data saved successfully');

@@ -196,6 +196,7 @@ const AnswerVote = () => {
   const handleButtonClick = (answerId) => {
     setSelectedAnswerId(answerId); // 선택된 버튼의 answerId를 상태로 설정
     setModalOpen(true); // 모달 열기
+    localStorage.setItem(questionId, answerId); // localStorage에 (questionId, answerId) 저장
   };
   const handleCloseModal_new = () => {
     setModalOpen_new(false);
@@ -264,6 +265,7 @@ const handleCloseModal = () => {
   const isVote = () => {
     return questionId === localStorage.getItem("questionId");
   };
+
   
 
   const [modalOpen_new, setModalOpen_new] = useState(false);

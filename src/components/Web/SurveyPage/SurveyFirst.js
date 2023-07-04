@@ -200,7 +200,8 @@ function SurveyFirst() {
         comment,
         voteEnd,
         timestamp,
-        emoji  : selectedEmoji
+        emoji  : selectedEmoji,
+        voteNum:1
       });
 
       
