@@ -181,6 +181,7 @@ const AddAnswer = ({handleCloseModal }) => {
       setReason("");
       setNickName("");
       setIsSubmitting(false);
+      localStorage.setItem(questionId,newDocRef.id);
       navigate(`/AnswerLoading/${questionId}`);
     } catch (error) {
       console.error("Error adding document: ", error);

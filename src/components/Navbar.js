@@ -7,7 +7,8 @@ import styled /*{ ThemeProvider } */ from 'styled-components';
 const NavBarWrapper = styled.nav`
   height: 70px;
   display: flex;
-  justify-content: center;
+
+  align-items: center;
   position: fixed;
   top: 0;
   left: 50%;
@@ -30,17 +31,10 @@ const Setting  = styled.div `
     }
 
 `;
-const Home  = styled.div `      
-  &::after {        
-    content: url(${logo}); //이미지
-    color:black;
-        position: absolute;
-        top: 50%;
-        left : 24px;
-        transform: translateY(-50%);
-        cursor: pointer;
-    }
-
+const Home  = styled.img `      
+  width: 32px;
+  height: 34.15px ;
+  margin-left: 24px;
 `;
 
 const NavBar = () => {
@@ -54,7 +48,7 @@ const NavBar = () => {
     return(
     <NavBarWrapper>
 
-        <Home onClick={HomeOnClick}></Home>
+        <Home src={logo} onClick={HomeOnClick}></Home>
         <Setting onClick={onClick}></Setting>
     </NavBarWrapper>
     );

@@ -127,7 +127,7 @@ const AnswerText = styled.p`
     height: 20px;
     font-family: Pretendard;
 `;
-const Percentage = styled.p`
+const VotePercentage = styled.p`
     margin-top: 14px;
     margin-right: 8px;
     margin-bottom: 8px;
@@ -138,9 +138,29 @@ const Percentage = styled.p`
     font-family: Pretendard;
     color: #EC582F;
 `;
+const Percentage = styled.p`
+    margin-top: 14px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    margin-left: auto;
+    font-size: 14px;
+    font-weight: 600;
+    height: 18px;
+    font-family: Pretendard;
+    color: #ababab;
+`;
 const PercentageContainer = styled.div`
     display: flex;
     align-items: center;
+`;
+const VotePercentBox = styled.div`
+    width: 280px;
+    height: 8px;
+    margin-left: 12px;
+    border-radius: 10px;
+    border: 0;
+    background: linear-gradient(to right, #EC582F ${props => props.percentage}%, #FFF8F3 ${props => props.percentage}%);
+    color: #000000;
 `;
 const PercentBox = styled.div`
     width: 280px;
@@ -148,7 +168,7 @@ const PercentBox = styled.div`
     margin-left: 12px;
     border-radius: 10px;
     border: 0;
-    background: linear-gradient(to right, #EC582F ${props => props.percentage}%, #FFF8F3 ${props => props.percentage}%);
+    background: linear-gradient(to right, #ababab ${props => props.percentage}%, #eee ${props => props.percentage}%);
     color: #000000;
 `;
 const VoteNumber = styled.p`
@@ -256,6 +276,8 @@ const AnswerEnd = () => {
     setVoteEnd(targetQ.voteEnd); // 투표 종료 여부 판단
   };
 
+
+
   return (
     <Div>
       <NavBar/>
@@ -280,11 +302,18 @@ const AnswerEnd = () => {
   <VoteBox key={answerId}>
       <AnswerContainer>
           <AnswerText>{answer}</AnswerText>
-          <Percentage>{((totalVote / totalVotes) * 100).toFixed(0)}%</Percentage>
+          {answerId === localStorage.getItem(questionId) ? (
+          <VotePercentage>{((totalVote / totalVotes) * 100).toFixed(0)}%</VotePercentage>
+          ):(
+            <Percentage>{((totalVote / totalVotes) * 100).toFixed(0)}%</Percentage>
+          )}
       </AnswerContainer>
       <PercentageContainer>
-         <PercentBox percentage={(totalVote/ totalVotes) * 100} />   {/*여기에 props로 보내서 선택한것만 볼 수 있도록 */}
-          <VoteNumber>{totalVote}명</VoteNumber>
+      {answerId === localStorage.getItem(questionId) ? (
+            <VotePercentBox percentage={(totalVote / totalVotes) * 100} />
+          ) : (
+            <PercentBox percentage={(totalVote / totalVotes) * 100} />
+          )}
       </PercentageContainer>
 </VoteBox>
       ))}
