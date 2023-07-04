@@ -140,12 +140,15 @@ padding-top: 8px;
 
 
 const Submit = styled.button`
-  // width: 327px;
-  height: 48px;
-  top: 655px;
-  left: 24px;
+  width: 327px;
+height: 48px;
+flex-shrink: 0;
+border-radius: 10px;
+background: var(--gray-10, #F8F8F8);
+margin-left: 24px;
+margin-top: 132px;
   border: white;
-  background-color: white;
+  background:${({ isAnswerEmpty }) => (isAnswerEmpty ? 'var(--gray-10, #F8F8F8)' : '#FFF8F3')};
   color: ${({ isAnswerEmpty }) => (isAnswerEmpty ? 'var(--gray-60, #808080)' : '#EC582F')};
   cursor: ${({ isAnswerEmpty }) => (isAnswerEmpty ? 'not-allowed' : 'pointer')};
   pointer-events: ${({ isAnswerEmpty }) => (isAnswerEmpty ? 'none' : 'auto')};
@@ -202,6 +205,7 @@ font-weight: 700;
 line-height: 20px;
 letter-spacing: 0em;
 text-align: left;
+margin-top: 29px;
 
 
 `;

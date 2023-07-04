@@ -191,6 +191,12 @@ const ButtonA = styled.button`
   background: white;
   border: 1px solid white;
   left: 24px;
+  font-size: 14px;
+  font-family: Pretendard;
+font-style: normal;
+font-weight: 600;
+line-height: 18px;
+color: var(--gray-60, #808080);
 `;
 const ButtonB = styled.button`
   width: 100px;
@@ -199,6 +205,12 @@ const ButtonB = styled.button`
   left: 293px;
   background: #F8F8F8;
   border: 1px solid #F8F8F8;
+  font-size: 14px;
+font-family: Pretendard;
+font-style: normal;
+font-weight: 600;
+line-height: 18px;
+color: var(--gray-60, #808080);
 `;
 
 const ButtonNew = styled.button`
