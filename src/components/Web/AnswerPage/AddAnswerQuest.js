@@ -168,12 +168,12 @@ const AddAnswerQuest = ({ handleCloseModal }) => {
     <Div>
       <Form onSubmit={onSubmit}>
         <Header1 >투표항목 추가하기 <X src={cancleX} onClick={closeModal} /></Header1>
-        <Header2>키워드</Header2>
+        <Header2>내 답변</Header2>
         <Input
           value={answer}
           onChange={onChangeAnswer}
           type="text"
-          placeholder="10자 이내로 키워드를 적어보세요."
+          placeholder="10자 이내로 답변 키워드를 적어보세요."
           maxLength={10}
         />
         <InputNum>{inputCountName}/10</InputNum>
