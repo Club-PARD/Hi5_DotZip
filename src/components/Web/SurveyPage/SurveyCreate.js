@@ -11,7 +11,7 @@ import emoji4 from '../../../img/emoji4.png';
 import emoji5 from '../../../img/emoji5.png';
 import BackNavbar from '../../BackNavbar'
 import progress from '../../../img/Line2.png';
-import check from '../../../img/Group 33956.png';
+import check from '../../../img/CreateCheck.png';
 import tip from '../../../img/Tip.png'
 
 
@@ -140,14 +140,17 @@ padding-top: 8px;
 
 
 const Submit = styled.button`
-// width: 327px;
-height: 48px;
-top: 655px;
-left: 24px;
-border: white;
-background-color: white;
+  // width: 327px;
+  height: 48px;
+  top: 655px;
+  left: 24px;
+  border: white;
+  background-color: white;
   color: ${({ isAnswerEmpty }) => (isAnswerEmpty ? 'var(--gray-60, #808080)' : '#EC582F')};
+  cursor: ${({ isAnswerEmpty }) => (isAnswerEmpty ? 'not-allowed' : 'pointer')};
+  pointer-events: ${({ isAnswerEmpty }) => (isAnswerEmpty ? 'none' : 'auto')};
 `;
+
 
 const Div = styled.div`
   display: flex;
@@ -270,6 +273,7 @@ function SurveyCreate() {
           voteEnd,
           emoji: selectedEmoji, // Include the selected emoji value in the data
           timestamp,
+          VoteNum:1
         });
     
         console.log('Data saved successfully');
@@ -291,9 +295,10 @@ function SurveyCreate() {
     setQuestion(value);
     setInputCountName(e.target.value.length);
   };
-  const isAnswerEmpty = ()=> {
-    return question === "" || comment==="" ||(question === "" && comment === "" );
-  }
+  const isAnswerEmpty = () => {
+    return question.trim() === '' || comment.trim() === '' || selectedEmoji === null;
+  };
+  
     
 
   return (

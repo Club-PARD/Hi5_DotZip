@@ -237,6 +237,7 @@ const Question1Create = () => {
           voteEnd,
           emoji: "emoji1", // Include the selected emoji value in the data
           timestamp,
+          VoteNum:1
         });
     
         console.log('Data saved successfully');

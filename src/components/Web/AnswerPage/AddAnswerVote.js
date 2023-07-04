@@ -18,6 +18,7 @@ const Div = styled.div`
 display: flex;
 justify-content: center;
 align-items: center;
+margin: 0 auto;
 `;
 const AnswerDiv = styled.div`
 `;
