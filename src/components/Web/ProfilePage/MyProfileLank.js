@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { collection, query, orderBy, limit, getDocs, where} from "firebase/firestore";
 import { dbService } from "../../../fbase.js";
 import MyProfileNoQ from '../ProfilePage/MyProfileNoQ';
-import Loading from '../ProfilePage/Loding';
+import ProfileAnimation from './ProfileAnimation';
 import MyProfileFolderImage from '../../../img/MyProfileFolder.png';
 
 //랭킹 top3 키워드
@@ -92,7 +92,7 @@ const MyProfileLank = () => {
               };
     
               // 질문 가져오기
-              console.log(document);
+              console.log("확인",document);
               const questionSnapshot = await getDocs(
                 query(collection(dbService, "zip_Question"), where('questionId', '==', document.questionId))
               );
@@ -115,39 +115,37 @@ const MyProfileLank = () => {
             setLoading(false);
           }
         };
-    
         fetchDocuments();
       }, []);
     return (
       <>
-  {loading ? (
-    <Loading /> // 로딩 중인 경우에 표시할 로딩 스피너
-  ) : (
-    // 데이터 로딩이 완료된 경우에 렌더링
-    <>
-      {top3Answer.length > 0 ? (
-        <>
-        <Wrapper>
-          <MyProfileFolder src={MyProfileFolderImage} alt="Profile Image" />
-            <ProfileWrapper>
-              {top3Answer.map(({ answer, ID, question }, index) => (
-                <VoteKewordBox key={ID} style={{ marginTop: index === 0 ? '41px' : '11px' }}>
-                  <TextContainer>
-                    <QText>{question}</QText>
-                    <AText>{answer}</AText>
-                  </TextContainer>
-                </VoteKewordBox>
-              ))}
-            </ProfileWrapper>
-        </Wrapper>
-        </>
-      ) : (
-        <MyProfileNoQ />
-      )}
-    </>
-  )}
-</>
-
+        {loading ? (
+          <ProfileAnimation /> // 로딩 중인 경우에 표시할 로딩 스피너
+        ) : (
+          // 데이터 로딩이 완료된 경우에 렌더링
+          <>
+            {top3Answer.length > 0 ? (
+              <>
+              <Wrapper>
+                <MyProfileFolder src={MyProfileFolderImage} alt="Profile Image" />
+                  <ProfileWrapper>
+                    {top3Answer.map(({ answer, ID, question }, index) => (
+                      <VoteKewordBox key={ID} style={{ marginTop: index === 0 ? '41px' : '11px' }}>
+                        <TextContainer>
+                          <QText>{question}</QText>
+                          <AText>{answer}</AText>
+                        </TextContainer>
+                      </VoteKewordBox>
+                    ))}
+                  </ProfileWrapper>
+              </Wrapper>
+              </>
+            ) : (
+              <MyProfileNoQ />
+            )}
+          </>
+        )}
+      </>
     );
 }
 export default MyProfileLank;
