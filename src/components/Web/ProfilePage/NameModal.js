@@ -83,12 +83,12 @@ const InputNum = styled.span`
 
 const Submit = styled.input`
   border-radius: 24px;
-  background: ${({ isAnswerEmpty }) => (isAnswerEmpty ? "var(--white-100, #FFF)" : 'var(--background-orange, #FFF8F3);')};
+  background: var(--background-orange, #FFF8F3);
   width: 180px;
   padding: 11px 80px;
   border-style: none;
   gap: 4px;
-  color: ${({ isAnswerEmpty }) => (isAnswerEmpty ? 'var(--gray-60, #808080)' : '#EC582F')};
+  color: #EC582F;
 
   /* Body/B1-14-SB */
   font-size: 14px;
@@ -97,6 +97,11 @@ const Submit = styled.input`
   font-weight: 600;
   line-height: 18px;
   margin-top: 24px;
+  &:disabled {
+    background: var(--gray-10, #F8F8F8);;
+    color: #808080;
+    cursor: not-allowed;
+  }
 `;
 
 const DDiv = styled.div`
@@ -165,7 +170,7 @@ const NameModal = ({handleCloseModal, handleNicknameUpdate }) => {
         />
         <InputNum>{inputCountName}/10</InputNum>
         <DDiv>
-          <Submit type="submit" value="저장" isAnswerEmpty={isAnswerEmpty()} />
+          <Submit type="submit" value="저장" disabled={isAnswerEmpty()} />
         </DDiv>
       </Form>
     </Div>

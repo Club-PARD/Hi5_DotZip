@@ -88,7 +88,6 @@ const MyProfileComponent = () => {
         await updateDoc(docRef, {
           userName: newUserName
         });
-        console.log('Firestore userName updated:', newUserName);
         setuserNickname(newUserName); // userNickname 값을 업데이트
       } catch (error) {
         console.error('Error updating Firestore userName:', error);
@@ -98,7 +97,6 @@ const MyProfileComponent = () => {
     useEffect(() => {
       localStorage.setItem('userName', userNickname);
       updateFirestoreUserName(userNickname);
-      console.log(localStorage.getItem("userName"));
     }, [userNickname]);
 
     const [modalOpen, setModalOpen] = useState(false);

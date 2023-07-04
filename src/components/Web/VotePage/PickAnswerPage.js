@@ -236,7 +236,6 @@ const Percentage = styled.p`
     font-weight: 600;
     height: 18px;
     font-family: Pretendard;
-    color: #EC582F;
 `;
 const PercentageContainer = styled.div`
     display: flex;
@@ -248,7 +247,10 @@ const VoteBox = styled.div`
     margin-left: 12px;
     border-radius: 10px;
     border: 0;
-    background: linear-gradient(to right, #EC582F ${props => props.percentage}%, #FFF8F3 ${props => props.percentage}%);
+    background: ${({ percentage, isLastIndex }) =>
+    isLastIndex
+      ? `linear-gradient(to right, #EC582F ${percentage}%, #FFF8F3 ${percentage}%)`
+      : `linear-gradient(to right, #ABABAB ${percentage}%, #EEE ${percentage}%)`};
     color: #000000;
 `;
 const VoteNumber = styled.p`
@@ -412,7 +414,6 @@ const ReasonBox = styled.div`
   border-radius: 10px;
   background: var(--white-100, #FFF);
   box-shadow: 0px 2px 10px 0px #FFE2CE;
-  padding-bottom: 12px;
   margin-top: -280px;
 `;
 const ReasonModalText1 = styled.p`
@@ -468,10 +469,11 @@ const ReasonModalText4 = styled.p`
   line-height: 18px;
   width: 148px;
   height: 126px;
+  margin: 0;
   margin-left: 16px;
   word-wrap: break-word;
   word-break: break-all;
-  white-space: pre;
+  white-space: pre-wrap;
 `;
 
 
@@ -687,15 +689,15 @@ function PickAnswerPage() {
                     <HeartTipImage src = {HeartTip}></HeartTipImage>
                     <TipText>키워드를 작성한 이유는 나에게만 보여요.</TipText>
                 </TipBox>
-                {answerzips.map((answerzip) => (
+                {answerzips.map((answerzip, index) => (
                     <div key={answerzip.id}>
                         <AnswerBox onClick={() => handleVoteBoxClick(answerzip.answer, answerzip.id)}>
                             <AnswerContainer>
                                 <AnswerText>{answerzip.answer}</AnswerText>
-                                <Percentage>{((answerzip.totalVote / totalVotes) * 100).toFixed(0)}%</Percentage>
+                                <Percentage style={{ color: index === answerzips.length - 1 ? '#EC582F' : '#808080' }}>{((answerzip.totalVote / totalVotes) * 100).toFixed(0)}%</Percentage>
                             </AnswerContainer>
                             <PercentageContainer>
-                                <VoteBox percentage={(answerzip.totalVote / totalVotes) * 100} />
+                                <VoteBox percentage={(answerzip.totalVote / totalVotes) * 100} isLastIndex={index === answerzips.length - 1}/>
                                 <VoteNumber>{answerzip.totalVote}명</VoteNumber>
                             </PercentageContainer>
                         </AnswerBox>
@@ -726,7 +728,7 @@ function PickAnswerPage() {
                           </>
                         )}
                             <ModalCancelButton style={{width: '72px', height: '32px', marginLeft:'16px', marginRight:'4px'}} onClick={handlePreviousReason} disabled={currentReasonIndex === 0}>이전</ModalCancelButton>
-                            <ModalCheckButton style={{width: '72px', height: '32px'}} onClick={handleNextReason} disabled={currentReasonIndex === reasonzips.length - 1}>다음</ModalCheckButton>
+                            <ModalCheckButton style={{width: '72px', height: '32px', margin: '0'}} onClick={handleNextReason} disabled={currentReasonIndex === reasonzips.length - 1}>다음</ModalCheckButton>
                         </ReasonBox>
                     <ModalCheckButton isopen="false" onClick={handleCloseModal} style={{ width: '180px', marginBottom: '24px', marginTop: '60px' }}> <RedText>확인</RedText> </ModalCheckButton>
                 </Modal>

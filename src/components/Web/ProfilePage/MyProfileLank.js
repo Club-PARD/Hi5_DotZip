@@ -100,15 +100,17 @@ const MyProfileLank = () => {
                   id: doc.id,
                   ...doc.data(),
                 }));
+                console.log("question", questionData);
                 const question = questionData[0].question;
-                console.log("확인", question);
+                console.log("question", question);
                 document.question = question;
     
               topThreeDocuments.push(document);
-            }
+            } //for
             setTop3Answer(topThreeDocuments);
+            console.log(loading);
             setLoading(false);
-            console.log("확인", topThreeDocuments);
+            console.log("topThreeDocuments", topThreeDocuments);
             // 여기서 상태(state)로 할당하거나 렌더링할 수 있습니다.
           } catch (error) {
             console.error('Error getting documents:', error);
