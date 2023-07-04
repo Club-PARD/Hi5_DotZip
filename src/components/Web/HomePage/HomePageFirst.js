@@ -24,7 +24,7 @@ const Div = styled.div`
   
 `;
 
-const HeaderP = styled.p`
+const HeaderP = styled.header`
 color: var(--gray-90, #353535);
 /* Head/H2-20-B */
 font-size: 20px;
@@ -32,11 +32,11 @@ font-family: Pretendardbold;
 font-style: normal;
 line-height: 24px;
 margin-left: 24px;
+margin-bottom: 26px;
 `;
 
 const HeaderDiv = styled.header`
 width: 170px;
-height: 24px;
 top: 152px;
 margin-left: 24px;
 font-family: Pretendardbold;
@@ -44,6 +44,7 @@ font-size: 20px;
 line-height: 24px;
 letter-spacing: 0em;
 margin-top: 25px;
+margin-bottom: 8px;
 `;
 
 const Header3 = styled.p`
@@ -73,13 +74,22 @@ const Survey = styled.div`
   //background-color:white;
 `;
 
-const HomeP = styled.header`
+const HomeP = styled.button`
   gap: 10px;
   width: 130px;
-  color: white;
-  border-bottom: 2px solid black;
-  color: black;
+  height: 40px;
+  top: 80px;
   text-align: center;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 0em;
+  color: #353535;
+  background-color: white;
+  border: none;
+  border-bottom: 2px solid black;
+
 `;
 
 const HeaderContainer = styled.div`
@@ -144,9 +154,10 @@ display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+  margin-top: 10px;
   margin-bottom: 10px;
-  width: 340px;
-  margin-left:24px;
+  width: 330px;
+  margin-left: 24px;
 `;
 const Questionp = styled.div`
 color: black;
@@ -159,16 +170,17 @@ const Profile = styled.button`
   height: 40px;
   top: 80px;
   left: 186px;
-  padding: 8px 61.5px;
+  //padding: 8px 61.5px;
   gap: 10px;
   font-family: Pretendard;
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
   letter-spacing: 0em;
-  color: #ababab;
+  color: #ABABAB;
   background-color: white;
-  border: 1px solid white;
+  border: none;
+  /* border-bottom: 2px solid white; */
 `;
 
 const ButtonA = styled.button`
@@ -231,7 +243,7 @@ top: 724px;
 left: 5px;
 font-family: Pretendard;
 font-size: 14px;
-weight: 600;
+font-weight: 600;
 line-height: 18px;
 letter-spacing: 0em;
 text-align: left;
@@ -337,7 +349,7 @@ const QText = styled.p`
   margin-top: 63px;
   margin-left: 60px;
   margin-bottom: 19px;
-  weight: 600;
+  font-weight: 600;
   width: 235px;
   height: 36px;
   font-family: Pretendard;
@@ -350,7 +362,7 @@ const CText = styled.p`
   font-size: 12px;
   margin: 0;
   margin-left: 60px;
-  weight: 600;
+  font-weight: 600;
   width: 235px;
   height: 14px;
   font-family: Pretendard;
@@ -364,7 +376,7 @@ const AnswerText = styled.p`
   font-size: 12px;
   margin: 0;
   margin-top: 24px;
-  weight: 600;
+  font-weight: 600;
   width: 118px;
   height: 16px;
   font-family: Pretendard;
@@ -551,6 +563,7 @@ const HomePageFirst = () => {
 };
 
 export default HomePageFirst;
+
 
 
 
