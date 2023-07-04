@@ -6,6 +6,7 @@ import { dbService } from "../../../fbase.js";
 import NameModal from './NameModal';
 import Modal from 'react-modal';
 
+
 const Profile1Text = styled.p`
   font-size: 24px;
   font-weight: 700;

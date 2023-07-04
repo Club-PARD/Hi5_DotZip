@@ -8,6 +8,7 @@ import MyProfileLank from '../ProfilePage/MyProfileLank';
 import ImageSaveButton from '../ProfilePage/SaveImage';
 
 
+
 //기본틀
 const DDiv = styled.div`
     display: flex;
@@ -31,6 +32,7 @@ const Container = styled.div`
     flex-direction: row;
     padding-top: 85px;
 `;
+
 
 const MyProfilePage = () => {
     return(

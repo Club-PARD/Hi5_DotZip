@@ -4,17 +4,73 @@ import { collection, query, orderBy, limit, getDocs, where} from "firebase/fires
 import { dbService } from "../../../fbase.js";
 import MyProfileNoQ from '../ProfilePage/MyProfileNoQ';
 import Loading from '../ProfilePage/Loding';
+import MyProfileFolderImage from '../../../img/MyProfileFolder.png';
 
 //랭킹 top3 키워드
-const VoteKewordBox = styled.div`
-    white-space: pre-line;
-    width: 200px;
-    height: 100px;
-    margin: 5px;
-    border: 1px solid black;
-    background: skyblue;
-    color: #ffffff;
+const Wrapper = styled.div`
+  position: relative;
+  width: 359px;
+  height: 329px;
+  margin-top: 32px;
+  margin-left: 8px;
 `;
+
+const MyProfileFolder = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+const ProfileWrapper = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+`;
+
+const VoteKewordBox = styled.div`
+  display: flex;
+  align-items: center;
+  width: 295px;
+  height: 80px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-10, #F8F8F8);
+  background: var(--background-orange, #FFF8F3);
+  margin-left: 32px;
+`;
+const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 295px;
+`;
+const QText = styled.p`
+  color: var(--gray-60, #808080);
+  font-size: 12px;
+  font-family: Pretendard;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  margin: 0;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  text-align: center;
+`;
+const AText = styled.p`
+  color: var(--primary-orange, #EC582F);
+  margin: 0;
+  font-size: 24px;
+  font-family: Pretendard;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px;
+  text-align: center;
+`;
+
 
 const MyProfileLank = () => {
     const road = collection(dbService, 'zip_Answer');
@@ -64,21 +120,34 @@ const MyProfileLank = () => {
       }, []);
     return (
       <>
-      {loading ? (
-        <Loading /> // 로딩 중인 경우에 표시할 로딩 스피너
-      ) : (
-        // 데이터 로딩이 완료된 경우에 렌더링
+  {loading ? (
+    <Loading /> // 로딩 중인 경우에 표시할 로딩 스피너
+  ) : (
+    // 데이터 로딩이 완료된 경우에 렌더링
+    <>
+      {top3Answer.length > 0 ? (
         <>
-          {top3Answer.length > 0 ? (
-            top3Answer.map(({ answer, ID, question }, index) => (
-              <VoteKewordBox key={ID}>{`질문 : ${question} \n ${index + 1}위 ${answer}`}</VoteKewordBox>
-            ))
-          ) : (
-            <MyProfileNoQ />
-          )}
+        <Wrapper>
+          <MyProfileFolder src={MyProfileFolderImage} alt="Profile Image" />
+            <ProfileWrapper>
+              {top3Answer.map(({ answer, ID, question }, index) => (
+                <VoteKewordBox key={ID} style={{ marginTop: index === 0 ? '41px' : '11px' }}>
+                  <TextContainer>
+                    <QText>{question}</QText>
+                    <AText>{answer}</AText>
+                  </TextContainer>
+                </VoteKewordBox>
+              ))}
+            </ProfileWrapper>
+        </Wrapper>
         </>
+      ) : (
+        <MyProfileNoQ />
       )}
     </>
+  )}
+</>
+
     );
 }
 export default MyProfileLank;
