@@ -201,7 +201,7 @@ function SurveyFirst() {
         voteEnd,
         timestamp,
         emoji  : selectedEmoji,
-        voteNum:1
+        VoteNum:1
       });
 
       

@@ -18,6 +18,7 @@ const Div = styled.div`
 display: flex;
 justify-content: center;
 align-items: center;
+margin: 0 auto;
 `;
 const AnswerDiv = styled.div`
 `;
@@ -255,7 +256,7 @@ return (
               <InputNum>{inputCountReason}/100</InputNum>
               <DDiv >
       <Warning>답변은 1인당 1개만 투표할 수 있어요</Warning>
-      <Submit type="submit" value="투표하기" isAnswerEmpty={isAnswerEmpty()} />
+      <Submit type="submit" value="투표하기" isAnswerEmpty={isAnswerEmpty()}  disabled={isAnswerEmpty()} />
       </DDiv>
     </Form>
   </Div>

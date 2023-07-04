@@ -100,7 +100,7 @@ const HeaderContainer = styled.div`
   margin-bottom: 10px;
   width: 330px;
   margin-left: 24px;
-  margin-top: 70px;
+  margin-top: 80px;
 `;
 
 
@@ -191,6 +191,12 @@ const ButtonA = styled.button`
   background: white;
   border: 1px solid white;
   left: 24px;
+  font-size: 14px;
+  font-family: Pretendard;
+font-style: normal;
+font-weight: 600;
+line-height: 18px;
+color: var(--gray-60, #808080);
 `;
 const ButtonB = styled.button`
   width: 100px;
@@ -199,6 +205,12 @@ const ButtonB = styled.button`
   left: 293px;
   background: #F8F8F8;
   border: 1px solid #F8F8F8;
+  font-size: 14px;
+font-family: Pretendard;
+font-style: normal;
+font-weight: 600;
+line-height: 18px;
+color: var(--gray-60, #808080);
 `;
 
 const ButtonNew = styled.button`
@@ -506,15 +518,15 @@ const HomePageFirst = () => {
         </HeaderContainer>
         <HeaderDiv>안녕하세요, <RedText>{userNickname}</RedText> 님</HeaderDiv>
         <HeaderP>나의 프로필.ZiP을 만들어보세요!</HeaderP>
-        <Banner src={banner} onClick={() => navigate(`/SurveyFirst`)}/>
+        <Banner src={banner} onClick={() => navigate(`/BannerCreate/${kakaoId}`)}/>
         <ButtonContainer>
         <NewQ>새로운 질문 만들기</NewQ>
         <ButtonA onClick={handleButtonClick}>전체보기 &gt; </ButtonA>
         </ButtonContainer>
         <Newq>지인들에게 나에 대해 물어보세요!</Newq>
         <QuestionContainer>
-          <ButtonQ src={Home1} onClick={() => navigate(`/SurveyFirst`)}/>
-          <ButtonQ1 src={Home2} onClick={() => navigate(`/SurveyFirst`)}/>
+          <ButtonQ src={Home1} onClick={() => navigate(`/Question1Create/${kakaoId}`)}/>
+          <ButtonQ1 src={Home2} onClick={() => navigate(`/BannerCreate/${kakaoId}`)}/>
         </QuestionContainer>
         <ButtonNew onClick={handleButtonClick}> + 나만의 질문 만들기</ButtonNew>
         <DIVB>

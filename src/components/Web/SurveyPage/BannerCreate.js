@@ -237,6 +237,7 @@ const BannerCreate = () => {
           voteEnd,
           emoji: "emoji3", // Include the selected emoji value in the data
           timestamp,
+          VoteNum:1
         });
     
         console.log('Data saved successfully');

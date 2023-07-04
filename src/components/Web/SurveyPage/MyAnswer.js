@@ -1,25 +1,45 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { dbService } from '../../../fbase';
-import { collection, addDoc,updateDoc, doc, onSnapshot,serverTimestamp } from 'firebase/firestore';
+import { collection, deleteDoc,updateDoc, doc, onSnapshot,serverTimestamp } from 'firebase/firestore';
 import styled from 'styled-components';
-import BackNavBar from '../../BackNavbar'
+
 import progress from '../../../img/Line2.png'
-import tipimage from '../../../img/Tip.png'
 import addVote from '../../../img/addVote.png'
 import AddAnswerQuest from '../AnswerPage/AddAnswerQuest';
 import Modal from 'react-modal';
-import noAnswer from '../../../img/noAnswer.png'
 import emoji1 from '../../../img/emoji1.png';
 import emoji2 from '../../../img/emoji2.png';
 import emoji3 from '../../../img/emoji3.png';
 import emoji4 from '../../../img/emoji4.png';
 import emoji5 from '../../../img/emoji5.png';
-import tip from '../../../img/TipHeart.png'
 
-const Div = styled.div`
-  
+const DDiv = styled.div`
+  width: 375px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
 `;
+const Div = styled.div`
+  width: 100%;
+  margin-right: 15px;
+`;
+const NavbarWrapper = styled.nav`
+  width: 327px;
+  display: flex;
+  height: 64px;
+`;
+
+const BackButton = styled.button`
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  margin-left: 20px;
+`;
+
 
 const HeaderP = styled.p`
   width: 260px;
@@ -56,7 +76,6 @@ const Survey = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 375px;
-  margin: 0 auto;
   overflow-x: hidden;
 `;
 const Container = styled.div`
@@ -122,36 +141,7 @@ width: 327px;
 height: 48px;
 margin-top: 8px;
 `;
-const NoAnswer = styled.img`
-width: 327px;
-height: 48px;
-margin-top: 16px;
-`;
 
-const Tip = styled.p`
-color: var(--gray-90, #353535);
-/* Body/B1-12-M */
-font-size: 12px;
-font-family: Pretendard;
-font-style: normal;
-font-weight: 500;
-line-height: 16px;
-width: 168px;
-height: 16px;
-top: 385px;
-left: 103px;
-margin-left: 8px;
-
-
-`;
-const TipCon = styled.p`
-display: flex;
-align-items: center;
-`;
-const Img = styled.img`
-width: 55px;
-Height: 24px;
-`;
 
 const modalStyles = {
   content: {
@@ -232,13 +222,29 @@ const MyAnsewer = () => {
       const handleButtonClick = () => {
         navigate(`/SurveyShare/${questionId}`);
       };
+      const fbDelete = async() =>{
+          try {
+            const questionRef = doc(dbService, 'zip_Question', questionId);
+            await deleteDoc(questionRef);
+            console.log('문서가 성공적으로 삭제되었습니다.');
+            navigate(-1);
+            // 삭제 후 필요한 작업 수행
+          } catch (error) {
+            console.error('문서 삭제 중 오류가 발생했습니다:', error);
+            // 오류 처리
+          }
+        };
 
       
     
 
     return (
+      <DDiv>
+        
         <Div>
-          <BackNavBar/>
+        <NavbarWrapper>
+            <BackButton onClick={fbDelete}>{'<'}</BackButton>
+          </NavbarWrapper>
           <Survey>
           <Progress src={progress}/>
             <Header2>
@@ -250,10 +256,6 @@ const MyAnsewer = () => {
                 <IMG src={getEmojiImage(emoji)} alt="Emoji"></IMG>
                 </Container>
                 <Hr></Hr>
-                <TipCon>
-                <Img src={tip}/>
-                <Tip>내가 생각하는 답변을 추가해보세요!</Tip>
-                </TipCon>
             </Header2>
             
           <AddVote src={addVote} onClick={showModal} ></AddVote>
@@ -262,6 +264,7 @@ const MyAnsewer = () => {
           </Modal>
           </Survey>
         </Div>
+        </DDiv>
       );
     };
 
