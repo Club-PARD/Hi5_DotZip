@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React from 'react';
+import Navbar from '../../Navbar';
 import HomeNavbar from '../HomePage/HomeNavber';
 import MyKakaoShareButton from '../ProfilePage/MyKakaoShare';
 import MyProfileComponent from '../ProfilePage/MyProfileComponent';
@@ -36,6 +37,7 @@ const MyProfilePage = () => {
       <>
       <DDiv>
         <Div>
+          <Navbar />
           <HomeNavbar />
           <MyProfileComponent />
           <MyProfileLank />

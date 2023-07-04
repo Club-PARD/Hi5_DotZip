@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { collection, query, orderBy, limit, getDocs, where} from "firebase/firestore";
 import { dbService } from "../../../fbase.js";
 import MyProfileNoQ from '../ProfilePage/MyProfileNoQ';

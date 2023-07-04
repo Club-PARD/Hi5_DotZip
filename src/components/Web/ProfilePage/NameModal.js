@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { dbService } from "../../../fbase.js";
-import { collection, updateDoc, addDoc, serverTimestamp } from "firebase/firestore";
-import { useNavigate, useParams } from 'react-router-dom';
-import { css, styled } from 'styled-components';
+import { updateDoc , doc} from "firebase/firestore";
+import { styled } from 'styled-components';
 
 const Div = styled.div`
   display: flex;
@@ -106,75 +105,71 @@ const DDiv = styled.div`
   align-items: center; /* 가로 중앙 정렬 */
 `;
 
-const AddAnswerQuest = ({ handleCloseModal }) => {
+const NameModal = ({handleCloseModal, handleNicknameUpdate }) => {
   const closeModal = () => {
     // 모달 닫기 로직 구현
     handleCloseModal(); // handleCloseModal 함수 호출
+    handleNicknameUpdate(name); // handleNicknameUpdate 콜백 함수 호출
   };
 
-  const [answer, setAnswer] = useState("");
-  const { questionId } = useParams();
-  const road = collection(dbService, "zip_Answer");
-  const navigate = useNavigate();
-  const nickname = localStorage.getItem("userName");
-  const timestamp = serverTimestamp();
+  const [name, setName] = useState("");
   const [inputCountName, setInputCountName] = useState(0);
+  const userId = localStorage.getItem("kakaoId");
+  const [userNickname, setUserName] = useState(localStorage.getItem("userName"));
 
-  const data = {
-    answer: answer,
-    totalVote: 1,
-    questionId: questionId, //params로 받은 변수 넣기
-    timestamp,
-  };
+  useEffect(() => {
+    localStorage.setItem('userName', userNickname);
+    setUserName(userNickname);
+    console.log(localStorage.getItem("userName"));
+  }, [userNickname]);
+
 
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const newDocRef = await addDoc(road, data);
-      await updateDoc(newDocRef, {
-        answerId: newDocRef.id,
+      const docRef = doc(dbService, 'kakaoId', userId);
+      await updateDoc(docRef, {
+        userName: name
       });
-      await addDoc(collection(dbService, "zip_Reason"), {
-        reason: "내가 선택한건\n이유를 작성하지 않아요.\n\n 다른 사람들의\n 답변을 받고\n 이유를 확인해보세요!",
-        answerId: newDocRef.id,
-        nickname: nickname,
-      });
-      setAnswer("");
-      navigate(`/PickAnswer/${questionId}`);
+      setName("");
+      setUserName(name);
+      localStorage.setItem("userName", name);
+      closeModal();
+      console.log('Firestore userName updated:', name);
     } catch (error) {
-      console.error("Error adding document: ", error);
+      console.error('Error updating Firestore userName:', error);
     }
   };
 
-  const onChangeAnswer = (e) => {
+  const onChangeName = (e) => {
     const { value } = e.target;
-    setAnswer(value);
+    setName(value);
     setInputCountName(e.target.value.length);
   };
 
   const isAnswerEmpty = () => {
-    return answer === "";
+    return name === "";
   };
 
   return (
     <Div>
       <Form onSubmit={onSubmit}>
-        <Header1 onClick={closeModal}>투표항목 추가하기</Header1>
-        <Header2>키워드</Header2>
+        <Header1 onClick={closeModal}>이름 수정하기</Header1>
+        <Header2>이름</Header2>
         <Input
-          value={answer}
-          onChange={onChangeAnswer}
+          value={name}
+          onChange={onChangeName}
           type="text"
-          placeholder="10자 이내로 키워드를 적어보세요."
+          placeholder="10자 이내로 원하는 닉네임을 적어주세요."
           maxLength={10}
         />
         <InputNum>{inputCountName}/10</InputNum>
         <DDiv>
-          <Submit type="submit" value="추가하기" isAnswerEmpty={isAnswerEmpty()} />
+          <Submit type="submit" value="저장" isAnswerEmpty={isAnswerEmpty()} />
         </DDiv>
       </Form>
     </Div>
   );
 };
 
-export default AddAnswerQuest;
+export default NameModal;

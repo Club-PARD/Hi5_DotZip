@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import UserNameImoticon from '../../../img/UserNameImoticon.png';
 import { updateDoc , doc} from "firebase/firestore";
 import { dbService } from "../../../fbase.js";
+import NameModal from './NameModal';
+import Modal from 'react-modal';
 
 const Profile1Text = styled.p`
   font-size: 24px;
@@ -51,15 +53,34 @@ const Profile = styled.div`
   align-items: center;
   padding-bottom: 4px;
 `;
+const modalStyles = {
+  content: {
+      position: 'absolute',
+      width: '343px',
+      height: '300px',
+      borderRadius: '10px',
+      background: 'var(--background-gra, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%))',
+      margin: 'auto',
+      padding: '0',
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      transform: 'translate(-50%, -50%)',
+      zIndex: '2',
+      borderStyle : 'none',
+    },
+    overlay: {
+      backgroundColor: 'rgba(0, 0, 0, 0.50)',
+      zIndex: '2',
+    },
+};
+
 
 const MyProfileComponent = () => {
   const userId = localStorage.getItem("kakaoId");
-    const [userNickname, setUserName] = useState(localStorage.getItem("userName"));
-    useEffect(() => {
-      localStorage.setItem('userName', userNickname);
-      updateFirestoreUserName(userNickname);
-      console.log(localStorage.getItem("userName"));
-    }, [userNickname]);
+  const [userNickname, setuserNickname] = useState(localStorage.getItem("userName"));
+
     const updateFirestoreUserName = async (newUserName) => {
       try {
         const docRef = doc(dbService, 'kakaoId', userId);
@@ -67,22 +88,36 @@ const MyProfileComponent = () => {
           userName: newUserName
         });
         console.log('Firestore userName updated:', newUserName);
+        setuserNickname(newUserName); // userNickname 값을 업데이트
       } catch (error) {
         console.error('Error updating Firestore userName:', error);
       }
     };
 
-    const handleButtonClick = () => {
-        const newUserName = prompt('Enter your new name:');
-        if (newUserName) {
-          setUserName(newUserName);
-        }
-      };
+    useEffect(() => {
+      localStorage.setItem('userName', userNickname);
+      updateFirestoreUserName(userNickname);
+      console.log(localStorage.getItem("userName"));
+    }, [userNickname]);
+
+    const [modalOpen, setModalOpen] = useState(false);
+    const handleCloseModal = () => {
+      setModalOpen(false);
+    };
+    const showModal = ()=>{
+      setModalOpen(!modalOpen);
+    };
+    const handleNicknameUpdate = (newNickname) => {
+      setuserNickname(newNickname);
+    };
     return (
         <>
             <Profile>
                 <Profile1Text><Red>{userNickname}</Red> 님의</Profile1Text>
-                <Img src = {UserNameImoticon} onClick={handleButtonClick}/>
+                <Img src = {UserNameImoticon} onClick={showModal} />
+                <Modal isOpen={modalOpen} onRequestClose={handleCloseModal} style={modalStyles}>
+                  {modalOpen && <NameModal key="update-name"  handleCloseModal={handleCloseModal} handleNicknameUpdate={handleNicknameUpdate}/>}
+                </Modal>
             </Profile>
             <Text>프로필.ZiP</Text>
             <Profile2Text>가장 많이 선택받은 키워드를 확인해보세요!</Profile2Text>

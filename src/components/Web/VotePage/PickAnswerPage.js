@@ -471,6 +471,7 @@ const ReasonModalText4 = styled.p`
   margin-left: 16px;
   word-wrap: break-word;
   word-break: break-all;
+  white-space: pre;
 `;
 
 
