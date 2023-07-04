@@ -506,15 +506,15 @@ const HomePageFirst = () => {
         </HeaderContainer>
         <HeaderDiv>안녕하세요, <RedText>{userNickname}</RedText> 님</HeaderDiv>
         <HeaderP>나의 프로필.ZiP을 만들어보세요!</HeaderP>
-        <Banner src={banner} onClick={() => navigate(`/SurveyFirst`)}/>
+        <Banner src={banner} onClick={() => navigate(`/BannerCreate/${kakaoId}`)}/>
         <ButtonContainer>
         <NewQ>새로운 질문 만들기</NewQ>
         <ButtonA onClick={handleButtonClick}>전체보기 &gt; </ButtonA>
         </ButtonContainer>
         <Newq>지인들에게 나에 대해 물어보세요!</Newq>
         <QuestionContainer>
-          <ButtonQ src={Home1} onClick={() => navigate(`/SurveyFirst`)}/>
-          <ButtonQ1 src={Home2} onClick={() => navigate(`/SurveyFirst`)}/>
+          <ButtonQ src={Home1} onClick={() => navigate(`/Question1Create/${kakaoId}`)}/>
+          <ButtonQ1 src={Home2} onClick={() => navigate(`/BannerCreate/${kakaoId}`)}/>
         </QuestionContainer>
         <ButtonNew onClick={handleButtonClick}> + 나만의 질문 만들기</ButtonNew>
         <DIVB>
