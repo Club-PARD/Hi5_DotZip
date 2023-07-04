@@ -36,7 +36,7 @@ margin-bottom: 26px;
 `;
 
 const HeaderDiv = styled.header`
-width: 170px;
+width: 296px;
 top: 152px;
 margin-left: 24px;
 font-family: Pretendardbold;
@@ -237,7 +237,7 @@ gap: 6px;
 top: 876px;
 width: 154px;
 height: 40px;
-margin-left: 111.5px;
+margin-left: 40px;
 
 `;
 
@@ -326,7 +326,7 @@ const FolderContent = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  margin-left: 32px;
+  margin-left: 16px;
   top: 0;
   left: 0;
   right: 0;
@@ -335,14 +335,14 @@ const FolderContent = styled.div`
 `;
 const IMG = styled.img`
   position: absolute;
-  padding-top: 58px;
+  padding-top: 44px;
   width: 48px;
   height: 48px;
   z-index: 1;
 `;
 const TipImage = styled.img`
   position: absolute;
-  margin-top: 115px;
+  margin-top: 108px;
   width: 53px;
   height: 23px;
   z-index: 1;
@@ -358,11 +358,11 @@ const AnswerLinkContainer = styled.div`
 const QText = styled.p`
   font-size: 14px;
   margin: 0;
-  margin-top: 63px;
+  margin-top: 55px;
   margin-left: 60px;
   margin-bottom: 19px;
   font-weight: 600;
-  width: 235px;
+  width: 1155px;
   height: 36px;
   font-family: Pretendard;
   z-index: 1;
@@ -373,9 +373,9 @@ const QText = styled.p`
 const CText = styled.p`
   font-size: 12px;
   margin: 0;
-  margin-left: 60px;
+  margin-left: 59px;
   font-weight: 600;
-  width: 235px;
+  width: 223px;
   height: 14px;
   font-family: Pretendard;
   color: #808080;
