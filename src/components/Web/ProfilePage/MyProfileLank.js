@@ -80,52 +80,56 @@ const Container = styled.div`
 
 
 const MyProfileLank = () => {
-    const road = collection(dbService, 'zip_Answer');
+    const userId = localStorage.getItem("kakaoId");
     const [top3Answer, setTop3Answer] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        const fetchDocuments = async () => {
-          const q = query(road, orderBy('totalVote', 'desc'), limit(3));
-          try {
-            const querySnapshot = await getDocs(q);
-            const topThreeDocuments = [];
+      const fetchDocuments = async () => {
+        try {
+          const answerSnapshot = await getDocs(
+            query(
+              collection(dbService, 'zip_Answer'),
+              where('kakaoId', '==', userId),
+              orderBy('totalVote', 'desc'),
+              limit(3)
+            )
+          );
     
-            for (const doc of querySnapshot.docs) {
-              const data = doc.data();
-              const document = {
-                answer: data.answer,
-                ID: data.answerId,
-                questionId: data.questionId,
-              };
+          const topThreeDocuments = [];
     
-              // 질문 가져오기
-              console.log("확인",document);
-              const questionSnapshot = await getDocs(
-                query(collection(dbService, "zip_Question"), where('questionId', '==', document.questionId))
-              );
-                const questionData = questionSnapshot.docs.map((doc) => ({
-                  id: doc.id,
-                  ...doc.data(),
-                }));
-                console.log("question", questionData);
-                const question = questionData[0].question;
-                console.log("question", question);
-                document.question = question;
+          for (const doc of answerSnapshot.docs) {
+            const data = doc.data();
+            const document = {
+              answer: data.answer,
+              ID: data.answerId,
+              questionId: data.questionId,
+            };
     
-              topThreeDocuments.push(document);
-            } //for
-            setTop3Answer(topThreeDocuments);
-            console.log(loading);
-            setLoading(false);
-            console.log("topThreeDocuments", topThreeDocuments);
-            // 여기서 상태(state)로 할당하거나 렌더링할 수 있습니다.
-          } catch (error) {
-            console.error('Error getting documents:', error);
-            setLoading(false);
+            // 질문 가져오기
+            const questionSnapshot = await getDocs(
+              query(collection(dbService, 'zip_Question'), where('questionId', '==', document.questionId))
+            );
+            const questionData = questionSnapshot.docs.map((doc) => ({
+              id: doc.id,
+              ...doc.data(),
+            }));
+            const question = questionData[0].question;
+            document.question = question;
+    
+            topThreeDocuments.push(document);
           }
-        };
-        fetchDocuments();
-      }, []);
+    
+          setTop3Answer(topThreeDocuments);
+          setLoading(false);
+        } catch (error) {
+          console.error('Error getting documents:', error);
+          setLoading(false);
+        }
+      };
+    
+      fetchDocuments();
+    }, []);
+    
     return (
       <>
         {loading ? (
