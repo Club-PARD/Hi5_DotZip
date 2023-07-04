@@ -19,8 +19,8 @@ import CopyToClipboard from 'react-copy-to-clipboard'; //링크복사
 
 
 const Div = styled.div`
-  margin-top: 70px;
   display: flex;
+  margin: 0 auto; 
   
 `;
 
@@ -35,7 +35,7 @@ margin-left: 24px;
 `;
 
 const HeaderDiv = styled.header`
-width: 200px;
+width: 170px;
 height: 24px;
 top: 152px;
 margin-left: 24px;
@@ -43,7 +43,7 @@ font-family: Pretendardbold;
 font-size: 20px;
 line-height: 24px;
 letter-spacing: 0em;
-margin-top: 32px;
+margin-top: 25px;
 `;
 
 const Header3 = styled.p`
@@ -90,6 +90,7 @@ const HeaderContainer = styled.div`
   margin-bottom: 10px;
   width: 330px;
   margin-left: 24px;
+  margin-top: 70px;
 `;
 
 
@@ -258,8 +259,6 @@ margin-top: 32px;
 
 const QP = styled.p`
 color: var(--gray-30, #ABABAB);
-
-/* Head/H1-18-SB */
 font-size: 18px;
 font-family: Pretendard;
 font-style: normal;
@@ -408,12 +407,6 @@ const Link = styled.img`
   margin-right: 4px;
 `;
 
-
-
-
-
-
-
 const HomePageFirst = () => {
   const navigate = useNavigate();
   const kakaoId = localStorage.getItem('kakaoId');
@@ -426,6 +419,11 @@ const HomePageFirst = () => {
 
   const [showMessage, setShowMessage] = useState(false);
   const [copiedLinkId, setCopiedLinkId] = useState('');
+  
+  // kakaoId가 비어있는 경우에만 새로고침
+  if (!kakaoId) {
+    window.location.reload();
+  } 
 
   useEffect(() => {
     const q = query(collection(dbService, 'zip_Question'), where('kakaoId', '==', kakaoId), orderBy('timestamp', 'desc'));
@@ -503,8 +501,8 @@ const HomePageFirst = () => {
         </ButtonContainer>
         <Newq>지인들에게 나에 대해 물어보세요!</Newq>
         <QuestionContainer>
-          <ButtonQ src={Home1}onClick={() => navigate(`/SurveyFirst`)}/>
-          <ButtonQ1 src={Home2}onClick={() => navigate(`/SurveyFirst`)}/>
+          <ButtonQ src={Home1} onClick={() => navigate(`/SurveyFirst`)}/>
+          <ButtonQ1 src={Home2} onClick={() => navigate(`/SurveyFirst`)}/>
         </QuestionContainer>
         <ButtonNew onClick={handleButtonClick}> + 나만의 질문 만들기</ButtonNew>
         <DIVB>
