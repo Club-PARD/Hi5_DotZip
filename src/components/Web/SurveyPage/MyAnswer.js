@@ -148,19 +148,6 @@ const TipCon = styled.p`
 display: flex;
 align-items: center;
 `;
-const Submit = styled.p`
-border: white;
-height: 48px;
-left: 24px;
-maring-top: 16px;
-color: #808080;
-font-size: 14px;
-font-family: Pretendard;
-font-style: normal;
-font-weight: 600;
-line-height: 18px;
-
-`;
 const Img = styled.img`
 width: 55px;
 Height: 24px;
@@ -273,7 +260,6 @@ const MyAnsewer = () => {
           <Modal isOpen={modalOpen} onRequestClose={handleCloseModal} style={modalStyles}>
           {modalOpen && <AddAnswerQuest key="add-answer"  handleCloseModal={handleCloseModal} />}
           </Modal>
-          <Submit onClick={handleButtonClick}>항목 추가 없이 투표 등록하기</Submit>  
           </Survey>
         </Div>
       );
