@@ -43,7 +43,7 @@ cursor: pointer;
 
 const LoginCon = styled.div`
 width: 375px;
-height: 812px;
+height: 100%;
 display: flex;
 flex-direction: column;
 justify-content: flex-start;
@@ -168,6 +168,7 @@ const Auth = () => {
   }, []); //kakao id가 있는지 없는지 확인
 
   const handleSuccess = async (response) => {
+    //console.log("로그인 성공", response);
     setAccessToken(response.response.access_token);
     localStorage.setItem("kakaoId", response.profile.id);
   
@@ -186,8 +187,10 @@ const Auth = () => {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         const data = docSnap.data();
+        //console.log("기존 로그인", data.userName);
         localStorage.setItem("userName", data.userName);
       } else {
+        //console.log("처음 로그인 한 사람");
         const data = {
           userId: response.profile.id,
           userName: response.profile.properties.nickname,
@@ -199,6 +202,7 @@ const Auth = () => {
   
 
   const handleFailure = (error) => {
+    console.log("로그인 실패", error);
   };
 
   const handleLogout = () => {

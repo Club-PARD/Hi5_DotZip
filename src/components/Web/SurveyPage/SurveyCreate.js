@@ -49,7 +49,7 @@ const Header2 = styled.div`
   margin-top: 32px;
 `;
 
-const HeaderP = styled.p`
+const HeaderP = styled.header`
   width: 260px;
   height: 19px;
   font-size: 14px;
@@ -253,9 +253,9 @@ function SurveyCreate() {
   let [inputCountName, setInputCountName] = useState(0);
 
 
-    useEffect(() => {
-      console.log(kakaoId); // Print kakaoId value only once
-    }, []);
+    // useEffect(() => {
+    //   console.log(kakaoId); // Print kakaoId value only once
+    // }, []);
 
   
     const handleSubmit = async () => {
