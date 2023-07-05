@@ -16,7 +16,11 @@ import Home2 from '../../../img/Home2.png';
 import Tip from '../../../img/Tip.png';
 import LinkImage from '../../../img/Link.png';
 import CopyToClipboard from 'react-copy-to-clipboard'; //링크복사
-
+import CopyLinkMessage from '../VotePage/CopyLinkMessage';
+import EndMessage from '../VotePage/EndMessage';
+import Folder1 from '../../../img/Folder1.png';
+import Folder2 from '../../../img/Folder2.png';
+import arrow from '../../../img/arrow.png';
 
 const Div = styled.div`
   display: flex;
@@ -206,7 +210,7 @@ const ButtonB = styled.button`
   width: 100px;
   height: 20px;
   top: 367px;
-  left: 293px;
+  margin-left: 10px;
   background: #F8F8F8;
   border: 1px solid #F8F8F8;
   font-size: 14px;
@@ -216,6 +220,7 @@ font-weight: 600;
 line-height: 18px;
 color: var(--gray-60, #808080);
 cursor: pointer;
+
 `;
 
 const ButtonNew = styled.button`
@@ -346,17 +351,20 @@ const FolderContent = styled.div`
 `;
 const IMG = styled.img`
   position: absolute;
-  padding-top: 44px;
+  padding-top: 57px;
+  margin-left: 16px ;
   width: 48px;
   height: 48px;
+
   z-index: 1;
   cursor: pointer;
 `;
 const TipImage = styled.img`
   position: absolute;
-  margin-top: 108px;
+  margin-top: 115px;
+  margin-left: 14px;
   width: 53px;
-  height: 23px;
+  height: 22px;
   z-index: 1;
   cursor: pointer;
 `;
@@ -371,9 +379,9 @@ const AnswerLinkContainer = styled.div`
 const QText = styled.p`
   font-size: 14px;
   margin: 0;
-  margin-top: 55px;
-  margin-left: 60px;
-  margin-bottom: 19px;
+  margin-top: 68px;
+  margin-left: 76px;
+
   font-weight: 600;
   width: 1155px;
   height: 36px;
@@ -385,8 +393,8 @@ const QText = styled.p`
 `;
 const CText = styled.p`
   font-size: 12px;
-  margin: 0;
-  margin-left: 59px;
+  margin-left: 76px;
+  margin-top:15px;
   font-weight: 600;
   width: 223px;
   height: 14px;
@@ -400,7 +408,8 @@ const CText = styled.p`
 const AnswerText = styled.p`
   font-size: 12px;
   margin: 0;
-  margin-top: 24px;
+  /* margin-top: 5px; */
+  margin-left: 16px;
   font-weight: 600;
   width: 118px;
   height: 16px;
@@ -424,26 +433,30 @@ const LinkMessage = styled.div` //링크복사
   padding: 10px;
   border: 1px solid black;
 `;
+
 const CopyLinkButton = styled.button`
   border: none;
-  margin-top: 15px;
-  margin-left: 72px;
+
+  margin-left: 50px;
   padding: 0;
   width: 97px;
   height: 32px;
   border-radius: 20px;
-  color: white;
   font-size: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
 `;
 const Link = styled.img`
   width: 16px;
   height: 16px;
   margin-right: 4px;
-  cursor: pointer;
+`;
+
+const Arrow = styled.img`
+  width: 5px;
+  height: 10px;
+  /* margin-right: 4px; */
 `;
 
 const HomePageFirst = () => {
@@ -451,15 +464,17 @@ const HomePageFirst = () => {
   const kakaoId = localStorage.getItem('kakaoId');
   //const [userContext] = useContext(UserNameContext);
   const [userNickname] = useState(localStorage.getItem("userName"));
-  console.log(localStorage.getItem('userName'));
-  console.log(localStorage.getItem('kakaoId'));
   const [questions, setQuestions] = useState([]);
   const [emoji, setEmoji] = useState([]);
+  const [showEndMessage, setShowEndMessage] = useState(false);
 
   const [showMessage, setShowMessage] = useState(false);
   const [copiedLinkId, setCopiedLinkId] = useState('');
   
-
+  // kakaoId가 비어있는 경우에만 새로고침
+  if (!kakaoId) {
+    window.location.reload();
+  } 
 
   useEffect(() => {
     const q = query(collection(dbService, 'zip_Question'), where('kakaoId', '==', kakaoId), orderBy('timestamp', 'desc'));
@@ -472,6 +487,15 @@ const HomePageFirst = () => {
       });
       setQuestions(questionList);
     });
+    const modalConfirmed = localStorage.getItem('modalConfirmed');
+        if (modalConfirmed === 'true') {
+          setShowEndMessage(true);
+    
+          setTimeout(() => {
+            setShowEndMessage(false);
+            localStorage.removeItem('modalConfirmed');
+          }, 1000);
+        }
 
     return () => {
       unsubscribe();
@@ -483,7 +507,7 @@ const HomePageFirst = () => {
   };
 
   const handleButtonClick = () => {
-    navigate('../../../../SurveyFirst'); // Replace with the actual path you want to navigate to
+    navigate('../../../../SurveyCreate'); // Replace with the actual path you want to navigate to
   };
 
   const handleButton1Click = () => {
@@ -492,6 +516,7 @@ const HomePageFirst = () => {
   const handleButton3Click = () => {
     navigate(`/VotingPage`); // Replace with the actual path you want to navigate to
   };
+ 
 
   const handleLinkButtonClick = (questionId) => {
     const link = `${window.location.origin}/answer/${questionId}`;
@@ -518,12 +543,9 @@ const HomePageFirst = () => {
         return null;
     }
   };
-  // kakaoId가 비어있는 경우에만 새로고침
-  if (!kakaoId) {
-    window.location.reload();
-  } 
 
   const emojiImage = getEmojiImage(emoji);
+  const folderImages = [Folder1, Folder2];
 
   return (
     <Div>
@@ -537,7 +559,7 @@ const HomePageFirst = () => {
         <Banner src={banner} onClick={() => navigate(`/BannerCreate/${kakaoId}`)}/>
         <ButtonContainer>
         <NewQ>새로운 질문 만들기</NewQ>
-        <ButtonA onClick={handleButtonClick}>전체보기 &gt; </ButtonA>
+        <ButtonA onClick={handleButtonClick}>전체보기 <Arrow src={arrow}/></ButtonA>
         </ButtonContainer>
         <Newq>지인들에게 나에 대해 물어보세요!</Newq>
         <QuestionContainer>
@@ -548,14 +570,14 @@ const HomePageFirst = () => {
         <DIVB>
         <ButtonsContainer>
         <Header3>최근에 만든 질문</Header3>
-        <ButtonB onClick={handleButton3Click}>전체보기 &gt;</ButtonB>
+        <ButtonB onClick={handleButton3Click}>전체보기 <Arrow src={arrow}/></ButtonB>
         </ButtonsContainer>
         {questions.length > 0 ? (
         questions.slice(0, 2).map((question, index) => (
         <div key={question.questionId}>
         {question && question.question && (
         <FolderImageContainer onClick={() => handleQuestionClick(question.questionId, index)}>
-          <FolderImage src={homeFolder} />
+          <FolderImage src={folderImages[index % folderImages.length]} />
                   <FolderContent>
                     <IMG src={getEmojiImage(question.emoji)} alt="Emoji" />
                     <TipImage src={Tip} />
@@ -576,7 +598,8 @@ const HomePageFirst = () => {
                           )}
                         </CopyLinkButton>
                       </CopyToClipboard>
-                      {showMessage && copiedLinkId === question.questionId && <LinkMessage>링크가 복사되었습니다</LinkMessage>}
+                      {showMessage && copiedLinkId === question.questionId && <CopyLinkMessage />}
+                      {showEndMessage && <EndMessage />}
                     </AnswerLinkContainer>
                   </FolderContent>
                 </FolderImageContainer>

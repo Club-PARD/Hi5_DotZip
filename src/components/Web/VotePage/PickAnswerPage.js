@@ -418,7 +418,7 @@ const ReasonModalText1 = styled.p`
   font-size: 18px;
   font-weight: 600;
   font-family: Pretendard;
-  colot: #353535;
+  color: #353535;
   padding: 0;
   margin: 0;
   overflow: hidden;
@@ -523,7 +523,6 @@ function PickAnswerPage() {
           ...doc.data(),
         }));
         const targetQ = QuestionzipArr.find((user) => user.id === questionId);
-        console.log(targetQ);
         setQuestionZip(targetQ.question);
         setCommentZip(targetQ.comment);
         setEmoji(targetQ.emoji); 
@@ -541,7 +540,6 @@ function PickAnswerPage() {
         }));
       
         setAnswerZip(targetAnswers);
-        console.log(targetAnswers);
       
         return () => {
           answerZipCollection(); // Stop listening
@@ -562,7 +560,6 @@ function PickAnswerPage() {
             (reason) => reason.answerId === answerID
           );
           setReasonZip(targetReason);
-          console.log(targetReason);
         });
         return () => {
             reasonZipCollection();

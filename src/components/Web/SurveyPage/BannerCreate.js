@@ -213,9 +213,9 @@ const BannerCreate = () => {
         setModalOpen(!modalOpen);
       };
 
-    useEffect(() => {
-      console.log(kakaoId); // Print kakaoId value only once
-    }, []);
+    // useEffect(() => {
+    //   console.log(kakaoId); // Print kakaoId value only once
+    // }, []);
 
   
     const handleButtonClick = async () => {

@@ -269,7 +269,6 @@ const AnswerEnd = () => {
       ...doc.data(),
     }));
     const targetQ = QuestionzipArr.find((user) => user.id === questionId);
-    console.log(targetQ);
     setQuestionZip(targetQ.question);
     setCommentZip(targetQ.comment);
     setEmoji(targetQ.emoji);
