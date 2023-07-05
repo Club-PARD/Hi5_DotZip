@@ -1,12 +1,9 @@
 import styled from "styled-components";
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { collection, query, orderBy, limit, getDocs, where} from "firebase/firestore";
 import { dbService } from "../../../fbase.js";
-import MyProfileNoQ from '../ProfilePage/MyProfileNoQ';
-import ProfileAnimation from './ProfileAnimation';
 import MyProfileFolderImage from '../../../img/MyProfileFolder.png';
-import ImageSaveButton from '../ProfilePage/SaveImage';
-import MyKakaoShareButton from '../ProfilePage/MyKakaoShare';
 
 //랭킹 top3 키워드
 const Wrapper = styled.div`
@@ -80,7 +77,8 @@ const Container = styled.div`
 
 
 const MyProfileLank = () => {
-    const userId = localStorage.getItem("kakaoId");
+    const {hashId} = useParams(); //questionid 받아오기
+    const userId = (hashId / 3).toString();
     const [top3Answer, setTop3Answer] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {

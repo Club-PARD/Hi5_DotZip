@@ -11,8 +11,7 @@ const ShareButton = styled.img`
 `;
 const MyKakaoShareButton = () => {
   const [userNickname] = useState(localStorage.getItem("userName"));
-  const kakaoId = parseInt(localStorage.getItem("kakaoId"), 10); //숫자로
-  const hashId = 3 * kakaoId;
+  const hashId = 3 * localStorage.getItem("kakaoId");
   useEffect(() => {
     createKakaoButton();
   }, []);
