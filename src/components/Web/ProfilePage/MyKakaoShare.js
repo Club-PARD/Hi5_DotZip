@@ -44,8 +44,8 @@ const MyKakaoShareButton = () => {
         {
           title: '답변 남기러 가기',
           link: {
-            mobileWebUrl: window.location.href,
-            webUrl: window.location.href,
+            mobileWebUrl: `${window.location.origin}/MyProfileSharePage`,
+            webUrl: `${window.location.origin}/MyProfileSharePage`,
           },
         },
       ],

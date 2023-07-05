@@ -5,6 +5,7 @@ import Inquiry from './pages/Inquiry';
 import About from './pages/About';
 import PickAnswerPage from './components/Web/VotePage/PickAnswerPage';
 import MyProfilePage from './components/Web/ProfilePage/MyProfilePage';
+import MyProfileSharePage from './components/Web/ProfilePage/MyProfileSharePage';
 import SurveyFirst from './components/Web/SurveyPage/SurveyFirst';
 import SurveySecond from './components/Web/SurveyPage/SurveySecond';
 import SurveyCreate from './components/Web/SurveyPage/SurveyCreate';
@@ -33,6 +34,7 @@ function App() {
     <Route path='/VotingPage' element={<VotingPage/>}/>
     <Route path='/PickAnswer/:questionId' element={<PickAnswerPage/>}/>
     <Route path='/MyProfile' element={<MyProfilePage/>}/>
+    <Route path='/MyProfileSharePage' element={<MyProfileSharePage/>}/>
     <Route path='/SurveyFirst' element={<SurveyFirst/>}/>
     <Route path='/SurveySecond' element={<SurveySecond/>}/>
     <Route path='/SurveyCreate' element={<SurveyCreate/>}/>
