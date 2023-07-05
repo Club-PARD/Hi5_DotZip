@@ -27,14 +27,12 @@ const Text = styled.p`
 `;
 
 const CopyLinkMessage = () => {
-    
     return (
         <>
         <Box>
             <Text>링크가 복사되었어요.</Text>
         </Box>
         </>
-
     );
 }
 export default CopyLinkMessage;

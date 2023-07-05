@@ -1,5 +1,5 @@
 //카카오톡으로 공유하는 기능 구현
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
 import KakaoImoticon from '../../../img/KakaoImoticon.png';
 const { Kakao } = window;
@@ -22,7 +22,8 @@ const KakaoImage = styled.img`
   height: 100%;
 `;
 
-const KakaoShareButton = () => {
+const KakaoShareButton = ({ questionId }) => {
+  const [userNickname] = useState(localStorage.getItem("userName"));
   useEffect(() => {
     createKakaoButton();
   }, []);
@@ -44,9 +45,9 @@ const KakaoShareButton = () => {
       container: '#kakaotalk-sharing-btn',
       objectType: 'feed',
       content: {
-        title: '{사용자 이름}.Zip', // 사용자 id받아와서 넣어 줄 부분
-        description: '타인을 통해 나 자신을 파악하게 도와주는 웹서비스',
-        imageUrl: 'https://github.com/Club-PARD/Hi5_DotZip/blob/master/src/img/Logo.png?raw=true',
+        title: `${userNickname}님이 질문 폴더를 공유했어요!`, // 사용자 id받아와서 넣어 줄 부분
+        description: `로그인 없이 \n간편하게 답변을 남겨보세요.`,
+        imageUrl: 'https://github.com/Club-PARD/Hi5_DotZip/blob/master/src/img/thumbnail.png?raw=true',
         link: {
           mobileWebUrl: window.location.href,
           webUrl: window.location.href,
@@ -54,10 +55,10 @@ const KakaoShareButton = () => {
       },
       buttons: [
         {
-          title: '.Zip 구경하기',
+          title: '답변 남기러 가기',
           link: {
-            mobileWebUrl: window.location.href,
-            webUrl: window.location.href,
+            mobileWebUrl: `${window.location.origin}/answer/${questionId}`,
+            webUrl: `${window.location.origin}/answer/${questionId}`,
           },
         },
       ],

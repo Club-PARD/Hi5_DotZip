@@ -6,9 +6,8 @@ import Modal from 'react-modal';
 import CopyToClipboard from 'react-copy-to-clipboard'; //링크복사
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import KakaoShareButton from '../ProfilePage/ShareKakao';
-import BackNavBar from '../../BackNavbar';
+import AnswerNavBar from '../../AnswerNavbar';
 import CopyLinkMessage from './CopyLinkMessage';
-import EndMessage from './EndMessage';
 import emoji1 from '../../../img/emoji1.png';
 import emoji2 from '../../../img/emoji2.png';
 import emoji3 from '../../../img/emoji3.png';
@@ -43,6 +42,7 @@ const Div = styled.div`
   padding: 0;
   margin-left: 8px;
   margin-right: 8px;
+  margin-top: 70px;
 `;
 
 //text
@@ -655,7 +655,7 @@ function PickAnswerPage() {
 
     return (
         <>
-        <BackNavBar/>
+        <AnswerNavBar/>
         <DDiv>
             <Div>
                 <Text1><RedText>{userNickname}</RedText> 님의 <br></br> 진행중인 질문</Text1> 
@@ -668,7 +668,7 @@ function PickAnswerPage() {
                     <QText>{questionzip}</QText>
                     <CText>{commentzip}</CText>
                     <AnswerLinkContainer>
-                    {voteEnd && <KakaoShareButton />}
+                    {voteEnd && <KakaoShareButton questionId={questionId}/>}
                     <CopyToClipboard text={`${window.location.origin}/answer/${questionId}`}>
                       <CopyLinkButton onClick={(event) => {event.stopPropagation(); handleLinkButtonClick(questionId); }} 
                       disabled={!voteEnd} style={{ backgroundColor: voteEnd ? '#EC582F' : '#F8F8F8' , marginLeft: voteEnd ? '0' : '44px' , color: voteEnd ? 'white' : '#808080' }}>
