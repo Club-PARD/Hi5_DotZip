@@ -11,6 +11,8 @@ const ShareButton = styled.img`
 `;
 const MyKakaoShareButton = () => {
   const [userNickname] = useState(localStorage.getItem("userName"));
+  const kakaoId = parseInt(localStorage.getItem("kakaoId"), 10); //숫자로
+  const hashId = 3 * kakaoId;
   useEffect(() => {
     createKakaoButton();
   }, []);
@@ -44,8 +46,8 @@ const MyKakaoShareButton = () => {
         {
           title: '답변 남기러 가기',
           link: {
-            mobileWebUrl: `${window.location.origin}/MyProfileSharePage`,
-            webUrl: `${window.location.origin}/MyProfileSharePage`,
+            mobileWebUrl: `${window.location.origin}/MyProfileSharePage/${hashId}`,
+            webUrl: `${window.location.origin}/MyProfileSharePage/${hashId}`,
           },
         },
       ],
