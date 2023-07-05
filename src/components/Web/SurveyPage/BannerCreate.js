@@ -7,7 +7,7 @@ import BackNavBar from '../../BackNavbar'
 import progress from '../../../img/Line2.png'
 import tipimage from '../../../img/Tip.png'
 import addVote from '../../../img/addVote.png'
-import AddAnswerQuest from '../AnswerPage/AddAnswerQuest';
+import AddAnswerQuest from '../AnswerPage/AddAnswerQuestHome';
 import Modal from 'react-modal';
 import emoji3 from '../../../img/emoji3.png';
 import tip from '../../../img/TipHeart.png'
@@ -115,10 +115,12 @@ height: 0px;
 color:#ABABAB ;
 margin-top: 32px;
 margin-bottom: 32px;
+border : 0px;
+border-top: 1px dashed #ABABAB;
 `;
 const AddVote = styled.img`
 width: 327px;
-height: 48px;
+height: 64px;
 margin-top: 8px;
 `;
 const NoAnswer = styled.img`
@@ -213,11 +215,6 @@ const BannerCreate = () => {
         setModalOpen(!modalOpen);
       };
 
-    // useEffect(() => {
-    //   console.log(kakaoId); // Print kakaoId value only once
-    // }, []);
-
-  
     const handleButtonClick = async () => {
       try {
         if (!kakaoId) {
@@ -244,7 +241,8 @@ const BannerCreate = () => {
       setQuestion('');
       setComment('');
       setSelectedEmoji(null);
-      navigate(`/SurveyShare/${questionId}`);
+      navigate(`/PickAnswer/${questionId}`); // Pass the questionId to the navigate function
+      //navigate(`/SurveyShare/${questionId}`);
       //navigate(`/SurveyShare/${questionId}?question=${question}&comment=${comment}`);
     } catch (error) {
       console.error('Error adding document:', error);
@@ -253,7 +251,7 @@ const BannerCreate = () => {
 
     return (
         <Div>
-          <BackNavBar/>
+          {/* <BackNavBar/>
           <Survey>
           <Progress src={progress}/>
             <Header2>
@@ -271,12 +269,11 @@ const BannerCreate = () => {
                 </TipCon>
             </Header2>
             
-          <AddVote src={addVote} onClick={showModal} ></AddVote>
+            <AddVote src={addVote} onClick={showModal} ></AddVote>
           <Modal isOpen={modalOpen} onRequestClose={handleCloseModal} style={modalStyles}>
           {modalOpen && <AddAnswerQuest key="add-answer"  handleCloseModal={handleCloseModal} />}
           </Modal>
-          <Submit onClick={handleButtonClick}>항목 추가 없이 투표 등록하기</Submit>  
-          </Survey>
+          </Survey> */}
         </Div>
       );
     };

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { dbService } from '../../../fbase';
-import { collection, onSnapshot, query, where, orderBy } from 'firebase/firestore';
+import { collection, onSnapshot, query, where, orderBy,setDoc,doc, serverTimestamp } from 'firebase/firestore';
+import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
 import emoji1 from '../../../img/emoji1.png';
 import emoji2 from '../../../img/emoji2.png';
@@ -114,7 +115,7 @@ const ButtonContainer = styled.div`
   align-items: center;
   gap: 10px;
   margin-bottom: 10px;
-  width: 350px;
+  //width: 350px;
   margin-left: 10px;
 `;
 
@@ -162,7 +163,7 @@ display: flex;
   gap: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
-  width: 330px;
+  //width: 330px;
   margin-left: 24px;
 `;
 const Questionp = styled.div`
@@ -465,11 +466,14 @@ const HomePageFirst = () => {
   //const [userContext] = useContext(UserNameContext);
   const [userNickname] = useState(localStorage.getItem("userName"));
   const [questions, setQuestions] = useState([]);
+  const [question, setQuestion] = useState('');
+  const [comment, setComment] = useState('');
   const [emoji, setEmoji] = useState([]);
   const [showEndMessage, setShowEndMessage] = useState(false);
-
+  const [voteEnd, setIsBooleanValue] = useState(true); 
   const [showMessage, setShowMessage] = useState(false);
   const [copiedLinkId, setCopiedLinkId] = useState('');
+  const [selectedEmoji, setSelectedEmoji] = useState(null); // New state for the selected emoji
   
   // kakaoId가 비어있는 경우에만 새로고침
   if (!kakaoId) {
@@ -501,6 +505,98 @@ const HomePageFirst = () => {
       unsubscribe();
     };
   }, [kakaoId]);
+
+  const BannerCreate = async () => {
+    try {
+      if (!kakaoId) {
+        throw new Error('User not logged in');
+      }
+  
+      const questionId = uuidv4();
+      const timestamp = serverTimestamp();
+  
+      await setDoc(doc(dbService, 'zip_Question', questionId), {
+        kakaoId,
+        questionId,
+        question: "나를 표현하는 형용사는?",
+        comment: "나에게 어울리는 단어를 생각해보세요!",
+        voteEnd,
+        emoji: "emoji3",
+        timestamp,
+        VoteNum: 1
+      });
+  
+      console.log('Data saved successfully');
+      setQuestion('');
+      setComment('');
+      setSelectedEmoji(null);
+  
+      navigate(`/MyAnswer/${questionId}`);
+    } catch (error) {
+      console.error('Error adding document:', error);
+    }
+  };
+  const Question1Create = async () => {
+    try {
+      if (!kakaoId) {
+        throw new Error('User not logged in');
+      }
+  
+      const questionId = uuidv4();
+      const timestamp = serverTimestamp();
+  
+      await setDoc(doc(dbService, 'zip_Question', questionId), {
+        kakaoId,
+        questionId,
+        question: "나의 이미지에 어울리는 컬러는?",
+        comment: "나의 성격과 떠오르는 이미지를 연관지어보세요!",
+        voteEnd,
+        emoji: "emoji1", // Include the selected emoji value in the data
+        timestamp,
+        VoteNum:1
+      });
+  
+      console.log('Data saved successfully');
+      setQuestion('');
+      setComment('');
+      setSelectedEmoji(null);
+  
+      navigate(`/MyAnswer/${questionId}`);
+    } catch (error) {
+      console.error('Error adding document:', error);
+    }
+  };
+  const Question2Create = async () => {
+    try {
+      if (!kakaoId) {
+        throw new Error('User not logged in');
+      }
+  
+      const questionId = uuidv4();
+      const timestamp = serverTimestamp();
+  
+      await setDoc(doc(dbService, 'zip_Question', questionId), {
+        kakaoId,
+        questionId,
+        question: "나에게 어울릴 것 같은 직업은?",
+        comment: "나의 성향과 장점을 생각해보세요!",
+        voteEnd,
+        emoji: "emoji2", // Include the selected emoji value in the data
+        timestamp,
+        VoteNum:1
+      });
+  
+      console.log('Data saved successfully');
+      setQuestion('');
+      setComment('');
+      setSelectedEmoji(null);
+  
+      navigate(`/MyAnswer/${questionId}`);
+    } catch (error) {
+      console.error('Error adding document:', error);
+    }
+  };
+  
 
   const handleQuestionClick = (questionId, index) => {
     navigate(`/PickAnswer/${questionId}`, { state: { index } });
@@ -559,15 +655,16 @@ const HomePageFirst = () => {
         </HeaderContainer>
         <HeaderDiv>안녕하세요, <RedText>{userNickname}</RedText> 님</HeaderDiv>
         <HeaderP>나의 프로필.ZiP을 만들어보세요!</HeaderP>
-        <Banner src={banner} onClick={() => navigate(`/BannerCreate/${kakaoId}`)}/>
+        {/* <Banner src={banner} onClick={() => navigate(`/BannerCreate/${kakaoId}`)}/> */}
+        <Banner src={banner} onClick={() => BannerCreate()} />
         <ButtonContainer>
         <NewQ>새로운 질문 만들기</NewQ>
         <ButtonA onClick={handleButtonClick}>전체보기 <Arrow src={arrow}/></ButtonA>
         </ButtonContainer>
         <Newq>지인들에게 나에 대해 물어보세요!</Newq>
         <QuestionContainer>
-          <ButtonQ src={Home1} onClick={() => navigate(`/Question1Create/${kakaoId}`)}/>
-          <ButtonQ1 src={Home2} onClick={() => navigate(`/Question2Create/${kakaoId}`)}/>
+          <ButtonQ src={Home1} onClick={() => Question1Create()}/>
+          <ButtonQ1 src={Home2} onClick={() => Question2Create()}/>
         </QuestionContainer>
         <ButtonNew onClick={handleButton4Click}> + 나만의 질문 만들기</ButtonNew>
         <DIVB>

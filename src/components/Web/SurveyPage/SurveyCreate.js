@@ -49,7 +49,7 @@ const Header2 = styled.div`
   margin-top: 32px;
 `;
 
-const HeaderP = styled.header`
+const HeaderP = styled.p`
   width: 260px;
   height: 19px;
   font-size: 14px;
@@ -65,11 +65,12 @@ margin-left: 24px;
 
 `;
 
-const ProfileEmoji = styled.p`
+const ProfileEmoji = styled.header`
 width: 87px;
 height: 20px;
 top: 212px;
 margin-left: 26px;
+margin-top: 32px;
   font-family: Pretendardbold;
   font-size: 16px;
   font-weight: 700;
@@ -119,7 +120,9 @@ const InputQues1 = styled.textarea`
 }
 ::placeholder {
   /* placeholder 스타일 */
-  color:  var(--gray-60, #808080);
+  color: var(--gray-60, #808080);
+
+  
 }
 width: 327px;
 height: 48px;
@@ -168,7 +171,7 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 320px;
-  margin-top: 20px;
+  margin-top: 12px;
   margin-left:24px;
 `;
 
@@ -314,7 +317,7 @@ function SurveyCreate() {
           <HeaderDiv>직접 질문을 만들어보세요.</HeaderDiv>
           <HeaderP>프로필 이모지와 질문,Tip을 적어보세요.</HeaderP>
         </Header2>
-        <ProfileEmoji>프로필이미지</ProfileEmoji>
+        <ProfileEmoji>프로필 이미지</ProfileEmoji>
         <ButtonContainer>
         <EmojiButton onClick={() => setSelectedEmoji('emoji1')} >
             <EmojiImage src={emoji1} alt="Emoji" active={selectedEmoji === 'emoji1'} />
