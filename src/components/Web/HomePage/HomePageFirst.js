@@ -549,9 +549,16 @@ const HomePageFirst = () => {
                     <AnswerLinkContainer>
                       <AnswerText><RedText>{question.VoteNum}명</RedText>이 답변을 남겼어요!</AnswerText>
                       <CopyToClipboard text={`${window.location.origin}/answer/${question.questionId}`}>
-                        <CopyLinkButton onClick={(event) => {event.stopPropagation(); handleLinkButtonClick(question.questionId);}} 
-                        disabled={!question.voteEnd} style={{ backgroundColor: question.voteEnd ? '#EC582F' : 'gray' }}>
-                          <Link src={LinkImage} />링크복사
+                      <CopyLinkButton onClick={(event) => {event.stopPropagation(); handleLinkButtonClick(question.questionId);}} 
+                        disabled={!question.voteEnd} style={{ backgroundColor: question.voteEnd ? '#EC582F' : '#F8F8F8' , color: question.voteEnd ? 'white' : '#808080' }}>
+                          {question.voteEnd ? (
+                            <>
+                              <Link src={LinkImage} />
+                              링크복사
+                            </>
+                          ) : (
+                            '종료된 투표'
+                          )}
                         </CopyLinkButton>
                       </CopyToClipboard>
                       {showMessage && copiedLinkId === question.questionId && <LinkMessage>링크가 복사되었습니다</LinkMessage>}
