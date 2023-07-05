@@ -3,6 +3,135 @@ import KakaoLogin from "react-kakao-login";
 import { dbService } from "../fbase.js";
 import { collection, onSnapshot, setDoc, doc, getDoc } from "firebase/firestore";
 import { Navigate } from "react-router-dom";
+import login from '../img/Login.png';
+import FolderImg from '../img/LoginImg.png';
+import styled from 'styled-components';
+import zip from '../img/ZiP.png';
+import zip1 from '../img/ZiP (1).png';
+import logo from '../img/Logo.png';
+
+const DIV = styled.div`
+margin: 0 auto;
+
+`;
+
+const Logo = styled.img`
+width: 32px;
+height: 34px;
+margin-top: 32px;
+margin-left: 24px;
+`;
+
+const Login = styled.img`
+width: 327px;
+height: 48px;
+margin-top: 8px;
+margin-left: 24px;
+cursor: pointer;
+`;
+
+const LoginCon = styled.div`
+width: 375px;
+height: 812px;
+display: flex;
+flex-direction: column;
+justify-content: flex-start;
+margin: 0 auto;
+overflow-x: hidden;
+background: #FFF8F3;
+
+`;
+
+const LoginP = styled.header`
+width: 287px;
+margin-top: 32px;
+margin-left: 24px;
+//styleName: Body/B5-16-SB;
+font-family: Pretendard;
+font-size: 16px;
+font-weight: 600;
+line-height: 20px;
+letter-spacing: 0em;
+text-align: left;
+color:#353535;
+
+
+
+`;
+const LoginP1 = styled.header`
+width: 280px;
+height: 20px;
+top: 125px;
+margin-top: 6px;
+margin-left: 2px;
+//styleName: Body/B5-16-SB;
+font-family: Pretendard;
+font-size: 16px;
+font-weight: 600;
+line-height: 20px;
+letter-spacing: 0em;
+text-align: left;
+color:#353535;
+
+
+
+`;
+
+const RedText = styled.span`
+font-family: Benz Grotesk;
+font-size: 18px;
+font-weight: 850;
+line-height: 20px;
+letter-spacing: 0em;
+text-align: left;
+width: 33px;
+top: 126px;
+left: 24px;
+color: #EC582F;
+
+
+`;
+
+const Img = styled.img`
+width: 252px;
+height: 230px;
+margin-top: 146px;
+margin-left: 58px;
+margin-bottom: 171px;
+opacity: 0.10000000149011612px;
+
+`;
+
+const ZIP = styled.img`
+width: 33px;
+height: 20px;
+margin-top: 7px;
+
+
+`;
+
+const ZipCon = styled.div`
+margin-left: 24px;
+display: flex;
+justify-content: flex-start;
+
+
+`;
+
+const MyZip = styled.header`
+width: 140px;
+height: 16px;
+margin-left: 118px;
+color: var(--orange-primary, #EC582F);
+/* Body/B2-12-SB */
+font-size: 12px;
+font-family: Pretendard;
+font-style: normal;
+font-weight: 600;
+line-height: 16px;
+
+`;
+
 
 const Auth = () => {
   const [accessToken, setAccessToken] = useState("");
@@ -88,10 +217,20 @@ const Auth = () => {
           onFail={handleFailure}
           onLogout={handleLogout}
           render={({ onClick }) => (
-            <div>
-              <div onClick={onClick}>카카오로 로그인하기</div>
-              <button onClick={handleLogout}>로그아웃</button>
-            </div>
+            <DIV>
+              <LoginCon>
+              <Logo src={logo}/> 
+              <LoginP>지인들의 눈으로 나를 재발견하는 여정의 시작,</LoginP>
+            <ZipCon>
+              <ZIP src={zip1}/>
+              <LoginP1>에서 나의 새로운 모습을 찾아가보세요!</LoginP1>
+            </ZipCon>
+              <Img src={FolderImg} alt="Folder"/>
+              <MyZip>나만의 .ZiP을 만들고 싶다면?</MyZip>
+              <Login  src={login} onClick={onClick}/>
+              </LoginCon>
+              {/* <button onClick={handleLogout}>로그아웃</button> */}
+            </DIV>
           )}
         />
       )}
