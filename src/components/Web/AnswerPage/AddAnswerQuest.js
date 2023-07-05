@@ -40,7 +40,7 @@ height: 24px;
 
 const Header2 = styled.div`
   font-size: 16px;
-  font-family: Pretendard;
+  font-family: Pretendardbold;
   font-style: normal;
   font-weight: 700;
   line-height: 20px;
@@ -167,7 +167,7 @@ const AddAnswerQuest = ({ handleCloseModal }) => {
   return (
     <Div>
       <Form onSubmit={onSubmit}>
-        <Header1 >투표항목 추가하기 <X src={cancleX} onClick={closeModal} /></Header1>
+        <Header1 >답변 추가하기 <X src={cancleX} onClick={closeModal} /></Header1>
         <Header2>내 답변</Header2>
         <Input
           value={answer}

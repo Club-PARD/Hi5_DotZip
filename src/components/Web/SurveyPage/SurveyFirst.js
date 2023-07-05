@@ -129,6 +129,7 @@ const Img = styled.img`
 width: 327px;
 height: 96px;
 margin-top: 20px;
+
 `;
 
 
@@ -206,9 +207,9 @@ function SurveyFirst() {
       });
 
       
-      console.log('Question:', question);
-      console.log('Comment:', comment);
-      console.log(selectedEmoji);
+      // console.log('Question:', question);
+      // console.log('Comment:', comment);
+      // console.log(selectedEmoji);
 
       setButtonSelected(false);
       setSelectedEmoji(null);

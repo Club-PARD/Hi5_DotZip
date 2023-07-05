@@ -147,10 +147,12 @@ height: 0px;
 color:#ABABAB ;
 margin-top: 32px;
 margin-bottom: 32px;
+border : 0px;
+border-top: 1px dashed #ABABAB;
 `;
 const AddVote = styled.img`
 width: 327px;
-height: 48px;
+height: 64px;
 margin-top: 8px;
 `;
 
@@ -260,8 +262,8 @@ const MyAnsewer = () => {
           <Survey>
           <Progress src={progress}/>
             <Header2>
-              <HeaderDiv>나에 대해 생각해보세요!</HeaderDiv>
-              <HeaderP>답변 키워드와 이유를 적어 투표 후보에 추가해보세요.</HeaderP>
+              <HeaderDiv>내 답변 추가하기</HeaderDiv>
+              <HeaderP>투표 항목에 내가 생각하는 답변을 추가해보세요.</HeaderP>
               <Container>
                 <Question>{question}</Question>
                 <Comment>{comment}</Comment>

@@ -507,6 +507,9 @@ const HomePageFirst = () => {
   };
 
   const handleButtonClick = () => {
+    navigate('../../../../SurveyFirst'); // Replace with the actual path you want to navigate to
+  };
+  const handleButton4Click = () => {
     navigate('../../../../SurveyCreate'); // Replace with the actual path you want to navigate to
   };
 
@@ -566,7 +569,7 @@ const HomePageFirst = () => {
           <ButtonQ src={Home1} onClick={() => navigate(`/Question1Create/${kakaoId}`)}/>
           <ButtonQ1 src={Home2} onClick={() => navigate(`/Question2Create/${kakaoId}`)}/>
         </QuestionContainer>
-        <ButtonNew onClick={handleButtonClick}> + 나만의 질문 만들기</ButtonNew>
+        <ButtonNew onClick={handleButton4Click}> + 나만의 질문 만들기</ButtonNew>
         <DIVB>
         <ButtonsContainer>
         <Header3>최근에 만든 질문</Header3>
