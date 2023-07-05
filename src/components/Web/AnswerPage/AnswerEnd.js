@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { dbService } from "../../../fbase.js";
-import { collection, onSnapshot, query, where , orderBy, doc, updateDoc ,getDocs} from "firebase/firestore";
+import { collection, onSnapshot, query, where, orderBy, doc, updateDoc, getDocs } from "firebase/firestore";
 import { useNavigate, useParams } from 'react-router-dom';
 import NavBar from '../../AnswerNavbar.js';
 import samllFolder1 from '../../../img/smallFolder1.png';
@@ -180,7 +180,7 @@ const VoteNumber = styled.p`
     font-family: Pretendard;
     color: #ABABAB;
 `;
-const MakeMyAnswer =styled.img`
+const MakeMyAnswer = styled.img`
   width: 327px;
   height: 48px;
   margin-top: 8px;
@@ -198,11 +198,11 @@ margin-top: 30px;
 
 
 const AnswerEnd = () => {
-  
+
   const [documents, setDocuments] = useState([]);
   const totalVotes = documents.reduce((sum, documents) => sum + documents.totalVote, 0);
-  const {questionId} = useParams();
-  const navigate= useNavigate();
+  const { questionId } = useParams();
+  const navigate = useNavigate();
   const userName = localStorage.getItem("userName")
   const [questionzip, setQuestionZip] = useState();
   const [commentzip, setCommentZip] = useState();
@@ -215,7 +215,7 @@ const AnswerEnd = () => {
     });
   };
 
-  const onSubmit= ()=>{
+  const onSubmit = () => {
     navigate('/');
   }
   useEffect(() => {
@@ -226,8 +226,8 @@ const AnswerEnd = () => {
     );
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const answerList = [];
-      snapshot.forEach((doc)=>{
-        if(doc.data().questionId===questionId){
+      snapshot.forEach((doc) => {
+        if (doc.data().questionId === questionId) {
           answerList.push(doc.data());
         }
       });
@@ -258,8 +258,8 @@ const AnswerEnd = () => {
     }
   };
   updateVoteNum(totalVotes);
-  
-  localStorage.setItem("questionId",questionId);
+
+  localStorage.setItem("questionId", questionId);
 
   const fetchDataQuestion = async () => {
     const zipCollection = collection(dbService, "zip_Question");
@@ -272,7 +272,7 @@ const AnswerEnd = () => {
     console.log(targetQ);
     setQuestionZip(targetQ.question);
     setCommentZip(targetQ.comment);
-    setEmoji(targetQ.emoji); 
+    setEmoji(targetQ.emoji);
     setVoteEnd(targetQ.voteEnd); // 투표 종료 여부 판단
   };
 
@@ -280,9 +280,9 @@ const AnswerEnd = () => {
 
   return (
     <Div>
-      <NavBar/>
+      <NavBar />
       <Container>
-      <Head>답변 전달 완료!</Head>
+        <Head>답변 전달 완료!</Head>
       </Container>
 
       <FolderImageContainer>
@@ -295,30 +295,30 @@ const AnswerEnd = () => {
       </FolderImageContainer>
       <Hr></Hr>
       <Container>
-      <Header1>투표 결과</Header1>
+        <Header1>투표 결과</Header1>
       </Container>
       {documents.map(({ answer, totalVote, answerId }) => (
-  // <VoteBox key={answerId} percentage={(totalVote / totalVotes) * 100}>{answer} : {totalVote}</VoteBox>
-  <VoteBox key={answerId}>
-      <AnswerContainer>
-          <AnswerText>{answer}</AnswerText>
-          {answerId === localStorage.getItem(questionId) ? (
-          <VotePercentage>{((totalVote / totalVotes) * 100).toFixed(0)}%</VotePercentage>
-          ):(
-            <Percentage>{((totalVote / totalVotes) * 100).toFixed(0)}%</Percentage>
-          )}
-      </AnswerContainer>
-      <PercentageContainer>
-      {answerId === localStorage.getItem(questionId) ? (
-            <VotePercentBox percentage={(totalVote / totalVotes) * 100} />
-          ) : (
-            <PercentBox percentage={(totalVote / totalVotes) * 100} />
-          )}
-      </PercentageContainer>
-</VoteBox>
+        // <VoteBox key={answerId} percentage={(totalVote / totalVotes) * 100}>{answer} : {totalVote}</VoteBox>
+        <VoteBox key={answerId}>
+          <AnswerContainer>
+            <AnswerText>{answer}</AnswerText>
+            {answerId === localStorage.getItem(questionId) ? (
+              <VotePercentage>{((totalVote / totalVotes) * 100).toFixed(0)}%</VotePercentage>
+            ) : (
+              <Percentage>{((totalVote / totalVotes) * 100).toFixed(0)}%</Percentage>
+            )}
+          </AnswerContainer>
+          <PercentageContainer>
+            {answerId === localStorage.getItem(questionId) ? (
+              <VotePercentBox percentage={(totalVote / totalVotes) * 100} />
+            ) : (
+              <PercentBox percentage={(totalVote / totalVotes) * 100} />
+            )}
+          </PercentageContainer>
+        </VoteBox>
       ))}
- <Warning>답변은 1인당 1개만 투표할 수 있어요</Warning>
-    <MakeMyAnswer src={makeMyAnswer} onClick={onSubmit}/>
+      <Warning>나도 지인들에게 투표를 받아보고 싶다면?</Warning>
+      <MakeMyAnswer src={makeMyAnswer} onClick={onSubmit} />
 
     </Div>
   );

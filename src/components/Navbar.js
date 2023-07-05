@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../img/Logo.png'
+import setting from '../img/setting.png'
 import styled /*{ ThemeProvider } */ from 'styled-components';
 // import { useState, useEffect } from 'react';
 
@@ -19,22 +20,18 @@ const NavBarWrapper = styled.nav`
   color: white;
 `;
 
-const Setting  = styled.div `
-  &::after {        
-    content: '세팅'; //이미지
-      color:black;
-        position: absolute;
-        top: 50%;
-        right: 24px;
-        transform: translateY(-50%);
-        cursor: pointer;
-    }
-
+const Setting  = styled.img `
+position: absolute;
+width: 24px;
+height: 24px;
+right: 20px;
+cursor: pointer;
 `;
 const Home  = styled.img `      
   width: 32px;
   height: 34.15px ;
   margin-left: 24px;
+  cursor: pointer;
 `;
 
 const NavBar = () => {
@@ -49,7 +46,7 @@ const NavBar = () => {
     <NavBarWrapper>
 
         <Home src={logo} onClick={HomeOnClick}></Home>
-        <Setting onClick={onClick}></Setting>
+        <Setting src={setting} onClick={onClick}></Setting>
     </NavBarWrapper>
     );
 };

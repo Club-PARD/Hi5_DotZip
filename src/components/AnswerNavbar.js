@@ -24,6 +24,7 @@ const Home  = styled.img `
   width: 32px;
   height: 34.15px ;
   margin-left: 24px;
+  cursor: pointer;
 `;
 
 const NavBar = () => {

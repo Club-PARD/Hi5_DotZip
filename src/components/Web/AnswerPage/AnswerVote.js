@@ -7,7 +7,7 @@ import AddAnswerVote from './AddAnswerVote.js';
 import AddAnswer from './AddAnswer.js';
 import AnswerEnd from './AnswerEnd.js';
 import Modal from 'react-modal';
-import samllFolder1 from '../../../img/smallFolder1.png';
+import smallFolder1 from '../../../img/smallFolder1.png';
 import emoji1 from '../../../img/emoji1.png';
 import emoji2 from '../../../img/emoji2.png';
 import emoji3 from '../../../img/emoji3.png';
@@ -15,6 +15,7 @@ import emoji4 from '../../../img/emoji4.png';
 import emoji5 from '../../../img/emoji5.png';
 import newAnswer from '../../../img/newAnswer.png';
 import check from '../../../img/check.png'
+import EndVote from './EndVote.js';
 
 const Div = styled.div`
   display: flex;
@@ -276,59 +277,64 @@ const handleCloseModal = () => {
 
 
   return (
-    <>{isVote() ? <AnswerEnd /> :
-    <Div>
-      <Container>
-      <Head>질문 폴더를 받으셨네요 🤩️</Head>
-      <Head>답변을 보내보세요!</Head>
-      </Container>
-      <FolderImageContainer>
-        <FolderImage src={samllFolder1} />
-        <FolderContent>
-          <IMG src={getEmojiImage(emoji)} alt="Emoji" />
-          <QText>{questionzip}</QText>
-          <CText>{commentzip}</CText>
-        </FolderContent>
-      </FolderImageContainer>
-      <Hr></Hr>
-      <Container>
-      <Header1>투표 참여하기</Header1>
-      <Header2>답변을 투표하거나 새롭게 추가할 수 있어요!</Header2>
-      </Container>
-    {documents.map(({ answer, totalVote, answerId }) => (
-      <ButtonContainer key={answerId}>
-        <Button onClick={() => handleButtonClick(answerId)}>
-          {answer}
-          <Check src={check} />
-        </Button>
-        <Modal
-          isOpen={modalOpen && selectedAnswerId === answerId}
-          onRequestClose={handleCloseModal}
-          style={modalStyles}
-        >
-          {modalOpen && selectedAnswerId === answerId && (
-            <AddAnswerVote
-              key={answerId}
-              setModalOpen={setModalOpen}
-              totalVote={totalVote}
-              answerId={answerId}
-              answer = {answer}
-              handleCloseModal={handleCloseModal}
-            />
-          )}
-        </Modal>
-      </ButtonContainer>
-    ))}
-    
-            <NewAnswer src={newAnswer} onClick={showModal_new} key="add-button"></NewAnswer>
+    <>
+      {!voteEnd ? (
+        <EndVote/> 
+      ) : isVote() ? (
+        <AnswerEnd />
+      ) : (
+        <Div>
+          <Container>
+            <Head>질문 폴더를 받으셨네요 🤩️</Head>
+            <Head>답변을 보내보세요!</Head>
+          </Container>
+          <FolderImageContainer>
+            <FolderImage src={smallFolder1} />
+            <FolderContent>
+              <IMG src={getEmojiImage(emoji)} alt="Emoji" />
+              <QText>{questionzip}</QText>
+              <CText>{commentzip}</CText>
+            </FolderContent>
+          </FolderImageContainer>
+          <Hr />
+          <Container>
+            <Header1>투표 참여하기</Header1>
+            <Header2>답변을 투표하거나 새롭게 추가할 수 있어요!</Header2>
+          </Container>
+          {documents.map(({ answer, totalVote, answerId }) => (
+            <ButtonContainer key={answerId}>
+              <Button onClick={() => handleButtonClick(answerId)}>
+                {answer}
+                <Check src={check} />
+              </Button>
+              <Modal
+                isOpen={modalOpen && selectedAnswerId === answerId}
+                onRequestClose={handleCloseModal}
+                style={modalStyles}
+              >
+                {modalOpen && selectedAnswerId === answerId && (
+                  <AddAnswerVote
+                    key={answerId}
+                    setModalOpen={setModalOpen}
+                    totalVote={totalVote}
+                    answerId={answerId}
+                    answer={answer}
+                    handleCloseModal={handleCloseModal}
+                  />
+                )}
+              </Modal>
+            </ButtonContainer>
+          ))}
+  
+          <NewAnswer src={newAnswer} onClick={showModal_new} key="add-button"></NewAnswer>
           <Modal isOpen={modalOpen_new} onRequestClose={handleCloseModal_new} style={modalStyles}>
-          {modalOpen_new && <AddAnswer key="add-answer" handleCloseModal={handleCloseModal_new} />}
+            {modalOpen_new && <AddAnswer key="add-answer" handleCloseModal={handleCloseModal_new} />}
           </Modal>
         </Div>
-    
-      }
-       </>
+      )}
+    </>
   );
+  
 };
 
 export default AnswerVote;
