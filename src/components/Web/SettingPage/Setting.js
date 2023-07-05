@@ -85,7 +85,6 @@ function Setting() {
             if (window.Kakao.Auth.getAccessToken()) {
               window.Kakao.Auth.logout(() => {
                 setAccessToken("");
-                console.log("로그아웃");
               });
             }
             navigate("/");

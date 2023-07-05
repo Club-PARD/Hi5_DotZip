@@ -160,9 +160,7 @@ const AddAnswer = ({handleCloseModal }) => {
       const data = docSnapshot.data();
       const kakaoId = data.kakaoId;
       setKakao(kakaoId);
-    } else {
-      console.log("No matching document found.");
-    }
+    } 
   }).catch((error) => {
     console.log("Error getting document: ", error);
   });
