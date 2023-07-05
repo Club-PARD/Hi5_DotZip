@@ -13,6 +13,7 @@ import emoji2 from '../../../img/emoji2.png';
 import emoji3 from '../../../img/emoji3.png';
 import emoji4 from '../../../img/emoji4.png';
 import emoji5 from '../../../img/emoji5.png';
+import back from '../../../img/back.png';
 
 const DDiv = styled.div`
   width: 375px;
@@ -29,36 +30,46 @@ const Div = styled.div`
 const NavbarWrapper = styled.nav`
   width: 327px;
   display: flex;
-  height: 64px;
+  height: 73px;
+  align-items: center;
 `;
 
-const BackButton = styled.button`
+const BackButton = styled.img`
   background-color: transparent;
   border: none;
   font-size: 18px;
   cursor: pointer;
-  margin-left: 20px;
+  margin-left: 23px;
+  width: 7px;
+  height: 14px;
+
 `;
 
 
 const HeaderP = styled.p`
-  width: 260px;
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 19px;
-  color: #818181;
+  width: 100%;
+  height: 19px;
+  color: var(--gray-60, #808080);
+text-align: left;
+margin-top: 13px;
+/* Body/B4-14-SB */
+font-size: 14px;
+font-family: Pretendard;
+font-style: normal;
+font-weight: 600;
+line-height: 18px;
+margin-bottom: 12px;
 `;
 
 const HeaderDiv = styled.header`
-color: var(--gray-90, #353535);
-/* Head/H3-24-B */
-font-size: 24px;
+  width : 100%;
+  height: 19px;
+  font-size: 24px;
 font-family: PretendardBold;
 font-style: normal;
 font-weight: 700;
-line-height: 28px;
+text-align: left;
+  color: var(--gray-90, #353535);
 `;
 
 
@@ -67,6 +78,7 @@ const Header2 = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+    width: 327px;
   margin-top: 20px;
 `;
 
@@ -126,7 +138,7 @@ margin-top: 6px;
 const Progress = styled.img`
   width: 260px;
   height: 1.5px;
-  margin-right: 115px;
+  margin-right: 103px;
 `;
 
 const Hr = styled.hr`
@@ -243,7 +255,7 @@ const MyAnsewer = () => {
         
         <Div>
         <NavbarWrapper>
-            <BackButton onClick={fbDelete}>{'<'}</BackButton>
+            <BackButton src= {back} onClick={fbDelete}></BackButton>
           </NavbarWrapper>
           <Survey>
           <Progress src={progress}/>

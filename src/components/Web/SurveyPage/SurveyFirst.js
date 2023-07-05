@@ -123,6 +123,7 @@ const Progress = styled.img`
   width: 125px;
   height: 1.5px;
   margin-right: 235px;
+  margin-top: 4.5px;
 `;
 const Img = styled.img`
 width: 327px;

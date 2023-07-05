@@ -13,6 +13,7 @@ const NavbarWrapper = styled.nav`
   height: 64px;
       display: flex;
     align-items: center;
+    margin-top: 4.5px;
 `;
 
 const BackButton = styled.img`
