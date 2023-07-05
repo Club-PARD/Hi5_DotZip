@@ -527,7 +527,7 @@ const HomePageFirst = () => {
         <Newq>지인들에게 나에 대해 물어보세요!</Newq>
         <QuestionContainer>
           <ButtonQ src={Home1} onClick={() => navigate(`/Question1Create/${kakaoId}`)}/>
-          <ButtonQ1 src={Home2} onClick={() => navigate(`/BannerCreate/${kakaoId}`)}/>
+          <ButtonQ1 src={Home2} onClick={() => navigate(`/Question2Create/${kakaoId}`)}/>
         </QuestionContainer>
         <ButtonNew onClick={handleButtonClick}> + 나만의 질문 만들기</ButtonNew>
         <DIVB>

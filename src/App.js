@@ -17,6 +17,7 @@ import VotingPage from './components/Web/VotePage/VotingPage';
 import AnswerLoading from './components/Web/AnswerPage/AnswerLoading';
 import BannerCreate from './components/Web/SurveyPage/BannerCreate';
 import Question1Create from './components/Web/SurveyPage/Question1Create';
+import Question2Create from './components/Web/SurveyPage/Question2Create';
 
 function App() {
   const kakaoId =  localStorage.getItem("kakaoId")
@@ -39,6 +40,7 @@ function App() {
     <Route path='/SurveyShare/:questionId' element={<SurveyShare/>}/>
     <Route path='/BannerCreate/:kakaoId' element={<BannerCreate/>}/>
     <Route path='/Question1Create/:kakaoId' element={<Question1Create/>}/>
+    <Route path='/Question2Create/:kakaoId' element={<Question2Create/>}/>
     <Route path='/Answer' element={<Answer/>}/>
     <Route path='/Answer/:questionId' element={<Answer/>}/>
     <Route path='/AnswerEnd' element={<AnswerEnd/>}/>

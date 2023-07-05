@@ -9,7 +9,7 @@ import tipimage from '../../../img/Tip.png'
 import addVote from '../../../img/addVote.png'
 import AddAnswerQuest from '../AnswerPage/AddAnswerQuest';
 import Modal from 'react-modal';
-import emoji3 from '../../../img/emoji3.png';
+import emoji2 from '../../../img/emoji2.png';
 import tip from '../../../img/TipHeart.png'
 import 'firebase/compat/auth';
 import { v4 as uuidv4 } from 'uuid';
@@ -191,7 +191,7 @@ const modalStyles = {
 
 
 
-const BannerCreate = () => {
+const Question2Create = () => {
     const navigate = useNavigate();
     // const [kakaoContext] = useContext(KakaoIdContext);
     // console.log("zip userId : ", kakaoContext);//userId
@@ -232,10 +232,10 @@ const BannerCreate = () => {
         await setDoc(doc(dbService, 'zip_Question', questionId), {
           kakaoId,
           questionId,
-          question: "나를 표현하는 형용사는?",
-          comment: "나에게 어울리는 단어를 생각해보세요!",
+          question: "나에게 어울릴 것 같은 직업은?",
+          comment: "나의 성향과 장점을 생각해보세요!",
           voteEnd,
-          emoji: "emoji3", // Include the selected emoji value in the data
+          emoji: "emoji2", // Include the selected emoji value in the data
           timestamp,
           VoteNum:1
         });
@@ -260,9 +260,9 @@ const BannerCreate = () => {
               <HeaderDiv>나에 대해 생각해보세요!</HeaderDiv>
               <HeaderP>답변 키워드와 이유를 적어 투표 후보에 추가해보세요.</HeaderP>
               <Container>
-                <Question>나를 표현하는 형용사는?</Question>
-                <Comment>나에게 어울리는 단어를 생각해보세요!</Comment>
-                <IMG src={emoji3} alt="Emoji"></IMG>
+                <Question>나에게 어울릴 것 같은 직업은?</Question>
+                <Comment>나의 성향과 장점을 생각해보세요!</Comment>
+                <IMG src={emoji2} alt="Emoji"></IMG>
                 </Container>
                 <Hr></Hr>
                 <TipCon>
@@ -281,7 +281,7 @@ const BannerCreate = () => {
       );
     };
 
-export default BannerCreate;
+export default Question2Create;
 
 
 

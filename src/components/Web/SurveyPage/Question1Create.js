@@ -232,7 +232,7 @@ const Question1Create = () => {
         await setDoc(doc(dbService, 'zip_Question', questionId), {
           kakaoId,
           questionId,
-          question: "나에게 어울리는 컬러는?",
+          question: "나의 이미지에 어울리는 컬러는?",
           comment: "나의 성격과 떠오르는 이미지를 연관지어보세요!",
           voteEnd,
           emoji: "emoji1", // Include the selected emoji value in the data
@@ -260,8 +260,8 @@ const Question1Create = () => {
               <HeaderDiv>나에 대해 생각해보세요!</HeaderDiv>
               <HeaderP>답변 키워드와 이유를 적어 투표 후보에 추가해보세요.</HeaderP>
               <Container>
-                <Question>나에게 어울리는 컬러는?</Question>
-                <Comment>나를 표현하는 단어를 생각해보세요!</Comment>
+                <Question>나의 이미지에 어울리는 컬러는?</Question>
+                <Comment>나의 성격과 떠오르는 이미지를 연관지어보세요!</Comment>
                 <IMG src={emoji1} alt="Emoji"></IMG>
                 </Container>
                 <Hr></Hr>

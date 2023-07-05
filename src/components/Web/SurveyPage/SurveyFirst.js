@@ -170,22 +170,22 @@ function SurveyFirst() {
 
 
       if (selectedEmoji === 'emoji1') {
-        question = '나에게 어울리는 컬러는?';
+        question = '나의 이미지에 어울리는 컬러는?';
         comment = '나의 성격과 떠오르는 이미지를 연관지어보세요!';
         emoji = emoji1;
 
       } else if (selectedEmoji === 'emoji2') {
-        question = '나에게 어울리는 직업은?';
+        question = '나에게 어울릴 것 같은 직업은?';
         comment = '나의 성향과 장점을 생각해보세요!';
         emoji = emoji2;
         setSelectedEmoji("emoji2");
       } else if (selectedEmoji === 'emoji3') {
-        question = '나에게 어울리는 형용사는?';
-        comment = '나를 표현하는 단어를 생각해보세요!';
+        question = '나를 표현하는 형용사는?';
+        comment = '나에게 어울리는 단어를 생각해보세요!';
         emoji = emoji3;
         setSelectedEmoji("emoji3");
       } else if (selectedEmoji=== 'emoji4') {
-        question = '나에게 어울리는 브랜드는?';
+        question = '내 이미지가 떠오르는 브랜드는?';
         comment = '나를 생각하면 떠오르는 키워드와 연관지어보세요!';
         emoji = emoji4;
         setSelectedEmoji("emoji4");
