@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BackNavBar from '../../BackNavbar';
 const DDiv = styled.div`
@@ -69,6 +69,7 @@ const DivideContent = styled.div`
     font-weight: 700;
 `;
 function Setting() {
+    const [accessToken, setAccessToken] = useState("");
     const navigate = useNavigate();
     const onClickInquire = () => {
         window.open('https://www.notion.so', '_blank'); //문의 페이지
@@ -80,13 +81,19 @@ function Setting() {
     const onClickTerm = () => {
         window.open('https://www.notion.so', '_blank'); // 약관페이지
     };
-    const onClickLogout = {
-        
+    const onClickLogout = () => {
+            if (window.Kakao.Auth.getAccessToken()) {
+              window.Kakao.Auth.logout(() => {
+                setAccessToken("");
+                console.log("로그아웃");
+              });
+            }
+            navigate("/");
     };
-    const onClickDrop  = () => {
-        localStorage.clear();
-        navigate("/");
-    };
+    // const onClickDrop  = () => {
+    //     localStorage.clear();
+    //     navigate("/");
+    // };
 
     return(
         <>
@@ -100,8 +107,8 @@ function Setting() {
             <Button onClick={onClickTeam}>팀소개</Button>
             <Divide>    <DivideContent>계정관리</DivideContent></Divide>
             <Button onClick={onClickTerm}>약관</Button>
-            <Button>로그아웃</Button> {/*현승오빠가 만들어둔 부분 가져오기 */}
-            <Button onClick={onClickDrop}>탈퇴</Button>
+            <Button onClick={onClickLogout}>로그아웃</Button> {/*현승오빠가 만들어둔 부분 가져오기 */}
+            {/* <Button onClick={onClickDrop}>탈퇴</Button> */}
         </Div>
         </DDiv>
         </>
