@@ -459,10 +459,7 @@ const HomePageFirst = () => {
   const [showMessage, setShowMessage] = useState(false);
   const [copiedLinkId, setCopiedLinkId] = useState('');
   
-  // kakaoId가 비어있는 경우에만 새로고침
-  if (!kakaoId) {
-    window.location.reload();
-  } 
+
 
   useEffect(() => {
     const q = query(collection(dbService, 'zip_Question'), where('kakaoId', '==', kakaoId), orderBy('timestamp', 'desc'));
@@ -521,6 +518,10 @@ const HomePageFirst = () => {
         return null;
     }
   };
+  // kakaoId가 비어있는 경우에만 새로고침
+  if (!kakaoId) {
+    window.location.reload();
+  } 
 
   const emojiImage = getEmojiImage(emoji);
 

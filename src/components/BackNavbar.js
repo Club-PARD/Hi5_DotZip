@@ -1,20 +1,25 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import back from '../img/back.png'
 const Div = styled.div`
     display: flex;
     justify-content: center;
+    align-items: center;
 `;
 const NavbarWrapper = styled.nav`
   width: 327px;
   display: flex;
   height: 64px;
+      display: flex;
+    align-items: center;
 `;
 
-const BackButton = styled.button`
+const BackButton = styled.img`
   background-color: transparent;
   border: none;
-  font-size: 18px;
+  width: 7px;
+  height: 14px;
   cursor: pointer;
 `;
 
@@ -28,7 +33,7 @@ const Navbar = () => {
   return (
     <Div>
     <NavbarWrapper>
-      <BackButton onClick={handleGoBack}>{'<'}</BackButton>
+      <BackButton src={back} onClick={handleGoBack}></BackButton>
     </NavbarWrapper>
     </Div>
   );
