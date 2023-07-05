@@ -34,7 +34,7 @@ function App() {
     <Route path='/VotingPage' element={<VotingPage/>}/>
     <Route path='/PickAnswer/:questionId' element={<PickAnswerPage/>}/>
     <Route path='/MyProfile' element={<MyProfilePage/>}/>
-    <Route path='/MyProfileSharePage' element={<MyProfileSharePage/>}/>
+    <Route path='/MyProfileSharePage/:hashId' element={<MyProfileSharePage/>}/>
     <Route path='/SurveyFirst' element={<SurveyFirst/>}/>
     <Route path='/SurveySecond' element={<SurveySecond/>}/>
     <Route path='/SurveyCreate' element={<SurveyCreate/>}/>
