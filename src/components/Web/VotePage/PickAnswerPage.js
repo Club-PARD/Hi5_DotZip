@@ -7,6 +7,8 @@ import CopyToClipboard from 'react-copy-to-clipboard'; //링크복사
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import KakaoShareButton from '../ProfilePage/ShareKakao';
 import BackNavBar from '../../BackNavbar';
+import CopyLinkMessage from './CopyLinkMessage';
+import EndMessage from './EndMessage';
 import emoji1 from '../../../img/emoji1.png';
 import emoji2 from '../../../img/emoji2.png';
 import emoji3 from '../../../img/emoji3.png';
@@ -42,13 +44,7 @@ const Div = styled.div`
   margin-left: 8px;
   margin-right: 8px;
 `;
-//버튼들
-const LinkMessage = styled.div` //링크복사
-  width: 200px;
-  background: white;
-  padding: 10px;
-  border: 1px solid black;
-`;
+
 //text
 const Text1 = styled.div`
   font-size: 24px;
@@ -425,6 +421,11 @@ const ReasonModalText1 = styled.p`
   colot: #353535;
   padding: 0;
   margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 `;
 const Point = styled.div`
   display: inline-block;
@@ -590,6 +591,7 @@ function PickAnswerPage() {
         .then(() => {
         // Update the local state after successful update in Firebase
         setVoteEnd(false);
+            localStorage.setItem('modalConfirmed', 'true'); //Message띄우기
             navigate('/VotingPage');
         })
         .catch((error) => {
@@ -679,7 +681,7 @@ function PickAnswerPage() {
                         )}
                       </CopyLinkButton>
                     </CopyToClipboard>
-                      {showMessage && copiedLinkId === questionId && <LinkMessage>링크가 복사되었습니다</LinkMessage>}
+                      {showMessage && copiedLinkId === questionId && <CopyLinkMessage />}
                     </AnswerLinkContainer>
                   </FolderContent>
                 </FolderImageContainer>
@@ -714,6 +716,7 @@ function PickAnswerPage() {
                     <ModalCancelButton onClick={handleCloseEndModal}>취소</ModalCancelButton>
                     <ModalCheckButton onClick={handleEndVote}>확인</ModalCheckButton>
                 </Modal>
+
 
                 <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal} style={reasonModalStyles}>
                   <CancelButton onClick={handleCloseModal}><CancelX src={X}/></CancelButton>

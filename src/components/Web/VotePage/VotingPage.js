@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import CreateFolderButton from '../../../img/CreateFolderButton.png';
 import BackNavBar from '../../BackNavbar';
 import VotePageComponent1 from './VotePageComponent1';
+import CopyLinkMessage from './CopyLinkMessage';
+import EndMessage from './EndMessage';
 import emoji1 from '../../../img/emoji1.png';
 import emoji2 from '../../../img/emoji2.png';
 import emoji3 from '../../../img/emoji3.png';
@@ -176,17 +178,11 @@ const NoFolder2Text = styled.div`
   font-weight: 600;
   height: 18px;
 `;
-const LinkMessage = styled.div` //링크복사
-  width: 200px;
-  background: white;
-  padding: 10px;
-  border: 1px solid black;
-`;
-
 
 const VotingPage = () => {
     const kakaoId = localStorage.getItem("kakaoId");
     const [questions, setQuestions] = useState([]);
+    const [showEndMessage, setShowEndMessage] = useState(false);
     useEffect(() => {
         const q = query(
           collection(dbService, 'zip_Question'),
@@ -202,6 +198,15 @@ const VotingPage = () => {
           });
           setQuestions(questionList);
         });
+        const modalConfirmed = localStorage.getItem('modalConfirmed');
+        if (modalConfirmed === 'true') {
+          setShowEndMessage(true);
+    
+          setTimeout(() => {
+            setShowEndMessage(false);
+            localStorage.removeItem('modalConfirmed');
+          }, 1000);
+        }
       
         return () => {
           unsubscribe();
@@ -237,7 +242,6 @@ const VotingPage = () => {
       const [copiedLinkId, setCopiedLinkId] = useState('');
 
       const handleLinkButtonClick = (questionId) => {
-        const link = `${window.location.origin}/answer/${questionId}`;
         setCopiedLinkId(questionId);
         setShowMessage(true);
         setTimeout(() => {
@@ -280,7 +284,8 @@ const VotingPage = () => {
                           )}
                         </CopyLinkButton>
                       </CopyToClipboard>
-                      {showMessage && copiedLinkId === question.questionId && <LinkMessage>링크가 복사되었습니다</LinkMessage>}
+                      {showMessage && copiedLinkId === question.questionId && <CopyLinkMessage />}
+                      {showEndMessage && <EndMessage />}
                     </AnswerLinkContainer>
                   </FolderContent>
                 </FolderImageContainer>
