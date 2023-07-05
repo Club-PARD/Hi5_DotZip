@@ -119,11 +119,13 @@ const ButtonQ = styled.img`
   height: 156px;
   justify-self: flex-start;
   margin-left: 24px;
+  cursor: pointer;
 `;
 const ButtonQ1 = styled.img`
   width: 156px;
   height: 156px;
   justify-self: flex-start;
+  cursor: pointer;
 `;
 
 const NewQ = styled.header`
@@ -181,6 +183,7 @@ const Profile = styled.button`
   background-color: white;
   border: none;
   /* border-bottom: 2px solid white; */
+  cursor: pointer;
 `;
 
 const ButtonA = styled.button`
@@ -197,6 +200,7 @@ font-style: normal;
 font-weight: 600;
 line-height: 18px;
 color: var(--gray-60, #808080);
+cursor: pointer;
 `;
 const ButtonB = styled.button`
   width: 100px;
@@ -211,6 +215,7 @@ font-style: normal;
 font-weight: 600;
 line-height: 18px;
 color: var(--gray-60, #808080);
+cursor: pointer;
 `;
 
 const ButtonNew = styled.button`
@@ -229,6 +234,7 @@ color: #EC582F;
 border: 1px solid var(--primary-orange, #EC582F);
 background: none;
 margin-left: 24px;
+cursor: pointer;
 
 `;
 
@@ -239,6 +245,7 @@ width: 154px;
 height: 40px;
 margin-left: 111.5px;
 margin-top: 24px;
+cursor: pointer;
 
 `;
 
@@ -247,6 +254,7 @@ const Banner = styled.img`
   height: 96px;
   // background: var(--background-gra, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%));
   margin-bottom: 32px;
+  cursor: pointer;
 `;
 
 const MadeF = styled.header`
@@ -268,6 +276,7 @@ color: #F8F8F8;
 const Emoji = styled.img`
 width: 48px;
 height: 48px;
+cursor: pointer;
 
 `;
 const RedText = styled.span`
@@ -309,6 +318,7 @@ const FolderImage = styled.img`
   z-index: 0;
   width: 327px;
   height: 196px;
+  cursor: pointer;
 
 `;
 
@@ -340,6 +350,7 @@ const IMG = styled.img`
   width: 48px;
   height: 48px;
   z-index: 1;
+  cursor: pointer;
 `;
 const TipImage = styled.img`
   position: absolute;
@@ -347,6 +358,7 @@ const TipImage = styled.img`
   width: 53px;
   height: 23px;
   z-index: 1;
+  cursor: pointer;
 `;
 const AnswerLinkContainer = styled.div`
   display: flex;
@@ -425,11 +437,13 @@ const CopyLinkButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `;
 const Link = styled.img`
   width: 16px;
   height: 16px;
   margin-right: 4px;
+  cursor: pointer;
 `;
 
 const HomePageFirst = () => {

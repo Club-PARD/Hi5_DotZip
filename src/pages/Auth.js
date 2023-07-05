@@ -27,6 +27,7 @@ width: 327px;
 height: 48px;
 margin-top: 8px;
 margin-left: 24px;
+cursor: pointer;
 `;
 
 const LoginCon = styled.div`
