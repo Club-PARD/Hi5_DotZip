@@ -10,9 +10,20 @@ import zip from '../img/ZiP.png';
 import zip1 from '../img/ZiP (1).png';
 import logo from '../img/Logo.png';
 
+const DDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 812px;
+`;
 const DIV = styled.div`
-margin: 0 auto;
-
+    display: flex;
+    flex-direction: column;
+    width: 375px;
+    margin: 0;
+    padding: 0;
 `;
 
 const Logo = styled.img`
@@ -36,7 +47,6 @@ height: 812px;
 display: flex;
 flex-direction: column;
 justify-content: flex-start;
-margin: 0 auto;
 overflow-x: hidden;
 background: #FFF8F3;
 
@@ -217,6 +227,7 @@ const Auth = () => {
           onFail={handleFailure}
           onLogout={handleLogout}
           render={({ onClick }) => (
+          <DDiv>
             <DIV>
               <LoginCon>
               <Logo src={logo}/> 
@@ -231,6 +242,7 @@ const Auth = () => {
               </LoginCon>
               {/* <button onClick={handleLogout}>로그아웃</button> */}
             </DIV>
+            </DDiv>  
           )}
         />
       )}
