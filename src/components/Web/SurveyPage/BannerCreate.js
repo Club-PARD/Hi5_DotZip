@@ -7,7 +7,7 @@ import BackNavBar from '../../BackNavbar'
 import progress from '../../../img/Line2.png'
 import tipimage from '../../../img/Tip.png'
 import addVote from '../../../img/addVote.png'
-import AddAnswerQuest from '../AnswerPage/AddAnswerQuestHome';
+import AddAnswerQuest from '../AnswerPage/AddAnswerQuest';
 import Modal from 'react-modal';
 import emoji3 from '../../../img/emoji3.png';
 import tip from '../../../img/TipHeart.png'
