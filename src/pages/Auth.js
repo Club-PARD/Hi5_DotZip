@@ -4,7 +4,8 @@ import { dbService } from "../fbase.js";
 import { collection, onSnapshot, setDoc, doc, getDoc } from "firebase/firestore";
 import { Navigate } from "react-router-dom";
 import login from '../img/Login.png';
-import FolderImg from '../img/LoginImg.png';
+// import FolderImg from '../img/LoginImg.png';
+import FolderImg from '../img/LoginGif.gif';
 import styled from 'styled-components';
 import zip from '../img/ZiP.png';
 import zip1 from '../img/ZiP (1).png';
@@ -39,11 +40,12 @@ height: 48px;
 margin-top: 8px;
 margin-left: 24px;
 cursor: pointer;
+margin-bottom: 48px;
 `;
 
 const LoginCon = styled.div`
 width: 375px;
-height: 100%;
+height: 812px;
 display: flex;
 flex-direction: column;
 justify-content: flex-start;
@@ -57,7 +59,7 @@ width: 287px;
 margin-top: 32px;
 margin-left: 24px;
 //styleName: Body/B5-16-SB;
-font-family: Pretendard;
+font-family:PretendardSemi;
 font-size: 16px;
 font-weight: 600;
 line-height: 20px;
@@ -75,7 +77,7 @@ top: 125px;
 margin-top: 6px;
 margin-left: 2px;
 //styleName: Body/B5-16-SB;
-font-family: Pretendard;
+font-family: PretendardSemi;
 font-size: 16px;
 font-weight: 600;
 line-height: 20px;
@@ -103,17 +105,17 @@ color: #EC582F;
 `;
 
 const Img = styled.img`
-width: 252px;
-height: 230px;
-margin-top: 146px;
-margin-left: 58px;
+width: 377px;
+height: 521px;
+/* margin-top: 146px;
+margin-left: 58px; */
 margin-bottom: 171px;
 opacity: 0.10000000149011612px;
 
 `;
 
 const ZIP = styled.img`
-width: 33px;
+width: 40px;
 height: 20px;
 margin-top: 7px;
 

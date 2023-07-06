@@ -107,7 +107,7 @@ const CText = styled.p`
   margin-left: 76px;
   font-weight: 600;
   width: 235px;
-  font-family: Pretendard;
+  font-family: PretendardSemi;
   color: #808080;
   word-break: keep-all;
   display: flex;

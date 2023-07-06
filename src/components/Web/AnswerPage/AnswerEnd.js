@@ -44,7 +44,7 @@ const IMG = styled.img`
   margin-left: 5px;
 `;
 const QText = styled.p`
-  font-family: Pretendard;
+  font-family: PretendardSemi;
   font-size: 14px;
   margin: 0;
   margin-top: 60px;
