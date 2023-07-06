@@ -30,7 +30,6 @@ const Profile = styled.button`
   height: 40px;
   top: 80px;
   left: 186px;
-  padding: 8px 61.5px;
   gap: 10px;
   font-family: Pretendard;
   font-size: 16px;
