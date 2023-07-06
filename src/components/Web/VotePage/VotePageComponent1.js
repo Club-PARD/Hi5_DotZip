@@ -19,6 +19,7 @@ const Folder2Text = styled.header`
   padding-bottom: 32px;
   padding-left: 14px;
   margin-top: 6px;
+  font-family: PretendardSemi;
 
 `;
 const VotePageComponent1 = () => {
