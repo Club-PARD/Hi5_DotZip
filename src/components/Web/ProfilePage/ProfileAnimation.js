@@ -4,8 +4,8 @@ import GIFImg from '../../../img/MyRankImage.gif';
 
 
 const GIF = styled.img`
-  width: 400px;
-  height: 380px;
+  width: 300px;
+  height: 250px;
 `;
 
 const ProfileAnimation = () => {

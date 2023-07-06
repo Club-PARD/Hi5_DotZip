@@ -17,13 +17,15 @@ import Folder1 from '../../../img/Folder1.png';
 import Folder2 from '../../../img/Folder2.png';
 import Folder3 from '../../../img/Folder3.png';
 import Folder4 from '../../../img/Folder4.png';
-import Tip from '../../../img/Tip.png';
-import HeartTip from '../../../img/HeartTip.png';
+import EndVoteBox from '../../../img/EndVoteBox.png';
 import LinkImage from '../../../img/Link.png';
 import HomeButtonImage from '../../../img/GoHome.png';
 import ModalImoticon from '../../../img/ModalImoticon.png';
 import X from '../../../img/CancelX.png';
 import ReasonBoxImage from '../../../img/ReasonBox.png';
+import Line4 from '../../../img/Line4.png';
+import Arrow from '../../../img/화살표.png';
+import CheckAnswer from '../../../img/AnswerCheck.png';
 
 //기본틀
 const DDiv = styled.div`
@@ -50,7 +52,7 @@ const Text1 = styled.div`
   font-size: 24px;
   font-weight: 700;
   height: 60px;
-  font-family: Pretendard;
+  font-family: PretendardBold;
   margin-left: 16px;
   margin-bottom: 8px;
 `;
@@ -61,7 +63,7 @@ const Text2 = styled.div`
   font-size: 14px;
   font-weight: 600;
   height: 18px;
-  font-family: Pretendard;
+  font-family: PretendardSemi;
   margin-left: 16px;
   padding-bottom: 32px;
   color: #808080;
@@ -70,7 +72,7 @@ const Text3 = styled.div`
   font-size: 20px;
   font-weight: 700;
   height: 24px;
-  font-family: Pretendard;
+  font-family: PretendardBold;
   margin-left: 16px;
   padding-bottom: 8px;
 `;
@@ -78,15 +80,15 @@ const Text4 = styled.div`
   font-size: 14px;
   font-weight: 600;
   height: 18px;
-  font-family: Pretendard;
+  font-family: PretendardSemi;
   margin-left: 16px;
-  padding-bottom: 8px;
+  padding-bottom: 24px;
   color: #808080;
 `;
 //폴더
 const FolderImageContainer = styled.div`
   position: relative;
-  width: 375px;
+  width: 359px;
   height: 196px;
   margin-bottom: 24px;
 `;
@@ -110,43 +112,23 @@ const FolderContent = styled.div`
 `;
 const IMG = styled.img`
   position: absolute;
-  padding-top: 58px;
+  padding-top: 65px;
   width: 48px;
   height: 48px;
   z-index: 1;
 `;
-const TipImage = styled.img`
-  position: absolute;
-  margin-top: 115px;
-  width: 53px;
-  height: 23px;
-  z-index: 1;
-`;
 //폴더 안 텍스트
 const QText = styled.p`
-  font-size: 14px;
+  font-size: 16px;
   margin: 0;
-  margin-top: 63px;
+  margin-top: 70px;
   margin-left: 60px;
   margin-bottom: 19px;
   font-weight: 600;
   width: 235px;
   height: 36px;
-  font-family: Pretendard;
-  z-index: 1;
-  word-break: keep-all;
-  display: flex;
-  align-items: center;
-`;
-const CText = styled.p`
-  font-size: 12px;
-  margin: 0;
-  margin-left: 60px;
-  font-weight: 600;
-  width: 235px;
-  height: 14px;
-  font-family: Pretendard;
-  color: #808080;
+  font-family: PretendardSemi;
+  color: #212121;
   z-index: 1;
   word-break: keep-all;
   display: flex;
@@ -158,226 +140,228 @@ const AnswerLinkContainer = styled.div`
   align-items: center;
 `;
 const CopyLinkButton = styled.button`
-  border: none;
-  margin-top: 13px;
+  font-family: Pretendard;
+  margin-top: 3px;
   padding: 0;
-  width: 239px;
-  height: 32px;
-  border-radius: 20px;
-  font-size: 12px;
+  width: 220px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid #CF4823;
+  background: var(--orange-primary, #EC582F);
+  font-size: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
 `;
 const Link = styled.img`
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
+  margin-right: 4px; 
 `;
-//tip box
-const TipBox = styled.div`
-    width: 327px;
-    height: 40px;
-    margin-left: 16px;
-    margin-bottom: 16px;
-    border-radius: 30px;
-    background: var(--background-orange, #FFF8F3);
-    display: flex;
-    align-items: center;
-`;
-const HeartTipImage = styled.img`
-    margin-left: 16px;
-    width: 55px;
-    height: 24px;
-`;
-const TipText = styled.p`
-    margin-left: 8px;
-    margin-top: 12px;
-    font-size: 12px;
-    font-weight: 600;
-    height: 16px;
-    font-family: Pretendard;
-    color: #808080;
+//라인
+const Line = styled.img`
+  width: 327px;
+  height: 1px;
+  margin-left: 16px;
+  margin-bottom: 32px;
 `;
 //답변들 box
 const AnswerBox = styled.button`
-    width: 327px;
-    height: 64px;
-    width: 327px;
-    margin-left: 16px;
-    margin-bottom: 16px;
-    border-radius: 8px;
-    border: 1px solid var(--white-80, #EFEFEF);
-    background: none;
-    cursor: pointer;
+  width: 327px;
+  height: 64px;
+  margin-left: 16px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  border: 1px solid var(--white-80, #EFEFEF);
+  background: none;
+  cursor: pointer;
 `;
 const AnswerContainer = styled.div`
   display: flex;
   align-items: center;
 `;
 const AnswerText = styled.p`
-    margin: 0;
-    margin-top: 12px;
-    margin-left: 12px;
-    margin-bottom: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    height: 20px;
-    font-family: Pretendard;
+  margin: 0;
+  margin-top: 3px;
+  margin-left: 12px;
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  height: 20px;
+  font-family: Pretendard;
+`;
+const CheckAnswerImg = styled.img`
+  width: 13px;
+  height: 8px;
+  margin-left: 6px;
 `;
 const Percentage = styled.p`
-    margin-top: 14px;
-    margin-right: 8px;
-    margin-bottom: 8px;
-    margin-left: auto;
-    font-size: 14px;
-    font-weight: 600;
-    height: 18px;
-    font-family: Pretendard;
+  margin: 0;
+  margin-left: 17px;
+  width: 30px;
+  font-size: 12px;
+  font-weight: 600;
+  height: 18px;
+  font-family: Pretendard;
 `;
 const PercentageContainer = styled.div`
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 `;
 const VoteBox = styled.div`
-    width: 280px;
-    height: 8px;
-    margin-left: 12px;
-    border-radius: 10px;
-    border: 0;
-    background: ${({ percentage, isLastIndex }) =>
-    isLastIndex
-      ? `linear-gradient(to right, #EC582F ${percentage}%, #FFF8F3 ${percentage}%)`
-      : `linear-gradient(to right, #ABABAB ${percentage}%, #EEE ${percentage}%)`};
-    color: #000000;
+  width: 260px;
+  height: 8px;
+  margin: 0;
+  padding: 0;
+  margin-left: 12px;
+  border-radius: 10px;
+  border: 0;
+  background: ${({ percentage, isLargest }) =>
+  isLargest
+    ? `linear-gradient(to right, #EC582F ${percentage}%, #FFF8F3 ${percentage}%)`
+    : `linear-gradient(to right, #ABABAB ${percentage}%, #EEE ${percentage}%)`};
+  color: #000000;
 `;
 const VoteNumber = styled.p`
-    margin: 0;
-    margin-left: 3px;
-    font-size: 12px;
-    font-weight: 500;
-    height: 16px;
-    font-family: Pretendard;
-    color: #ABABAB;
+  margin: 0;
+  margin-top: 3px;
+  margin-bottom: 8px;
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 500;
+  width: 90px;
+  height: 16px;
+  font-family: Pretendard;
+  color: #ABABAB;
+`;
+const ArrowImg = styled.img`
+  width: 5px;
+  height: 9px;
 `;
 const TotalNumber = styled.p`
-    margin-right: 24px;
-    margin-left: auto;
-    font-size: 12px;
-    font-weight: 500;
-    height: 16px;
-    font-family: Pretendard;
-    color: #353535;
+  margin: 0;
+  margin-right: 32px;
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 500;
+  height: 16px;
+  font-family: Pretendard;
+  color: #353535;
 `;
 //아래 버튼
 const BackHomeButton = styled.button`
-    width: 327px;
-    height: 48px;
-    margin-top: 80px;
-    margin-left: 16px;
-    margin-bottom: 8px;
-    border: none;
-    background: none;
-    cursor: pointer;
+  width: 327px;
+  height: 48px;
+  margin-top: 64px;
+  margin-left: 16px;
+  margin-bottom: 8px;
+  border: none;
+  background: none;
+  cursor: pointer;
 `;
 const HomeImage = styled.img`
   width: 100%;
   height: 100%;
 `;
 const EndButton = styled.button`
-    margin-left: 20px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    width: 318px;
-    height: 47px;
-    border-radius: 10px;
-    border: 1px solid var(--primary-orange, #EC582F);
-    color: #EC582F;
-    background: white;
-    cursor: pointer;
+  width: 327px;
+  height: 48px;
+  margin-left: 16px;
+  margin-bottom: 53px;
+  border: none;
+  background: none;
+  cursor: pointer;
+`;
+const EndVoteImage = styled.img`
+  width: 100%;
+  height: 100%;
 `;
 //종료 모달 안에 내용들
 const modalStyles = {
-    content: {
-        position: 'absolute',
-        width: '343px',
-        height: '300px',
-        borderRadius: '10px',
-        borderStyle : 'none',
-        background: 'white',
-        margin: 'auto',
-        padding: '0',
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        transform: 'translate(-50%, -50%)',
-        zIndex: '2',
-      },
-      overlay: {
-        backgroundColor: 'rgba(0, 0, 0, 0.50)',
-        zIndex: '2',
-      },
+  content: {
+      position: 'absolute',
+      width: '343px',
+      height: '300px',
+      borderRadius: '10px',
+      borderStyle : 'none',
+      background: 'white',
+      margin: 'auto',
+      padding: '0',
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      transform: 'translate(-50%, -50%)',
+      zIndex: '2',
+    },
+    overlay: {
+      backgroundColor: 'rgba(0, 0, 0, 0.50)',
+      zIndex: '2',
+    },
 };
 const ModalImg = styled.img`
-    width: 48px;
-    height: 48px;
-    margin-left: 147px;
-    margin-bottom: 0px;
+  width: 48px;
+  height: 48px;
+  margin-left: 147px;
+  margin-bottom: 0px;
 `;
 const ModalText1 = styled.p`
-    margin-top: 8px;
-    text-align: center;
-    margin-bottom: 10px;
-    font-size: 20px;
-    font-weight: 700;
-    height: 24px;
-    font-family: Pretendard;
-    color: #353535;
+  margin-top: 8px;
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  height: 24px;
+  font-family: Pretendard;
+  color: #353535;
 `;
 const ModalText2 = styled.p`
-    margin-bottom: 40px;
-    font-size: 14px;
-    font-weight: 600;
-    height: 18px;
-    font-family: Pretendard;
-    color: #808080;
-    text-align: center;
+  margin-bottom: 40px;
+  font-size: 14px;
+  font-weight: 600;
+  height: 18px;
+  font-family: Pretendard;
+  color: #808080;
+  text-align: center;
 `;
 const ModalCancelButton = styled.button`
-    width: 120px;
-    height: 40px;
-    border-radius: 24px;
-    margin-top: 5px;
-    margin-left: 40px;
-    margin-right: 24px;
-    background: var(--gray-10, #F8F8F8);
-    text-align: center;
-    border: 0;
-    cursor: pointer;
+  width: 120px;
+  height: 40px;
+  border-radius: 24px;
+  margin-top: 5px;
+  margin-left: 40px;
+  margin-right: 24px;
+  background: var(--gray-10, #F8F8F8);
+  text-align: center;
+  border: 0;
+  cursor: pointer;
+  font-family: PretendardSemi;
 `;
 const ModalCheckButton = styled.button`
-    width: 120px;
-    height: 40px;
-    background: var(--background-orange, #FFF8F3);
-    margin-top: 30px;
-    border-radius: 24px;
-    text-align: center;
-    border: 0;
-    cursor: pointer;
+  width: 120px;
+  height: 40px;
+  background: var(--background-orange, #FFF8F3);
+  margin-top: 30px;
+  border-radius: 24px;
+  text-align: center;
+  border: 0;
+  cursor: pointer;
+  font-family: PretendardSemi;
 `;
 const CancelButton = styled.button`
-    width: 35px;
-    height: 24px;
-    margin-top: 24px;
-    margin-left: 295px;
-    border: 0;
-    background: none;
-    cursor: pointer;
+  width: 35px;
+  height: 24px;
+  margin-top: 24px;
+  margin-left: 295px;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-family: PretendardSemi;
 `;
 const CancelX = styled.img`
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 `;
 //이유 모달 안에 내용들
 const reasonModalStyles = {
@@ -407,8 +391,8 @@ const reasonModalStyles = {
     },
 };
 const Box2Image = styled.img`
-  width: 311px;
-  height: 250px;
+  width: 295px;
+  height: 180px;
   margin-top: 30px;
 `;
 const ReasonBox = styled.div`
@@ -417,7 +401,7 @@ const ReasonBox = styled.div`
   border-radius: 10px;
   background: var(--white-100, #FFF);
   box-shadow: 0px 2px 10px 0px #FFE2CE;
-  margin-top: -280px;
+  margin-top: -210px;
 `;
 const ReasonModalText1 = styled.p`
   text-align: center;
@@ -518,7 +502,7 @@ function PickAnswerPage() {
     }
 
     useEffect(() => {
-      window.scrollTo(0, 0);
+        window.scrollTo(0, 0);
         fetchDataQuestion();
         fetchDataAnswer();
     }, []);
@@ -631,7 +615,6 @@ function PickAnswerPage() {
         }
       };
 
-    const emojiImage = getEmojiImage(emoji);
     //링크 복사하기
     const [showMessage, setShowMessage] = useState(false);
     const [copiedLinkId, setCopiedLinkId] = useState('');
@@ -658,6 +641,12 @@ function PickAnswerPage() {
     }
   };
 
+  //totalVote최대 골라내기
+  const maxTotalVote = answerzips.reduce((max, answerzip) => {
+    return answerzip.totalVote > max ? answerzip.totalVote : max;
+  }, 0);
+    
+
     return (
         <>
         <AnswerNavBar/>
@@ -669,9 +658,7 @@ function PickAnswerPage() {
                   <FolderImage src={selectedFolderImage} />
                   <FolderContent>
                     <IMG src={getEmojiImage(emoji)} alt="Emoji" />
-                    <TipImage src={Tip} />
                     <QText>{questionzip}</QText>
-                    <CText>{commentzip}</CText>
                     <AnswerLinkContainer>
                     {voteEnd && <KakaoShareButton questionId={questionId}/>}
                     <CopyToClipboard text={`${window.location.origin}/answer/${questionId}`}>
@@ -690,29 +677,26 @@ function PickAnswerPage() {
                     </AnswerLinkContainer>
                   </FolderContent>
                 </FolderImageContainer>
+                <Line src = {Line4} />
                 <Text3>투표 현황</Text3>
                 <Text4>각 답변을 눌러 이유를 함께 확인해보세요!</Text4>
-                <TipBox>
-                    <HeartTipImage src = {HeartTip}></HeartTipImage>
-                    <TipText>키워드를 작성한 이유는 나에게만 보여요.</TipText>
-                </TipBox>
                 {answerzips.map((answerzip, index) => (
                     <div key={answerzip.id}>
                         <AnswerBox onClick={() => handleVoteBoxClick(answerzip.answer, answerzip.id)}>
                             <AnswerContainer>
-                                <AnswerText>{answerzip.answer}</AnswerText>
-                                <Percentage style={{ color: index === answerzips.length - 1 ? '#EC582F' : '#808080' }}>{((answerzip.totalVote / totalVotes) * 100).toFixed(0)}%</Percentage>
+                                <AnswerText>{answerzip.answer} {index === answerzips.length - 1 && <CheckAnswerImg src={CheckAnswer}/>}</AnswerText>
+                                <VoteNumber>{answerzip.totalVote}명의 이유보기 <ArrowImg src={Arrow}/></VoteNumber>
                             </AnswerContainer>
                             <PercentageContainer>
-                                <VoteBox percentage={(answerzip.totalVote / totalVotes) * 100} isLastIndex={index === answerzips.length - 1}/>
-                                <VoteNumber>{answerzip.totalVote}명</VoteNumber>
+                                <VoteBox percentage={(answerzip.totalVote / totalVotes) * 100} isLargest={answerzip.totalVote === maxTotalVote}/>
+                                <Percentage style={{ color: answerzip.totalVote === maxTotalVote ? '#EC582F' : '#808080' }}>{((answerzip.totalVote / totalVotes) * 100).toFixed(0)}%</Percentage>
                             </PercentageContainer>
                         </AnswerBox>
                     </div>
                 ))}
                 <TotalNumber>총 <RedText>{totalVotes}명</RedText>이 참여했어요.</TotalNumber>
                 <BackHomeButton onClick={handleBackHome}><HomeImage src = {HomeButtonImage} /></BackHomeButton>
-                {voteEnd ? (<EndButton onClick={() => setConfirmEndVoteModalOpen(true)}>투표 종료하기</EndButton>) : null}
+                {voteEnd ? (<EndButton onClick={() => setConfirmEndVoteModalOpen(true)}><EndVoteImage src = {EndVoteBox} /></EndButton>) : null}
                 <Modal isOpen={confirmEndVoteModalOpen} onRequestClose={handleCloseEndModal} contentLabel="투표 종료 확인" style={modalStyles}>
                     <CancelButton onClick={handleCloseEndModal}><CancelX src={X}/></CancelButton>
                     <ModalImg src = {ModalImoticon}/>
@@ -735,8 +719,12 @@ function PickAnswerPage() {
                             <ReasonModalText4>{reasonzips[reasonzips.length - 1 - currentReasonIndex].reason}</ReasonModalText4>
                           </>
                         )}
-                            <ModalCancelButton style={{width: '72px', height: '32px', marginLeft:'16px', marginRight:'4px', cursor: currentReasonIndex === 0 ? 'default' : 'pointer'}} onClick={handlePreviousReason} disabled={currentReasonIndex === 0}>이전</ModalCancelButton>
-                            <ModalCheckButton style={{width: '72px', height: '32px', margin: '0', cursor: currentReasonIndex === reasonzips.length - 1 ? 'default' : 'pointer'}} onClick={handleNextReason} disabled={currentReasonIndex === reasonzips.length - 1}>다음</ModalCheckButton>
+                            <ModalCancelButton style={{width: '72px', height: '32px', marginLeft:'16px', marginRight:'4px', cursor: currentReasonIndex === 0 ? 'default' : 'pointer', color: currentReasonIndex === 0 ? '#808080' : '#EC582F',
+                             background: currentReasonIndex === 0 ? 'var(--gray-10, #F8F8F8)':'var(--gradation-back, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%))'}} 
+                            onClick={handlePreviousReason} disabled={currentReasonIndex === 0}>이전</ModalCancelButton>
+                            <ModalCheckButton style={{width: '72px', height: '32px', margin: '0', cursor: currentReasonIndex === reasonzips.length - 1 ? 'default' : 'pointer', color: currentReasonIndex === reasonzips.length - 1 ? '#808080' : '#EC582F',
+                            background: currentReasonIndex === reasonzips.length - 1 ? 'var(--gray-10, #F8F8F8)':'var(--gradation-back, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%))'}}
+                            onClick={handleNextReason} disabled={currentReasonIndex === reasonzips.length - 1}>다음</ModalCheckButton>
                         </ReasonBox>
                     <ModalCheckButton isopen="false" onClick={handleCloseModal} style={{ width: '180px', marginBottom: '24px', marginTop: '60px' }}> <RedText>확인</RedText> </ModalCheckButton>
                 </Modal>

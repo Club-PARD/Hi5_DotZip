@@ -187,7 +187,7 @@ const VotingPage = () => {
     const [questions, setQuestions] = useState([]);
     const [showEndMessage, setShowEndMessage] = useState(false);
     useEffect(() => {
-      window.scrollTo(0, 0);
+        window.scrollTo(0, 0);
         const q = query(
           collection(dbService, 'zip_Question'),
           where('kakaoId', '==', kakaoId),

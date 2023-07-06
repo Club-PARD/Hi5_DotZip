@@ -38,8 +38,8 @@ const MyKakaoShareButton = () => {
         description: `프로필.ZiP을 \n지금 바로 확인해보세요.`,
         imageUrl: 'https://github.com/Club-PARD/Hi5_DotZip/blob/master/src/img/thumbnail.png?raw=true',
         link: {
-          mobileWebUrl: window.location.href,
-          webUrl: window.location.href,
+          mobileWebUrl: `${window.location.origin}/MyProfileSharePage/${hashId}`,
+          webUrl: `${window.location.origin}/MyProfileSharePage/${hashId}`,
         },
       },
       buttons: [

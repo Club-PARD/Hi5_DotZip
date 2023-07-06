@@ -8,12 +8,11 @@ const { Kakao } = window;
 
 const ShareButton = styled.button`
   border: none;
-  margin-top: 13px;
-  margin-left: 6px;
+  margin-top: 3px;
   margin-right: 12px;
   padding: 0;
-  width: 40px;
-  height: 32px;
+  width: 63px;
+  height: 40px;
   background: none;
   display: flex;
   cursor: pointer;
@@ -50,8 +49,8 @@ const KakaoShareButton = ({ questionId }) => {
         description: `로그인 없이 \n간편하게 답변을 남겨보세요.`,
         imageUrl: 'https://github.com/Club-PARD/Hi5_DotZip/blob/master/src/img/thumbnail.png?raw=true',
         link: {
-          mobileWebUrl: window.location.href,
-          webUrl: window.location.href,
+          mobileWebUrl: `${window.location.origin}/answer/${questionId}`,
+          webUrl: `${window.location.origin}/answer/${questionId}`,
         },
       },
       buttons: [
