@@ -53,7 +53,7 @@ const AnswerLoading = () => {
       useEffect(() => {
         const timer = setTimeout(() => {
           navigateToAnswerEnd();
-        }, 2500);
+        }, 2000);
     
         return () => clearTimeout(timer);
       }, []);

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const HomeP = styled.header`
   gap: 10px;
-  width: 130px;
+  width: 163px;
   color: #ABABAB;
   text-align: center;
   cursor: pointer;
@@ -26,7 +26,7 @@ const HeaderContainer = styled.div`
 
 
 const Profile = styled.button`
-  width: 180px;
+  width: 165px;
   height: 40px;
   top: 80px;
   left: 186px;
