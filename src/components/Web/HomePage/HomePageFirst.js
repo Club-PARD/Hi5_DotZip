@@ -325,7 +325,7 @@ const FolderImageContainer = styled.div`
   position: relative;
   width: 357px;
   margin-bottom: 24px;
-  margin-left: 6px;
+  margin-left: 7px;
 
 
 `;
@@ -714,17 +714,14 @@ const HomePageFirst = () => {
               </div>
             ))
           ) :
-          ((!question.length || (question.length>0 &&question.voteEnd===false))&&(
-              <Questionp>
-                <QP>아직 만든 질문이 없어요.</QP>
-                <Qp>새로운 질문을 만들고 공유해보세요.</Qp>
-                <Img src={NewquesButton} onClick={() => navigate(`/SurveyFirst`)} />
-              </Questionp>
-              
-            )
-            
+          (questions.length === 0 || (questions.length > 0 && question.voteEnd===false)) && (
+            <Questionp>
+              <QP>아직 만든 질문이 없어요.</QP>
+              <Qp>새로운 질문을 만들고 공유해보세요.</Qp>
+              <Img src={NewquesButton} onClick={() => navigate(`/SurveyFirst`)} />
+            </Questionp>
           )
-          }
+        }
           </>
         )}
         </DIVB>

@@ -1,23 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Folder1Text = styled.div`
+const Folder1Text = styled.header`
   font-size: 24px;
   font-weight: 700;
   height: 24px;
-  font-family: Pretendard;
+  font-family: PretendardBold;
   padding-top: 32px;
   padding-bottom: 8px;
   padding-left: 14px;
   line-height: 28px;
 `;
-const Folder2Text = styled.div`
+const Folder2Text = styled.header`
   color: #ABABAB;
   font-size: 14px;
   font-weight: 600;
   height: 18px;
   padding-bottom: 32px;
   padding-left: 14px;
+  margin-top: 6px;
+
 `;
 const VotePageComponent1 = () => {
     return (
