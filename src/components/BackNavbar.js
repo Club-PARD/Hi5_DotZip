@@ -15,7 +15,13 @@ const NavbarWrapper = styled.nav`
     align-items: center;
     margin-top: 4.5px;
 `;
+const ButtonClick = styled.div`
+  width: 32px;
+  height: 32px;
+  display: flex;
+    align-items: center;
 
+  `
 const BackButton = styled.img`
   background-color: transparent;
   border: none;
@@ -33,8 +39,10 @@ const Navbar = () => {
 
   return (
     <Div>
-    <NavbarWrapper>
-      <BackButton src={back} onClick={handleGoBack}></BackButton>
+    <NavbarWrapper >
+      <ButtonClick onClick={handleGoBack}>
+      <BackButton src={back} ></BackButton>
+      </ButtonClick>
     </NavbarWrapper>
     </Div>
   );
