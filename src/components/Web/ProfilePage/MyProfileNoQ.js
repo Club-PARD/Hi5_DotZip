@@ -9,9 +9,9 @@ const Container = styled.div`
     align-items: center;
 `;
 const Text1 = styled.div`
-    width: 167px;
+    width: 180px;
     font-size: 18px;
-    font-family: Pretendard;
+    font-family: PretendardSemi;
     font-style: normal;
     font-weight: 600;
     line-height: 24px;
@@ -22,7 +22,7 @@ const Text1 = styled.div`
 const Text2 = styled.div`
     width: 196px;
     font-size: 14px;
-    font-family: Pretendard;
+    font-family: PretendardSemi;
     font-style: normal;
     font-weight: 600;
     line-height: 18px;

@@ -20,6 +20,7 @@ import Folder4 from '../../../img/Folder4.png';
 import Tip from '../../../img/Tip.png';
 import LinkImage from '../../../img/Link.png';
 import CopyToClipboard from 'react-copy-to-clipboard'; //링크복사
+import MyQuestionsLoadingImg from '../../../img/MyQuestionsLoading.png';
 
 //기본틀
 const DDiv = styled.div`
@@ -181,11 +182,18 @@ const NoFolder2Text = styled.div`
   font-weight: 600;
   height: 18px;
 `;
+const MyQuestionsLoading = styled.img`
+  width: 327px
+  height: 856px
+  margin-top: 32px;
+`;
 
 const VotingPage = () => {
     const kakaoId = localStorage.getItem("kakaoId");
     const [questions, setQuestions] = useState([]);
     const [showEndMessage, setShowEndMessage] = useState(false);
+    //로딩
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         window.scrollTo(0, 0);
         const q = query(
@@ -201,6 +209,7 @@ const VotingPage = () => {
             }
           });
           setQuestions(questionList);
+          setLoading(false);
         });
         const modalConfirmed = localStorage.getItem('modalConfirmed');
         if (modalConfirmed === 'true') {
@@ -211,7 +220,6 @@ const VotingPage = () => {
             localStorage.removeItem('modalConfirmed');
           }, 1000);
         }
-      
         return () => {
           unsubscribe();
         };
@@ -250,10 +258,11 @@ const VotingPage = () => {
         setShowMessage(true);
         setTimeout(() => {
           setShowMessage(false);
-        }, 1000);
+        }, 2000);
       };
       const folderImages = [Folder1, Folder2, Folder3, Folder4];
       const sortedQuestions = questions.slice().sort((a, b) => (a.voteEnd && !b.voteEnd ? -1 : 1));
+
 
 
     return(
@@ -262,46 +271,52 @@ const VotingPage = () => {
       <DDiv>
       <Div>
         <VotePageComponent1 />
-        {questions.length > 0 ? (
-          sortedQuestions.map((question, index) => (
-            <div key={question.questionId}>
-              {question && question.question && (
-                <FolderImageContainer onClick={() => handleQuestionClick(question.questionId, index)}>
-                  <FolderImage src={folderImages[index % folderImages.length]} />
-                  <FolderContent>
-                    <IMG src={getEmojiImage(question.emoji)} alt="Emoji" />
-                    <TipImage src={Tip} />
-                    <QText>{question.question}</QText>
-                    <CText>{question.comment}</CText>
-                    <AnswerLinkContainer>
-                      <AnswerText><RedText>{question.VoteNum}명</RedText>이 답변을 남겼어요!</AnswerText>
-                      <CopyToClipboard text={`${window.location.origin}/answer/${question.questionId}`}>
-                        <CopyLinkButton onClick={(event) => {event.stopPropagation(); handleLinkButtonClick(question.questionId);}} 
-                        disabled={!question.voteEnd} style={{ backgroundColor: question.voteEnd ? '#EC582F' : '#F8F8F8' , color: question.voteEnd ? 'white' : '#808080' ,cursor: question.voteEnd ? 'pointer' : 'default'}}>
-                          {question.voteEnd ? (
-                            <>
-                              <Link src={LinkImage} />
-                              링크복사
-                            </>
-                          ) : (
-                            '종료된 투표'
-                          )}
-                        </CopyLinkButton>
-                      </CopyToClipboard>
-                      {showMessage && copiedLinkId === question.questionId && <CopyLinkMessage />}
-                      {showEndMessage && <EndMessage />}
-                    </AnswerLinkContainer>
-                  </FolderContent>
-                </FolderImageContainer>
-              )}
-            </div>
-          ))
+        {loading ? (
+          <MyQuestionsLoading src = {MyQuestionsLoadingImg}/>
         ) : (
-          <NoDiv>
-            <NoFolder1Text>아직 진행중인 폴더가 없어요.</NoFolder1Text>
-            <NoFolder2Text>새로운 폴더를 만들고 공유해보세요.</NoFolder2Text>
-            <NewFolderButton onClick={handleButtonClick}><CreateFolderImage src={CreateFolderButton}/></NewFolderButton>
-          </NoDiv>
+        <>
+          {questions.length > 0 ? (
+            sortedQuestions.map((question, index) => (
+              <div key={question.questionId}>
+                {question && question.question && (
+                  <FolderImageContainer onClick={() => handleQuestionClick(question.questionId, index)}>
+                    <FolderImage src={folderImages[index % folderImages.length]} />
+                    <FolderContent>
+                      <IMG src={getEmojiImage(question.emoji)} alt="Emoji" />
+                      <TipImage src={Tip} />
+                      <QText>{question.question}</QText>
+                      <CText>{question.comment}</CText>
+                      <AnswerLinkContainer>
+                        <AnswerText><RedText>{question.VoteNum}명</RedText>이 답변을 남겼어요!</AnswerText>
+                        <CopyToClipboard text={`${window.location.origin}/answer/${question.questionId}`}>
+                          <CopyLinkButton onClick={(event) => {event.stopPropagation(); handleLinkButtonClick(question.questionId);}} 
+                          disabled={!question.voteEnd} style={{ backgroundColor: question.voteEnd ? '#EC582F' : '#F8F8F8' , color: question.voteEnd ? 'white' : '#808080' ,cursor: question.voteEnd ? 'pointer' : 'default'}}>
+                            {question.voteEnd ? (
+                              <>
+                                <Link src={LinkImage} />
+                                링크복사
+                              </>
+                            ) : (
+                              '종료된 투표'
+                            )}
+                          </CopyLinkButton>
+                        </CopyToClipboard>
+                        {showMessage && copiedLinkId === question.questionId && <CopyLinkMessage />}
+                        {showEndMessage && <EndMessage />}
+                      </AnswerLinkContainer>
+                    </FolderContent>
+                  </FolderImageContainer>
+                )}
+              </div>
+            ))
+          ) : (
+            <NoDiv>
+              <NoFolder1Text>아직 진행중인 폴더가 없어요.</NoFolder1Text>
+              <NoFolder2Text>새로운 폴더를 만들고 공유해보세요.</NoFolder2Text>
+              <NewFolderButton onClick={handleButtonClick}><CreateFolderImage src={CreateFolderButton}/></NewFolderButton>
+            </NoDiv>
+          )}
+        </>
         )}
       </Div>
       </DDiv>
