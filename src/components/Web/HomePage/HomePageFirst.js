@@ -81,7 +81,7 @@ const Survey = styled.div`
 
 const HomeP = styled.button`
   gap: 10px;
-  width: 130px;
+  width: 162px;
   height: 40px;
   top: 80px;
   text-align: center;
@@ -162,7 +162,7 @@ display: flex;
   align-items: center;
   gap: 10px;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
   //width: 330px;
   margin-left: 24px;
 `;
@@ -173,7 +173,7 @@ height: 259px;
 font-family: Pretendard;
 `;
 const Profile = styled.button`
-  width: 180px;
+  width: 165px;
   height: 40px;
   top: 80px;
   left: 186px;
@@ -391,6 +391,7 @@ const QText = styled.p`
   word-break: keep-all;
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 const CText = styled.p`
   font-size: 12px;
@@ -405,6 +406,7 @@ const CText = styled.p`
   word-break: keep-all;
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 const AnswerText = styled.p`
   font-size: 12px;
@@ -426,6 +428,7 @@ display: flex;
   gap: 10px;
   margin-bottom: 10px;
   width: 330px;
+  cursor: pointer;
 `;
 
 const LinkMessage = styled.div` //링크복사
@@ -447,11 +450,13 @@ const CopyLinkButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `;
 const Link = styled.img`
   width: 16px;
   height: 16px;
   margin-right: 4px;
+  cursor: pointer;
 `;
 
 const Arrow = styled.img`
@@ -481,6 +486,7 @@ const HomePageFirst = () => {
   } 
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const q = query(collection(dbService, 'zip_Question'), where('kakaoId', '==', kakaoId), orderBy('timestamp', 'desc'));
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const questionList = [];

@@ -16,6 +16,7 @@ const ShareButton = styled.button`
   height: 32px;
   background: none;
   display: flex;
+  cursor: pointer;
 `;
 const KakaoImage = styled.img`
   width: 100%;

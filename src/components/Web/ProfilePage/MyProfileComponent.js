@@ -42,12 +42,14 @@ const Red = styled.span`
   color: #EC582F;
   border: none;
   border-bottom: 2px solid #EC582F;
+  cursor: pointer;
 `;
 const Img = styled.img`
     margin-top: 32px;
     margin-left: 2px;
     width: 22px;
     height: 22px;
+    cursor: pointer;
 `;
 const Profile = styled.div`
   display: flex;

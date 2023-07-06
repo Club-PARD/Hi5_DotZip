@@ -168,6 +168,7 @@ const CopyLinkButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `;
 const Link = styled.img`
   width: 16px;
@@ -208,6 +209,7 @@ const AnswerBox = styled.button`
     border-radius: 8px;
     border: 1px solid var(--white-80, #EFEFEF);
     background: none;
+    cursor: pointer;
 `;
 const AnswerContainer = styled.div`
   display: flex;
@@ -276,6 +278,7 @@ const BackHomeButton = styled.button`
     margin-bottom: 8px;
     border: none;
     background: none;
+    cursor: pointer;
 `;
 const HomeImage = styled.img`
   width: 100%;
@@ -291,6 +294,7 @@ const EndButton = styled.button`
     border: 1px solid var(--primary-orange, #EC582F);
     color: #EC582F;
     background: white;
+    cursor: pointer;
 `;
 //종료 모달 안에 내용들
 const modalStyles = {
@@ -350,6 +354,7 @@ const ModalCancelButton = styled.button`
     background: var(--gray-10, #F8F8F8);
     text-align: center;
     border: 0;
+    cursor: pointer;
 `;
 const ModalCheckButton = styled.button`
     width: 120px;
@@ -359,6 +364,7 @@ const ModalCheckButton = styled.button`
     border-radius: 24px;
     text-align: center;
     border: 0;
+    cursor: pointer;
 `;
 const CancelButton = styled.button`
     width: 35px;
@@ -367,6 +373,7 @@ const CancelButton = styled.button`
     margin-left: 295px;
     border: 0;
     background: none;
+    cursor: pointer;
 `;
 const CancelX = styled.img`
     width: 100%;
@@ -511,6 +518,7 @@ function PickAnswerPage() {
     }
 
     useEffect(() => {
+      window.scrollTo(0, 0);
         fetchDataQuestion();
         fetchDataAnswer();
     }, []);
@@ -668,7 +676,7 @@ function PickAnswerPage() {
                     {voteEnd && <KakaoShareButton questionId={questionId}/>}
                     <CopyToClipboard text={`${window.location.origin}/answer/${questionId}`}>
                       <CopyLinkButton onClick={(event) => {event.stopPropagation(); handleLinkButtonClick(questionId); }} 
-                      disabled={!voteEnd} style={{ backgroundColor: voteEnd ? '#EC582F' : '#F8F8F8' , marginLeft: voteEnd ? '0' : '44px' , color: voteEnd ? 'white' : '#808080' }}>
+                      disabled={!voteEnd} style={{ backgroundColor: voteEnd ? '#EC582F' : '#F8F8F8' , marginLeft: voteEnd ? '0' : '44px' , color: voteEnd ? 'white' : '#808080', cursor: voteEnd ? 'pointer' : 'default'}}>
                         {voteEnd ? (
                           <>
                             <Link src={LinkImage} /> 링크 복사
@@ -727,8 +735,8 @@ function PickAnswerPage() {
                             <ReasonModalText4>{reasonzips[reasonzips.length - 1 - currentReasonIndex].reason}</ReasonModalText4>
                           </>
                         )}
-                            <ModalCancelButton style={{width: '72px', height: '32px', marginLeft:'16px', marginRight:'4px'}} onClick={handlePreviousReason} disabled={currentReasonIndex === 0}>이전</ModalCancelButton>
-                            <ModalCheckButton style={{width: '72px', height: '32px', margin: '0'}} onClick={handleNextReason} disabled={currentReasonIndex === reasonzips.length - 1}>다음</ModalCheckButton>
+                            <ModalCancelButton style={{width: '72px', height: '32px', marginLeft:'16px', marginRight:'4px', cursor: currentReasonIndex === 0 ? 'default' : 'pointer'}} onClick={handlePreviousReason} disabled={currentReasonIndex === 0}>이전</ModalCancelButton>
+                            <ModalCheckButton style={{width: '72px', height: '32px', margin: '0', cursor: currentReasonIndex === reasonzips.length - 1 ? 'default' : 'pointer'}} onClick={handleNextReason} disabled={currentReasonIndex === reasonzips.length - 1}>다음</ModalCheckButton>
                         </ReasonBox>
                     <ModalCheckButton isopen="false" onClick={handleCloseModal} style={{ width: '180px', marginBottom: '24px', marginTop: '60px' }}> <RedText>확인</RedText> </ModalCheckButton>
                 </Modal>

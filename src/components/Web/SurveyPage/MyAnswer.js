@@ -200,6 +200,7 @@ const MyAnsewer = () => {
 
   
     useEffect(() => {
+      window.scrollTo(0, 0);
       const unsubscribe = onSnapshot(doc(dbService, 'zip_Question', questionId), (snapshot) => {
         if (snapshot.exists()) {
           const data = snapshot.data();
