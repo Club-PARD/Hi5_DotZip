@@ -250,7 +250,7 @@ const VotingPage = () => {
         setShowMessage(true);
         setTimeout(() => {
           setShowMessage(false);
-        }, 1000);
+        }, 2000);
       };
       const folderImages = [Folder1, Folder2, Folder3, Folder4];
       const sortedQuestions = questions.slice().sort((a, b) => (a.voteEnd && !b.voteEnd ? -1 : 1));

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { dbService } from "../../../fbase.js";
 import { updateDoc , doc} from "firebase/firestore";
 import { styled } from 'styled-components';
+import X from '../../../img/CancelX.png';
 
 const Div = styled.div`
   display: flex;
@@ -20,30 +21,30 @@ const Form = styled.form`
   }
 `;
 
-const Header1 = styled.div `
+const Header1 = styled.p`
+  margin: 0;
+  margin-left: 5px;
   font-family: PretendardBold;
-  position: relative;
   font-size: 20px;
+  font-style: normal;
   font-weight: 700;
   line-height: 24px;
-  cursor: default;
-  &::after {
-    content: 'X'; //이미지
-    position: absolute;
-    top: 50%;
-    right: 24px;
-    transform: translateY(-50%);
-    cursor: pointer;
-  }
+  color: var(--gray-90, #353535);
+`;
+const Container = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 const Header2 = styled.div`
   font-size: 16px;
-  font-family: Pretendard;
+  margin-left: 5px;
+  font-family: PretendardBold;
   font-style: normal;
   font-weight: 700;
   line-height: 20px;
   margin-top: 32px;
+  color: var(--gray-90, #353535);
 `;
 
 const Input = styled.input`
@@ -58,9 +59,12 @@ const Input = styled.input`
   font-weight: 500;
   line-height: 18px;
   border-radius: 8px;
+  margin-top: 10px;
+  margin-left: 5px;
+  margin-bottom: 8px;
   border: 1px solid var(--gray-60, #808080);
   backdrop-filter: blur(2px);
-  width: 295px;
+  width: 250px;
   height: 48px;
   background-color: transparent; 
   padding-left: 16px;
@@ -89,14 +93,13 @@ const Submit = styled.input`
   border-style: none;
   gap: 4px;
   color: #EC582F;
-
-  /* Body/B1-14-SB */
   font-size: 14px;
-  font-family: Pretendard;
+  font-family: PretendardSemi;
   font-style: normal;
   font-weight: 600;
   line-height: 18px;
   margin-top: 24px;
+  cursor: pointer;
   &:disabled {
     background: var(--gray-10, #F8F8F8);;
     color: #808080;
@@ -109,6 +112,21 @@ const DDiv = styled.div`
   flex-direction: column;
   align-items: center; /* 가로 중앙 정렬 */
 `;
+const CancelX = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+const CancelButton = styled.button`
+  width: 24px;
+  height: 24px;
+  margin-left: auto;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: PretendardSemi;
+`;
 
 const NameModal = ({handleCloseModal, handleNicknameUpdate }) => {
   const closeModal = () => {
@@ -118,6 +136,10 @@ const NameModal = ({handleCloseModal, handleNicknameUpdate }) => {
       handleNicknameUpdate(name); // handleNicknameUpdate 콜백 함수 호출
     }
   };
+  const [confirmEndVoteModalOpen, setConfirmEndVoteModalOpen] = useState(false);
+  const handleCloseEndModal = () => {
+    setConfirmEndVoteModalOpen(false);
+  };  
 
   const [name, setName] = useState("");
   const [inputCountName, setInputCountName] = useState(0);
@@ -160,8 +182,11 @@ const NameModal = ({handleCloseModal, handleNicknameUpdate }) => {
 
   return (
     <Div>
-      <Form onSubmit={onSubmit}>
-        <Header1 onClick={closeModal}>이름 수정하기</Header1>
+      <Form onSubmit={onSubmit} isOpen={confirmEndVoteModalOpen}>
+        <Container>
+          <Header1>이름 수정하기</Header1>
+          <CancelButton onClick={handleCloseModal}><CancelX src={X}/></CancelButton>
+        </Container>
         <Header2>이름</Header2>
         <Input
           value={name}
@@ -170,7 +195,7 @@ const NameModal = ({handleCloseModal, handleNicknameUpdate }) => {
           placeholder="10자 이내로 원하는 닉네임을 적어주세요."
           maxLength={10}
         />
-        <InputNum>{inputCountName}/10</InputNum>
+        <InputNum>{inputCountName} / 10</InputNum>
         <DDiv>
           <Submit type="submit" value="저장" disabled={isAnswerEmpty()} />
         </DDiv>

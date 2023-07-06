@@ -95,7 +95,6 @@ const FolderImageContainer = styled.div`
 const FolderImage = styled.img`
   width: 100%;
   height: 100%;
-  z-index: 0;
 `;
 const FolderContent = styled.div`
   position: absolute;
@@ -294,6 +293,10 @@ const modalStyles = {
       bottom: 'auto',
       transform: 'translate(-50%, -50%)',
       zIndex: '2',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     overlay: {
       backgroundColor: 'rgba(0, 0, 0, 0.50)',
@@ -303,17 +306,16 @@ const modalStyles = {
 const ModalImg = styled.img`
   width: 48px;
   height: 48px;
-  margin-left: 147px;
-  margin-bottom: 0px;
+  margin-bottom: 16px;
 `;
 const ModalText1 = styled.p`
-  margin-top: 8px;
+  margin: 0;
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   font-size: 20px;
   font-weight: 700;
   height: 24px;
-  font-family: Pretendard;
+  font-family: PretendardBold;
   color: #353535;
 `;
 const ModalText2 = styled.p`
@@ -321,7 +323,7 @@ const ModalText2 = styled.p`
   font-size: 14px;
   font-weight: 600;
   height: 18px;
-  font-family: Pretendard;
+  font-family: PretendardSemi;
   color: #808080;
   text-align: center;
 `;
@@ -329,34 +331,39 @@ const ModalCancelButton = styled.button`
   width: 120px;
   height: 40px;
   border-radius: 24px;
-  margin-top: 5px;
-  margin-left: 40px;
+  margin-left: 20px;
   margin-right: 24px;
   background: var(--gray-10, #F8F8F8);
   text-align: center;
   border: 0;
   cursor: pointer;
+  font-size: 14px;
   font-family: PretendardSemi;
 `;
 const ModalCheckButton = styled.button`
   width: 120px;
   height: 40px;
   background: var(--background-orange, #FFF8F3);
-  margin-top: 30px;
   border-radius: 24px;
   text-align: center;
   border: 0;
   cursor: pointer;
+  font-size: 14px;
   font-family: PretendardSemi;
+`;
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 const CancelButton = styled.button`
   width: 35px;
   height: 24px;
-  margin-top: 24px;
-  margin-left: 295px;
+  margin-left: auto;
+  margin-right: 28px;
   border: 0;
   background: none;
   cursor: pointer;
+  font-size: 12px;
   font-family: PretendardSemi;
 `;
 const CancelX = styled.img`
@@ -408,7 +415,7 @@ const ReasonModalText1 = styled.p`
   width: 235px;
   font-size: 18px;
   font-weight: 600;
-  font-family: Pretendard;
+  font-family: PretendardSemi;
   color: #353535;
   padding: 0;
   margin: 0;
@@ -432,7 +439,7 @@ const ReasonModalText2 = styled.p`
   text-align: center;
   margin-top: 8px;
   font-size: 16px;
-  font-family: Pretendard;
+  font-family: PretendardBold;
   font-style: normal;
   font-weight: 700;
   line-height: 20px;
@@ -624,7 +631,7 @@ function PickAnswerPage() {
     setShowMessage(true);
     setTimeout(() => {
         setShowMessage(false);
-    }, 1000);
+    }, 1500);
     };
 
   const [currentReasonIndex, setCurrentReasonIndex] = useState(0);
@@ -702,13 +709,15 @@ function PickAnswerPage() {
                     <ModalImg src = {ModalImoticon}/>
                     <ModalText1>충분히 답변을 받으셨나요?</ModalText1>
                     <ModalText2>투표를 종료하시면<br></br>더 이상 답변을 받을 수 없어요.</ModalText2>
-                    <ModalCancelButton onClick={handleCloseEndModal}>취소</ModalCancelButton>
-                    <ModalCheckButton onClick={handleEndVote}>확인</ModalCheckButton>
+                    <ButtonContainer>
+                      <ModalCancelButton onClick={handleCloseEndModal}>취소</ModalCancelButton>
+                      <ModalCheckButton onClick={handleEndVote}>확인</ModalCheckButton>
+                    </ButtonContainer>
                 </Modal>
 
 
                 <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal} style={reasonModalStyles}>
-                  <CancelButton onClick={handleCloseModal}><CancelX src={X}/></CancelButton>
+                  <CancelButton onClick={handleCloseModal} style={{marginTop: '28px', marginBottom: '4px'}}><CancelX src={X}/></CancelButton>
                     <ReasonModalText1>{questionzip}</ReasonModalText1>
                     <Point><ReasonModalText2>{keyword}</ReasonModalText2></Point>
                       <Box2Image src = {ReasonBoxImage}></Box2Image>
@@ -720,13 +729,13 @@ function PickAnswerPage() {
                           </>
                         )}
                             <ModalCancelButton style={{width: '72px', height: '32px', marginLeft:'16px', marginRight:'4px', cursor: currentReasonIndex === 0 ? 'default' : 'pointer', color: currentReasonIndex === 0 ? '#808080' : '#EC582F',
-                             background: currentReasonIndex === 0 ? 'var(--gray-10, #F8F8F8)':'var(--gradation-back, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%))'}} 
+                             background: currentReasonIndex === 0 ? 'var(--gray-10, #F8F8F8)':'var(--gradation-back, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%))', fontSize: '12px'}} 
                             onClick={handlePreviousReason} disabled={currentReasonIndex === 0}>이전</ModalCancelButton>
                             <ModalCheckButton style={{width: '72px', height: '32px', margin: '0', cursor: currentReasonIndex === reasonzips.length - 1 ? 'default' : 'pointer', color: currentReasonIndex === reasonzips.length - 1 ? '#808080' : '#EC582F',
-                            background: currentReasonIndex === reasonzips.length - 1 ? 'var(--gray-10, #F8F8F8)':'var(--gradation-back, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%))'}}
+                            background: currentReasonIndex === reasonzips.length - 1 ? 'var(--gray-10, #F8F8F8)':'var(--gradation-back, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%))', fontSize: '12px'}}
                             onClick={handleNextReason} disabled={currentReasonIndex === reasonzips.length - 1}>다음</ModalCheckButton>
                         </ReasonBox>
-                    <ModalCheckButton isopen="false" onClick={handleCloseModal} style={{ width: '180px', marginBottom: '24px', marginTop: '60px' }}> <RedText>확인</RedText> </ModalCheckButton>
+                    <ModalCheckButton isopen="false" onClick={handleCloseModal} style={{ width: '180px', marginBottom: '24px', marginTop: 'auto' }}> <RedText>확인</RedText> </ModalCheckButton>
                 </Modal>
             </Div>
         </DDiv>

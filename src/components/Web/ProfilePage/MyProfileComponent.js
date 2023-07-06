@@ -11,7 +11,7 @@ const Profile1Text = styled.p`
   font-size: 24px;
   font-weight: 700;
   height: 24px;
-  font-family: Pretendard;
+  font-family: PretendardBold;
   padding: 0;
   margin: 0;
   margin-top: 32px;
@@ -22,7 +22,7 @@ const Text = styled.p`
   font-size: 24px;
   font-weight: 700;
   height: 24px;
-  font-family: Pretendard;
+  font-family: PretendardBold;
   padding: 0;
   margin: 0;
   margin-top: 4px;
@@ -30,8 +30,9 @@ const Text = styled.p`
   line-height: 24px;
 `;
 const Profile2Text = styled.div`
-  color: #ABABAB;
+  color: #808080;
   font-size: 14px;
+  font-family: PretendardSemi;
   font-weight: 600;
   height: 18px;
   margin-top: 8px;
