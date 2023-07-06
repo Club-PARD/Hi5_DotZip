@@ -18,7 +18,7 @@ const Folder2Text = styled.header`
   height: 18px;
   padding-bottom: 32px;
   padding-left: 14px;
-  margin-top: 6px;
+  margin-top: 8px;
   font-family: PretendardSemi;
 
 `;
