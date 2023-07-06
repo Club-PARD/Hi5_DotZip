@@ -49,7 +49,7 @@ const Header2 = styled.div`
   margin-top: 32px;
 `;
 
-const HeaderP = styled.p`
+const HeaderP = styled.header`
   width: 260px;
   height: 19px;
   font-size: 14px;
@@ -62,6 +62,7 @@ line-height: 18px;
 height: 18px;
 top: 162px;
 margin-left: 24px;
+margin-top: 6px;
 
 `;
 
@@ -89,7 +90,7 @@ const InputQues = styled.textarea`
   /* placeholder 스타일 */
   color:  var(--gray-60, #808080);
 }
-width: 327px;
+width: 300px;
 height: 66px;
 top: 361px;
 margin-left: 24px;
@@ -116,7 +117,7 @@ const InputQues1 = styled.textarea`
 
   
 }
-width: 327px;
+width: 300px;
 height: 48px;
 top: 505px;
 margin-left: 24px;
@@ -205,7 +206,7 @@ margin-top: 29px;
 
 `;
 
-const TipP = styled.p`
+const TipP = styled.header`
 width: 56px;
 height: 20px;
 top: 473px;
@@ -216,6 +217,7 @@ font-weight: 700;
 line-height: 20px;
 letter-spacing: 0em;
 text-align: left;
+margin-bottom: 12px;
 `;
 
 const InputNum = styled.span`
@@ -226,7 +228,7 @@ font-family: Pretendard;
 font-style: normal;
 font-weight: 500;
 line-height: 16px;
-padding-right:20px;
+padding-right:25px;
 `;
 
 

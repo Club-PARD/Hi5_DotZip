@@ -183,8 +183,8 @@ const NoFolder2Text = styled.div`
   height: 18px;
 `;
 const MyQuestionsLoading = styled.img`
-  width: 327px
-  height: 856px
+  width: 327px;
+  height: 856px;
   margin-top: 32px;
 `;
 

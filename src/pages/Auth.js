@@ -16,13 +16,14 @@ const DDiv = styled.div`
     justify-content: center;
     margin: 0;
     padding: 0;
-    width: 100%;
-    height: 812px;
+    /* width: 100%;
+    height: 812px; */
 `;
 const DIV = styled.div`
     display: flex;
     flex-direction: column;
     width: 375px;
+    height: 812px;
     margin: 0;
     padding: 0;
 `;
@@ -37,7 +38,7 @@ margin-left: 24px;
 const Login = styled.img`
 width: 327px;
 height: 48px;
-margin-top: 8px;
+top: 534px;
 margin-left: 24px;
 cursor: pointer;
 margin-bottom: 48px;
@@ -105,20 +106,18 @@ color: #EC582F;
 `;
 
 const Img = styled.img`
-width: 377px;
-height: 521px;
-/* margin-top: 146px;
-margin-left: 58px; */
-margin-bottom: 171px;
-opacity: 0.10000000149011612px;
+width: 275px;
+height: 389px;
+/* margin-top: 146px; */
+margin-left: 55px;
+/* margin-bottom: 171px; */
 
 `;
 
 const ZIP = styled.img`
-width: 40px;
-height: 20px;
+width: 35px;
+height: 16px;
 margin-top: 7px;
-
 
 `;
 
@@ -137,11 +136,11 @@ margin-left: 118px;
 color: var(--orange-primary, #EC582F);
 /* Body/B2-12-SB */
 font-size: 12px;
-font-family: Pretendard;
+font-family: PretendardSemi;
 font-style: normal;
 font-weight: 600;
 line-height: 16px;
-
+margin-bottom: 8px;
 `;
 
 
@@ -150,6 +149,7 @@ const Auth = () => {
   const [kakaoId, setKakaoId] = useState([]);
  
   useEffect(() => {
+    window.scrollTo(0, 0);
     const initializeKakao = () => {
       if (!window.Kakao.isInitialized()) {
         window.Kakao.init("7eee69554b01a9bd34081035d074123e"); //카카오 자바스크립트 key
@@ -159,6 +159,7 @@ const Auth = () => {
   }, []); //카카오 초기화
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const unsubscribe = onSnapshot(collection(dbService, "kakaoId"), (snapshot) => {
       const kakaoArr = snapshot.docs.map((doc) => ({
         id: doc.userId,

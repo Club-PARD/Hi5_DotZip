@@ -18,11 +18,13 @@ import Tip from '../../../img/Tip.png';
 import LinkImage from '../../../img/Link.png';
 import CopyToClipboard from 'react-copy-to-clipboard'; //링크복사
 import CopyLinkMessage from '../VotePage/CopyLinkMessage';
+import CopyLinkMessageHome from '../HomePage/HomeCopyLinkMessage';
 import EndMessage from '../VotePage/EndMessage';
 import Folder1 from '../../../img/Folder1.png';
 import Folder2 from '../../../img/Folder2.png';
 import arrow from '../../../img/arrow.png';
 import buttonnew from '../../../img/buttonnew.png';
+import HomeLoading from './HomeLoading';
 
 const Div = styled.div`
   display: flex;
@@ -409,7 +411,7 @@ const AnswerText = styled.p`
   height: 16px;
   font-family: PretendardSemi;
   color: #808080;
-  z-index: 1;
+  //z-index: 0;
 `;
 
 const QuestionContainer = styled.div`
@@ -427,6 +429,7 @@ const LinkMessage = styled.div` //링크복사
   background: white;
   padding: 10px;
   border: 1px solid black;
+  
 `;
 
 const CopyLinkButton = styled.button`
@@ -442,6 +445,7 @@ const CopyLinkButton = styled.button`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  //z-index: 1;
 `;
 const Link = styled.img`
   width: 16px;
@@ -643,6 +647,7 @@ const HomePageFirst = () => {
   const emojiImage = getEmojiImage(emoji);
   const folderImages = [Folder1, Folder2];
 
+
   return (
     <Div>
       <Survey>
@@ -655,66 +660,71 @@ const HomePageFirst = () => {
         {/* <Banner src={banner} onClick={() => navigate(`/BannerCreate/${kakaoId}`)}/> */}
         <Banner src={banner} onClick={() => BannerCreate()} />
         <ButtonContainer>
-        <NewQ>새로운 질문 만들기</NewQ>
-        <ButtonA onClick={handleButtonClick}>전체보기 <Arrow src={arrow}/></ButtonA>
+          <NewQ>새로운 질문 만들기</NewQ>
+          <ButtonA onClick={handleButtonClick}>전체보기 <Arrow src={arrow}/></ButtonA>
         </ButtonContainer>
         <Newq>지인들에게 나에 대해 물어보세요!</Newq>
         <QuestionContainer>
-          <ButtonQ src={Home1} onClick={() => Question1Create()}/>
-          <ButtonQ1 src={Home2} onClick={() => Question2Create()}/>
+          <ButtonQ src={Home1} onClick={() => Question1Create()} />
+          <ButtonQ1 src={Home2} onClick={() => Question2Create()} />
         </QuestionContainer>
-        <ButtonNew src={buttonnew}onClick={handleButton4Click}/>
+        <ButtonNew src={buttonnew} onClick={handleButton4Click} />
         <DIVB>
-        <ButtonsContainer>
-        <Header3>최근에 만든 질문</Header3>
-        <ButtonB onClick={handleButton3Click}>전체보기 <Arrow src={arrow}/></ButtonB>
-        </ButtonsContainer>
-        {questions.length > 0 ? (
-        questions.slice(0, 2).map((question, index) => (
-        <div key={question.questionId}>
-        {question && question.question && question.voteEnd &&(
-        <FolderImageContainer onClick={() => handleQuestionClick(question.questionId, index)}>
-          <FolderImage src={folderImages[index % folderImages.length]} />
-                  <FolderContent>
-                    <IMG src={getEmojiImage(question.emoji)} alt="Emoji" />
-                    <TipImage src={Tip} />
-                    <QText>{question.question}</QText>
-                    <CText>{question.comment}</CText>
-                    <AnswerLinkContainer>
-                      <AnswerText><RedText>{question.VoteNum}명</RedText>이 답변을 남겼어요!</AnswerText>
-                      <CopyToClipboard text={`${window.location.origin}/answer/${question.questionId}`}>
-                      <CopyLinkButton onClick={(event) => {event.stopPropagation(); handleLinkButtonClick(question.questionId);}} 
-                        disabled={!question.voteEnd} style={{ backgroundColor: question.voteEnd ? '#EC582F' : '#F8F8F8' , color: question.voteEnd ? 'white' : '#808080' }}>
-                          {question.voteEnd ? (
-                            <>
-                              <Link src={LinkImage} />
-                              링크복사
-                            </>
-                          ) : (
-                            '종료된 투표'
-                          )}
-                        </CopyLinkButton>
-                      </CopyToClipboard>
-                      {showMessage && copiedLinkId === question.questionId && <CopyLinkMessage />}
-                      {showEndMessage && <EndMessage />}
-                    </AnswerLinkContainer>
-                  </FolderContent>
-                </FolderImageContainer>
-              )}
-
-    </div>
-  ))
-) : (
-  <><Questionp>
-              <QP>아직 만든 질문이 없어요. </QP>
-              <Qp>새로운 질문을 만들고 공유해보세요.</Qp>
-              <Img src={NewquesButton}onClick={() => navigate(`/SurveyFirst`)}/>
-            </Questionp></>
-)}
+          <ButtonsContainer>
+            <Header3>최근에 만든 질문</Header3>
+            <ButtonB onClick={handleButton3Click}>전체보기 <Arrow src={arrow}/></ButtonB>
+          </ButtonsContainer>
+          {questions.length > 0 ? (
+            questions.slice(0, 2).map((question, index) => (
+              <div key={question.questionId}>
+                {question.question && question.voteEnd && (
+                  <FolderImageContainer onClick={() => handleQuestionClick(question.questionId, index)}>
+                    <FolderImage src={folderImages[index % folderImages.length]} />
+                    <FolderContent>
+                      <IMG src={getEmojiImage(question.emoji)} alt="Emoji" />
+                      <TipImage src={Tip} />
+                      <QText>{question.question}</QText>
+                      <CText>{question.comment}</CText>
+                      <AnswerLinkContainer>
+                        <AnswerText><RedText>{question.VoteNum}명</RedText>이 답변을 남겼어요!</AnswerText>
+                        <CopyToClipboard text={`${window.location.origin}/answer/${question.questionId}`}>
+                          <CopyLinkButton onClick={(event) => {event.stopPropagation(); handleLinkButtonClick(question.questionId);}} 
+                            disabled={!question.voteEnd} style={{ backgroundColor: question.voteEnd ? '#EC582F' : '#F8F8F8' , color: question.voteEnd ? 'white' : '#808080' }}>
+                            {question.voteEnd ? (
+                              <>
+                                <Link src={LinkImage} />
+                                링크복사
+                              </>
+                            ) : (
+                              '종료된 투표'
+                            )}
+                          </CopyLinkButton>
+                        </CopyToClipboard>
+                        {showMessage && copiedLinkId === question.questionId && <CopyLinkMessageHome />}
+                        {showEndMessage && <EndMessage />}
+                      </AnswerLinkContainer>
+                    </FolderContent>
+                  </FolderImageContainer>
+                )}
+              </div>
+            ))
+          ) :
+          ((!question.length || (question.question &&question.voteEnd===false))&&(
+              <Questionp>
+                <QP>아직 만든 질문이 없어요.</QP>
+                <Qp>새로운 질문을 만들고 공유해보세요.</Qp>
+                <Img src={NewquesButton} onClick={() => navigate(`/SurveyFirst`)} />
+              </Questionp>
+              
+            )
+            
+          )
+          }
         </DIVB>
       </Survey>
     </Div>
   );
-};
+            }
+  
 
 export default HomePageFirst;
