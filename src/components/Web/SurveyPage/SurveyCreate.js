@@ -88,14 +88,6 @@ const InputQues = styled.textarea`
 ::placeholder {
   /* placeholder 스타일 */
   color:  var(--gray-60, #808080);
-font-family: Pretendard;
-font-size: 14px;
-font-weight: 500;
-line-height: 18px;
-letter-spacing: 0em;
-text-align: left;
-/* background-color: transparent;  */
-padding-left: 16px;
 }
 width: 327px;
 height: 66px;
@@ -109,8 +101,8 @@ font-weight: 500;
 line-height: 18px;
 letter-spacing: 0em;
 text-align: left;
-padding-left: 8px;
-padding-top: 8px;
+padding-left: 16px;
+padding-top: 15px;
 `;
 
 const InputQues1 = styled.textarea`
@@ -137,8 +129,8 @@ font-weight: 500;
 line-height: 18px;
 letter-spacing: 0em;
 text-align: left;
-padding-left: 8px;
-padding-top: 8px;
+padding-left: 16px;
+padding-top: 15px;
 `;
 
 

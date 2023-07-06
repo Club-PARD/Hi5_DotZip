@@ -9,6 +9,18 @@ const HomeP = styled.header`
   top: 80px;
   left: 186px;
   gap: 10px;
+  width: 163px;
+  color: #ABABAB;
+  text-align: center;
+  cursor: pointer;
+  font-family: PretendardBold;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 0em;
+  color: #353535;
+  background-color: white;
+  border: none;
   font-family: Pretendard;
   font-size: 16px;
   font-weight: 700;
@@ -26,7 +38,6 @@ const HeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 10px;
-  margin-top: 80px;
   margin-bottom: 10px;
   width: 330px;
   margin-left: 24px;
@@ -38,9 +49,8 @@ const Profile = styled.button`
   width: 165px;
   height: 40px;
   top: 80px;
-  left: 186px;
-  gap: 10px;
-  font-family: Pretendard;
+  text-align: center;
+  font-family: PretendardBold;
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
