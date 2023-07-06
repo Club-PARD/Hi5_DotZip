@@ -33,7 +33,7 @@ font-family: PretendardBold;
 font-style: normal;
 font-weight: 700;
 line-height: 32px;
-margin-left:18px;
+margin-left:24px;
 `;
 
 const modalStyles = {
@@ -192,6 +192,7 @@ const AnswerVote = () => {
   const [questionzip, setQuestionZip] = useState();
   const [commentzip, setCommentZip] = useState();
   const [emoji, setEmoji] = useState([]);
+  const [isVote, setIsVote] = useState(false);
 
   const handleButtonClick = (answerId) => {
     setSelectedAnswerId(answerId); // 선택된 버튼의 answerId를 상태로 설정
@@ -206,7 +207,13 @@ const handleCloseModal = () => {
 };
 
   useEffect(() => {
-
+    for (let i = 0; i < localStorage.length; i++) {
+      let key = localStorage.key(i);
+      if (key === questionId) {
+        setIsVote(true);
+        break;
+      }
+    }
     const q = query(
       collection(dbService, 'zip_Answer'),
       where('questionId', '==', questionId), 
@@ -259,13 +266,8 @@ const handleCloseModal = () => {
     setEmoji(targetQ.emoji); 
     setVoteEnd(targetQ.voteEnd); // 투표 종료 여부 판단
   };
-  
-  
-  const isVote = () => {
-    return questionId === localStorage.getItem("questionId");
-  };
 
-  
+
 
   const [modalOpen_new, setModalOpen_new] = useState(false);
   const showModal_new = () => {
@@ -279,7 +281,7 @@ const handleCloseModal = () => {
     <>
       {!voteEnd ? (
         <EndVote/> 
-      ) : isVote() ? (
+      ) : isVote ? (
         <AnswerEnd />
       ) : (
         <Div>
