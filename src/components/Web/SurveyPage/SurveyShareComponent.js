@@ -37,7 +37,7 @@ const SurveyShareComponent = () => {
     return (
         <>
             <Progress src={progress}/>
-            <Text1><RedText>{userNickname} </RedText>님의 <br></br>질문 폴더 생성 완료!</Text1>
+            <Text1><RedText>{userNickname} </RedText>님의 질문 폴더</Text1>
             <Text2>링크를 공유하고 투표를 통해 답변을 받아보세요!</Text2>
         </>
     );

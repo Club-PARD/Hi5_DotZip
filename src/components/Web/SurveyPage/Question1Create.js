@@ -115,10 +115,12 @@ height: 0px;
 color:#ABABAB ;
 margin-top: 32px;
 margin-bottom: 32px;
+border : 0px;
+border-top: 1px dashed #ABABAB;
 `;
 const AddVote = styled.img`
 width: 327px;
-height: 48px;
+height: 64px;
 margin-top: 8px;
 `;
 const NoAnswer = styled.img`
@@ -275,7 +277,7 @@ const Question1Create = () => {
           <Modal isOpen={modalOpen} onRequestClose={handleCloseModal} style={modalStyles}>
           {modalOpen && <AddAnswerQuest key="add-answer"  handleCloseModal={handleCloseModal} />}
           </Modal>
-          <Submit onClick={handleButtonClick}>항목 추가 없이 투표 등록하기</Submit>  
+          {/* <Submit onClick={handleButtonClick}>항목 추가 없이 투표 등록하기</Submit>   */}
           </Survey>
         </Div>
       );

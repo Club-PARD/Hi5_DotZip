@@ -115,10 +115,12 @@ height: 0px;
 color:#ABABAB ;
 margin-top: 32px;
 margin-bottom: 32px;
+border : 0px;
+border-top: 1px dashed #ABABAB;
 `;
 const AddVote = styled.img`
 width: 327px;
-height: 48px;
+height: 64px;
 margin-top: 8px;
 `;
 const NoAnswer = styled.img`
