@@ -76,7 +76,7 @@ const FolderContent = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  margin-left: 32px;
+  margin-left: 40px;
   top: 0;
   left: 0;
   right: 0;
@@ -84,17 +84,17 @@ const FolderContent = styled.div`
 `;
 const IMG = styled.img`
   position: absolute;
-  padding-top: 60px;
+  margin-top: 53px;
   width: 48px;
   height: 48px;
-  margin-left: 5px;
+  margin-left: 6px;
 `;
 const QText = styled.p`
-  font-family: Pretendard;
+  font-family: PretendardSemi;
   font-size: 14px;
   margin: 0;
-  margin-top: 60px;
-  margin-left: 76px;
+  margin-top: 56px;
+  margin-left: 66px;
   font-weight: 600;
   width: 235px;
   word-break: keep-all;
@@ -103,11 +103,11 @@ const QText = styled.p`
 `;
 const CText = styled.p`
   font-size: 12px;
-  margin-top: 8px;
-  margin-left: 76px;
+  margin-top: 6px;
+  margin-left: 66px;
   font-weight: 600;
   width: 235px;
-  font-family: PretendardSemi;
+  font-family: Pretendard;
   color: #808080;
   word-break: keep-all;
   display: flex;
@@ -117,7 +117,7 @@ const Hr = styled.hr`
   border: 1px dashed #ABABAB; // Specify the border width: ;
   width: 327px;
   margin-bottom: 32px;
-  margin-top: 32px;
+  margin-top: 24px;
 `;
 const ButtonContainer = styled.div`
   position: relative;
@@ -142,6 +142,7 @@ font-style: normal;
 font-weight: 600;
 line-height: 24px;
 margin-top: 16px;
+cursor: pointer;
 `;
 const Check = styled.img`
   position: absolute;
@@ -156,7 +157,7 @@ const Container = styled.div`
 const Header1 = styled.div`
   color: var(--black-90, #212121);
 font-size: 20px;
-font-family: Pretendard;
+font-family: PretendardBold;
 font-style: normal;
 font-weight: 700;
 line-height: 24px;
@@ -167,12 +168,12 @@ color: var(--gray-60, #808080);
 
 /* Body/B4-14-SB */
 font-size: 14px;
-font-family: Pretendard;
+font-family: PretendardSemi;
 font-style: normal;
 font-weight: 600;
 line-height: 18px;
 margin-left: 24px;
-margin-top: 2px;
+margin-top: 8px;
 margin-bottom: 8px;
 `;
 
@@ -181,6 +182,7 @@ width: 327px;
 height: 64px;
 margin-top: 16px;
 margin-bottom: 120px;
+cursor:pointer;
 `;
 
 const AnswerVote = () => {
@@ -281,8 +283,8 @@ const handleCloseModal = () => {
     <>
       {!voteEnd ? (
         <EndVote/> 
-      ) : isVote ? (
-        <AnswerEnd />
+       ) : isVote ? (
+         <AnswerEnd />
       ) : (
         <Div>
           <Container>

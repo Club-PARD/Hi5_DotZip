@@ -47,7 +47,7 @@ const FolderContent = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  margin-left: 32px;
+  margin-left: 40px;
   top: 0;
   left: 0;
   right: 0;
@@ -55,17 +55,17 @@ const FolderContent = styled.div`
 `;
 const IMG = styled.img`
   position: absolute;
-  padding-top: 60px;
+  margin-top: 70px;
   width: 48px;
   height: 48px;
-  margin-left: 5px;
+  margin-left: 6px;
 `;
 const QText = styled.p`
-  font-family: Pretendard;
+  font-family: PretendardSemi;
   font-size: 14px;
   margin: 0;
-  margin-top: 60px;
-  margin-left: 76px;
+  margin-top: 76px;
+  margin-left: 68px;
   font-weight: 600;
   width: 235px;
   word-break: keep-all;
@@ -75,7 +75,7 @@ const QText = styled.p`
 const CText = styled.p`
   font-size: 12px;
   margin-top: 8px;
-  margin-left: 76px;
+  margin-left: 68px;
   font-weight: 600;
   width: 235px;
   font-family: Pretendard;
@@ -93,7 +93,7 @@ const Warning = styled.div`
   color: var(--primary-orange, #EC582F);
 /* Body/B2-12-SB */
 font-size: 12px;
-font-family: Pretendard;
+font-family: PretendardSemi;
 font-style: normal;
 font-weight: 600;
 line-height: 16px;
@@ -112,7 +112,7 @@ text-align: center;
 
 /* Body/B5-16-SB */
 font-size: 16px;
-font-family: Pretendard;
+font-family: PretendardSemi;
 font-style: normal;
 font-weight: 600;
 line-height: 20px;
@@ -200,7 +200,7 @@ const EndVote = () => {
         <Div>
             <Container>
             <Head>이제는 답변을</Head>
-            <Head>남길 수 없는 투표에요</Head>
+            <Head>남길 수 없는 투표에요😭</Head>
             </Container>
             <FolderImageContainer>
                 <FolderImage src={doneFolder} />
