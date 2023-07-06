@@ -80,6 +80,7 @@ const InputNum = styled.span`
   font-style: normal;
   font-weight: 500;
   line-height: 16px;
+  margin-top: 8px;
 `;
 
 const Submit = styled.input`

@@ -3,12 +3,13 @@ import { dbService } from "../../../fbase.js";
 import { collection, getDocs, updateDoc, doc, addDoc } from "firebase/firestore";
 import { useNavigate, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
+import cancleX from "../../../img/CancelX.png"
 
 const Warning = styled.div`
   color: var(--primary-orange, #EC582F);
 /* Body/B2-12-SB */
 font-size: 12px;
-font-family: Pretendard;
+font-family: PretendardSemi;
 font-style: normal;
 font-weight: 600;
 line-height: 16px;
@@ -24,6 +25,7 @@ const AnswerDiv = styled.div`
 `;
 const Answer = styled.div`
 width: ${props => props.answerLength * 30}px;
+color: var(--orange-primary, #EC582F);
 height: 40px;
 border-radius: 24px;
 border: 2px solid var(--primary-orange, #EC582F);
@@ -31,6 +33,11 @@ text-align:center;
 display: flex;
   align-items: center;
   justify-content: center;
+  font-family: PretendardBold;
+font-size: 16px;
+font-style: normal;
+font-weight: 700;
+line-height: 20px;
 `;
 const Form = styled.form`
 display: flex;
@@ -50,20 +57,19 @@ font-size: 20px;
 font-weight: 700px;
 line-height: 24px;
 cursor: default;
-&::after {
-      content: 'X'; //이미지
-      position: absolute;
-      top: 50%;
-      right: 24px;
-      transform: translateY(-50%);
-      cursor: pointer;
-  }
+`;
+const X = styled.img`
+width: 24px;
+height: 24px;
+  position: absolute;
+  right: 0px;
+  cursor: pointer;
 `;
 
 const Header2 = styled.div`
 
 font-size: 16px;
-font-family: Pretendard;
+font-family: PretendardBold;
 font-style: normal;
 font-weight: 700;
 line-height: 20px;
@@ -124,6 +130,7 @@ font-family: Pretendard;
 font-style: normal;
 font-weight: 500;
 line-height: 16px;
+margin-top: 8px;
 `;
 
 const Submit = styled.input`
@@ -136,7 +143,7 @@ color: ${({ isAnswerEmpty }) => (isAnswerEmpty ? 'var(--gray-60, #808080)' : '#E
 
 /* Body/B1-14-SB */
 font-size: 14px;
-font-family: Pretendard;
+font-family: PretendardSemi;
 font-style: normal;
 font-weight: 600;
 line-height: 18px;
@@ -231,7 +238,7 @@ const isAnswerEmpty = ()=> {
 return (
   <Div>
     <Form onSubmit={onSubmit}>
-      <Header1  onClick={closeModal} >투표하기</Header1>
+      <Header1  onClick={closeModal} >투표하기 <X src={cancleX} onClick={closeModal} /> </Header1>
       <Header2>선택한 답변</Header2>
       <AnswerDiv>
       <Answer answerLength = {answer.length}>{answer}</Answer>

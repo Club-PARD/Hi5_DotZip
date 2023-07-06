@@ -40,7 +40,7 @@ const modalStyles = {
   content: {
       position: 'absolute',
       width: '343px',
-      height: '610px',
+      height: '630px',
       borderRadius: '10px',
       background: 'var(--background-gra, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%))',
       margin: 'auto',
