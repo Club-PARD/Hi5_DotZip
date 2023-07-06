@@ -6,7 +6,7 @@ const Folder1Text = styled.div`
   font-weight: 700;
   height: 24px;
   font-family: Pretendard;
-  padding-top: 92px;
+  padding-top: 32px;
   padding-bottom: 8px;
   padding-left: 14px;
   line-height: 28px;

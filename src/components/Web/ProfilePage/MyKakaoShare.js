@@ -8,6 +8,7 @@ const ShareButton = styled.img`
     width: 157px;
     height: 48px;
     margin-left: 24px;
+    cursor: pointer;
 `;
 const MyKakaoShareButton = () => {
   const [userNickname] = useState(localStorage.getItem("userName"));

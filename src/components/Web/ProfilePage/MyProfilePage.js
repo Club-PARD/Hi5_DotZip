@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React from 'react';
+import React, {useEffect} from 'react';
 import Navbar from '../../Navbar';
 import HomeNavbar from '../HomePage/HomeNavber';
 import MyProfileComponent from '../ProfilePage/MyProfileComponent';
@@ -29,6 +29,9 @@ const Div = styled.div`
 
 
 const MyProfilePage = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
     return(
       <>
       <DDiv>

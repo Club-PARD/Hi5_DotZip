@@ -8,6 +8,7 @@ const HomeP = styled.header`
   width: 130px;
   color: #ABABAB;
   text-align: center;
+  cursor: pointer;
 `;
 
 

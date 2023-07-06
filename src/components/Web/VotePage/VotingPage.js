@@ -53,6 +53,7 @@ const NewFolderButton = styled.button`
   border: none;
   background-color: transparent;
   margin-top: 24px;
+  cursor: pointer;
 `;
 //폴더
 const FolderImageContainer = styled.div`
@@ -60,6 +61,7 @@ const FolderImageContainer = styled.div`
   width: 357px;
   height: 196px;
   margin-bottom: 24px;
+  cursor: pointer;
 `;
 const FolderImage = styled.img`
   width: 100%;
@@ -109,6 +111,7 @@ const CopyLinkButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `;
 const Link = styled.img`
   width: 16px;
@@ -184,6 +187,7 @@ const VotingPage = () => {
     const [questions, setQuestions] = useState([]);
     const [showEndMessage, setShowEndMessage] = useState(false);
     useEffect(() => {
+      window.scrollTo(0, 0);
         const q = query(
           collection(dbService, 'zip_Question'),
           where('kakaoId', '==', kakaoId),
@@ -273,7 +277,7 @@ const VotingPage = () => {
                       <AnswerText><RedText>{question.VoteNum}명</RedText>이 답변을 남겼어요!</AnswerText>
                       <CopyToClipboard text={`${window.location.origin}/answer/${question.questionId}`}>
                         <CopyLinkButton onClick={(event) => {event.stopPropagation(); handleLinkButtonClick(question.questionId);}} 
-                        disabled={!question.voteEnd} style={{ backgroundColor: question.voteEnd ? '#EC582F' : '#F8F8F8' , color: question.voteEnd ? 'white' : '#808080' }}>
+                        disabled={!question.voteEnd} style={{ backgroundColor: question.voteEnd ? '#EC582F' : '#F8F8F8' , color: question.voteEnd ? 'white' : '#808080' ,cursor: question.voteEnd ? 'pointer' : 'default'}}>
                           {question.voteEnd ? (
                             <>
                               <Link src={LinkImage} />

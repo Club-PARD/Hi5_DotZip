@@ -7,6 +7,7 @@ const SaveButton = styled.img`
     width: 157px;
     height: 48px;
     margin-left: 24px;
+    cursor: pointer;
 `;
 
 const ImageSaveButton = () => {

@@ -8,7 +8,6 @@ import styled /*{ ThemeProvider } */ from 'styled-components';
 const NavBarWrapper = styled.nav`
   height: 70px;
   display: flex;
-
   align-items: center;
   position: fixed;
   top: 0;
