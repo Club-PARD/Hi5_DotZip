@@ -112,6 +112,7 @@ const CopyLinkButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: PretendardSemi;
   cursor: pointer;
 `;
 const Link = styled.img`
@@ -132,7 +133,7 @@ const QText = styled.p`
   font-weight: 600;
   width: 235px;
   height: 36px;
-  font-family: Pretendard;
+  font-family: PretendardSemi;
   z-index: 1;
   word-break: keep-all;
   display: flex;
@@ -145,7 +146,7 @@ const CText = styled.p`
   font-weight: 600;
   width: 235px;
   height: 14px;
-  font-family: Pretendard;
+  font-family: PretendardSemi;
   color: #808080;
   z-index: 1;
   word-break: keep-all;
@@ -159,7 +160,7 @@ const AnswerText = styled.p`
   font-weight: 600;
   width: 118px;
   height: 16px;
-  font-family: Pretendard;
+  font-family: PretendardSemi;
   color: #808080;
   z-index: 1;
 `;
@@ -167,20 +168,21 @@ const RedText = styled.span`
   color: #EC582F;
 `;
 //텍스트
-const NoFolder1Text = styled.div`
+const NoFolder1Text = styled.header`
   color: #ABABAB;
   margin-top: 120px;
   font-size: 18px;
   font-weight: 600;
   height: 24px;
-  font-family: Pretendard;
+  font-family: PretendardSemi;
 `;
-const NoFolder2Text = styled.div`
+const NoFolder2Text = styled.header`
   color: #ABABAB;
   margin-top: 4px;
   font-size: 14px;
   font-weight: 600;
   height: 18px;
+  font-family: PretendardSemi;
 `;
 const MyQuestionsLoading = styled.img`
   width: 327px;
