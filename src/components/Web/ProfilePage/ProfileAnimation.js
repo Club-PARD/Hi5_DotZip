@@ -1,17 +1,17 @@
 import React from 'react';
-import Lottie from 'lottie-react';
-import animationData from '../../../asset/animation/myprofile.json';
+import styled from "styled-components";
+import GIFImg from '../../../img/MyRankImage.gif';
 
+
+const GIF = styled.img`
+  width: 400px;
+  height: 380px;
+`;
 
 const ProfileAnimation = () => {
   return (
-    <div>
-      <Lottie
-        animationData={animationData} // 애니메이션 JSON 데이터
-        loop={true} // 애니메이션 반복 여부
-        autoplay={true} // 애니메이션 자동 재생 여부
-
-      />
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <GIF src={GIFImg}/>
     </div>
   );
 };
