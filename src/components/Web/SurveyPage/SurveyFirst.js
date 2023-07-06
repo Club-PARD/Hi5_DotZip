@@ -189,7 +189,7 @@ function SurveyFirst() {
         setSelectedEmoji("emoji3");
       } else if (selectedEmoji=== 'emoji4') {
         question = '내 이미지가 떠오르는 브랜드는?';
-        comment = '나를 생각하면 떠오르는 키워드와 연관지어보세요!';
+        comment = '나를 생각하면 떠오르는 키워드를 생각해보세요!';
         emoji = emoji4;
         setSelectedEmoji("emoji4");
       }

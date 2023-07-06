@@ -22,6 +22,7 @@ import EndMessage from '../VotePage/EndMessage';
 import Folder1 from '../../../img/Folder1.png';
 import Folder2 from '../../../img/Folder2.png';
 import arrow from '../../../img/arrow.png';
+import buttonnew from '../../../img/buttonnew.png';
 
 const Div = styled.div`
   display: flex;
@@ -75,7 +76,7 @@ const Survey = styled.div`
   height: 1245px;
   margin: 0 auto;
   overflow-x: hidden;
-  //background-color: #00FFFF; /* Set the background color to aqua */
+background-color: #00FFFF; /* Set the background color to aqua */
   //background-color:white;
 `;
 
@@ -85,7 +86,7 @@ const HomeP = styled.button`
   height: 40px;
   top: 80px;
   text-align: center;
-  font-family: Pretendard;
+  font-family: PretendardBold;
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
@@ -123,7 +124,7 @@ const ButtonQ = styled.img`
   width: 156px;
   height: 156px;
   justify-self: flex-start;
-  margin-left: 24px;
+  margin-left: 26px;
   cursor: pointer;
 `;
 const ButtonQ1 = styled.img`
@@ -142,7 +143,7 @@ line-height: 24px;
 letter-spacing: 0em;
 text-align: left;
 top: 362px;
-margin-left: 15px;
+margin-left: 16px;
 
 `;
 
@@ -150,11 +151,11 @@ const Newq = styled.header`
 margin-bottom: 16px;
 color: var(--gray-60, #808080);
 font-size: 14px;
-font-family: Pretendard;
+font-family: PretendardSemi;
 font-style: normal;
 font-weight: 600;
 line-height: 18px;
-margin-left: 24px;
+margin-left: 26px;
 `;
 const ButtonsContainer = styled.div`
 display: flex;
@@ -164,7 +165,7 @@ display: flex;
   margin-top: 10px;
   margin-bottom: 16px;
   //width: 330px;
-  margin-left: 24px;
+  margin-left: 25px;
 `;
 const Questionp = styled.div`
 color: black;
@@ -179,7 +180,7 @@ const Profile = styled.button`
   left: 186px;
   //padding: 8px 61.5px;
   gap: 10px;
-  font-family: Pretendard;
+  font-family: PretendardBold;
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
@@ -198,9 +199,9 @@ const ButtonA = styled.button`
   left: 293px;
   background: white;
   border: 1px solid white;
-  left: 24px;
+  margin-right: 6px;
   font-size: 14px;
-  font-family: Pretendard;
+  font-family: PretendardSemi;
 font-style: normal;
 font-weight: 600;
 line-height: 18px;
@@ -211,11 +212,12 @@ const ButtonB = styled.button`
   width: 100px;
   height: 20px;
   top: 367px;
-  margin-left: 10px;
+  margin-left: 24px;
+  margin-right: 7px;
   background: #F8F8F8;
   border: 1px solid #F8F8F8;
   font-size: 14px;
-font-family: Pretendard;
+font-family: PretendardSemi;
 font-style: normal;
 font-weight: 600;
 line-height: 18px;
@@ -224,22 +226,10 @@ cursor: pointer;
 
 `;
 
-const ButtonNew = styled.button`
-width: 327px;
+const ButtonNew = styled.img`
+width: 322px;
 height: 48px;
-flex-shrink: 0;
-border-radius: 10px;
-border-image-source: linear-gradient(93.75deg, #EC5730 0%, #FE8100 51.04%, #F8C51F 99.99%);
-font-family: Pretendard;
-font-size: 14px;
-font-weight: 600;
-line-height: 18px;
-letter-spacing: 0em;
-text-align: center;
-color: #EC582F;
-border: 1px solid var(--primary-orange, #EC582F);
-background: none;
-margin-left: 24px;
+margin-left: 26px;
 cursor: pointer;
 
 `;
@@ -297,10 +287,10 @@ background-color: #F8F8F8;
 margin-top: 32px;
 `;
 
-const QP = styled.p`
+const QP = styled.header`
 color: var(--gray-30, #ABABAB);
 font-size: 18px;
-font-family: Pretendard;
+font-family: PretendardSemi;
 font-style: normal;
 font-weight: 600;
 line-height: 24px;
@@ -308,21 +298,22 @@ margin-left: 99px;
 margin-top: 100px;
 
 `;
-const Qp = styled.p`
+const Qp = styled.header`
 color: var(--gray-30, #ABABAB);
 
 /* Body/B4-14-SB */
 font-size: 14px;
-font-family: Pretendard;
+font-family: PretendardSemi;
 font-style: normal;
 font-weight: 600;
 line-height: 18px;
 margin-left: 90px;
+margin-top: 4px;
 
 `;
 const FolderImage = styled.img`
   z-index: 0;
-  width: 327px;
+  width: 359px;
   height: 196px;
   cursor: pointer;
 
@@ -332,7 +323,7 @@ const FolderImageContainer = styled.div`
   position: relative;
   width: 357px;
   margin-bottom: 24px;
-  margin-left: 24px;
+  margin-left: 6px;
 
 
 `;
@@ -377,16 +368,15 @@ const AnswerLinkContainer = styled.div`
 
 
 //폴더 안 텍스트
-const QText = styled.p`
+const QText = styled.header`
   font-size: 14px;
   margin: 0;
-  margin-top: 68px;
+  margin-top: 66px;
   margin-left: 76px;
-
   font-weight: 600;
   width: 1155px;
   height: 36px;
-  font-family: Pretendard;
+  font-family: PretendardSemi;
   z-index: 1;
   word-break: keep-all;
   display: flex;
@@ -672,7 +662,7 @@ const HomePageFirst = () => {
           <ButtonQ src={Home1} onClick={() => Question1Create()}/>
           <ButtonQ1 src={Home2} onClick={() => Question2Create()}/>
         </QuestionContainer>
-        <ButtonNew onClick={handleButton4Click}> + 나만의 질문 만들기</ButtonNew>
+        <ButtonNew src={buttonnew}onClick={handleButton4Click}/>
         <DIVB>
         <ButtonsContainer>
         <Header3>최근에 만든 질문</Header3>
@@ -715,8 +705,8 @@ const HomePageFirst = () => {
   ))
 ) : (
   <><Questionp>
-              <QP>진행중인 폴더가 없어요! </QP>
-              <Qp>새로운 폴더를 만들고 공유해보세요.</Qp>
+              <QP>아직 만든 질문이 없어요. </QP>
+              <Qp>새로운 질문을 만들고 공유해보세요.</Qp>
               <Img src={NewquesButton}onClick={() => navigate(`/SurveyFirst`)}/>
             </Questionp></>
 )}
@@ -727,9 +717,3 @@ const HomePageFirst = () => {
 };
 
 export default HomePageFirst;
-
-
-
-
-
-
