@@ -4,10 +4,6 @@ import styled from 'styled-components';
 
 
 const HomeP = styled.header`
-  width: 165px;
-  height: 40px;
-  top: 80px;
-  left: 186px;
   gap: 10px;
   width: 163px;
   color: #ABABAB;
@@ -21,15 +17,6 @@ const HomeP = styled.header`
   color: #353535;
   background-color: white;
   border: none;
-  font-family: Pretendard;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 20px;
-  letter-spacing: 0em;
-  color: #353535;
-  background-color: white;
-  border: none;
-  border-bottom: 2px solid black;
 `;
 
 
