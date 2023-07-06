@@ -33,8 +33,8 @@ const MyKakaoShareButton = () => {
       container: '#kakaotalk-sharing-btn',
       objectType: 'feed',
       content: {
-        title: `${userNickname}님이 질문 폴더를 공유했어요!`, // 사용자 id받아와서 넣어 줄 부분
-        description: `로그인 없이 \n간편하게 답변을 남겨보세요.`,
+        title: `${userNickname}님이 프로필을 공유했어요!`, // 사용자 id받아와서 넣어 줄 부분
+        description: `프로필.ZiP을 \n지금 바로 확인해보세요.`,
         imageUrl: 'https://github.com/Club-PARD/Hi5_DotZip/blob/master/src/img/thumbnail.png?raw=true',
         link: {
           mobileWebUrl: window.location.href,
@@ -43,7 +43,7 @@ const MyKakaoShareButton = () => {
       },
       buttons: [
         {
-          title: '답변 남기러 가기',
+          title: '프로필 구경하러 가기',
           link: {
             mobileWebUrl: `${window.location.origin}/MyProfileSharePage/${hashId}`,
             webUrl: `${window.location.origin}/MyProfileSharePage/${hashId}`,
