@@ -145,7 +145,6 @@ const CopyLinkButton = styled.button`
   width: 220px;
   height: 40px;
   border-radius: 8px;
-  border: 1px solid #CF4823;
   background: var(--orange-primary, #EC582F);
   font-size: 14px;
   display: flex;
@@ -670,7 +669,8 @@ function PickAnswerPage() {
                     {voteEnd && <KakaoShareButton questionId={questionId}/>}
                     <CopyToClipboard text={`${window.location.origin}/answer/${questionId}`}>
                       <CopyLinkButton onClick={(event) => {event.stopPropagation(); handleLinkButtonClick(questionId); }} 
-                      disabled={!voteEnd} style={{ backgroundColor: voteEnd ? '#EC582F' : '#F8F8F8' , marginLeft: voteEnd ? '0' : '44px' , color: voteEnd ? 'white' : '#808080', cursor: voteEnd ? 'pointer' : 'default'}}>
+                      disabled={!voteEnd} style={{ backgroundColor: voteEnd ? '#EC582F' : '#F8F8F8' , marginLeft: voteEnd ? '0' : '44px' ,  borderRadius: voteEnd ? '8px' : '20px',
+                      color: voteEnd ? 'white' : '#808080', cursor: voteEnd ? 'pointer' : 'default', border: voteEnd ? '1px solid #CF4823' : 'none' }}>
                         {voteEnd ? (
                           <>
                             <Link src={LinkImage} /> 링크 복사
