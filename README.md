@@ -1,4 +1,4 @@
-# 프로젝트 이름
+# DotZiP
 
 <p align="center">
   <br>
@@ -11,11 +11,14 @@
 ## 프로젝트 소개
 
 <p align="justify">
-프로젝트 개요/동기
+나를 발견할 수 있는 질문들을 통해 지인들이 바라보는 모습, <br/>나도 몰랐던 나의 새로운 모습을 키워드로 발견하도록 투표 기반의 서비스를 제공합니다.
 </p>
 
 <p align="center">
-GIF Images
+ <img src='./src/img/answerLoading.gif' /> 
+  <!--
+로그인 gif로 바꿀예쩡
+-->
 </p>
 
 <br>
@@ -57,4 +60,4 @@ MIT &copy; [NoHack](mailto:lbjp114@gmail.com)
 [nt]: /readme/notion.svg
 [fm]: /readme/figma.svg
 [react]: /readme/react.svg
-[fb]: /readme/notion.svg
+[fb]: /readme/firebase.svg
