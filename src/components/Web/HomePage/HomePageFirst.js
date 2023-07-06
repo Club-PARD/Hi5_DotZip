@@ -486,6 +486,7 @@ const HomePageFirst = () => {
   } 
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const q = query(collection(dbService, 'zip_Question'), where('kakaoId', '==', kakaoId), orderBy('timestamp', 'desc'));
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const questionList = [];

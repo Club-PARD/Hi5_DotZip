@@ -154,6 +154,7 @@ function SurveyFirst() {
 
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (selectedEmoji) {
       handleButton1Click();
     }

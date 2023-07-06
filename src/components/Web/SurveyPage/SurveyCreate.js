@@ -253,12 +253,13 @@ function SurveyCreate() {
     const [selectedEmoji, setSelectedEmoji] = useState(null); // New state for the selected emoji
 
     let [inputCountReason, setInputCountReason] = useState(0);
-  let [inputCountName, setInputCountName] = useState(0);
+    let [inputCountName, setInputCountName] = useState(0);
 
 
-    // useEffect(() => {
-    //   console.log(kakaoId); // Print kakaoId value only once
-    // }, []);
+    useEffect(() => {
+      window.scrollTo(0, 0); // Scroll to top when the component mounts
+    }, []);
+  
 
   
     const handleSubmit = async () => {
