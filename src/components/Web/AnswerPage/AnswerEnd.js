@@ -30,7 +30,7 @@ const FolderContent = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  margin-left: 32px;
+  margin-left: 40px;
   top: 0;
   left: 0;
   right: 0;
@@ -38,17 +38,17 @@ const FolderContent = styled.div`
 `;
 const IMG = styled.img`
   position: absolute;
-  padding-top: 60px;
+  margin-top: 53px;
   width: 48px;
   height: 48px;
-  margin-left: 5px;
+  margin-left: 6px;
 `;
 const QText = styled.p`
   font-family: PretendardSemi;
   font-size: 14px;
   margin: 0;
-  margin-top: 60px;
-  margin-left: 76px;
+  margin-top: 56px;
+  margin-left: 66px;
   font-weight: 600;
   width: 235px;
   word-break: keep-all;
@@ -58,7 +58,7 @@ const QText = styled.p`
 const CText = styled.p`
   font-size: 12px;
   margin-top: 8px;
-  margin-left: 76px;
+  margin-left: 66px;
   font-weight: 600;
   width: 235px;
   font-family: Pretendard;
@@ -93,12 +93,12 @@ const Hr = styled.hr`
   border: 1px dashed #ABABAB; // Specify the border width: ;
   width: 327px;
   margin-bottom: 32px;
-  margin-top: 32px;
+  margin-top: 24px;
 `;
 const Header1 = styled.div`
   color: var(--black-90, #212121);
 font-size: 20px;
-font-family: Pretendard;
+font-family: PretendardBold;
 font-style: normal;
 font-weight: 700;
 line-height: 24px;
@@ -125,7 +125,7 @@ const AnswerText = styled.p`
     font-size: 16px;
     font-weight: 600;
     height: 20px;
-    font-family: Pretendard;
+    font-family: PretendardSemi;
 `;
 const VotePercentage = styled.p`
     margin-top: 14px;
@@ -135,7 +135,7 @@ const VotePercentage = styled.p`
     font-size: 14px;
     font-weight: 600;
     height: 18px;
-    font-family: Pretendard;
+    font-family: PretendardSemi;
     color: #EC582F;
 `;
 const Percentage = styled.p`
@@ -146,7 +146,7 @@ const Percentage = styled.p`
     font-size: 14px;
     font-weight: 600;
     height: 18px;
-    font-family: Pretendard;
+    font-family: PretendardSemi;
     color: #ababab;
 `;
 const PercentageContainer = styled.div`
@@ -189,7 +189,7 @@ const Warning = styled.div`
   color: var(--primary-orange, #EC582F);
 /* Body/B2-12-SB */
 font-size: 12px;
-font-family: Pretendard;
+font-family: PretendardSemi;
 font-style: normal;
 font-weight: 600;
 line-height: 16px;

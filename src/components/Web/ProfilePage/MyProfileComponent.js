@@ -55,6 +55,7 @@ const Img = styled.img`
 const Profile = styled.div`
   display: flex;
   align-items: center;
+  margin-top: '80px';
   padding-bottom: 4px;
 `;
 const modalStyles = {

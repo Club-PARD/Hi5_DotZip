@@ -46,12 +46,12 @@ const BackButton = styled.img`
 `;
 
 
-const HeaderP = styled.p`
+const HeaderP = styled.header`
   width: 100%;
   height: 19px;
   color: var(--gray-60, #808080);
 text-align: left;
-margin-top: 13px;
+margin-top: 17px;
 /* Body/B4-14-SB */
 font-size: 14px;
 font-family: Pretendard;
@@ -72,6 +72,18 @@ text-align: left;
   color: var(--gray-90, #353535);
 `;
 
+const MyQues = styled.header`
+  width: 105px;
+height: 20px;
+left: 24px;
+margin-top: 32px;
+font-family: PretendardBold;
+font-style: normal;
+font-weight: 700;
+text-align: left;
+  color: var(--gray-90, #353535);
+`;
+
 
 const Header2 = styled.div`
   display: flex;
@@ -80,6 +92,7 @@ const Header2 = styled.div`
   justify-content: center;
     width: 327px;
   margin-top: 20px;
+  margin-left: 13px;
 `;
 
 const Survey = styled.div`
@@ -102,7 +115,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  margin-top: 32px;
+  margin-top: 12px;
 `;
 const IMG = styled.img`
   position: absolute;
@@ -117,7 +130,7 @@ color: var(--black-90, #212121);
 /* Body/B4-14-SB */
 width: 235px;
 font-size: 14px;
-font-family: PretendardBold;
+font-family: PretendardSemi;
 font-style: normal;
 font-weight: 600;
 line-height: 18px;
@@ -153,7 +166,7 @@ border-top: 1px dashed #ABABAB;
 const AddVote = styled.img`
 width: 327px;
 height: 64px;
-margin-top: 8px;
+margin-left: 12px;
 `;
 
 
@@ -263,8 +276,9 @@ const MyAnsewer = () => {
           <Survey>
           <Progress src={progress}/>
             <Header2>
-              <HeaderDiv>내 답변 추가하기</HeaderDiv>
+              <HeaderDiv>질문 선택 완료!</HeaderDiv>
               <HeaderP>투표 항목에 내가 생각하는 답변을 추가해보세요.</HeaderP>
+              <MyQues>내가 선택한 질문</MyQues>
               <Container>
                 <Question>{question}</Question>
                 <Comment>{comment}</Comment>

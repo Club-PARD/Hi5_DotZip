@@ -26,6 +26,9 @@ const Div = styled.div`
     margin-left: 8px;
     margin-right: 8px;
 `;
+const Margin = styled.div`
+  margin-top: 80px;
+`;
 
 
 const MyProfilePage = () => {
@@ -37,7 +40,9 @@ const MyProfilePage = () => {
       <DDiv>
         <Div>
           <Navbar />
+          <Margin>
           <HomeNavbar />
+          </Margin>
           <MyProfileComponent />
           <MyProfileLank />
         </Div>

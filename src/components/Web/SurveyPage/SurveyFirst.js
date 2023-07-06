@@ -15,18 +15,22 @@ import answer2 from '../../../img/answer2.png';
 import answer3 from '../../../img/answer3.png';
 import answer4 from '../../../img/answer4.png';
 import progress from '../../../img/Line1.png'
+import button1 from '../../../img/Button1.png'
 const Div = styled.div`
     display: flex;
     align-items: center;
   flex-direction: column;
+  margin: 0 auto;
+
 `;
 
 
 const Survey = styled.div`
   width: 375px;
-  background: white;
+  //background: white;
   display: flex;
   justify-content: center;
+
 `;
 
 const ButtonRow = styled.div`
@@ -67,6 +71,7 @@ const Header2 = styled.div`
   width: 327px;
   justify-content: center;
   align-items: center;
+  margin-left: 3px;
 `;
 
 const HeaderP = styled.header`
@@ -74,10 +79,10 @@ const HeaderP = styled.header`
   height: 19px;
   color: var(--gray-60, #808080);
 text-align: left;
-margin-top: 13px;
+margin-top: 15px;
 /* Body/B4-14-SB */
 font-size: 14px;
-font-family: Pretendard;
+font-family: PretendardSemi;
 font-style: normal;
 font-weight: 600;
 line-height: 18px;
@@ -85,21 +90,12 @@ margin-bottom: 12px;
 `;
 
 
-const Button1 = styled.button`
+const Button1 = styled.img`
   width: 327px;
-  height: 48px;
-  border-radius: 10px;
-  border: 1px solid #EC582F;
-  background-color: white;
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 14px;
-  text-align: center;
-  color: var(--primary-orange, #EC582F);
+  height: 64px;
   margin-bottom: 10px;
-  margin-top: 32px;
+  margin-top: 20px;
+
 `;
 
 // const Button2 = styled.button`
@@ -252,7 +248,7 @@ function SurveyFirst() {
             active={selectedEmoji === 'emoji4'}/> 
         </ButtonRow>
         <Survey>
-        <Button1 onClick={handleButtonClick}>+ 내가 직접 질문 만들기</Button1>
+        <Button1 src={button1}onClick={handleButtonClick} />
         </Survey>
         {/* <Button2 disabled={!buttonSelected} onClick={() => navigate(`/SurveyShare/${questionId}`)}>
           다음

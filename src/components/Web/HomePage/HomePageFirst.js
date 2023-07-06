@@ -76,7 +76,7 @@ const Survey = styled.div`
   height: 1245px;
   margin: 0 auto;
   overflow-x: hidden;
-background-color: #00FFFF; /* Set the background color to aqua */
+/* background-color: #00FFFF; Set the background color to aqua */
   //background-color:white;
 `;
 
@@ -343,7 +343,7 @@ const FolderContent = styled.div`
 `;
 const IMG = styled.img`
   position: absolute;
-  padding-top: 57px;
+  padding-top: 56px;
   margin-left: 16px ;
   width: 48px;
   height: 48px;
@@ -353,7 +353,7 @@ const IMG = styled.img`
 `;
 const TipImage = styled.img`
   position: absolute;
-  margin-top: 115px;
+  margin-top: 114px;
   margin-left: 14px;
   width: 53px;
   height: 22px;
@@ -361,6 +361,7 @@ const TipImage = styled.img`
   cursor: pointer;
 `;
 const AnswerLinkContainer = styled.div`
+margin-top: 10px;
   display: flex;
   align-items: center;
 `;
@@ -369,10 +370,10 @@ const AnswerLinkContainer = styled.div`
 
 //폴더 안 텍스트
 const QText = styled.header`
-  font-size: 14px;
+  font-size: 16px;
   margin: 0;
-  margin-top: 66px;
-  margin-left: 76px;
+  margin-top: 65px;
+  margin-left: 74px;
   font-weight: 600;
   width: 1155px;
   height: 36px;
@@ -383,14 +384,14 @@ const QText = styled.header`
   align-items: center;
   cursor: pointer;
 `;
-const CText = styled.p`
+const CText = styled.header`
   font-size: 12px;
-  margin-left: 76px;
-  margin-top:15px;
+  margin-left: 72px;
+  margin-top:17px;
   font-weight: 600;
   width: 223px;
   height: 14px;
-  font-family: Pretendard;
+  font-family: PretendardSemi;
   color: #808080;
   z-index: 1;
   word-break: keep-all;
@@ -400,13 +401,13 @@ const CText = styled.p`
 `;
 const AnswerText = styled.p`
   font-size: 12px;
-  margin: 0;
-  /* margin-top: 5px; */
+  /* margin: 0; */
+  margin-top: 10px;
   margin-left: 16px;
   font-weight: 600;
   width: 118px;
   height: 16px;
-  font-family: Pretendard;
+  font-family: PretendardSemi;
   color: #808080;
   z-index: 1;
 `;
@@ -430,13 +431,13 @@ const LinkMessage = styled.div` //링크복사
 
 const CopyLinkButton = styled.button`
   border: none;
-
-  margin-left: 50px;
+  margin-left: 80px;
   padding: 0;
   width: 97px;
   height: 32px;
   border-radius: 20px;
   font-size: 12px;
+  font-family: PretendardSemi;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -574,7 +575,7 @@ const HomePageFirst = () => {
       await setDoc(doc(dbService, 'zip_Question', questionId), {
         kakaoId,
         questionId,
-        question: "나에게 어울릴 것 같은 직업은?",
+        question: "나에게 어울리는 직업은?",
         comment: "나의 성향과 장점을 생각해보세요!",
         voteEnd,
         emoji: "emoji2", // Include the selected emoji value in the data
@@ -671,7 +672,7 @@ const HomePageFirst = () => {
         {questions.length > 0 ? (
         questions.slice(0, 2).map((question, index) => (
         <div key={question.questionId}>
-        {question && question.question && (
+        {question && question.question && question.voteEnd &&(
         <FolderImageContainer onClick={() => handleQuestionClick(question.questionId, index)}>
           <FolderImage src={folderImages[index % folderImages.length]} />
                   <FolderContent>
