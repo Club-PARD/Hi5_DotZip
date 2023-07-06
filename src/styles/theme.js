@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import Pretendard from '../asset/font/Pretendard-Medium.otf'
 import PretendardBold from '../asset/font/Pretendard-Bold.otf'
-
+import PretendardSemi from '../asset/font/Pretendard-SemiBold.otf'
 
 // GlobalStyle을 생성합니다.
 export const GlobalStyle = createGlobalStyle`
@@ -71,6 +71,62 @@ export const GlobalStyle = createGlobalStyle`
          url(${PretendardBold}) format("truetype");
     font-display: swap;
 } 
+@font-face {
+    font-family: 'PretendardSemi';
+    font-weight: 300;
+    font-style: normal;
+    src: url('PretendardSemi');
+    src: url(${PretendardSemi}) format('embedded-opentype'),
+         url(${PretendardSemi}) format('woff2'),
+         url(${PretendardSemi}) format('woff'),
+         url(${PretendardSemi}) format("truetype");
+    font-display: swap;
+} 
+@font-face {
+    font-family: 'PretendardSemi';
+    font-weight: 400;
+    font-style: normal;
+    src: url('PretendardSemi');
+    src: url(${PretendardSemi}) format('embedded-opentype'),
+         url(${PretendardSemi}) format('woff2'),
+         url(${PretendardSemi}) format('woff'),
+         url(${PretendardSemi}) format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: 'PretendardSemi';
+    font-weight: 700;
+    font-style: normal;
+    src: url('PretendardSemi');
+    src: url(${PretendardSemi}) format('embedded-opentype'),
+         url(${PretendardSemi}) format('woff2'),
+         url(${PretendardSemi}) format('woff'),
+         url(${PretendardSemi}) format("truetype");
+    font-display: swap;
+} 
+@font-face {
+    font-family: 'PretendardSemi';
+    font-weight: 800;
+    font-style: normal;
+    src: url('PretendardSemi');
+    src: url(${PretendardSemi}) format('embedded-opentype'),
+         url(${PretendardSemi}) format('woff2'),
+         url(${PretendardSemi}) format('woff'),
+         url(${PretendardSemi}) format("truetype");
+    font-display: swap;
+} 
+@font-face {
+    font-family: 'PretendardSemi';
+    font-weight: 900;
+    font-style: normal;
+    src: url('PretendardSemi');
+    src: url(${PretendardSemi}) format('embedded-opentype'),
+         url(${PretendardSemi}) format('woff2'),
+         url(${PretendardSemi}) format('woff'),
+         url(${PretendardSemi}) format("truetype");
+    font-display: swap;
+} 
+
 
 body {
   font-family: "Pretendard";
