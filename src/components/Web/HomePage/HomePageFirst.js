@@ -474,7 +474,7 @@ const HomePageFirst = () => {
   const [showMessage, setShowMessage] = useState(false);
   const [copiedLinkId, setCopiedLinkId] = useState('');
   const [selectedEmoji, setSelectedEmoji] = useState(null); // New state for the selected emoji
-  
+  const [loading, setLoading] = useState(true);
   // kakaoId가 비어있는 경우에만 새로고침
   if (!kakaoId) {
     window.location.reload();
@@ -491,6 +491,7 @@ const HomePageFirst = () => {
         }
       });
       setQuestions(questionList);
+      setLoading(false);
     });
     const modalConfirmed = localStorage.getItem('modalConfirmed');
         if (modalConfirmed === 'true') {
@@ -674,6 +675,10 @@ const HomePageFirst = () => {
             <Header3>최근에 만든 질문</Header3>
             <ButtonB onClick={handleButton3Click}>전체보기 <Arrow src={arrow}/></ButtonB>
           </ButtonsContainer>
+          {loading ? (
+          <HomeLoading/>
+        ) : (
+        <>
           {questions.length > 0 ? (
             questions.slice(0, 2).map((question, index) => (
               <div key={question.questionId}>
@@ -709,7 +714,7 @@ const HomePageFirst = () => {
               </div>
             ))
           ) :
-          ((!question.length || (question.question &&question.voteEnd===false))&&(
+          ((!question.length || (question.length>0 &&question.voteEnd===false))&&(
               <Questionp>
                 <QP>아직 만든 질문이 없어요.</QP>
                 <Qp>새로운 질문을 만들고 공유해보세요.</Qp>
@@ -720,6 +725,8 @@ const HomePageFirst = () => {
             
           )
           }
+          </>
+        )}
         </DIVB>
       </Survey>
     </Div>

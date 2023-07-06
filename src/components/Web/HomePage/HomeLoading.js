@@ -9,7 +9,7 @@ const IMG = styled.img`
   top: 683px;
 `;
 
-const ProfileAnimation = () => {
+const HomeLoading = () => {
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <IMG src={Img}/>
@@ -17,4 +17,4 @@ const ProfileAnimation = () => {
   );
 };
 
-export default ProfileAnimation;
+export default HomeLoading;
