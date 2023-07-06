@@ -37,7 +37,7 @@ margin-top: 32px;
 `;
 const Header2 = styled.div`
 font-size: 16px;
-font-family: Pretendard;
+font-family: PretendardBold;
 font-style: normal;
 font-weight: 700;
 line-height: 20px;
@@ -101,6 +101,7 @@ font-family: Pretendard;
 font-style: normal;
 font-weight: 500;
 line-height: 16px;
+margin-top: 8px;
 `;
 const DDiv = styled.div`
 display: flex;
