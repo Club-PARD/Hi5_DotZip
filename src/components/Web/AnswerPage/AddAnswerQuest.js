@@ -99,6 +99,7 @@ const Submit = styled.input`
   font-weight: 600;
   line-height: 18px;
   margin-top: 24px;
+  cursor: pointer;
 `;
 
 const DDiv = styled.div`

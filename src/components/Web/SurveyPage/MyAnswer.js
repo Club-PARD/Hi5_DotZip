@@ -167,6 +167,7 @@ const AddVote = styled.img`
 width: 327px;
 height: 64px;
 margin-left: 12px;
+cursor: pointer;
 `;
 
 
