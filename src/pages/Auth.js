@@ -12,21 +12,21 @@ import zip1 from '../img/ZiP (1).png';
 import logo from '../img/Logo.png';
 
 const DDiv = styled.div`
-    display: flex;
-    justify-content: center;
-    margin: 0;
-    padding: 0;
-    /* width: 100%;
-    height: 812px; */
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* Set the height to 100% of the viewport height */
 `;
+
 const DIV = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 375px;
-    height: 100%;
-    margin: 0;
-    padding: 0;
+  display: flex;
+  flex-direction: column;
+  width: 375px;
+  height: 100%; /* Fill the available height */
+  background: #FFF8F3;
 `;
+
 
 const Logo = styled.img`
 width: 32px;
@@ -46,7 +46,6 @@ margin-bottom: 48px;
 
 const LoginCon = styled.div`
 width: 375px;
-height: 812px;
 display: flex;
 flex-direction: column;
 justify-content: flex-start;
