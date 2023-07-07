@@ -18,7 +18,7 @@
 ###### 이미지 클릭 시 각 팀원의 소개 페이지로 이동
 |  기획자 배예진    |  디자이너 조세희     |   웹개발자 김현승   |   웹개발자 이한나  |  웹개발자 김지수  |
 |   :--------:   |    :--------:    |    :--------:  |    :--------:   |   :--------:  |
-|   <img src="./readme/YJ.PNG.png" width="300" height="150">   |  <img src="./readme/Say.png" width="300" height="150">   | <img src="./readme/H.png" width="300" height="150"> | <img src="./readme/HN.png" width="300" height="150">    | <img src="./readme/JS.png" width="300" height="150">    |
+|   <a href="https://www.notion.so/c214bca8c6fe4322ab5b6e77e6dd9365?pvs=4"><img src="./readme/YJ.PNG.png" width="300" height="150"></a>  |  <a href="https://www.notion.so/c214bca8c6fe4322ab5b6e77e6dd9365?pvs=4"><img src="./readme/Say.png" width="300" height="150"></a>    | <a href="https://www.notion.so/c214bca8c6fe4322ab5b6e77e6dd9365?pvs=4"><img src="./readme/H.png" width="300" height="150"></a>         | <a href="https://www.notion.so/c214bca8c6fe4322ab5b6e77e6dd9365?pvs=4"><img src="./readme/HN.png" width="300" height="150"></a>        | <a href="https://www.notion.so/c214bca8c6fe4322ab5b6e77e6dd9365?pvs=4"><img src="./readme/JS.png" width="300" height="150"></a>        |
 
 <br>
 
