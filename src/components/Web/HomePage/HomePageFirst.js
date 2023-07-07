@@ -482,7 +482,7 @@ const HomePageFirst = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    const q = query(collection(dbService, 'zip_Question'), where('kakaoId', '==', kakaoId), orderBy('timestamp', 'desc'));
+    const q = query(collection(dbService, 'zip_Question'), where('kakaoId', '==', kakaoId), where('voteEnd', '==', true), orderBy('timestamp', 'desc'));
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const questionList = [];
       snapshot.forEach((doc) => {
@@ -680,7 +680,8 @@ const HomePageFirst = () => {
         ) : (
         <>
           {questions.length > 0 ? (
-            questions.slice(0, 2).map((question, index) => (
+            <>
+            {questions.slice(0, 2).map((question, index) => (
               <div key={question.questionId}>
                 {question.question && question.voteEnd && (
                   <FolderImageContainer onClick={() => handleQuestionClick(question.questionId, index)}>
@@ -712,9 +713,9 @@ const HomePageFirst = () => {
                   </FolderImageContainer>
                 )}
               </div>
-            ))
-          ) :
-          (questions.length === 0 || (questions.length > 0 && question.voteEnd===false)) && (
+            ))}
+          </>
+          ) : (
             <Questionp>
               <QP>아직 만든 질문이 없어요.</QP>
               <Qp>새로운 질문을 만들고 공유해보세요.</Qp>
@@ -728,7 +729,7 @@ const HomePageFirst = () => {
       </Survey>
     </Div>
   );
-            }
+}
   
 
 export default HomePageFirst;
