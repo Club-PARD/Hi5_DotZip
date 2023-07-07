@@ -68,9 +68,9 @@ const Input = styled.input`
   background-color: transparent; 
   margin-left: 8px;
  width: 250px;
-  &:focus {
-    border: none;
-    outline: 1px solid var(--primary-orange, #EC582F);
+ &:focus {
+    outline: none;
+    border: 1px solid var(--primary-orange, #EC582F);
   }
 `;
 

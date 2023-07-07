@@ -94,8 +94,8 @@ height: 48px;
 background-color: transparent; 
 padding-left: 16px;
 &:focus {
-    border: none;
-    outline: 1px solid var(--primary-orange, #EC582F);
+    outline: none;
+    border: 1px solid var(--primary-orange, #EC582F);
   }
 `;
 const InputReason = styled.textarea`
@@ -118,8 +118,8 @@ background-color: transparent;
 padding-left: 16px;
 padding-top : 15px;
 &:focus {
-    border: none;
-    outline: 1px solid var(--primary-orange, #EC582F);
+    outline: none;
+    border: 1px solid var(--primary-orange, #EC582F);
   }
 `;
 const InputNum = styled.span`

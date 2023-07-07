@@ -45,29 +45,29 @@ margin-top: 32px;
 `;
 
 const Input = styled.input`
- ::placeholder {
+  ::placeholder {
     /* placeholder 스타일 */
-    color:  var(--gray-60, #808080);
- }
- color :var(--black-90, #212121);
-font-size: 14px;
-font-family: Pretendard;
-font-style: normal;
-font-weight: 500;
-line-height: 18px;
-border-radius: 8px;
-border: 1px solid var(--gray-60, #808080);
-backdrop-filter: blur(2px);
-width: 295px;
-height: 48px;
-background-color: transparent; 
-padding-left: 16px;
+  }
+  color: var(--black-90, #212121);
+  font-size: 14px;
+  font-family: Pretendard;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-60, #808080);
+  backdrop-filter: blur(2px);
+  width: 295px;
+  height: 48px;
+  background-color: transparent;
+  padding-left: 16px;
 
-&:focus {
-    border: none;
-    outline: 1px solid var(--primary-orange, #EC582F);
+  &:focus {
+    outline: none;
+    border: 1px solid var(--primary-orange, #EC582F);
   }
 `;
+
 
 const InputReason = styled.textarea`
  ::placeholder {
@@ -88,9 +88,9 @@ height: 102px;
 background-color: transparent;
 padding-left: 16px;
 padding-top : 15px;
-&:focus {
-    border: none;
-    outline: 1px solid var(--primary-orange, #EC582F);
+  &:focus {
+    outline: none;
+    border: 1px solid var(--primary-orange, #EC582F);
   }
 `;
 const InputNum = styled.span`
@@ -134,7 +134,7 @@ font-family: Pretendard;
 font-style: normal;
 font-weight: 600;
 line-height: 16px;
-margin-top: 30px;
+margin-top: 15px;
 `;
 
 

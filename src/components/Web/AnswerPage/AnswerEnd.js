@@ -184,6 +184,7 @@ const MakeMyAnswer = styled.img`
   width: 327px;
   height: 48px;
   margin-top: 8px;
+  margin-bottom: 40px;
 `;
 const Warning = styled.div`
   color: var(--primary-orange, #EC582F);

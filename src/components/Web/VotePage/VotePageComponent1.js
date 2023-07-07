@@ -1,5 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+const Div = styled.div`
+text-align: left;
+margin-right: 100px;
+`;
 
 const Folder1Text = styled.header`
   font-size: 24px;
@@ -8,7 +12,6 @@ const Folder1Text = styled.header`
   font-family: PretendardBold;
   padding-top: 32px;
   padding-bottom: 8px;
-  padding-left: 14px;
   line-height: 28px;
 `;
 const Folder2Text = styled.header`
@@ -17,17 +20,16 @@ const Folder2Text = styled.header`
   font-weight: 600;
   height: 18px;
   padding-bottom: 32px;
-  padding-left: 14px;
   margin-top: 8px;
   font-family: PretendardSemi;
 
 `;
 const VotePageComponent1 = () => {
     return (
-        <>
+        <Div>
             <Folder1Text>내가 만든 질문 폴더들</Folder1Text>
             <Folder2Text>내가 생성한 폴더의 답변을 확인해보세요.</Folder2Text>
-        </>
+        </Div>
     );
 }
 export default VotePageComponent1;

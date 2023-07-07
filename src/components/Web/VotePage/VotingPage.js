@@ -34,9 +34,8 @@ const DDiv = styled.div`
 const Div = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 375px;
-    margin: 0;
-    padding: 0;
 `;
 //새로운 폴더 생성
 const NoDiv = styled.div`
