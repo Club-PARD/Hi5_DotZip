@@ -2,7 +2,7 @@
 
 <p align="center">
   <br>
-  <img src="./readme/thumbnail.png">
+  <img src="./readme/로고.jpeg">
   <br>
 </p>
 
