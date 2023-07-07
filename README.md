@@ -35,35 +35,35 @@
 
 ## 📌 주요 기능
 
-### 🔗 로그인
+###  🔗 [로그인](https://github.com/Club-PARD/Hi5_DotZip/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C-(%EB%A1%9C%EA%B7%B8%EC%9D%B8))
 - 카카오톡 로그인
 - 최초 로그인한 유저일 경우 firestore에 정보 저장
-### 🔗 홈 페이지 & 생성한 질문 폴더 페이지
+### 🔗 [홈 페이지 & 생성한 질문 폴더 페이지](https://github.com/Club-PARD/Hi5_DotZip/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C-(%ED%99%88-%ED%8E%98%EC%9D%B4%EC%A7%80-&-%EC%A7%84%ED%96%89%EC%A4%91%EC%9D%B8-%EC%A7%88%EB%AC%B8-%ED%8E%98%EC%9D%B4%EC%A7%80))
 - 최근 생성한 질문 2개 
 - 질문 생성 시간 순으로 질문 폴더 나열
 - 해당 질문 폴더 링크 복사하기
 - 종료된 질문 폴더는 아래로 이동
-### 🔗 질문만들기
+### 🔗 [질문만들기](https://github.com/Club-PARD/Hi5_DotZip/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C-(%EC%A7%88%EB%AC%B8-%EB%A7%8C%EB%93%A4%EA%B8%B0))
 - 주어진 질문으로 질문 폴더 만들기
 - 유저가 새로운 질문 생성하여 질문 폴더 만들기
 - 본인 질문에 답변 추가하기 (투표 항목 추가)
-### 🔗 투표하기
+### 🔗 [투표하기](https://github.com/Club-PARD/Hi5_DotZip/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C-(%ED%88%AC%ED%91%9C%ED%95%98%EA%B8%B0))
 - 투표 항목 새롭게 추가하기 (닉네임, 새로운 답변, 이유 추가)
 - 기존 투표 항목에 투표하기 (닉네임, 이유 추가)
 - 새로운 질문 만들기
-### 🔗 투표 결과 확인 페이지
+### 🔗 [투표 결과 확인 페이지](https://github.com/Club-PARD/Hi5_DotZip/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C-(%ED%88%AC%ED%91%9C-%EA%B2%B0%EA%B3%BC-%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0))
 - 총 투표 참여자와 각 항목 득표수와 이유 공개 (%로 항목들 비교)
 - 질문자 본인이 추가한 투표 항목 표시 (체크)
 - 최대 득표 항목 표시
 - 카카오톡 공유
 - 링크 복사
 - 투표 종료하기
-### 🔗 마이 프로필 페이지
+### 🔗 [마이 프로필 페이지](https://github.com/Club-PARD/Hi5_DotZip/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C-(%EB%A7%88%EC%9D%B4-%ED%94%84%EB%A1%9C%ED%95%84--%ED%8E%98%EC%9D%B4%EC%A7%80))
 - 모든 투표 항목 중 top3를 랭킹으로 공개
 - 닉네임 수정하기
 - 카카오톡 마이프로필 랭킹3 공유하기
 - 이미지 저장하기
-### 🔗 환경 설정 페이지
+### 🔗 [환경 설정 페이지]
 - 문의하기
 - 팀소개
 - 약관
