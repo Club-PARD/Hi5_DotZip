@@ -96,6 +96,18 @@ const FolderImage = styled.img`
   width: 100%;
   height: 100%;
 `;
+const Font = styled.div`
+color: var(--white-100, #FFF);
+text-align: right;
+/* Body/B4-14-SB */
+font-family: PretendardSemi;
+font-size: 14px;
+font-style: normal;
+font-weight: 600;
+line-height: 18px;
+display: flex;
+justify-content: center;
+`;
 const FolderContent = styled.div`
   position: absolute;
   display: flex;
@@ -187,7 +199,8 @@ const AnswerText = styled.p`
   font-size: 16px;
   font-weight: 600;
   height: 20px;
-  font-family: Pretendard;
+  font-family: PretendardSemi;
+  color: var(--gray-90, #353535);
 `;
 const CheckAnswerImg = styled.img`
   width: 13px;
@@ -672,9 +685,9 @@ function PickAnswerPage() {
                       disabled={!voteEnd} style={{ backgroundColor: voteEnd ? '#EC582F' : '#F8F8F8' , marginLeft: voteEnd ? '0' : '44px' ,  borderRadius: voteEnd ? '8px' : '20px',
                       color: voteEnd ? 'white' : '#808080', cursor: voteEnd ? 'pointer' : 'default', border: voteEnd ? '1px solid #CF4823' : 'none' }}>
                         {voteEnd ? (
-                          <>
+                          <Font>
                             <Link src={LinkImage} /> 링크 복사
-                          </>
+                          </Font>
                         ) : (
                           '종료된 투표'
                         )}

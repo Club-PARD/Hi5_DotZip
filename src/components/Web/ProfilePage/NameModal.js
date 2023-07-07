@@ -23,7 +23,6 @@ const Form = styled.form`
 
 const Header1 = styled.p`
   margin: 0;
-  margin-left: 5px;
   font-family: PretendardBold;
   font-size: 20px;
   font-style: normal;
@@ -38,7 +37,6 @@ const Container = styled.div`
 
 const Header2 = styled.div`
   font-size: 16px;
-  margin-left: 5px;
   font-family: PretendardBold;
   font-style: normal;
   font-weight: 700;
@@ -60,7 +58,6 @@ const Input = styled.input`
   line-height: 18px;
   border-radius: 8px;
   margin-top: 10px;
-  margin-left: 5px;
   margin-bottom: 8px;
   border: 1px solid var(--gray-60, #808080);
   backdrop-filter: blur(2px);
@@ -83,6 +80,7 @@ const InputNum = styled.span`
   font-style: normal;
   font-weight: 500;
   line-height: 16px;
+  margin-right:6px;
 `;
 
 const Submit = styled.input`

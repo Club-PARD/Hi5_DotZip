@@ -2,6 +2,7 @@ import styled from "styled-components";
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BackNavBar from '../../BackNavbar';
+import front from '../../../img/front.png'
 const DDiv = styled.div`
     display: flex; //유연하게 바꾸는 역할
     justify-content: center; // 중간으로 모으는 역할
@@ -23,9 +24,20 @@ const Body1 = styled.div`
     padding-left: 24px;
     padding-top : 8px;
     color : gray;
-    font-family: Pretendard;
+    font-family: PretendardSemi;
     font-size: 14px;
     font-weight: 600;
+`;
+
+const NavBarWrapper = styled.nav`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  width: 375px;
+  z-index:0;
+  background-color: white;
+  color: white;
 `;
 
 
@@ -37,20 +49,17 @@ const Button = styled.button`
     background: #FFF8F3;
     text-align: left;
     font-size: 16px;
-    font-family: Pretendard;
+    font-family: PretendardSemi;
     border-style: none;
     position: relative;
-    overflow: hidden;
-
-
-    &::after {
-        content: '>'; //이미지
-        position: absolute;
-        top: 50%;
-        right: 24px;
-        transform: translateY(-50%);
-        cursor: pointer;
-    }
+    color: var(--gray-90, #353535);
+`;
+const Front  = styled.img `
+position: absolute;
+width: 6px;
+height: 12px;
+right: 20px;
+cursor: pointer;
 `;
 
 const Divide = styled.div`
@@ -89,10 +98,10 @@ function Setting() {
             }
             navigate("/");
     };
-    // const onClickDrop  = () => {
-    //     localStorage.clear();
-    //     navigate("/");
-    // };
+    const onClickDrop  = () => {
+        localStorage.clear();
+        navigate("/");
+    };
 
     return(
         <>
@@ -102,12 +111,27 @@ function Setting() {
             <Header1>환경설정</Header1>
             <Body1>더 나은 서비스를 위해 계속 발전시켜 갈게요!</Body1>
             <Divide>    <DivideContent>고객센터</DivideContent></Divide>
+            <NavBarWrapper>
             <Button onClick={onClickInquire}>문의하기</Button>
+            <Front src={front}onClick={onClickInquire}></Front>
+            </NavBarWrapper>
+            <NavBarWrapper>
             <Button onClick={onClickTeam}>팀소개</Button>
+            <Front src={front} onClick={onClickTeam}></Front>
+            </NavBarWrapper>
             <Divide>    <DivideContent>계정관리</DivideContent></Divide>
+            <NavBarWrapper>
             <Button onClick={onClickTerm}>약관</Button>
-            <Button onClick={onClickLogout}>로그아웃</Button> {/*현승오빠가 만들어둔 부분 가져오기 */}
-            {/* <Button onClick={onClickDrop}>탈퇴</Button> */}
+            <Front src={front} onClick={onClickTerm}></Front>
+            </NavBarWrapper>
+            <NavBarWrapper>
+            <Button onClick={onClickLogout}>로그아웃</Button>
+            <Front src={front} onClick={onClickLogout} ></Front>
+            </NavBarWrapper> {/*현승오빠가 만들어둔 부분 가져오기 */}
+            <NavBarWrapper>         
+            <Button onClick={onClickDrop}>탈퇴</Button> 
+            <Front src={front} onClick={onClickDrop} ></Front>
+            </NavBarWrapper> 
         </Div>
         </DDiv>
         </>

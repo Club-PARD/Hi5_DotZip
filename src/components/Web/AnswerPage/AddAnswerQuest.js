@@ -28,6 +28,7 @@ const Header1 = styled.div `
   font-size: 20px;
   font-weight: 700;
   line-height: 24px;
+  margin-left: 8px;
   cursor: default;
 `;
 const X = styled.img`
@@ -45,6 +46,7 @@ const Header2 = styled.div`
   font-weight: 700;
   line-height: 20px;
   margin-top: 32px;
+  margin-left: 8px;
 `;
 
 const Input = styled.input`
@@ -64,8 +66,8 @@ const Input = styled.input`
   width: 295px;
   height: 48px;
   background-color: transparent; 
-  padding-left: 16px;
-
+  margin-left: 8px;
+ width: 250px;
   &:focus {
     border: none;
     outline: 1px solid var(--primary-orange, #EC582F);
@@ -81,6 +83,7 @@ const InputNum = styled.span`
   font-weight: 500;
   line-height: 16px;
   margin-top: 8px;
+  margin-right: 4px;
 `;
 
 const Submit = styled.input`
@@ -94,7 +97,7 @@ const Submit = styled.input`
 
   /* Body/B1-14-SB */
   font-size: 14px;
-  font-family: Pretendard;
+  font-family: PretendardSemi;
   font-style: normal;
   font-weight: 600;
   line-height: 18px;
