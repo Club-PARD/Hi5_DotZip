@@ -124,6 +124,7 @@ font-weight: 600;
 line-height: 18px;
 margin-top: 8px;
 text-align: center;
+  cursor: pointer;
 `;
 const Warning = styled.div`
   color: var(--primary-orange, #EC582F);

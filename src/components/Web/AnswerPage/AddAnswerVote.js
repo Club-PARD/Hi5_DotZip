@@ -149,6 +149,7 @@ font-weight: 600;
 line-height: 18px;
 margin-top: 8px;
 margin-bottom: 20px;
+  cursor: pointer;
 `;
 const DDiv = styled.div`
 display: flex;
