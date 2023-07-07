@@ -23,7 +23,7 @@ const DIV = styled.div`
     display: flex;
     flex-direction: column;
     width: 375px;
-    height: 812px;
+    height: 100%;
     margin: 0;
     padding: 0;
 `;
