@@ -11,6 +11,9 @@
 나를 발견할 수 있는 질문들을 통해 지인들이 바라보는 모습, <br/>나도 몰랐던 나의 새로운 모습을 키워드로 발견하도록 투표 기반의 서비스를 제공합니다.
 </p>
 
+## 🖥️ 배포 주소
+[.ZiP 방문하기📂](https://dotzip.swygbro.com)
+
 ## 🕰️ 개발 기간
 * 23.06.19일 ~ 23.07.08일 (3주 프로젝트)
 
@@ -18,7 +21,7 @@
 ###### 이미지 클릭 시 각 팀원의 소개 페이지로 이동
 |  기획자 배예진    |  디자이너 조세희     |   웹개발자 김현승   |   웹개발자 이한나  |  웹개발자 김지수  |
 |   :--------:   |    :--------:    |    :--------:  |    :--------:   |   :--------:  |
-|   <a href="https://www.notion.so/c214bca8c6fe4322ab5b6e77e6dd9365?pvs=4"><img src="./readme/YJ.PNG.png" width="300" height="150"></a>  |  <a href="https://www.notion.so/c214bca8c6fe4322ab5b6e77e6dd9365?pvs=4"><img src="./readme/Say.png" width="300" height="150"></a>    | <a href="https://www.notion.so/c214bca8c6fe4322ab5b6e77e6dd9365?pvs=4"><img src="./readme/H.png" width="300" height="150"></a>         | <a href="https://www.notion.so/c214bca8c6fe4322ab5b6e77e6dd9365?pvs=4"><img src="./readme/HN.png" width="300" height="150"></a>        | <a href="https://www.notion.so/c214bca8c6fe4322ab5b6e77e6dd9365?pvs=4"><img src="./readme/JS.png" width="300" height="150"></a>        |
+|   <a href="https://www.notion.so/c214bca8c6fe4322ab5b6e77e6dd9365?pvs=4"><img src="./readme/YJ.PNG.png" width="300" height="150"></a>  |  <a href="https://www.notion.so/f4d63cf63e7c4360917a26a2e129667f?pvs=4"><img src="./readme/Say.png" width="300" height="150"></a>    | <a href="https://www.notion.so/37942b37e5414b06a578e99a44052ea4?pvs=4"><img src="./readme/H.png" width="300" height="150"></a>         | <a href="https://www.notion.so/65eed5b6553a4d03a55e19cd82ffb8e1?pvs=4"><img src="./readme/HN.png" width="300" height="150"></a>        | <a href="https://www.notion.so/6e29f9775a3f4394a2e68e280275c69a?pvs=4"><img src="./readme/JS.png" width="300" height="150"></a>        |
 
 <br>
 
@@ -70,7 +73,7 @@
 
 <br>
 
-## 
+ 
 
 <!-- Stack Icon Refernces -->
 
