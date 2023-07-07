@@ -46,7 +46,6 @@ margin-top: 200px;
 const AnswerLoading = () => {
     const { questionId } = useParams();
     const navigate = useNavigate();
-    const userName=localStorage.getItem("userName")
     const navigateToAnswerEnd = () => {
         navigate(`/AnswerEnd/${questionId}`);
       };
