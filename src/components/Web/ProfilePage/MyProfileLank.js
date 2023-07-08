@@ -58,13 +58,15 @@ const QText = styled.p`
   font-weight: 500;
   line-height: 16px;
   margin: 0;
-  margin-top: 16px;
-  margin-bottom: 8px;
+  padding: 0;
+  margin-top: 4px;
+  margin-bottom: 4px;
   text-align: center;
 `;
 const AText = styled.p`
   color: var(--primary-orange, #EC582F);
   margin: 0;
+  padding: 0;
   font-size: 24px;
   font-family: Pretendard;
   font-style: normal;

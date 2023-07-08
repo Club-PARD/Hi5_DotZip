@@ -372,6 +372,7 @@ const CancelButton = styled.button`
   height: 24px;
   margin-left: auto;
   margin-right: 28px;
+  padding-right: 10px;
   border: 0;
   background: none;
   cursor: pointer;
