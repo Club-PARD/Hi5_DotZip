@@ -724,8 +724,8 @@ function PickAnswerPage() {
                     <ModalText1>충분히 답변을 받으셨나요?</ModalText1>
                     <ModalText2>투표를 종료하시면<br></br>더 이상 답변을 받을 수 없어요.</ModalText2>
                     <ButtonContainer>
-                      <ModalCancelButton onClick={handleCloseEndModal}>취소</ModalCancelButton>
-                      <ModalCheckButton onClick={handleEndVote}>확인</ModalCheckButton>
+                      <ModalCancelButton onClick={handleCloseEndModal} style={{color: '#808080'}}>취소</ModalCancelButton>
+                      <ModalCheckButton onClick={handleEndVote} style={{color: '#EC582F'}}>확인</ModalCheckButton>
                     </ButtonContainer>
                 </Modal>
 
