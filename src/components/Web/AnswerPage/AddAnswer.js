@@ -118,7 +118,7 @@ border-style: none;
 
 /* Body/B1-14-SB */
 font-size: 14px;
-font-family: Pretendard;
+font-family: PretendardSemi;
 font-style: normal;
 font-weight: 600;
 line-height: 18px;
@@ -130,7 +130,7 @@ const Warning = styled.div`
   color: var(--primary-orange, #EC582F);
 /* Body/B2-12-SB */
 font-size: 12px;
-font-family: Pretendard;
+font-family: PretendardSemi;
 font-style: normal;
 font-weight: 600;
 line-height: 16px;

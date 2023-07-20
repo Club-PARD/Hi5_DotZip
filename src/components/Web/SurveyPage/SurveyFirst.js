@@ -247,9 +247,9 @@ function SurveyFirst() {
           onClick={() => handleButtonSelect('emoji4')}
             active={selectedEmoji === 'emoji4'}/> 
         </ButtonRow>
-        <Survey>
+        {/* <Survey>
         <Button1 src={button1}onClick={handleButtonClick} />
-        </Survey>
+        </Survey> */}
         {/* <Button2 disabled={!buttonSelected} onClick={() => navigate(`/SurveyShare/${questionId}`)}>
           다음
         </Button2> */}

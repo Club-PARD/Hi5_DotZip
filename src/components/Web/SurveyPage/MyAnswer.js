@@ -3,7 +3,6 @@ import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { dbService } from '../../../fbase';
 import { collection, deleteDoc,updateDoc, doc, onSnapshot,serverTimestamp } from 'firebase/firestore';
 import styled from 'styled-components';
-
 import progress from '../../../img/Line2.png'
 import addVote from '../../../img/addVote.png'
 import AddAnswerQuest from '../AnswerPage/AddAnswerQuest';
@@ -170,6 +169,24 @@ margin-left: 12px;
 cursor: pointer;
 `;
 
+const NextButton = styled.button`
+width: 327px;
+height: 48px;
+margin-top: 16px;
+margin-left: 12px;
+border-radius: 10px;
+background: #F8F8F8;
+border:  #F8F8F8;
+color: var(--gray-60, #808080);
+
+/* Body/B4-14-SB */
+font-family: PretendardSemi;
+font-size: 14px;
+font-style: normal;
+font-weight: 600;
+line-height: 18px; /* 128.571% */
+`;
+
 
 const modalStyles = {
   content: {
@@ -205,12 +222,17 @@ const MyAnsewer = () => {
     const [comment, setComment] = useState('');
     const [userNickname] = useState(localStorage.getItem("userName"));
     const [emoji,setEmoji] = useState('');
+    
   const handleCloseModal = () => {
     setModalOpen(false);
   };
   const showModal = ()=>{
     setModalOpen(!modalOpen);
   };
+  const handleNButtonClick = () => {
+    navigate(`/PickAnswer/${questionId}`);
+  };
+  
 
   
     useEffect(() => {
@@ -247,10 +269,6 @@ const MyAnsewer = () => {
           return null;
       }
     };
-    
-      const handleButtonClick = () => {
-        navigate(`/SurveyShare/${questionId}`);
-      };
       const fbDelete = async() =>{
           try {
             const questionRef = doc(dbService, 'zip_Question', questionId);
@@ -292,6 +310,8 @@ const MyAnsewer = () => {
           <Modal isOpen={modalOpen} onRequestClose={handleCloseModal} style={modalStyles}>
           {modalOpen && <AddAnswerQuest key="add-answer"  handleCloseModal={handleCloseModal} />}
           </Modal>
+          <NextButton onClick={handleNButtonClick}>항목 추가 없이 투표 등록하기</NextButton>
+
           </Survey>
         </Div>
         </DDiv>

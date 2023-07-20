@@ -525,7 +525,7 @@ const HomePageFirst = () => {
         voteEnd,
         emoji: "emoji3",
         timestamp,
-        VoteNum: 1
+        VoteNum: 0
       });
   
       console.log('Data saved successfully');
@@ -555,7 +555,7 @@ const HomePageFirst = () => {
         voteEnd,
         emoji: "emoji1", // Include the selected emoji value in the data
         timestamp,
-        VoteNum:1
+        VoteNum:0
       });
   
       console.log('Data saved successfully');
@@ -585,7 +585,7 @@ const HomePageFirst = () => {
         voteEnd,
         emoji: "emoji2", // Include the selected emoji value in the data
         timestamp,
-        VoteNum:1
+        VoteNum:0
       });
   
       console.log('Data saved successfully');
