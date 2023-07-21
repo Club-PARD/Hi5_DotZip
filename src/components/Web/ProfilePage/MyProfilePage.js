@@ -27,7 +27,7 @@ const Div = styled.div`
     margin-right: 8px;
 `;
 const Margin = styled.div`
-  margin-top: 80px;
+  //margin-top: 60px;
 `;
 
 
