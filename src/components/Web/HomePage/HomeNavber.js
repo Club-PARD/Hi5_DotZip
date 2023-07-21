@@ -14,7 +14,6 @@ const HomeP = styled.header`
   font-weight: 700;
   line-height: 20px;
   letter-spacing: 0em;
-  color: #353535;
   background-color: white;
   border: none;
 `;
