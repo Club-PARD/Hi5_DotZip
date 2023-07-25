@@ -16,7 +16,7 @@ import SurveyShare from './components/Web/SurveyPage/SurveyShare';
 import Setting from './components/Web/SettingPage/Setting';
 import VotingPage from './components/Web/VotePage/VotingPage';
 import AnswerLoading from './components/Web/AnswerPage/AnswerLoading';
-
+import HomeLoading from './components/Web/HomePage/HomeKakaoId';
 
 function App() {
   const kakaoId =  localStorage.getItem("kakaoId")
@@ -26,7 +26,7 @@ function App() {
 <Router>
   <Routes>
     <Route path= '/' element={<Auth/>}/>
-    <Route path="/Home" element={kakaoId ? <Home /> : <Auth />} />
+    <Route path="/Home" element= {<Home/>}/>
     <Route path='/Inquiry' element={<Inquiry/>}/>
     <Route path='About' element={<About/>}/>
     <Route path='/VotingPage' element={<VotingPage/>}/>
@@ -45,7 +45,7 @@ function App() {
     <Route path='/AnswerLoading' element={<AnswerLoading/>}/>
     <Route path='/AnswerLoading/:questionId' element={<AnswerLoading/>}/>
     <Route path='/Setting' element={<Setting/>}/>
-
+    <Route path='/kakao' element={<HomeLoading/>}/>
   </Routes>
 
 

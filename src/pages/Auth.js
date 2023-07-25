@@ -220,7 +220,7 @@ const Auth = () => {
     <div>
       {accessToken ? (
         <div>
-          {accessToken && <Navigate to="/home" replace={true} />}
+          {accessToken && <Navigate to="/kakao" replace={true} />}
         </div>
       ) : (
         <KakaoLogin

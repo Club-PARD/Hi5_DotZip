@@ -47,7 +47,7 @@ const AnswerLoading = () => {
     const { questionId } = useParams();
     const navigate = useNavigate();
     const navigateToAnswerEnd = () => {
-        navigate(`/AnswerEnd/${questionId}`);
+        navigate(`/AnswerEnd/${questionId}`, { replace: true });
       };
       useEffect(() => {
         const timer = setTimeout(() => {
