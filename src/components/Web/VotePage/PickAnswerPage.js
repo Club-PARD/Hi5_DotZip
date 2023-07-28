@@ -412,16 +412,16 @@ const reasonModalStyles = {
 };
 const Box2Image = styled.img`
   width: 295px;
-  height: 180px;
+  height: 200px;
   margin-top: 30px;
 `;
 const ReasonBox = styled.div`
-  width: 180px;
-  height: 240px;
+  width: 240px;
+  height: 320px;
   border-radius: 10px;
   background: var(--white-100, #FFF);
   box-shadow: 0px 2px 10px 0px #FFE2CE;
-  margin-top: -210px;
+  margin-top: -250px;
 `;
 const ReasonModalText1 = styled.p`
   text-align: center;
@@ -460,7 +460,7 @@ const ReasonModalText2 = styled.p`
 const ReasonModalText3 = styled.p`
   color: #ABABAB;
   text-align: center;
-  font-size: 12px;
+  font-size: 14px;
   font-family: Pretendard;
   font-style: normal;
   font-weight: 600;
@@ -469,12 +469,12 @@ const ReasonModalText3 = styled.p`
 `;
 const ReasonModalText3Point = styled.span`
   color: var(--gray-60, #808080);
-  font-size: 14px;
+  font-size: 18px;
 `;
 const ReasonModalText4 = styled.p`
   color: var(--primary-orange, #EC582F);
   text-align: center;
-  font-size: 14px;
+  font-size: 18px;
   font-family: Pretendard;
   font-style: normal;
   font-weight: 600;
@@ -483,6 +483,7 @@ const ReasonModalText4 = styled.p`
   height: 126px;
   margin: 0;
   margin-left: 16px;
+  margin-bottom: 48px;
   word-wrap: break-word;
   word-break: break-all;
   white-space: pre-wrap;
@@ -742,14 +743,14 @@ function PickAnswerPage() {
                             <ReasonModalText4>{reasonzips[reasonzips.length - 1 - currentReasonIndex].reason}</ReasonModalText4>
                           </>
                         )}
-                            <ModalCancelButton style={{width: '72px', height: '32px', marginLeft:'16px', marginRight:'4px', cursor: currentReasonIndex === 0 ? 'default' : 'pointer', color: currentReasonIndex === 0 ? '#808080' : '#EC582F',
+                            <ModalCancelButton style={{width: '72px', height: '32px', marginLeft:'16px', marginRight:'16px', cursor: currentReasonIndex === 0 ? 'default' : 'pointer', color: currentReasonIndex === 0 ? '#808080' : '#EC582F',
                              background: currentReasonIndex === 0 ? 'var(--gray-10, #F8F8F8)':'var(--gradation-back, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%))', fontSize: '12px'}} 
                             onClick={handlePreviousReason} disabled={currentReasonIndex === 0}>이전</ModalCancelButton>
                             <ModalCheckButton style={{width: '72px', height: '32px', margin: '0', cursor: currentReasonIndex === reasonzips.length - 1 ? 'default' : 'pointer', color: currentReasonIndex === reasonzips.length - 1 ? '#808080' : '#EC582F',
                             background: currentReasonIndex === reasonzips.length - 1 ? 'var(--gray-10, #F8F8F8)':'var(--gradation-back, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%))', fontSize: '12px'}}
                             onClick={handleNextReason} disabled={currentReasonIndex === reasonzips.length - 1}>다음</ModalCheckButton>
                         </ReasonBox>
-                    <ModalCheckButton isopen="false" onClick={handleCloseModal} style={{ width: '180px', marginBottom: '24px', marginTop: 'auto' }}> <RedText>확인</RedText> </ModalCheckButton>
+                    <ModalCheckButton isopen="false" onClick={handleCloseModal} style={{ width: '247px', marginBottom: '24px', marginTop: 'auto' }}> <RedText>확인</RedText> </ModalCheckButton>
                 </Modal>
             </Div>
         </DDiv>
