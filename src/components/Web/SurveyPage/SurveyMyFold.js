@@ -7,7 +7,7 @@ import CopyToClipboard from 'react-copy-to-clipboard'; //링크복사
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import KakaoShareButton from '../ProfilePage/ShareKakao';
 import AnswerNavBar from '../../AnswerNavbar';
-import CopyLinkMessage from './CopyLinkMessage';
+import CopyLinkMessage from '../VotePage/CopyLinkMessage';
 import emoji1 from '../../../img/emoji1.png';
 import emoji2 from '../../../img/emoji2.png';
 import emoji3 from '../../../img/emoji3.png';
@@ -26,6 +26,7 @@ import ReasonBoxImage from '../../../img/ReasonBox.png';
 import Line4 from '../../../img/Line4.png';
 import Arrow from '../../../img/화살표.png';
 import CheckAnswer from '../../../img/AnswerCheck.png';
+import MyAnsModal from './MyAnsModal'
 
 //기본틀
 const DDiv = styled.div`
@@ -45,6 +46,7 @@ const Div = styled.div`
   margin-left: 8px;
   margin-right: 8px;
   margin-top: 70px;
+  /* background: aqua; */
 `;
 
 //text
@@ -53,7 +55,7 @@ const Text1 = styled.div`
   font-weight: 700;
   height: 60px;
   font-family: PretendardBold;
-  margin-left: 16px;
+  margin-left: 24px;
   margin-bottom: 8px;
 `;
 const RedText = styled.span`
@@ -64,7 +66,7 @@ const Text2 = styled.div`
   font-weight: 600;
   height: 18px;
   font-family: PretendardSemi;
-  margin-left: 16px;
+  margin-left: 24px;
   padding-bottom: 32px;
   color: #808080;
 `;
@@ -73,7 +75,7 @@ const Text3 = styled.div`
   font-weight: 700;
   height: 24px;
   font-family: PretendardBold;
-  margin-left: 16px;
+  margin-left: 24px;
   padding-bottom: 8px;
 `;
 const Text4 = styled.div`
@@ -81,7 +83,7 @@ const Text4 = styled.div`
   font-weight: 600;
   height: 18px;
   font-family: PretendardSemi;
-  margin-left: 16px;
+  margin-left: 24px;
   padding-bottom: 24px;
   color: #808080;
 `;
@@ -95,6 +97,8 @@ const FolderImageContainer = styled.div`
 const FolderImage = styled.img`
   width: 100%;
   height: 100%;
+  margin-left: 8px;
+  padding-right: 8px;
 `;
 const Font = styled.div`
 color: var(--white-100, #FFF);
@@ -173,7 +177,7 @@ const Link = styled.img`
 const Line = styled.img`
   width: 327px;
   height: 1px;
-  margin-left: 16px;
+  margin-left: 24px;
   margin-bottom: 32px;
 `;
 //답변들 box
@@ -265,7 +269,7 @@ const BackHomeButton = styled.button`
   width: 327px;
   height: 48px;
   margin-top: 64px;
-  margin-left: 16px;
+  margin-left: 24px;
   margin-bottom: 8px;
   border: none;
   background: none;
@@ -278,7 +282,7 @@ const HomeImage = styled.img`
 const EndButton = styled.button`
   width: 327px;
   height: 48px;
-  margin-left: 16px;
+  margin-left: 24px;
   margin-bottom: 53px;
   border: none;
   background: none;
@@ -673,8 +677,8 @@ function PickAnswerPage() {
         <AnswerNavBar/>
         <DDiv>
             <Div>
-                <Text1><RedText>{userNickname}</RedText> 님의 <br></br> 진행중인 질문</Text1> 
-                <Text2>내가 생성한 질문의 답변과 이유를 확인해보세요!</Text2>
+                <Text1>내 질문 폴더</Text1> 
+                <Text2>링크를 공유하고 투표를 통해 답변을 받아보세요!</Text2>
                 <FolderImageContainer>
                   <FolderImage src={selectedFolderImage} />
                   <FolderContent>
@@ -702,6 +706,7 @@ function PickAnswerPage() {
                 <Line src = {Line4} />
                 <Text3>투표 현황</Text3>
                 <Text4>각 답변을 눌러 이유를 함께 확인해보세요!</Text4>
+                <MyAnsModal></MyAnsModal>
 
                 {answerzips.map((answerzip, index) => (
                     <div key={answerzip.id}>

@@ -17,6 +17,7 @@ import Setting from './components/Web/SettingPage/Setting';
 import VotingPage from './components/Web/VotePage/VotingPage';
 import AnswerLoading from './components/Web/AnswerPage/AnswerLoading';
 import HomeLoading from './components/Web/HomePage/HomeKakaoId';
+import SurveyMyFold from './components/Web/SurveyPage/SurveyMyFold'
 
 function App() {
   const kakaoId =  localStorage.getItem("kakaoId")
@@ -36,6 +37,7 @@ function App() {
     <Route path='/SurveyFirst' element={<SurveyFirst/>}/>
     <Route path='/SurveySecond' element={<SurveySecond/>}/>
     <Route path='/SurveyCreate' element={<SurveyCreate/>}/>
+    <Route path='/SurveyMyFold/:questionId' element={<SurveyMyFold/>}/>
     <Route path='/MyAnswer/:questionId' element={<MyAnswer/>}/>
     <Route path='/SurveyShare/:questionId' element={<SurveyShare/>}/>
     <Route path='/Answer' element={<Answer/>}/>

@@ -18,13 +18,14 @@ import Tip from '../../../img/Tip.png';
 import LinkImage from '../../../img/Link.png';
 import CopyToClipboard from 'react-copy-to-clipboard'; //링크복사
 import CopyLinkMessage from '../VotePage/CopyLinkMessage';
-import CopyLinkMessageHome from '../HomePage/HomeCopyLinkMessage';
+import CopyLinkMessageHome from './HomeCopyLinkMessage';
 import EndMessage from '../VotePage/EndMessage';
 import Folder1 from '../../../img/Folder1.png';
 import Folder2 from '../../../img/Folder2.png';
 import arrow from '../../../img/arrow.png';
 import buttonnew from '../../../img/buttonnew.png';
 import HomeLoading from './HomeLoading';
+import EmptyFold from '../../../img/EmptyFold.png'
 
 const Div = styled.div`
   display: flex;
@@ -40,7 +41,7 @@ font-family: Pretendardbold;
 font-style: normal;
 line-height: 24px;
 margin-left: 24px;
-margin-bottom: 26px;
+margin-bottom: 44px;
 `;
 
 const HeaderDiv = styled.header`
@@ -78,7 +79,7 @@ const Survey = styled.div`
   height: 1245px;
   margin: 0 auto;
   overflow-x: hidden;
-/* background-color: #00FFFF; Set the background color to aqua */
+/* background-color: #00FFFF;  */
   //background-color:white;
 `;
 
@@ -118,8 +119,7 @@ const ButtonContainer = styled.div`
   align-items: center;
   gap: 10px;
   margin-bottom: 10px;
-  //width: 350px;
-  margin-left: 10px;
+  margin-left: 8px;
 `;
 
 const ButtonQ = styled.img`
@@ -157,24 +157,9 @@ font-family: PretendardSemi;
 font-style: normal;
 font-weight: 600;
 line-height: 18px;
-margin-left: 26px;
+margin-left: 24px;
 `;
-const ButtonsContainer = styled.div`
-display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  margin-top: 10px;
-  margin-bottom: 16px;
-  //width: 330px;
-  margin-left: 25px;
-`;
-const Questionp = styled.div`
-color: black;
-width: 319px;
-height: 259px;
-font-family: Pretendard;
-`;
+
 const Profile = styled.button`
   width: 165px;
   height: 40px;
@@ -229,9 +214,10 @@ cursor: pointer;
 `;
 
 const ButtonNew = styled.img`
-width: 322px;
-height: 48px;
-margin-left: 26px;
+width: 327px;
+height: 64px;
+margin-left: 24px;
+
 cursor: pointer;
 
 `;
@@ -247,13 +233,7 @@ cursor: pointer;
 
 `;
 
-const Banner = styled.img`
-  width: 375px;
-  height: 96px;
-  // background: var(--background-gra, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%));
-  margin-bottom: 32px;
-  cursor: pointer;
-`;
+
 
 const MadeF = styled.header`
 width: 240px;
@@ -285,8 +265,8 @@ const DIVB = styled.div`
 top: 700px;
 width: 375px;
 height: 586px;
-background-color: #F8F8F8;
-margin-top: 32px;
+/* background-color: #F8F8F8; */
+margin-top: 16px;
 `;
 
 const QP = styled.header`
@@ -353,17 +333,9 @@ const IMG = styled.img`
   z-index: 1;
   cursor: pointer;
 `;
-const TipImage = styled.img`
-  position: absolute;
-  margin-top: 114px;
-  margin-left: 14px;
-  width: 53px;
-  height: 22px;
-  z-index: 1;
-  cursor: pointer;
-`;
+
 const AnswerLinkContainer = styled.div`
-margin-top: 10px;
+margin-top: 31px;
   display: flex;
   align-items: center;
 `;
@@ -434,9 +406,9 @@ const LinkMessage = styled.div` //링크복사
 
 const CopyLinkButton = styled.button`
   border: none;
-  margin-left: 80px;
+  margin-left: 60px;
   padding: 0;
-  width: 97px;
+  width: 118px;
   height: 32px;
   border-radius: 20px;
   font-size: 12px;
@@ -459,13 +431,14 @@ const Arrow = styled.img`
   height: 10px;
   /* margin-right: 4px; */
 `;
-
 const Empty = styled.img`
   width: 359px;
 height: 196px;
 margin-left: 8px;
 margin-bottom: 16px;
 `;
+
+
 
 const HomePageFirst = () => {
   const navigate = useNavigate();
@@ -515,96 +488,6 @@ const HomePageFirst = () => {
     };
   }, [kakaoId]);
 
-  const BannerCreate = async () => {
-    try {
-      if (!kakaoId) {
-        throw new Error('User not logged in');
-      }
-  
-      const questionId = uuidv4();
-      const timestamp = serverTimestamp();
-  
-      await setDoc(doc(dbService, 'zip_Question', questionId), {
-        kakaoId,
-        questionId,
-        question: "나를 표현하는 형용사는?",
-        comment: "나에게 어울리는 단어를 생각해보세요!",
-        voteEnd,
-        emoji: "emoji3",
-        timestamp,
-        VoteNum: 0
-      });
-  
-      console.log('Data saved successfully');
-      setQuestion('');
-      setComment('');
-      setSelectedEmoji(null);
-  
-      navigate(`/MyAnswer/${questionId}`);
-    } catch (error) {
-      console.error('Error adding document:', error);
-    }
-  };
-  const Question1Create = async () => {
-    try {
-      if (!kakaoId) {
-        throw new Error('User not logged in');
-      }
-  
-      const questionId = uuidv4();
-      const timestamp = serverTimestamp();
-  
-      await setDoc(doc(dbService, 'zip_Question', questionId), {
-        kakaoId,
-        questionId,
-        question: "나의 이미지에 어울리는 컬러는?",
-        comment: "나의 성격과 떠오르는 이미지를 연관지어보세요!",
-        voteEnd,
-        emoji: "emoji1", // Include the selected emoji value in the data
-        timestamp,
-        VoteNum:0
-      });
-  
-      console.log('Data saved successfully');
-      setQuestion('');
-      setComment('');
-      setSelectedEmoji(null);
-  
-      navigate(`/MyAnswer/${questionId}`);
-    } catch (error) {
-      console.error('Error adding document:', error);
-    }
-  };
-  const Question2Create = async () => {
-    try {
-      if (!kakaoId) {
-        throw new Error('User not logged in');
-      }
-  
-      const questionId = uuidv4();
-      const timestamp = serverTimestamp();
-  
-      await setDoc(doc(dbService, 'zip_Question', questionId), {
-        kakaoId,
-        questionId,
-        question: "나에게 어울리는 직업은?",
-        comment: "나의 성향과 장점을 생각해보세요!",
-        voteEnd,
-        emoji: "emoji2", // Include the selected emoji value in the data
-        timestamp,
-        VoteNum:0
-      });
-  
-      console.log('Data saved successfully');
-      setQuestion('');
-      setComment('');
-      setSelectedEmoji(null);
-  
-      navigate(`/MyAnswer/${questionId}`);
-    } catch (error) {
-      console.error('Error adding document:', error);
-    }
-  };
   
 
   const handleQuestionClick = (questionId, index) => {
@@ -615,7 +498,7 @@ const HomePageFirst = () => {
     navigate('../../../../SurveyFirst'); // Replace with the actual path you want to navigate to
   };
   const handleButton4Click = () => {
-    navigate('../../../../SurveyCreate'); // Replace with the actual path you want to navigate to
+    navigate('../../../../SurveyFirst'); // Replace with the actual path you want to navigate to
   };
 
   const handleButton1Click = () => {
@@ -665,23 +548,12 @@ const HomePageFirst = () => {
         </HeaderContainer>
         <HeaderDiv>안녕하세요, <RedText>{userNickname}</RedText> 님</HeaderDiv>
         <HeaderP>나의 프로필.ZiP을 만들어보세요!</HeaderP>
-        {/* <Banner src={banner} onClick={() => navigate(`/BannerCreate/${kakaoId}`)}/> */}
-        <Banner src={banner} onClick={() => BannerCreate()} />
         <ButtonContainer>
           <NewQ>나만의 질문 모음집</NewQ>
-          <ButtonA onClick={handleButtonClick}>전체보기 <Arrow src={arrow}/></ButtonA>
+          <ButtonA onClick={handleButton3Click}>전체보기 <Arrow src={arrow}/></ButtonA>
         </ButtonContainer>
         <Newq>지인들에게 나에 대해 물어보세요!</Newq>
-        <QuestionContainer>
-          <ButtonQ src={Home1} onClick={() => Question1Create()} />
-          <ButtonQ1 src={Home2} onClick={() => Question2Create()} />
-        </QuestionContainer>
-        <ButtonNew src={buttonnew} onClick={handleButton4Click} />
         <DIVB>
-          <ButtonsContainer>
-            <Header3>최근에 만든 질문</Header3>
-            <ButtonB onClick={handleButton3Click}>전체보기 <Arrow src={arrow}/></ButtonB>
-          </ButtonsContainer>
           {loading ? (
           <HomeLoading/>
         ) : (
@@ -695,43 +567,47 @@ const HomePageFirst = () => {
                     <FolderImage src={folderImages[index % folderImages.length]} />
                     <FolderContent>
                       <IMG src={getEmojiImage(question.emoji)} alt="Emoji" />
-                      <TipImage src={Tip} />
                       <QText>{question.question}</QText>
-                      <CText>{question.comment}</CText>
                       <AnswerLinkContainer>
                         <AnswerText><RedText>{question.VoteNum}명</RedText>이 답변을 남겼어요!</AnswerText>
                         <CopyToClipboard text={`${window.location.origin}/answer/${question.questionId}`}>
-                          <CopyLinkButton onClick={(event) => {event.stopPropagation(); handleLinkButtonClick(question.questionId);}} 
+                          <CopyLinkButton onClick={() => handleQuestionClick(question.questionId, index)} 
                             disabled={!question.voteEnd} style={{ backgroundColor: question.voteEnd ? '#EC582F' : '#F8F8F8' , color: question.voteEnd ? 'white' : '#808080' }}>
+                              
                             {question.voteEnd ? (
                               <>
                                 <Link src={LinkImage} />
-                                링크복사
+                                답변보러가기 
                               </>
                             ) : (
                               '종료된 투표'
                             )}
                           </CopyLinkButton>
                         </CopyToClipboard>
-                        {showMessage && copiedLinkId === question.questionId && <CopyLinkMessageHome />}
-                        {showEndMessage && <EndMessage />}
                       </AnswerLinkContainer>
                     </FolderContent>
+                    
                   </FolderImageContainer>
+                  
                 )}
+                
               </div>
+              
             ))}
           </>
           ) : (
-            <Questionp>
-              <QP>아직 만든 질문이 없어요.</QP>
-              <Qp>새로운 질문을 만들고 공유해보세요.</Qp>
-              <Img src={NewquesButton} onClick={() => navigate(`/SurveyFirst`)} />
-            </Questionp>
+            // <Questionp>
+            //   {/* <QP>아직 만든 질문이 없어요.</QP>
+            //   <Qp>새로운 질문을 만들고 공유해보세요.</Qp> */}
+            //   <img src={EmptyFold}></img>
+            //   //<Img src={NewquesButton} onClick={() => navigate(`/SurveyFirst`)} />
+            // </Questionp>
+            <Empty src={EmptyFold}></Empty>
           )
         }
           </>
         )}
+        <ButtonNew src={buttonnew} onClick={handleButton4Click} />
         </DIVB>
       </Survey>
     </Div>

@@ -16,6 +16,8 @@ import answer3 from '../../../img/answer3.png';
 import answer4 from '../../../img/answer4.png';
 import progress from '../../../img/Line1.png'
 import button1 from '../../../img/Button1.png'
+import CreateMyques from '../../../img/CreateMyques.png'
+
 const Div = styled.div`
     display: flex;
     align-items: center;
@@ -125,6 +127,14 @@ const Img = styled.img`
 width: 327px;
 height: 96px;
 margin-top: 20px;
+cursor: pointer;
+
+`;
+const ButtonNew = styled.img`
+width: 327px;
+height: 64px;
+margin-top: 20px;
+cursor: pointer;
 
 `;
 
@@ -165,6 +175,7 @@ function SurveyFirst() {
       let question = '';
       let comment = '';
       let emoji ='';
+      const VoteNum = 0; // Define the value of VoteNum
 
 
 
@@ -200,19 +211,14 @@ function SurveyFirst() {
         voteEnd,
         timestamp,
         emoji  : selectedEmoji,
-        VoteNum:1
+        VoteNum,
       });
-
-      
-      // console.log('Question:', question);
-      // console.log('Comment:', comment);
-      // console.log(selectedEmoji);
 
       setButtonSelected(false);
       setSelectedEmoji(null);
       setQuestionId(questionId); // Set the questionId value
 
-      navigate(`/MyAnswer/${questionId}`);
+      navigate(`/SurveyMyFold/${questionId}`);
     } catch (error) {
       console.error('Firestore에 데이터를 저장하는 도중 오류가 발생했습니다.', error);
     }
@@ -220,6 +226,10 @@ function SurveyFirst() {
 
   const handleButtonSelect = (button) => {
     setSelectedEmoji(button);
+  };
+
+  const handleButton4Click = () => {
+    navigate('../../../../SurveyFirst'); // Replace with the actual path you want to navigate to
   };
   
 
@@ -253,6 +263,7 @@ function SurveyFirst() {
         {/* <Button2 disabled={!buttonSelected} onClick={() => navigate(`/SurveyShare/${questionId}`)}>
           다음
         </Button2> */}
+        <ButtonNew src={CreateMyques} onClick={handleButton4Click} />
     </Div>
     </Div>
     </>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { dbService } from "../../../fbase.js";
-import { collection, updateDoc, addDoc, serverTimestamp } from "firebase/firestore";
+import { collection, updateDoc, addDoc, serverTimestamp,setDoc,doc, getDoc } from "firebase/firestore";
 import { useNavigate, useParams } from 'react-router-dom';
 import { css, styled } from 'styled-components';
 import cancleX from "../../../img/CancelX.png"
@@ -149,9 +149,24 @@ const AddAnswerQuest = ({ handleCloseModal }) => {
         reason: "내가 선택한건\n이유를 작성하지 않아요.\n\n 다른 사람들의\n 답변을 받고\n 이유를 확인해보세요!",
         answerId: newDocRef.id,
         nickname: nickname,
+        
       });
+      const questionDocRef = doc(dbService, "zip_Question", questionId);
+      const questionSnapshot = await getDoc(questionDocRef);
+      if (questionSnapshot.exists()) {
+        const questionData = questionSnapshot.data();
+        const newVoteNum = questionData.VoteNum ? questionData.VoteNum + 1 : 1;
+
+        // Update the VoteNum field in the zip_Question document
+        await setDoc(questionDocRef, {
+          ...questionData,
+          VoteNum: newVoteNum,
+        });
+      }
+
       setAnswer("");
       navigate(`/PickAnswer/${questionId}`);
+      // navigate(`/SurveyMyFold/${questionId}`);
     } catch (error) {
       console.error("Error adding document: ", error);
     }finally {
