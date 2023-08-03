@@ -27,6 +27,7 @@ import Line4 from '../../../img/Line4.png';
 import Arrow from '../../../img/화살표.png';
 import CheckAnswer from '../../../img/AnswerCheck.png';
 import MyAnsModal from './MyAnsModal'
+import BackNavBar from "../../BackNavbar"
 
 //기본틀
 const DDiv = styled.div`
@@ -45,7 +46,7 @@ const Div = styled.div`
   padding: 0;
   margin-left: 8px;
   margin-right: 8px;
-  margin-top: 70px;
+  margin-top: 20px;
   /* background: aqua; */
 `;
 
@@ -53,7 +54,6 @@ const Div = styled.div`
 const Text1 = styled.div`
   font-size: 24px;
   font-weight: 700;
-  height: 60px;
   font-family: PretendardBold;
   margin-left: 24px;
   margin-bottom: 8px;
@@ -93,6 +93,7 @@ const FolderImageContainer = styled.div`
   width: 359px;
   height: 196px;
   margin-bottom: 24px;
+
 `;
 const FolderImage = styled.img`
   width: 100%;
@@ -118,7 +119,7 @@ const FolderContent = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  margin-left: 32px;
+  margin-left: 40px;
   top: 0;
   left: 0;
   right: 0;
@@ -674,9 +675,11 @@ function PickAnswerPage() {
 
     return (
         <>
-        <AnswerNavBar/>
+        {/* <AnswerNavBar/> */}
+        <BackNavBar/>
         <DDiv>
             <Div>
+            {/* <BackNavBar/> */}
                 <Text1>내 질문 폴더</Text1> 
                 <Text2>링크를 공유하고 투표를 통해 답변을 받아보세요!</Text2>
                 <FolderImageContainer>

@@ -13,6 +13,7 @@ import emoji2 from '../../../img/emoji2.png';
 import tip from '../../../img/TipHeart.png'
 import 'firebase/compat/auth';
 import { v4 as uuidv4 } from 'uuid';
+import addMyVote from '../../../img/addMyVote.png'
 
 
 
@@ -223,7 +224,7 @@ const Question2Create = () => {
     return (
         <Div>
             <Survey>
-          <AddVote src={addVote} onClick={showModal} ></AddVote>
+          <AddVote src={addMyVote} onClick={showModal} ></AddVote>
           <Modal isOpen={modalOpen} onRequestClose={handleCloseModal} style={modalStyles}>
           {modalOpen && <AddAnswerQuest key="add-answer"  handleCloseModal={handleCloseModal} />}
           </Modal>

@@ -26,6 +26,7 @@ import arrow from '../../../img/arrow.png';
 import buttonnew from '../../../img/buttonnew.png';
 import HomeLoading from './HomeLoading';
 import EmptyFold from '../../../img/EmptyFold.png'
+import homeCheck from '../../../img/homeCheck.png';
 
 const Div = styled.div`
   display: flex;
@@ -335,9 +336,10 @@ const IMG = styled.img`
 `;
 
 const AnswerLinkContainer = styled.div`
-margin-top: 31px;
+margin-top: 30px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  
 `;
 
 
@@ -358,50 +360,19 @@ const QText = styled.header`
   align-items: center;
   cursor: pointer;
 `;
-const CText = styled.header`
-  font-size: 12px;
-  margin-left: 72px;
-  margin-top:17px;
-  font-weight: 600;
-  width: 223px;
-  height: 14px;
-  font-family: PretendardSemi;
-  color: #808080;
-  z-index: 1;
-  word-break: keep-all;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-`;
-const AnswerText = styled.p`
+
+const AnswerText = styled.header`
   font-size: 12px;
   /* margin: 0; */
-  margin-top: 10px;
-  margin-left: 16px;
+  margin-left: 17px;
   font-weight: 600;
   width: 118px;
   height: 16px;
   font-family: PretendardSemi;
   color: #808080;
-  //z-index: 0;
-`;
-
-const QuestionContainer = styled.div`
-display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
-  width: 330px;
-  cursor: pointer;
-`;
-
-const LinkMessage = styled.div` //링크복사
-  width: 200px;
-  background: white;
-  padding: 10px;
-  border: 1px solid black;
+  line-height: 16px;
   
+  //z-index: 0;
 `;
 
 const CopyLinkButton = styled.button`
@@ -420,9 +391,9 @@ const CopyLinkButton = styled.button`
   //z-index: 1;
 `;
 const Link = styled.img`
-  width: 16px;
-  height: 16px;
-  margin-right: 4px;
+  width: 12px;
+  height: 8px;
+  margin-right: 6px;
   cursor: pointer;
 `;
 
@@ -569,14 +540,14 @@ const HomePageFirst = () => {
                       <IMG src={getEmojiImage(question.emoji)} alt="Emoji" />
                       <QText>{question.question}</QText>
                       <AnswerLinkContainer>
-                        <AnswerText><RedText>{question.VoteNum}명</RedText>이 답변을 남겼어요!</AnswerText>
+                        <AnswerText><RedText>{question.VoteNum}명</RedText>이<br/> 답변을 남겼어요!</AnswerText>
                         <CopyToClipboard text={`${window.location.origin}/answer/${question.questionId}`}>
                           <CopyLinkButton onClick={() => handleQuestionClick(question.questionId, index)} 
                             disabled={!question.voteEnd} style={{ backgroundColor: question.voteEnd ? '#EC582F' : '#F8F8F8' , color: question.voteEnd ? 'white' : '#808080' }}>
                               
                             {question.voteEnd ? (
                               <>
-                                <Link src={LinkImage} />
+                                <Link src={homeCheck} />
                                 답변보러가기 
                               </>
                             ) : (

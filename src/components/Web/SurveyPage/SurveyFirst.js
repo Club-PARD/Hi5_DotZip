@@ -238,10 +238,10 @@ function SurveyFirst() {
     <Div>
       <Div>
     <BackNavBar/>
-    <Progress src={progress}/>
+    {/* <Progress src={progress}/> */}
         <Header2>
-          <HeaderDiv>새로운 질문 만들기</HeaderDiv>
-        <HeaderP>지인들에게 나에 대해 물어보고 투표를 받아보세요!</HeaderP>
+          <HeaderDiv>질문 선택하기</HeaderDiv>
+        <HeaderP>내가 물어보고 싶은 질문을 선택해보세요!</HeaderP>
         </Header2>
         <ButtonRow>
           <Img src={answer1}             
