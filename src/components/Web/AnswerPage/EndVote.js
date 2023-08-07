@@ -30,59 +30,62 @@ font-weight: 700;
 line-height: 32px;
 margin-left:18px;
 `;
+const Head3 = styled.div`
+color: var(--gray-90, #353535);
+
+/* Body/B6-16-B */
+font-family: PretendardBold;
+font-size: 16px;
+font-style: normal;
+font-weight: 700;
+line-height: 20px; /* 125% */
+margin-left:24px;
+margin-top: 32px;
+`;
+
 const FolderImageContainer = styled.div`
   position: relative;
-  width: 357px;
-  margin-top: 32px;
-`;
-const FolderImage = styled.img`
+  width: 327px;
+  height: 96px;
+  margin-top: 16px;
 
-  width: 100%;
-  height: 100%;
-  z-index: 0;
 `;
 const FolderContent = styled.div`
-  position: absolute;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  margin-left: 40px;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+border-radius: 10px;
+border: 1px solid var(--gray-30, #ABABAB);
+  width: 100%;
+  height: 100%;
 `;
 const IMG = styled.img`
   position: absolute;
-  margin-top: 70px;
   width: 48px;
   height: 48px;
-  margin-left: 6px;
+  margin-top: 24px;
+  margin-left: 16px;
 `;
 const QText = styled.p`
   font-family: PretendardSemi;
   font-size: 14px;
   margin: 0;
-  margin-top: 76px;
-  margin-left: 68px;
+  margin-left: 76px;
   font-weight: 600;
   width: 235px;
   word-break: keep-all;
   display: flex;
-  align-items: center;
+  margin-top: 27px;
 `;
 const CText = styled.p`
   font-size: 12px;
-  margin-top: 8px;
-  margin-left: 68px;
+  margin-top: 6px;
+  margin-left: 76px;
   font-weight: 600;
   width: 235px;
   font-family: Pretendard;
   color: #808080;
   word-break: keep-all;
   display: flex;
-  align-items: center;
 `;
 const MakeMyAnswer = styled.img`
 width: 327px;
@@ -117,6 +120,39 @@ font-style: normal;
 font-weight: 600;
 line-height: 20px;
 `;
+const Body8 = styled.p`
+overflow: hidden;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 1;
+color: var(--gray-60, #808080);
+text-overflow: ellipsis;
+font-family: Pretendard;
+font-size: 14px;
+font-style: normal;
+font-weight: 600;
+line-height: 18px;
+margin-right: 6px;
+cursor: default;
+`;
+const Body9 = styled.p`
+overflow: hidden;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 1;
+color: var(--gray-60, #808080);
+text-overflow: ellipsis;
+font-family: Pretendard;
+font-size: 14px;
+font-style: normal;
+font-weight: 600;
+line-height: 18px;
+text-decoration-line: underline;
+cursor: pointer;
+`;
+const PContainer = styled.div`
+  display: flex;
+margin-bottom: 100px;
+
+`;
 
 const EndVote = () => {
     const [documents, setDocuments] = useState([]);
@@ -128,6 +164,7 @@ const EndVote = () => {
     const [commentzip, setCommentZip] = useState();
     const [voteEnd, setVoteEnd] = useState(true);
     const [emoji, setEmoji] = useState([]);
+    const[kakaoId,setKakaoId] = useState("");
     const updateVoteNum = async (newVoteNum) => {
       const questionRef = doc(dbService, 'zip_Question', questionId);
       await updateDoc(questionRef, {
@@ -137,6 +174,10 @@ const EndVote = () => {
   
     const onSubmit = () => {
       navigate('/');
+    }
+    const myPage = () =>{
+      if(kakaoId===localStorage.getItem("kakaoId")) navigate(`/PickAnswer/${questionId}`);
+      else navigate('/');
     }
     useEffect(() => {
       const q = query(
@@ -193,6 +234,7 @@ const EndVote = () => {
       setCommentZip(targetQ.comment);
       setEmoji(targetQ.emoji);
       setVoteEnd(targetQ.voteEnd); // 투표 종료 여부 판단
+      setKakaoId(targetQ.kakaoId);
     };
   
   
@@ -201,9 +243,9 @@ const EndVote = () => {
             <Container>
             <Head>이제는 답변을</Head>
             <Head>남길 수 없는 투표에요😭</Head>
+            <Head3>받은 질문</Head3>
             </Container>
             <FolderImageContainer>
-                <FolderImage src={doneFolder} />
                 <FolderContent>
                     <IMG src={
                         getEmojiImage(emoji)
@@ -219,6 +261,10 @@ const EndVote = () => {
             <Warning>나도 지인들에게 투표를 받아보고 싶다면?</Warning>
             <MakeMyAnswer src={makeMyAnswer}
                 onClick={onSubmit} />
+            <PContainer>
+              <Body8 onClick={myPage}>내가 만든 질문이라면? </Body8>
+              <Body9 onClick={myPage}> 답변확인하러 가기</Body9>
+            </PContainer>
         </Div>
     );
 }

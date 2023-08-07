@@ -184,7 +184,8 @@ const MakeMyAnswer = styled.img`
   width: 327px;
   height: 48px;
   margin-top: 8px;
-  margin-bottom: 40px;
+  margin-bottom: 16px;
+  cursor: pointer;
 `;
 const Warning = styled.div`
   color: var(--primary-orange, #EC582F);
@@ -195,8 +196,42 @@ font-style: normal;
 font-weight: 600;
 line-height: 16px;
 margin-top: 30px;
-`;
+cursor: default;
 
+`;
+const Body8 = styled.p`
+overflow: hidden;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 1;
+color: var(--gray-60, #808080);
+text-overflow: ellipsis;
+font-family: Pretendard;
+font-size: 14px;
+font-style: normal;
+font-weight: 600;
+line-height: 18px;
+margin-right: 6px;
+cursor: default;
+`;
+const Body9 = styled.p`
+overflow: hidden;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 1;
+color: var(--gray-60, #808080);
+text-overflow: ellipsis;
+font-family: Pretendard;
+font-size: 14px;
+font-style: normal;
+font-weight: 600;
+line-height: 18px;
+text-decoration-line: underline;
+cursor: pointer;
+`;
+const PContainer = styled.div`
+  display: flex;
+margin-bottom: 100px;
+
+`;
 
 const AnswerEnd = () => {
 
@@ -204,11 +239,11 @@ const AnswerEnd = () => {
   const totalVotes = documents.reduce((sum, documents) => sum + documents.totalVote, 0);
   const { questionId } = useParams();
   const navigate = useNavigate();
-  const userName = localStorage.getItem("userName")
   const [questionzip, setQuestionZip] = useState();
   const [commentzip, setCommentZip] = useState();
   const [voteEnd, setVoteEnd] = useState(true);
   const [emoji, setEmoji] = useState([]);
+  const[kakaoId,setKakaoId] = useState("");
   const updateVoteNum = async (newVoteNum) => {
     const questionRef = doc(dbService, 'zip_Question', questionId);
     await updateDoc(questionRef, {
@@ -218,6 +253,10 @@ const AnswerEnd = () => {
 
   const onSubmit = () => {
     navigate('/');
+  }
+  const myPage = () =>{
+    if(kakaoId===localStorage.getItem("kakaoId")) navigate(`/PickAnswer/${questionId}`);
+    else navigate('/');
   }
   useEffect(() => {
     const q = query(
@@ -273,6 +312,7 @@ const AnswerEnd = () => {
     setQuestionZip(targetQ.question);
     setCommentZip(targetQ.comment);
     setEmoji(targetQ.emoji);
+    setKakaoId(targetQ.kakaoId);
     setVoteEnd(targetQ.voteEnd); // 투표 종료 여부 판단
   };
 
@@ -319,7 +359,11 @@ const AnswerEnd = () => {
       ))}
       <Warning>나도 지인들에게 투표를 받아보고 싶다면?</Warning>
       <MakeMyAnswer src={makeMyAnswer} onClick={onSubmit} />
-
+      
+      <PContainer>
+      <Body8 onClick={myPage}>내가 만든 질문이라면? </Body8>
+      <Body9 onClick={myPage}> 답변확인하러 가기</Body9>
+      </PContainer>
     </Div>
   );
 };

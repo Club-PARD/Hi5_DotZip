@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import { dbService } from "../../../fbase.js";
 import { collection, onSnapshot, query, where , orderBy, getDocs } from "firebase/firestore";
-import {useParams } from 'react-router-dom';
+import {useNavigate, useParams } from 'react-router-dom';
 import AddAnswerVote from './AddAnswerVote.js';
 import AddAnswer from './AddAnswer.js';
 import AnswerEnd from './AnswerEnd.js';
@@ -13,8 +13,10 @@ import emoji2 from '../../../img/emoji2.png';
 import emoji3 from '../../../img/emoji3.png';
 import emoji4 from '../../../img/emoji4.png';
 import emoji5 from '../../../img/emoji5.png';
+import makeMyAnswer from '../../../img/makeMyAnswer.png';
 import newAnswer from '../../../img/newAnswer.png';
 import check from '../../../img/check.png'
+import answerNo from '../../../img/answerNo.png'
 import EndVote from './EndVote.js';
 
 const Div = styled.div`
@@ -34,6 +36,18 @@ font-style: normal;
 font-weight: 700;
 line-height: 32px;
 margin-left:24px;
+`;
+const Head3 = styled.div`
+color: var(--gray-90, #353535);
+
+/* Body/B6-16-B */
+font-family: PretendardBold;
+font-size: 16px;
+font-style: normal;
+font-weight: 700;
+line-height: 20px; /* 125% */
+margin-left:24px;
+margin-top: 32px;
 `;
 
 const modalStyles = {
@@ -61,57 +75,47 @@ const modalStyles = {
 
 const FolderImageContainer = styled.div`
   position: relative;
-  width: 357px;
-  margin-top: 32px;
+  width: 327px;
+  height: 96px;
+  margin-top: 16px;
 
 `;
-const FolderImage = styled.img`
-
+const FolderContent = styled.div`
+  display: flex;
+  flex-direction: column;
+    border-radius: 10px;
+  border: 1px solid var(--orange-primary, #EC582F);
   width: 100%;
   height: 100%;
 `;
-const FolderContent = styled.div`
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  margin-left: 40px;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-`;
 const IMG = styled.img`
   position: absolute;
-  margin-top: 53px;
   width: 48px;
   height: 48px;
-  margin-left: 6px;
+  margin-top: 24px;
+  margin-left: 16px;
 `;
 const QText = styled.p`
   font-family: PretendardSemi;
   font-size: 14px;
   margin: 0;
-  margin-top: 56px;
-  margin-left: 66px;
+  margin-left: 76px;
   font-weight: 600;
   width: 235px;
   word-break: keep-all;
   display: flex;
-  align-items: center;
+  margin-top: 27px;
 `;
 const CText = styled.p`
   font-size: 12px;
   margin-top: 6px;
-  margin-left: 66px;
+  margin-left: 76px;
   font-weight: 600;
   width: 235px;
   font-family: Pretendard;
   color: #808080;
   word-break: keep-all;
   display: flex;
-  align-items: center;
 `;
 const Hr = styled.hr`
   border: 1px dashed #ABABAB; // Specify the border width: ;
@@ -181,8 +185,58 @@ const NewAnswer = styled.img`
 width: 327px;
 height: 64px;
 margin-top: 16px;
-margin-bottom: 120px;
 cursor:pointer;
+margin-bottom: 143px;
+`;
+const Warning = styled.div`
+  color: var(--primary-orange, #EC582F);
+/* Body/B2-12-SB */
+font-size: 12px;
+font-family: PretendardSemi;
+font-style: normal;
+font-weight: 600;
+line-height: 16px;
+margin-top: 120px;
+cursor: default;
+`;
+const MakeMyAnswer = styled.img`
+width: 327px;
+height: 48px;
+margin-top: 8px;
+cursor: pointer;
+`;
+const Body8 = styled.p`
+overflow: hidden;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 1;
+color: var(--gray-60, #808080);
+text-overflow: ellipsis;
+font-family: Pretendard;
+font-size: 14px;
+font-style: normal;
+font-weight: 600;
+line-height: 18px;
+margin-right: 6px;
+cursor: default;
+`;
+const Body9 = styled.p`
+overflow: hidden;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 1;
+color: var(--gray-60, #808080);
+text-overflow: ellipsis;
+font-family: Pretendard;
+font-size: 14px;
+font-style: normal;
+font-weight: 600;
+line-height: 18px;
+text-decoration-line: underline;
+cursor: pointer;
+`;
+const PContainer = styled.div`
+  display: flex;
+margin-bottom: 100px;
+
 `;
 
 const AnswerVote = () => {
@@ -193,8 +247,11 @@ const AnswerVote = () => {
   const [voteEnd, setVoteEnd] = useState(true);
   const [questionzip, setQuestionZip] = useState();
   const [commentzip, setCommentZip] = useState();
+  const navigate = useNavigate();
   const [emoji, setEmoji] = useState([]);
   const [isVote, setIsVote] = useState(false);
+  const [voteNum, setVoteNum] = useState(0);
+  const [kakaoId,setKakaoId] = useState("");
 
   const handleButtonClick = (answerId) => {
     setSelectedAnswerId(answerId); // 선택된 버튼의 answerId를 상태로 설정
@@ -207,6 +264,13 @@ const AnswerVote = () => {
 const handleCloseModal = () => {
   setModalOpen(false);
 };
+const onSubmit = () => {
+  navigate('/');
+}
+const myPage = () =>{
+  if(kakaoId===localStorage.getItem("kakaoId")) navigate(`/PickAnswer/${questionId}`);
+  else navigate('/');
+}
 
   useEffect(() => {
     for (let i = 0; i < localStorage.length; i++) {
@@ -267,14 +331,18 @@ const handleCloseModal = () => {
     setCommentZip(targetQ.comment);
     setEmoji(targetQ.emoji); 
     setVoteEnd(targetQ.voteEnd); // 투표 종료 여부 판단
+    setVoteNum(targetQ.VoteNum);
+    setKakaoId(targetQ.kakaoId);
   };
-
-
 
   const [modalOpen_new, setModalOpen_new] = useState(false);
   const showModal_new = () => {
     setModalOpen_new(!modalOpen_new);
   };
+  const voteNumIs0 = () => {
+    return (voteNum === 0);
+  };
+
 
 
 
@@ -290,9 +358,10 @@ const handleCloseModal = () => {
           <Container>
             <Head>질문 폴더를 받으셨네요 🤩️</Head>
             <Head>답변을 보내보세요!</Head>
+            <Head3>받은 질문</Head3>
           </Container>
+
           <FolderImageContainer>
-            <FolderImage src={smallFolder1} />
             <FolderContent>
               <IMG src={getEmojiImage(emoji)} alt="Emoji" />
               <QText>{questionzip}</QText>
@@ -304,35 +373,44 @@ const handleCloseModal = () => {
             <Header1>투표 참여하기</Header1>
             <Header2>답변을 투표하거나 새롭게 추가할 수 있어요!</Header2>
           </Container>
-          {documents.map(({ answer, totalVote, answerId }) => (
-            <ButtonContainer key={answerId}>
-              <Button onClick={() => handleButtonClick(answerId)}>
-                {answer}
-                <Check src={check} />
-              </Button>
-              <Modal
-                isOpen={modalOpen && selectedAnswerId === answerId}
-                onRequestClose={handleCloseModal}
-                style={modalStyles}
-              >
-                {modalOpen && selectedAnswerId === answerId && (
-                  <AddAnswerVote
-                    key={answerId}
-                    setModalOpen={setModalOpen}
-                    totalVote={totalVote}
-                    answerId={answerId}
-                    answer={answer}
-                    handleCloseModal={handleCloseModal}
-                  />
-                )}
-              </Modal>
-            </ButtonContainer>
-          ))}
+          {!voteNumIs0() ?  (
+        documents.map(({ answer, totalVote, answerId }) => (
+          <ButtonContainer key={answerId}>
+            <Button onClick={() => handleButtonClick(answerId)}>
+              {answer}
+              <Check src={check} />
+            </Button>
+            <Modal
+              isOpen={modalOpen && selectedAnswerId === answerId}
+              onRequestClose={handleCloseModal}
+              style={modalStyles}
+            >
+              {modalOpen && selectedAnswerId === answerId && (
+                <AddAnswerVote
+                  key={answerId}
+                  setModalOpen={setModalOpen}
+                  totalVote={totalVote}
+                  answerId={answerId}
+                  answer={answer}
+                  handleCloseModal={handleCloseModal}
+                />
+              )}
+            </Modal>
+          </ButtonContainer>
+        ))
+      ) : <NewAnswer src={answerNo} style={{ cursor: 'default' }}/>}
   
           <NewAnswer src={newAnswer} onClick={showModal_new} key="add-button"></NewAnswer>
           <Modal isOpen={modalOpen_new} onRequestClose={handleCloseModal_new} style={modalStyles}>
             {modalOpen_new && <AddAnswer key="add-answer" handleCloseModal={handleCloseModal_new} />}
           </Modal>
+          <Warning>나도 지인들에게 투표를 받아보고 싶다면?</Warning>
+            <MakeMyAnswer src={makeMyAnswer}
+                onClick={onSubmit} />
+            <PContainer>
+              <Body8 onClick={myPage}>내가 만든 질문이라면? </Body8>
+              <Body9 onClick={myPage}> 답변확인하러 가기</Body9>
+            </PContainer>
         </Div>
       )}
     </>
