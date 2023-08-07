@@ -409,7 +409,7 @@ const myPage = () =>{
                 onClick={onSubmit} />
             <PContainer>
               <Body8 onClick={myPage}>내가 만든 질문이라면? </Body8>
-              <Body9 onClick={myPage}> 답변확인하러 가기</Body9>
+              <Body9 onClick={myPage}> 이유 확인하러 가기</Body9>
             </PContainer>
         </Div>
       )}
