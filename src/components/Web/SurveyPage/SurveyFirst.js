@@ -240,7 +240,7 @@ function SurveyFirst() {
     <BackNavBar/>
     {/* <Progress src={progress}/> */}
         <Header2>
-          <HeaderDiv>질문 선택하기</HeaderDiv>
+          <HeaderDiv>질문을 선택해보세요.</HeaderDiv>
         <HeaderP>내가 물어보고 싶은 질문을 선택해보세요!</HeaderP>
         </Header2>
         <ButtonRow>

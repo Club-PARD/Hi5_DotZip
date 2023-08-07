@@ -680,7 +680,7 @@ function PickAnswerPage() {
         <DDiv>
             <Div>
             {/* <BackNavBar/> */}
-                <Text1>내 질문 폴더</Text1> 
+                <Text1>내 질문 폴더가 만들어졌어요.</Text1> 
                 <Text2>링크를 공유하고 투표를 통해 답변을 받아보세요!</Text2>
                 <FolderImageContainer>
                   <FolderImage src={selectedFolderImage} />
