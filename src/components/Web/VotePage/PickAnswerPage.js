@@ -478,11 +478,12 @@ const ReasonModalText4 = styled.p`
   font-family: Pretendard;
   font-style: normal;
   font-weight: 600;
-  line-height: 18px;
-  width: 148px;
-  height: 126px;
+  line-height: 24px;
+  width: 192px;
+  height: 144px;
   margin: 0;
-  margin-left: 16px;
+  margin-top: 26px;
+  margin-left: 24px;
   margin-bottom: 48px;
   word-wrap: break-word;
   word-break: break-all;
@@ -744,10 +745,10 @@ function PickAnswerPage() {
                             <ReasonModalText4>{reasonzips[reasonzips.length - 1 - currentReasonIndex].reason}</ReasonModalText4>
                           </>
                         )}
-                            <ModalCancelButton style={{width: '72px', height: '32px', marginLeft:'16px', marginRight:'16px', cursor: currentReasonIndex === 0 ? 'default' : 'pointer', color: currentReasonIndex === 0 ? '#808080' : '#EC582F',
+                            <ModalCancelButton style={{width: '80px', height: '32px', marginLeft:'32px', marginRight:'16px', cursor: currentReasonIndex === 0 ? 'default' : 'pointer', color: currentReasonIndex === 0 ? '#808080' : '#EC582F',
                              background: currentReasonIndex === 0 ? 'var(--gray-10, #F8F8F8)':'var(--gradation-back, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%))', fontSize: '12px'}} 
                             onClick={handlePreviousReason} disabled={currentReasonIndex === 0}>이전</ModalCancelButton>
-                            <ModalCheckButton style={{width: '72px', height: '32px', margin: '0', cursor: currentReasonIndex === reasonzips.length - 1 ? 'default' : 'pointer', color: currentReasonIndex === reasonzips.length - 1 ? '#808080' : '#EC582F',
+                            <ModalCheckButton style={{width: '80px', height: '32px', margin: '0', cursor: currentReasonIndex === reasonzips.length - 1 ? 'default' : 'pointer', color: currentReasonIndex === reasonzips.length - 1 ? '#808080' : '#EC582F',
                             background: currentReasonIndex === reasonzips.length - 1 ? 'var(--gray-10, #F8F8F8)':'var(--gradation-back, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%))', fontSize: '12px'}}
                             onClick={handleNextReason} disabled={currentReasonIndex === reasonzips.length - 1}>다음</ModalCheckButton>
                         </ReasonBox>
