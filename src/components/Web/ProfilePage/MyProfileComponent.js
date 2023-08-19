@@ -4,7 +4,9 @@ import UserNameImoticon from '../../../img/UserNameImoticon.png';
 import { updateDoc , doc} from "firebase/firestore";
 import { dbService } from "../../../fbase.js";
 import NameModal from './NameModal';
+import ProfileExModal from './ProfileExModal';
 import Modal from 'react-modal';
+import whatProfile from '../../../img/whatProfile.png'
 
 
 const Profile1Text = styled.p`
@@ -32,11 +34,11 @@ const Text = styled.p`
 const Profile2Text = styled.div`
   color: #808080;
   font-size: 14px;
-  font-family: PretendardSemi;
+  font-family: Pretendard;
   font-weight: 600;
   height: 18px;
-  margin-top: 8px;
-  margin-left: 24px;
+  margin-top: 9px;
+  margin-left: 3px;
 `;
 const Red = styled.span`
   font-size: 24px;
@@ -58,6 +60,18 @@ const Profile = styled.div`
   margin-top: '80px';
   padding-bottom: 4px;
 `;
+const ProfileContainer = styled.div`
+  display: flex;
+  width: 90px;
+  margin-left: 24px;
+  border-bottom: 1px solid #808080;
+  cursor: pointer;
+`;
+const ProfileVector = styled.img`
+  width: 16px;
+  height: 16px;
+  margin-top: 9px;
+`;
 const modalStyles = {
   content: {
       position: 'absolute',
@@ -65,6 +79,28 @@ const modalStyles = {
       height: '300px',
       borderRadius: '10px',
       background: 'var(--background-gra, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%))',
+      margin: 'auto',
+      padding: '0',
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      transform: 'translate(-50%, -50%)',
+      zIndex: '2',
+      borderStyle : 'none',
+    },
+    overlay: {
+      backgroundColor: 'rgba(0, 0, 0, 0.50)',
+      zIndex: '2',
+    },
+};
+const profileModalStyles = {
+  content: {
+      position: 'absolute',
+      width: '343px',
+      height: '523px',
+      borderRadius: '10px',
+      background: 'var(--gradation-back, linear-gradient(135deg, #FFEDE9 0%, #FFEAD3 51.04%, #FFF7DD 99.99%))',
       margin: 'auto',
       padding: '0',
       top: '50%',
@@ -102,7 +138,7 @@ const MyProfileComponent = () => {
       localStorage.setItem('userName', userNickname);
       updateFirestoreUserName(userNickname);
     }, [userNickname]);
-
+    //name update
     const [modalOpen, setModalOpen] = useState(false);
     const handleCloseModal = () => {
       setModalOpen(false);
@@ -112,6 +148,15 @@ const MyProfileComponent = () => {
     };
     const handleNicknameUpdate = (newNickname) => {
       setuserNickname(newNickname);
+    };
+
+    //profile modal
+    const [profilemModalOpen, setprofilemModalOpen] = useState(false);
+    const handleCloseProfileModal = () => {
+      setprofilemModalOpen(false);
+    };
+    const showProfileModal = ()=>{
+      setprofilemModalOpen(!profilemModalOpen);
     };
     return (
         <>
@@ -123,7 +168,13 @@ const MyProfileComponent = () => {
                 </Modal>
             </Profile>
             <Text>프로필.ZiP</Text>
-            <Profile2Text>가장 많이 선택받은 키워드를 확인해보세요!</Profile2Text>
+            <ProfileContainer onClick={showProfileModal}>
+              <ProfileVector src={whatProfile} /> <Profile2Text>프로필이란?</Profile2Text>
+            </ProfileContainer>
+            <Modal isOpen={profilemModalOpen} onRequestClose={handleCloseProfileModal} style={profileModalStyles}>
+              {profilemModalOpen && <ProfileExModal handleCloseProfileModal={handleCloseProfileModal}/>}
+            </Modal>
+
         </>
     );
 }
