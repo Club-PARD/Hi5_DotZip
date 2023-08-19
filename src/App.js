@@ -8,6 +8,7 @@ import MyProfilePage from './components/Web/ProfilePage/MyProfilePage';
 import MyProfileSharePage from './components/Web/ProfilePage/MyProfileSharePage';
 import SurveyFirst from './components/Web/SurveyPage/SurveyFirst';
 import SurveySecond from './components/Web/SurveyPage/SurveySecond';
+import SurveyNew from './components/Web/SurveyPage/SurveyNew';
 import SurveyCreate from './components/Web/SurveyPage/SurveyCreate';
 import MyAnswer from './components/Web/SurveyPage/MyAnswer';
 import Answer from './pages/Answer';
@@ -37,6 +38,7 @@ function App() {
     <Route path='/SurveyFirst' element={<SurveyFirst/>}/>
     <Route path='/SurveySecond' element={<SurveySecond/>}/>
     <Route path='/SurveyCreate' element={<SurveyCreate/>}/>
+    <Route path='/SurveyNew' element={<SurveyNew/>}/>
     <Route path='/SurveyMyFold/:questionId' element={<SurveyMyFold/>}/>
     <Route path='/MyAnswer/:questionId' element={<MyAnswer/>}/>
     <Route path='/SurveyShare/:questionId' element={<SurveyShare/>}/>

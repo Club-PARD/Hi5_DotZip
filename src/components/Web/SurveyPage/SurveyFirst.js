@@ -229,7 +229,7 @@ function SurveyFirst() {
   };
 
   const handleButton4Click = () => {
-    navigate('../../../../SurveyFirst'); // Replace with the actual path you want to navigate to
+    navigate('../../../../SurveySecond'); // Replace with the actual path you want to navigate to
   };
   
 
