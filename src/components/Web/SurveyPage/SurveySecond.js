@@ -62,6 +62,7 @@ text-align: left;
 margin-top: 80px;
 margin-left: 26px;
 margin-bottom: 12px;
+color: #353535;
 `;
 
 
@@ -116,6 +117,8 @@ text-align: left;
 margin-top: 48px;
 margin-left: 26px;
 margin-bottom: 12px;
+color: #353535;
+
 `;
 
 const InputQues1 = styled.textarea`
@@ -151,6 +154,24 @@ margin-left: 24px;
 cursor: pointer;
 
 `;
+const GrayButton = styled.button`
+  width: 327px;
+  height: 48px;
+  margin-top: 100px;
+  margin-left: 24px;
+  background-color: #F8F8F8;
+  border: 1px;
+  border-radius: 10px;
+  cursor: not-allowed;
+  opacity: 0.5;
+  font-family: PretendardSemi;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  text-align: center;
+  color: #808080;
+`;
+
 
 
 function SurveySecond() {
@@ -203,9 +224,7 @@ function SurveySecond() {
     setComment(value);
     setInputCountReason(e.target.value.length);
   };
-//   const isAnswerEmpty = () => {
-//     return Newquestion.trim() === '' || comment.trim() === '' || selectedEmoji === null;
-//   };
+  const isQuestionEmpty = Newquestion.trim() === '';
   
     
 
@@ -226,7 +245,7 @@ function SurveySecond() {
           maxLength={40}
         />
         <InputNum>{inputCountName}/40</InputNum>
-        <NewComm>새로운 질문 전달하기</NewComm>
+        <NewComm>이유 작성하기</NewComm>
         <InputQues1
           value={comment}
           onChange={onChangeComment}
@@ -234,7 +253,11 @@ function SurveySecond() {
           maxLength={80}
         />
         <InputNum>{inputCountReason}/80</InputNum>
-        <ButtonNew src={NewReg} onClick={handleSubmit}></ButtonNew>
+        {isQuestionEmpty ? (
+                        <GrayButton disabled>새로운 질문 전달하기</GrayButton>
+                    ) : (
+                        <ButtonNew src={NewReg} onClick={handleSubmit} />
+                    )}
         </Div>
         </DDiv>
         
