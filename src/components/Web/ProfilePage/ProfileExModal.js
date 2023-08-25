@@ -48,8 +48,6 @@ const CancelButton = styled.button`
   border: 0;
   background: none;
   cursor: pointer;
-  font-size: 12px;
-  font-family: PretendardSemi;
 `;
 
 const SliderContainer = styled.div`
@@ -87,7 +85,7 @@ const RectangleImg = styled.img`
 `;
 
 const TextDiv = styled.div`
-  width: 295px;
+  width: 285px;
   height: 60px;
   border-radius: 6px;
   margin-top: 24px;
@@ -111,7 +109,7 @@ const Circle = styled.div`
   border: 1px solid #EC582F;
   border-radius: 50%;
   box-shadow: 0px 2px 10px #FFE2CE;
-  font-family: Pretendard;
+  font-family: PretendardBold;
   font-size: 16px;
   color: var(--orange-primary, #EC582F);
   text-align: center;
@@ -119,6 +117,11 @@ const Circle = styled.div`
   justify-content: center;
   align-items: center;
   margin-right: 10px;
+`;
+
+const RedSpan = styled.span`
+  color: #EC582F;
+
 `;
 
 const ProfileExModal = ({handleCloseProfileModal }) => {
@@ -148,7 +151,7 @@ const ProfileExModal = ({handleCloseProfileModal }) => {
                   <RectangleImg src={Rectangle1} />
               </RectangleDiv>
             </WhiteDiv>
-            <TextDiv><Circle>1</Circle><Text>원하는 질문을 골라<br /> 질문 폴더를 만들어요.</Text></TextDiv>
+            <TextDiv><Circle>1</Circle><Text>원하는 질문을 골라<br /> <RedSpan>질문 폴더</RedSpan>를 만들어요.</Text></TextDiv>
             </div>
             <div>
             <WhiteDiv>
@@ -159,7 +162,7 @@ const ProfileExModal = ({handleCloseProfileModal }) => {
                   <RectangleImg src={Rectangle2} />
               </RectangleDiv>
             </WhiteDiv>
-                <TextDiv><Circle>2</Circle><Text>지인들에게 공유하고 투표를 받아요.</Text></TextDiv>
+                <TextDiv><Circle>2</Circle><Text><RedSpan>지인들에게 공유</RedSpan>하고 투표를 받아요.</Text></TextDiv>
             </div>
             <div>
             <WhiteDiv>
@@ -170,7 +173,7 @@ const ProfileExModal = ({handleCloseProfileModal }) => {
                   <RectangleImg src={Rectangle3} />
               </RectangleDiv>
             </WhiteDiv>
-                <TextDiv><Circle>3</Circle><Text style={{ width: '206px' }}>내가 만든 질문 폴더의 응답들을 실시간으로 득표순으로 모아봐요.</Text></TextDiv>
+                <TextDiv><Circle>3</Circle><Text style={{ width: '206px' }}>내가 만든 질문 폴더의 응답들을 <RedSpan>실시간 득표순</RedSpan>으로 모아봐요.</Text></TextDiv>
             </div>
             <div>
             <WhiteDiv>
@@ -181,7 +184,7 @@ const ProfileExModal = ({handleCloseProfileModal }) => {
                   <RectangleImg src={Rectangle4} style = {{width: "270px"}}/>
               </RectangleDiv>
             </WhiteDiv>
-                <TextDiv><Circle>4</Circle><Text>나를 표현하는 나만의 프로필 완성!</Text></TextDiv>
+                <TextDiv><Circle>4</Circle><Text>나를 표현하는 <RedSpan>나만의 프로필</RedSpan> 완성!</Text></TextDiv>
             </div>
             </Slider>
         </SliderContainer>

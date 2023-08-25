@@ -375,13 +375,10 @@ const CancelButton = styled.button`
   width: 35px;
   height: 24px;
   margin-left: auto;
-  margin-right: 28px;
-  padding-right: 10px;
+  margin-right: 20px;
   border: 0;
   background: none;
   cursor: pointer;
-  font-size: 12px;
-  font-family: PretendardSemi;
 `;
 const CancelX = styled.img`
   width: 100%;
