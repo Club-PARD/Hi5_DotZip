@@ -4,7 +4,7 @@ import BackNavBar from "../../BackNavbar"
 import { useNavigate } from 'react-router-dom';
 import AnoQues from '../../../img/AnoQues.png';
 import FoldImg from '../../../img/FoldImg.png';
-
+import GoHomeNoBackGround from '../../../img/GoHomeNoBackGround.png';
 const DDiv = styled.div`
   display: flex;
   flex-direction: column;
@@ -65,6 +65,14 @@ margin-left: 24px;
 cursor: pointer;
 
 `;
+const Home = styled.img`
+width: 327px;
+height: 48px;
+margin-top: 8px;
+margin-left: 24px;
+cursor: pointer;
+
+`;
 
 function SurveyNew() {
     const navigate = useNavigate();
@@ -75,6 +83,9 @@ function SurveyNew() {
   
     const handleSubmit = () => {
         navigate('/SurveyFirst'); // Replace with the actual path you want to navigate to
+      };
+    const handleHome = () => {
+        navigate('/home'); // Replace with the actual path you want to navigate to
       };
 
   
@@ -89,6 +100,7 @@ function SurveyNew() {
         <TopP>곧 업데이트될 질문 폴더를 확인해주세요 :)</TopP>
        <IMG src={FoldImg}/>
         <ButtonNew src={AnoQues} onClick={handleSubmit}></ButtonNew>
+        <Home src={GoHomeNoBackGround} onClick={handleHome}></Home>
         </Div>
         </DDiv>
         
