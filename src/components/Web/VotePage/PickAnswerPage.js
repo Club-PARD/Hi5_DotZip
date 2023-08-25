@@ -270,10 +270,12 @@ const BackHomeButton = styled.button`
   border: none;
   background: none;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
 `;
 const HomeImage = styled.img`
-  width: 100%;
-  height: 100%;
+  width: 327px;
+  height: 48px;
 `;
 const EndButton = styled.button`
   width: 327px;
@@ -283,10 +285,12 @@ const EndButton = styled.button`
   border: none;
   background: none;
   cursor: pointer;
+    display: flex;
+  justify-content: center;
 `;
 const EndVoteImage = styled.img`
-  width: 100%;
-  height: 100%;
+  width: 327px;
+  height: 48px;
 `;
 //종료 모달 안에 내용들
 const modalStyles = {

@@ -140,7 +140,7 @@ const ButtonQ1 = styled.img`
 const NewQ = styled.header`
 //styleName: Head/H1-20-B;
 font-family: Pretendardbold;
-font-size: 20px;
+font-size: 18px;
 font-weight: 700;
 line-height: 24px;
 letter-spacing: 0em;
@@ -193,7 +193,7 @@ const ButtonA = styled.button`
 font-style: normal;
 font-weight: 600;
 line-height: 18px;
-color: var(--gray-60, #808080);
+color: #EC582F;
 cursor: pointer;
 `;
 const ButtonB = styled.button`
@@ -404,7 +404,7 @@ const Arrow = styled.img`
 `;
 const Empty = styled.img`
   width: 359px;
-height: 196px;
+height: 215.2px;
 margin-left: 8px;
 margin-bottom: 16px;
 `;

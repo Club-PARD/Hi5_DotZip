@@ -81,11 +81,11 @@ function Setting() {
     const [accessToken, setAccessToken] = useState("");
     const navigate = useNavigate();
     const onClickInquire = () => {
-        window.open('https://www.notion.so', '_blank'); //문의 페이지
+        window.open('https://instagram.com/dot.zip_official?igshid=OGQ5ZDc2ODk2ZA==', '_blank'); //문의 페이지
     };
 
     const onClickTeam = () => {
-        window.open('https://www.notion.so', '_blank'); // 팀소개 페이지
+        window.open('https://pumped-confidence-93d.notion.site/HI-5-2ede1c0bec7140129d737fa2175f03cd?pvs=4', '_blank'); // 팀소개 페이지
     };
     const onClickTerm = () => {
         window.open('https://www.notion.so', '_blank'); // 약관페이지

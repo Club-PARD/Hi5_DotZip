@@ -170,7 +170,7 @@ const Auth = () => {
   }, []); //kakao id가 있는지 없는지 확인
 
   const handleSuccess = async (response) => {
-    //console.log("로그인 성공", response);
+    console.log("로그인 성공", response);
     setAccessToken(response.response.access_token);
     localStorage.setItem("kakaoId", response.profile.id);
   
