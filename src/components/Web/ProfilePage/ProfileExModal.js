@@ -4,12 +4,14 @@ import X from '../../../img/CancelX.png';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import CircleNum from "../../../img/CircleNum.png";
 import Profile1 from "../../../img/Profile1.png";
 import Profile2 from "../../../img/Profile2.png";
 import Profile3 from "../../../img/Profile3.png";
 import Profile4 from "../../../img/Profile4.png";
-
+import Rectangle1 from "../../../img/Rectangle1.png";
+import Rectangle2 from "../../../img/Rectangle2.png";
+import Rectangle3 from "../../../img/Rectangle3.png";
+import Rectangle4 from "../../../img/Rectangle4.png";
 
 const Div = styled.div`
   display: flex;
@@ -20,8 +22,7 @@ const Div = styled.div`
 
 const Header1 = styled.p`
   margin: 0;
-  margin-top: 8px;
-  margin-bottom: 49px;
+  margin-bottom: 24px;
   width: 183px;
   font-family: PretendardBold;
   font-size: 20px;
@@ -30,9 +31,6 @@ const Header1 = styled.p`
   line-height: 24px;
   color: var(--gray-90, #EC582F);
   text-align: center;
-`;
-const Container = styled.div`
-  display: flex;
 `;
 
 const CancelX = styled.img`
@@ -55,55 +53,77 @@ const CancelButton = styled.button`
 `;
 
 const SliderContainer = styled.div`
-  width: 263px;
-  height: 254px;
+  width: 295px;
+  height: 287px;
   border-radius: 22px;
   background: white;
   align-items: center;
 `;
 
-const CircleImg = styled.img`
-    width: 50px;
-    height: 50px;
+const WhiteDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+  flex-direction: column;
 `;
 
-const WhiteDiv = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 22px;
+const ProfileDiv = styled.div`
+  align-items: center;
+  margin-left: 30%;
+`;
+
+const RectangleDiv = styled.div`
+  align-items:: left;
 `;
 
 const ProfileImg = styled.img`
-    width: 114px;
-    height: 219px;
-    object-fit: contain;
+  width: 136px;
+  height: 266px;
+`;
+
+const RectangleImg = styled.img`
+  margin-top: 5px;
+  margin-left: 5px;
 `;
 
 const TextDiv = styled.div`
-    width: 279px;
-    height: 60px;
-    border-radius: 6px;
-    margin-top: 48px;
-    background: var(--orange-back, #FFF8F3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 295px;
+  height: 60px;
+  border-radius: 6px;
+  margin-top: 36px;
+  background: var(--orange-back, #FFF8F3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Text = styled.p`
-    color: var(--gray-90, #353535);
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 20px;
-    font-family: Pretendard;
-    text-align: center;
+  color: var(--gray-90, #353535);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  font-family: Pretendard;
 `;
 
+const Circle = styled.div`
+  width: 34px;
+  height: 34px;
+  border: 1px solid #EC582F;
+  border-radius: 50%;
+  box-shadow: 0px 2px 10px #FFE2CE;
+  font-family: Pretendard;
+  font-size: 16px;
+  color: var(--orange-primary, #EC582F);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+`;
 
 const ProfileExModal = ({handleCloseProfileModal }) => {
   const closeModal = () => {
-    handleCloseProfileModal(); // handleCloseModal 함수 호출
+    handleCloseProfileModal();
   };
   const settings = {
     infinite: false,
@@ -121,27 +141,47 @@ const ProfileExModal = ({handleCloseProfileModal }) => {
             <Slider {...settings}>
             <div>
             <WhiteDiv>
-                <ProfileImg src = {Profile1} />
+              <ProfileDiv>
+                  <ProfileImg src={Profile1} />
+              </ProfileDiv>
+              <RectangleDiv>
+                  <RectangleImg src={Rectangle1} />
+              </RectangleDiv>
             </WhiteDiv>
-                <TextDiv><Text>질문 폴더를 만들어요</Text></TextDiv>
+            <TextDiv><Circle>1</Circle><Text>원하는 질문을 골라<br /> 질문 폴더를 만들어요.</Text></TextDiv>
             </div>
             <div>
             <WhiteDiv>
-                <ProfileImg src = {Profile2} />
+              <ProfileDiv>
+                  <ProfileImg src={Profile2} />
+              </ProfileDiv>
+              <RectangleDiv>
+                  <RectangleImg src={Rectangle2} />
+              </RectangleDiv>
             </WhiteDiv>
-                <TextDiv><Text>지인들에게 공유하고 투표를 받아요.</Text></TextDiv>
+                <TextDiv><Circle>2</Circle><Text>지인들에게 공유하고 투표를 받아요.</Text></TextDiv>
             </div>
             <div>
             <WhiteDiv>
-                <ProfileImg src = {Profile3} />
+              <ProfileDiv>
+                  <ProfileImg src={Profile3} />
+              </ProfileDiv>
+              <RectangleDiv>
+                  <RectangleImg src={Rectangle3} />
+              </RectangleDiv>
             </WhiteDiv>
-                <TextDiv><Text style={{ width: '206px' }}>내가 만든 질문 폴더의 응답들을 실시간으로 득표순으로 모아봐요.</Text></TextDiv>
+                <TextDiv><Circle>3</Circle><Text style={{ width: '206px' }}>내가 만든 질문 폴더의 응답들을 실시간으로 득표순으로 모아봐요.</Text></TextDiv>
             </div>
             <div>
             <WhiteDiv>
-                <ProfileImg src = {Profile4} />
+              <ProfileDiv>
+                  <ProfileImg src={Profile4} />
+              </ProfileDiv>
+              <RectangleDiv>
+                  <RectangleImg src={Rectangle4} />
+              </RectangleDiv>
             </WhiteDiv>
-                <TextDiv><Text>나를 표현하는 나만의 프로필 완성!</Text></TextDiv>
+                <TextDiv><Circle>4</Circle><Text>나를 표현하는 나만의 프로필 완성!</Text></TextDiv>
             </div>
             </Slider>
         </SliderContainer>
