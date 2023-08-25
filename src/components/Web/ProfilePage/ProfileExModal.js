@@ -71,7 +71,7 @@ const ProfileDiv = styled.div`
 `;
 
 const RectangleDiv = styled.div`
-  align-items:: left;
+  align-items: left;
 `;
 
 const ProfileImg = styled.img`
@@ -121,6 +121,7 @@ const Circle = styled.div`
 
 const RedSpan = styled.span`
   color: #EC582F;
+  font-family: PretendardBold;
 
 `;
 

@@ -372,10 +372,10 @@ const ButtonContainer = styled.div`
   justify-content: space-between;
 `;
 const CancelButton = styled.button`
-  width: 35px;
+  width: 38px;
   height: 24px;
   margin-left: auto;
-  margin-right: 20px;
+  margin-right: 15px;
   border: 0;
   background: none;
   cursor: pointer;
