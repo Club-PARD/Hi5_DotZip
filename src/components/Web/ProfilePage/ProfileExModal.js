@@ -53,7 +53,7 @@ const CancelButton = styled.button`
 `;
 
 const SliderContainer = styled.div`
-  width: 295px;
+  width: 280px;
   height: 287px;
   border-radius: 22px;
   background: white;
@@ -69,7 +69,7 @@ const WhiteDiv = styled.div`
 
 const ProfileDiv = styled.div`
   align-items: center;
-  margin-left: 30%;
+  margin-left: 77px;
 `;
 
 const RectangleDiv = styled.div`
@@ -90,7 +90,7 @@ const TextDiv = styled.div`
   width: 295px;
   height: 60px;
   border-radius: 6px;
-  margin-top: 36px;
+  margin-top: 24px;
   background: var(--orange-back, #FFF8F3);
   display: flex;
   justify-content: center;
@@ -178,7 +178,7 @@ const ProfileExModal = ({handleCloseProfileModal }) => {
                   <ProfileImg src={Profile4} />
               </ProfileDiv>
               <RectangleDiv>
-                  <RectangleImg src={Rectangle4} />
+                  <RectangleImg src={Rectangle4} style = {{width: "270px"}}/>
               </RectangleDiv>
             </WhiteDiv>
                 <TextDiv><Circle>4</Circle><Text>나를 표현하는 나만의 프로필 완성!</Text></TextDiv>
