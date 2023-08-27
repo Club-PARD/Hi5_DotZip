@@ -14,7 +14,6 @@ const Wrapper = styled.div`
   width: 359px;
   height: 329px;
   margin-top: 32px;
-  margin-left: 8px;
 `;
 
 const MyProfileFolder = styled.img`

@@ -7,7 +7,7 @@ const { Kakao } = window;
 const ShareButton = styled.img`
     width: 157px;
     height: 48px;
-    margin-left: 24px;
+    margin-left:15px;
     cursor: pointer;
 `;
 const MyKakaoShareButton = () => {
