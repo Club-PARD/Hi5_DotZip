@@ -267,10 +267,10 @@ const TotalNumber = styled.p`
 `;
 //아래 버튼
 const BackHomeButton = styled.button`
-  width: 327px;
+  width: 339px;
   height: 48px;
   margin-top: 64px;
-  margin-left: 24px;
+  margin-left: 18px;
   margin-bottom: 8px;
   border: none;
   background: none;
@@ -281,9 +281,9 @@ const HomeImage = styled.img`
   height: 100%;
 `;
 const EndButton = styled.button`
-  width: 327px;
+  width: 339px;
   height: 48px;
-  margin-left: 24px;
+  margin-left: 18px;
   margin-bottom: 53px;
   border: none;
   background: none;

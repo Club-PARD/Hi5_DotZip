@@ -135,7 +135,7 @@ width: 327px;
 height: 64px;
 margin-top: 20px;
 cursor: pointer;
-
+margin-bottom: 150px;
 `;
 
 
