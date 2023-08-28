@@ -17,7 +17,7 @@ const Profile1Text = styled.p`
   padding: 0;
   margin: 0;
   margin-top: 32px;
-  margin-left: 24px;
+  margin-left: 16px;
   line-height: 24px;
 `;
 const Text = styled.p`
@@ -28,7 +28,7 @@ const Text = styled.p`
   padding: 0;
   margin: 0;
   margin-top: 4px;
-  margin-left: 24px;
+  margin-left: 16px;
   line-height: 24px;
 `;
 const Profile2Text = styled.div`
@@ -63,7 +63,7 @@ const Profile = styled.div`
 const ProfileContainer = styled.div`
   display: flex;
   width: 90px;
-  margin-left: 24px;
+  margin-left: 16px;
   border-bottom: 1px solid #808080;
   cursor: pointer;
 `;

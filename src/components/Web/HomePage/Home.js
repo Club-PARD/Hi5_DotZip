@@ -517,8 +517,8 @@ const HomePageFirst = () => {
           <HomeP>홈</HomeP>
           <Profile onClick={handleButton1Click}>프로필</Profile>
         </HeaderContainer>
-        <HeaderDiv>안녕하세요, <RedText>{userNickname}</RedText> 님</HeaderDiv>
-        <HeaderP>나의 프로필.ZiP을 만들어보세요!</HeaderP>
+        <HeaderDiv>안녕하세요,<RedText>{userNickname}</RedText>님</HeaderDiv>
+        <HeaderP>나를 표현하는 키워드를 찾아가보세요!</HeaderP>
         <ButtonContainer>
           <NewQ>나만의 질문 모음집</NewQ>
           <ButtonA onClick={handleButton3Click}>전체보기 <Arrow src={arrow}/></ButtonA>
