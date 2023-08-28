@@ -561,8 +561,6 @@ function PickAnswerPage() {
         };
       };
       
-    
-
     const fetchReasons = (answerID) => {
         if (!answerID) {return;}
         const reasonZipCollection = collection(dbService, "zip_Reason");
@@ -585,10 +583,17 @@ function PickAnswerPage() {
     Modal.setAppElement('#root'); // 예시로 root 요소를 App 요소로 설정
     const [keyword, setKeyword] = useState("");
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [answerId, setAnswerId] = useState(''); // answerId를 관리
+    useEffect(() => {
+      if (isModalOpen && answerId) {
+        // 모달이 열릴 때(fetchReasons 함수 호출 시) 실행되어야 하는 코드
+        fetchReasons(answerId);
+      }
+    }, [isModalOpen, answerId]); 
     const handleVoteBoxClick = (answer, answerID) => {
         setKeyword(answer);
         setIsModalOpen(true);
-        fetchReasons(answerID); //zip_reason컬렉션에서 해당 정보와 일치하는 이유 불러오기
+        setAnswerId(answerID); //zip_reason컬렉션에서 해당 정보와 일치하는 이유 불러오기
     };
     const handleCloseModal = () => {
         setIsModalOpen(false);
