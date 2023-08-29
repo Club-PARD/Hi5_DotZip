@@ -202,7 +202,7 @@ const Auth = () => {
       }
   };
   
-
+  console.log(localStorage.getItem("kakaoId"));
   const handleFailure = (error) => {
     console.log("로그인 실패", error);
   };

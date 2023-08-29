@@ -30,8 +30,13 @@ const Home  = styled.img `
 const NavBar = () => {
   const navigate = useNavigate();
   const HomeOnClick = () => {
-    navigate('/home');
-  };
+      if(localStorage.getItem("kakaoId")===null){
+        navigate('/');
+      }
+      else{
+        navigate('/home');
+      }
+    };
     return(
     <NavBarWrapper>
 
