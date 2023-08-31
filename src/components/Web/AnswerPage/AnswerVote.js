@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import { dbService } from "../../../fbase.js";
-import { collection, onSnapshot, query, where , orderBy, getDocs } from "firebase/firestore";
+import { collection, onSnapshot, query, where , orderBy, getDocs, doc, getDoc } from "firebase/firestore";
 import {useNavigate, useParams } from 'react-router-dom';
 import AddAnswerVote from './AddAnswerVote.js';
 import AddAnswer from './AddAnswer.js';
@@ -78,6 +78,7 @@ const FolderImageContainer = styled.div`
   width: 327px;
   height: 96px;
   margin-top: 16px;
+  z-index: 0;
 
 `;
 const FolderContent = styled.div`
@@ -251,6 +252,7 @@ const AnswerVote = () => {
   const [isVote, setIsVote] = useState(false);
   const [voteNum, setVoteNum] = useState(0);
   const [kakaoId,setKakaoId] = useState("");
+  const [answerName,setAnswerName] = useState("");
 
   const handleButtonClick = (answerId) => {
     setSelectedAnswerId(answerId); // 선택된 버튼의 answerId를 상태로 설정
@@ -294,11 +296,12 @@ const myPage = () =>{
       setDocuments(answerList);
     });
     fetchDataQuestion();
+    
 
     return () => {
       unsubscribe();
     };
-  }, [questionId]);
+  }, []);
 
   const getEmojiImage = (emoji) => {
     switch (emoji) {
@@ -321,6 +324,8 @@ const myPage = () =>{
   const fetchDataQuestion = async () => {
     const zipCollection = collection(dbService, "zip_Question");
     const zipQSnapshot = await getDocs(zipCollection);
+
+
     const QuestionzipArr = zipQSnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
@@ -332,6 +337,15 @@ const myPage = () =>{
     setVoteEnd(targetQ.voteEnd); // 투표 종료 여부 판단
     setVoteNum(targetQ.VoteNum);
     setKakaoId(targetQ.kakaoId);
+
+    const userDocRef  = doc(dbService, "kakaoId", targetQ.kakaoId);
+    const userDocSnapshot = await getDoc(userDocRef);
+    const userData = userDocSnapshot.data();
+    if (userDocSnapshot.exists()) {
+      const userName = userData.userName;
+      setAnswerName(userName);
+    }
+
   };
 
   const [modalOpen_new, setModalOpen_new] = useState(false);
@@ -355,7 +369,7 @@ const myPage = () =>{
       ) : (
         <Div>
           <Container>
-            <Head>질문 폴더를 받으셨네요 🤩️</Head>
+            <Head>{answerName}님의 질문에</Head>
             <Head>답변을 보내보세요!</Head>
             <Head3>받은 질문</Head3>
           </Container>
