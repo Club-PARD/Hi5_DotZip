@@ -80,4 +80,6 @@
 [react]: /readme/react.svg
 [fb]: /readme/firebase.svg
 
-git PR 안되는 연습
+
+git 응안돼
+
