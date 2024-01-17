@@ -80,4 +80,4 @@
 [react]: /readme/react.svg
 [fb]: /readme/firebase.svg
 
-git PR
+git 응안돼
